@@ -82,7 +82,7 @@ function Hero() {
                 transition={{
                   duration: 0.6,
                   delay: 0.15 + i * 0.08,
-                  ease: "easeOut",
+                  
                 }}
                 className="block"
               >
