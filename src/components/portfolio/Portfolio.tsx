@@ -3,17 +3,31 @@ import { motion, AnimatePresence } from "framer-motion";
 import sravanImg from "@/assets/sravan-cutout.png";
 import {
   ArrowRight,
-  Plus,
-  Minus,
   Close,
+  Send,
+  ExternalLink,
+  WebIcon,
+  BlogIcon,
+  GatewayIcon,
+  DesignIcon,
+  DocIcon,
+  ShieldIcon,
+  SparkIcon,
   GitHubIcon,
   LinkedInIcon,
   XIcon,
   MediumIcon,
   LinktreeIcon,
+  TelegramIcon,
+  WhatsAppIcon,
+  InstagramIcon,
+  YouTubeIcon,
+  ThreadsIcon,
+  FacebookIcon,
+  WritcoIcon,
 } from "./Icons";
+import { SkillsRadar } from "./SkillsRadar";
 
-/* ---------- motion helpers ---------- */
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -31,389 +45,471 @@ function Container({
   className?: string;
 }) {
   return (
-    <section
-      id={id}
-      className={`mx-auto w-full max-w-[1180px] px-6 md:px-12 ${className}`}
-    >
+    <section id={id} className={`mx-auto w-full max-w-[1180px] px-6 md:px-12 ${className}`}>
       {children}
     </section>
   );
+}
+
+function SectionLabel({ children }: { children: ReactNode }) {
+  return <div className="mono-label mb-6">{children}</div>;
 }
 
 /* ---------- HERO ---------- */
 function Hero() {
   return (
     <section id="top" className="relative pt-28 md:pt-32">
-      <div className="relative mx-auto grid min-h-[88vh] w-full max-w-[1400px] grid-cols-1 items-end gap-10 px-6 pb-16 md:grid-cols-[1.55fr_1fr] md:items-stretch md:gap-0 md:px-12 md:pb-0">
-        {/* Headline column */}
-        <div className="flex flex-col justify-center pt-10 md:pt-24 md:pb-28">
+      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-10 md:grid-cols-[1.35fr_1fr] md:gap-12 md:px-12 md:pb-0">
+        <div className="flex flex-col justify-center md:pt-16 md:pb-24">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display font-black tracking-[-0.035em] text-ink leading-[0.98] text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px]"
+            className="font-display font-black tracking-[-0.035em] text-ink leading-[1.02] text-[40px] sm:text-[52px] md:text-[64px] lg:text-[78px]"
           >
-            I build products,
-            <br />
-            architect{" "}
-            <span className="font-mono font-medium tracking-[-0.02em] text-[0.86em] align-baseline">
-              systems()
-            </span>
-            ,
-            <br />
-            and ship things
-            <br />
-            that matter.
+            Engineering full-stack digital{" "}
+            <span className="font-mono font-medium tracking-[-0.02em] text-[0.78em] align-baseline">
+              ecosystems()
+            </span>{" "}
+            with architectural precision and human-centric purpose.
           </motion.h1>
+
+          <motion.p
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.2 }}
+            className="mt-8 max-w-[560px] text-[16px] leading-[1.7] text-ink-secondary md:text-[17px]"
+          >
+            Founder and Lead Developer of{" "}
+            <a className="editorial-link" href="#lyfspot">LYFSpot</a>. Bridging the gap
+            between robust system architecture, sleek MERN-stack applications, and
+            deep-tech enterprise systems. Crafting digital products that reject rigid
+            templates to elevate modern everyday lives.
+          </motion.p>
+
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: 0.3 }}
+            className="mt-8 flex flex-wrap items-center gap-4"
+          >
+            <a
+              href="#resume"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
+            >
+              <DocIcon width={16} height={16} /> Launch Interactive Resume
+            </a>
+            <a href="#contact" className="editorial-link inline-flex items-center gap-2 text-[14px]">
+              Get in touch <ArrowRight width={14} height={14} />
+            </a>
+          </motion.div>
         </div>
 
-        {/* Portrait column - full-bleed right edge */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.0, delay: 0.25 }}
-          className="relative h-[60vh] min-h-[420px] w-full md:h-auto md:min-h-[88vh]"
+          className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-6 lg:translate-x-12"
         >
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(120% 80% at 80% 20%, #EEF4F6 0%, #DCE5EA 55%, #C9D5DC 100%)",
-            }}
-          />
-          <img
-            src={sravanImg}
-            alt="Sravan Sai Vuppula, Founder of LYFSpot"
-            className="absolute bottom-0 right-0 h-[100%] w-auto max-w-none object-contain object-bottom"
-            style={{ filter: "grayscale(0.25) contrast(1.02) brightness(1.02)" }}
-            loading="eager"
-            decoding="async"
-          />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(120% 80% at 70% 30%, #EEF4F6 0%, #DCE5EA 55%, #C2D0D8 100%)",
+              }}
+            />
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[color:var(--hairline)]" />
+            <img
+              src={sravanImg}
+              alt="Sravan Sai Vuppula, Founder of LYFSpot"
+              className="absolute inset-x-0 bottom-0 mx-auto h-[105%] w-auto max-w-none object-contain object-bottom"
+              style={{ filter: "grayscale(0.18) contrast(1.04) brightness(1.02)" }}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </motion.div>
       </div>
-
-      {/* Sub-block under hero, right-aligned like reference */}
-      <Container className="pb-20 pt-8 md:pb-28">
-        <motion.div
-          {...fadeUp}
-          className="ml-auto max-w-[520px] text-[16px] leading-[1.7] text-ink md:text-[17px]"
-        >
-          <p>
-            Currently, I'm{" "}
-            <span className="font-semibold">Founder &amp; Lead Developer</span> at{" "}
-            <a className="editorial-link" href="#work">
-              LYFSpot
-            </a>
-            , architecting a multi-sector product ecosystem — from civic tech and
-            cinema systems to logistics intelligence and enterprise cloud.
-          </p>
-          <p className="mt-5">
-            <a className="editorial-link" href="mailto:sai1234comon@gmail.com">
-              Email me
-            </a>
-            , or shout over on{" "}
-            <a
-              className="editorial-link"
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>{" "}
-            or{" "}
-            <a
-              className="editorial-link"
-              href="https://github.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
-            .
-          </p>
-        </motion.div>
-      </Container>
     </section>
   );
 }
 
-/* ---------- INTRO STATEMENT ---------- */
-function Intro() {
+/* ---------- IDENTITY ---------- */
+function Identity() {
   return (
-    <Container className="py-20 md:py-32">
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr] md:gap-20">
-        <motion.h2
-          {...fadeUp}
-          className="font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[32px] md:text-[48px] lg:text-[56px]"
-        >
-          Over five years bridging engineering and design into products that
-          quietly do the work.
-        </motion.h2>
+    <Container id="about" className="py-24 md:py-32">
+      <SectionLabel>The Founder's Identity</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        Two disciplines, one practice — the professional engineer and the creative storyteller.
+      </motion.h2>
+
+      <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
+        <motion.div {...fadeUp} className="border-t border-[color:var(--hairline)] pt-6">
+          <div className="mono-label mb-3">Philosophy</div>
+          <p className="text-[17px] leading-[1.7] text-ink">
+            Driven by the pursuit of turning complex, abstract engineering concepts into
+            scalable, intuitive real-world applications. Every pixel must serve a function;
+            every route must optimize a workflow.
+          </p>
+        </motion.div>
         <motion.div
           {...fadeUp}
-          transition={{ ...fadeUp.transition, delay: 0.12 }}
-          className="flex flex-col justify-end gap-3 text-[17px] leading-[1.6] text-ink-secondary"
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className="border-t border-[color:var(--hairline)] pt-6"
         >
-          <div>5+ years building.</div>
-          <div>7 products shipped.</div>
-          <div>From a single blog to a full conglomerate.</div>
+          <div className="mono-label mb-3">The Creative Edge</div>
+          <p className="text-[17px] leading-[1.7] text-ink">
+            Deeply rooted in regional Indian cinema and creative storytelling. Viewing
+            software architecture through the lens of a director — pacing, structural flow,
+            emotional impact, and cohesive world-building translate directly into writing
+            pristine, intentional code.
+          </p>
         </motion.div>
       </div>
     </Container>
   );
 }
 
-/* ---------- JOURNEY ---------- */
-type Entry = {
-  num: number;
-  range: string;
-  role: string;
-  org: string;
-  body: string;
-  impact: string;
-  nested?: { range: string; role: string }[];
-};
-
-const entries: Entry[] = [
+/* ---------- LYFSPOT JOURNEY ---------- */
+const timeline = [
   {
-    num: 1,
-    range: "20–Present",
-    role: "Founder & Chief Technical Architect",
-    org: "LYFSpot",
+    year: "2020",
+    title: "Origin",
     body:
-      "Architecting a multi-sector product ecosystem from the ground up — spanning civic tech, cinema production systems, logistics intelligence, and enterprise cloud deployments.",
-    impact:
-      "7 shipped products across MERN, React Native, Spring Boot, and SAP ecosystems. From a single blog to a full conglomerate.",
+      "Launched the primary digital footprint via the foundational blog network at sailyfspot.blogspot.com, establishing initial technical discourse and product ideation channels.",
   },
   {
-    num: 2,
-    range: "26",
-    role: "DevCon Associate — SAP Track",
-    org: "Naxrita India",
+    year: "2022",
+    title: "Phase I Frameworks",
     body:
-      "Production-grade SAP ABAP environments. Programmed custom Data Dictionary structures, optimized internal table architectures, shipped against the SAP S/4HANA Cloud backend.",
-    impact:
-      "SAP Certified Associate — ABAP Cloud. Production-ready in enterprise architecture within three months.",
+      "Initiated development on early business logic automation engines (IVOpt) and conversational knowledge bases (UneCust).",
   },
   {
-    num: 3,
-    range: "20–Present",
-    role: "Founder",
-    org: "Balcom & Nobody — LYFSpot Studio",
+    year: "2024",
+    title: "Scaled Infrastructure",
     body:
-      "The studio arm of LYFSpot — incubating experiments, frameworks, and creative engineering bets that later graduate into the product portfolio.",
-    impact:
-      "A continuous lab where everything LYFSpot ships is first prototyped, broken, and re-built.",
-    nested: [
-      { range: "20", role: "Origin — first digital footprint" },
-      { range: "22", role: "Phase I — IVOpt and UneCust framework initiation" },
-      { range: "24", role: "Scale — Shotweave and DeployBridge pipelines" },
-      { range: "26", role: "Convergence — mobile, cloud, enterprise, deep-tech research" },
-    ],
+      "Transitioned to complete MERN stack deployment pipelines, laying down the groundwork for production management platforms (Shotweave) and advanced deployment abstractions (DeployBridge).",
   },
   {
-    num: 4,
-    range: "22–26",
-    role: "B.Tech, Computer Science Engineering",
-    org: "Independent Engineering Practice",
+    year: "2026",
+    title: "Conglomerate Maturity",
     body:
-      "Self-directed full-stack practice in parallel with formal CS — shipping production code while completing the degree.",
-    impact:
-      "Built and deployed real products to real users before graduation.",
+      "Full convergence of web, mobile applications (LoadMate), enterprise cloud environments, and emerging deep-tech research sectors.",
   },
 ];
 
-function JourneyEntry({ e, detailed }: { e: Entry; detailed: boolean }) {
-  return (
-    <motion.article
-      {...fadeUp}
-      className="grid grid-cols-[auto_minmax(0,1fr)] gap-6 border-t border-[color:var(--hairline)] py-12 md:grid-cols-[80px_120px_minmax(0,1fr)] md:gap-12"
-    >
-      <div className="font-mono text-[13px] tracking-wide text-ink-muted">
-        {e.num}.
-      </div>
-      <div className="font-mono text-[13px] tracking-wide text-ink-muted md:pt-[2px]">
-        {e.range}
-      </div>
-      <div className="col-span-2 md:col-span-1">
-        <h3 className="font-display font-bold tracking-[-0.02em] text-ink text-[26px] md:text-[34px] leading-[1.1]">
-          {e.role}
-        </h3>
-        <div className="mt-2 font-display text-[20px] font-semibold text-ink-secondary md:text-[22px]">
-          {e.org}
-        </div>
+const pipeline = [
+  {
+    name: "Philistine",
+    body:
+      "A strategic development gateway engineered for innovators, problem solvers, and upcoming entrepreneurs — providing critical technical architecture frameworks and moral execution support to launch raw concepts.",
+  },
+  {
+    name: "IVOpt",
+    body:
+      "An enterprise billing and financial tracking engine meticulously optimized to streamline fiscal workflows for small-to-medium enterprises.",
+  },
+  {
+    name: "UneCust",
+    body:
+      "An interactive conversational knowledge agent built for rapid information discovery and responsive instant answers.",
+    cta: { label: "Execute UneCust Agent", href: "https://unecust-bot-93c0a9.zapier.app/" },
+  },
+  {
+    name: "Project Classified — Deep Tech Division",
+    body:
+      "An advanced project merging proprietary software with advanced hardware configurations, integrating hologram, AR, and VR wearable technologies intended to provide critical situational alert safety networks. Status: Architectural Schematics Phase.",
+  },
+];
 
-        <AnimatePresence initial={false}>
-          {detailed && (
+const networks = [
+  { Icon: BlogIcon, label: "Primary Web Node", href: "https://sailyfspot.blogspot.com" },
+  { Icon: LinkedInIcon, label: "Corporate Hub", href: "https://www.linkedin.com/company/lyfspot" },
+  { Icon: TelegramIcon, label: "Channel Matrix", href: "https://t.me/lyfspot" },
+  { Icon: WhatsAppIcon, label: "Broadcast Node", href: "https://whatsapp.com/channel/0029Va74d5MCcW4puaVyRj2V" },
+  { Icon: LinktreeIcon, label: "Unified Directory", href: "https://linktr.ee/lyfspot" },
+  { Icon: InstagramIcon, label: "Creative Stream", href: "https://instagram.com/lyfspot" },
+  { Icon: YouTubeIcon, label: "Video Directory", href: "https://youtube.com/@lyfspot" },
+  { Icon: ThreadsIcon, label: "Dialogue Portal", href: "https://www.threads.net/@lyfspot" },
+  { Icon: FacebookIcon, label: "Legacy Identity", href: "https://www.facebook.com/VuppulaSravanSai/" },
+];
+
+function LyfspotJourney() {
+  return (
+    <Container id="lyfspot" className="py-24 md:py-32">
+      <SectionLabel>The LYFSpot Ecosystem · Oct 2020 – Present · 5y 9m</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        A decentralized product ecosystem that refines, simplifies, and elevates
+        corporate, civic, and creative operations.
+      </motion.h2>
+
+      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
+        <motion.div {...fadeUp} className="border-t border-[color:var(--hairline)] pt-6">
+          <div className="mono-label mb-3">Mission</div>
+          <p className="text-[17px] leading-[1.7] text-ink">
+            Transforming complex computational patterns into accessible, high-performance
+            digital utilities engineered for human well-being.
+          </p>
+        </motion.div>
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.1 }}
+          className="border-t border-[color:var(--hairline)] pt-6"
+        >
+          <div className="mono-label mb-3">Vision</div>
+          <p className="text-[17px] leading-[1.7] text-ink">
+            Orchestrating a decentralized product ecosystem that refines, simplifies, and
+            elevates corporate, civic, and creative operations with absolute precision.
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Timeline */}
+      <div className="mt-20">
+        <div className="mono-label mb-8">The 5-Year Evolution · 2020 → 2026</div>
+        <div className="space-y-0">
+          {timeline.map((t, i) => (
             <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.35 }}
-              className="overflow-hidden"
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+              key={t.year}
+              className="grid grid-cols-[80px_minmax(0,1fr)] gap-6 border-t border-[color:var(--hairline)] py-8 md:grid-cols-[120px_220px_minmax(0,1fr)] md:gap-12 md:py-10"
             >
-              <p className="mt-6 max-w-[640px] text-[17px] leading-[1.7] text-ink-secondary">
-                {e.body}
-              </p>
-              {e.nested && (
-                <ul className="mt-5 space-y-2 border-l border-[color:var(--hairline)] pl-5">
-                  {e.nested.map((n) => (
-                    <li
-                      key={n.range}
-                      className="flex gap-4 text-[15px] text-ink-secondary"
-                    >
-                      <span className="font-mono text-[12px] text-ink-muted">
-                        {n.range}
-                      </span>
-                      <span>{n.role}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <p className="mt-6 max-w-[640px] text-[16px] leading-[1.7] text-ink">
-                <span className="font-semibold">Bottom Line →</span>{" "}
-                <span className="text-ink-secondary">{e.impact}</span>
-              </p>
+              <div className="font-mono text-[13px] text-ink-muted md:pt-1">{t.year}</div>
+              <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px]">
+                {t.title}
+              </div>
+              <div className="col-span-2 max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary md:col-span-1">
+                {t.body}
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.article>
-  );
-}
-
-function Journey() {
-  const [detailed, setDetailed] = useState(false);
-  return (
-    <Container id="about" className="py-20 md:py-28">
-      <div className="mb-10 flex items-center justify-between">
-        <h2 className="font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-          The Journey.
-        </h2>
-        <div className="inline-flex items-center gap-1 rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface)] p-1 text-[13px]">
-          <button
-            onClick={() => setDetailed(false)}
-            className={`rounded-full px-4 py-1.5 transition-colors ${
-              !detailed
-                ? "bg-ink text-background"
-                : "text-ink-secondary hover:text-ink"
-            }`}
-          >
-            Simple
-          </button>
-          <button
-            onClick={() => setDetailed(true)}
-            className={`rounded-full px-4 py-1.5 transition-colors ${
-              detailed
-                ? "bg-ink text-background"
-                : "text-ink-secondary hover:text-ink"
-            }`}
-          >
-            Detailed
-          </button>
+          ))}
         </div>
       </div>
 
-      <div>
-        {entries.map((e) => (
-          <JourneyEntry key={e.num} e={e} detailed={detailed} />
-        ))}
+      {/* Pipeline */}
+      <div className="mt-20">
+        <div className="mono-label mb-8">Future Pipelines · The Strategic Incubator</div>
+        <div className="space-y-0">
+          {pipeline.map((p, i) => (
+            <motion.div
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+              key={p.name}
+              className="border-t border-[color:var(--hairline)] py-8 md:py-10 last:border-b"
+            >
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12">
+                <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px]">
+                  {p.name}
+                </div>
+                <div>
+                  <p className="max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary">
+                    {p.body}
+                  </p>
+                  {p.cta && (
+                    <a
+                      href={p.cta.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="editorial-link mt-4 inline-flex items-center gap-2 text-[15px]"
+                    >
+                      <SparkIcon width={14} height={14} /> {p.cta.label}{" "}
+                      <ArrowRight width={14} height={14} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
-      <div className="mt-10 flex justify-center text-ink-muted">↓</div>
+      {/* Network */}
+      <div className="mt-20">
+        <div className="mono-label mb-8">Executive Communication Network</div>
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[color:var(--hairline)] sm:grid-cols-2 lg:grid-cols-3">
+          {networks.map(({ Icon, label, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center justify-between gap-4 bg-[color:var(--background)] px-5 py-5 outline outline-1 outline-[color:var(--hairline)] transition-colors hover:bg-[color:var(--surface)]"
+            >
+              <span className="flex items-center gap-3">
+                <Icon width={18} height={18} className="text-ink-secondary" />
+                <span className="text-[15px] text-ink">{label}</span>
+              </span>
+              <ArrowRight
+                width={14}
+                height={14}
+                className="text-ink-muted transition-transform group-hover:translate-x-1"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
     </Container>
   );
 }
 
-/* ---------- WORK ---------- */
+/* ---------- ENGINEERING MATRIX ---------- */
+const matrix = [
+  {
+    group: "Full-Stack & Backend Systems",
+    items: ["MERN Stack", "MongoDB", "Express.js", "React.js", "Node.js", "Spring Framework", "Spring Boot", "FastAPI"],
+  },
+  { group: "Mobile Architecture", items: ["React Native", "Expo CLI", "Expo Go", "Android Capacitor"] },
+  { group: "Core Engineering & Scripts", items: ["C", "Java", "Python", "JavaScript", "HTML5", "CSS3"] },
+  { group: "Cloud, DevOps & Data Storage", items: ["AWS", "GCP", "Cloudinary", "Git", "GitHub"] },
+  {
+    group: "Enterprise Software Suite",
+    items: ["SAP ABAP", "SAP S/4HANA Cloud Backend", "ABAP RESTful Application Programming Model (RAP)"],
+  },
+  {
+    group: "System Engineering",
+    items: ["Systems Architecture Design", "Workflow Optimization Pipelines", "Project Management Systems"],
+  },
+];
+
+function EngineeringMatrix() {
+  return (
+    <Container id="stack" className="py-24 md:py-32">
+      <SectionLabel>The Engineering Matrix</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        The verified stack — no exaggerations, no buzzwords.
+      </motion.h2>
+
+      <div className="mt-14 space-y-0">
+        {matrix.map((m, i) => (
+          <motion.div
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: i * 0.04 }}
+            key={m.group}
+            className="grid grid-cols-1 gap-4 border-t border-[color:var(--hairline)] py-7 md:grid-cols-[300px_minmax(0,1fr)] md:gap-12 last:border-b"
+          >
+            <div className="font-display text-[18px] font-semibold tracking-[-0.01em] text-ink">
+              {m.group}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {m.items.map((it) => (
+                <span key={it} className="code-tag">{it}</span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-20">
+        <div className="mono-label mb-8">Skills Radar · Live Proficiency Index</div>
+        <SkillsRadar />
+      </div>
+    </Container>
+  );
+}
+
+/* ---------- PROJECT REPOSITORY ---------- */
 type Project = {
   num: string;
   name: string;
-  blurb: string;
-  year: string;
-  category: string;
-  details: string;
-  stack: string[];
-  links: { label: string; href: string }[];
+  classification: string;
+  stack: string;
+  description: string;
+  note?: string;
+  links: { Icon: typeof WebIcon; label: string; href: string }[];
 };
 
 const projects: Project[] = [
   {
     num: "01",
     name: "Resolveit",
-    blurb: "Civic issue resolution infrastructure",
-    year: "23",
-    category: "MERN · Civic Tech",
-    details:
-      "A civic platform connecting citizens with municipal bodies through structured issue routing, status escalation, and transparent resolution timelines.",
-    stack: ["MongoDB", "Express", "React", "Node"],
-    links: [{ label: "GitHub", href: "#" }],
+    classification: "Civic Tech · Startup Core Platform (LYFSpot Ecosystem)",
+    stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
+    description:
+      "A highly secure, public issue-solving infrastructure built to transparently log, track, and resolve community and civic discrepancies through streamlined administrator dashboards.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/resolveit" },
+      { Icon: WebIcon, label: "Live Platform Node", href: "http://resolveit-community.me" },
+      { Icon: GatewayIcon, label: "Digital Download Gateway", href: "http://resolveit-gateway.vercel.app" },
+    ],
   },
   {
     num: "02",
     name: "Smart LoadMate",
-    blurb: "AI logistics & route optimization",
-    year: "24",
-    category: "React Native · FastAPI",
-    details:
-      "Mobile-first logistics intelligence — load-matching, AI-driven route optimization, and operational telemetry for fleet operators.",
-    stack: ["React Native", "Expo", "FastAPI", "Python"],
-    links: [{ label: "Live", href: "#" }],
+    classification: "Academic Innovation · Minor Project Board (MLRIT)",
+    stack: "React Native, Expo, Python FastAPI, MongoDB",
+    description:
+      "An intelligent, dual-interface logistics delivery and route optimization mobile application designed to seamlessly coordinate tasks between commercial haulers and drivers.",
+    note:
+      "System Note: The current preview link serves as an interactive Web Layout Preview. Full native distribution packages for Google Play Store and Apple App Store are undergoing active development. For optimal interface rendering on mobile viewports, toggle Desktop Mode View within your mobile browser.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/LoadMate-App" },
+      { Icon: WebIcon, label: "Live Web Preview Matrix", href: "https://smart-loadmate.vercel.app/" },
+    ],
   },
   {
     num: "03",
     name: "Shotweave",
-    blurb: "Cinema production operations dashboard",
-    year: "24",
-    category: "React · Python",
-    details:
-      "An operations layer for film sets — call sheets, shot tracking, and crew choreography for production houses that ship.",
-    stack: ["React", "Python", "PostgreSQL"],
-    links: [{ label: "Case study", href: "#" }],
+    classification: "National Level Cinema Hackathon Feature",
+    stack: "React.js, Python Backend Framework, MongoDB",
+    description:
+      "A powerful AI-driven operations dashboard engineered specifically for cinema production houses. Provides real-time financial tracking, predictive analytics for rolling film budgets, daily expense sheet optimization, dynamic script breakdowns, and cross-department scheduling syncs.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/shotweavep" },
+      { Icon: WebIcon, label: "Live System Dashboard", href: "https://shotweave.vercel.app/" },
+    ],
   },
   {
     num: "04",
     name: "DreamLaunch",
-    blurb: "Distribution engine for filmmakers",
-    year: "24",
-    category: "MERN · Media",
-    details:
-      "Distribution pipelines for independent filmmakers — release scheduling, asset packaging, and audience analytics.",
-    stack: ["MongoDB", "Express", "React", "Node"],
-    links: [{ label: "Live", href: "#" }],
+    classification: "Media Distribution Systems (LYFSpot Ecosystem)",
+    stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
+    description:
+      "A content orchestration platform built for filmmakers, screenwriters, and independent producers. Empowers creators to centrally manage major promotional assets — teasers, trailers, script previews — and safely deploy them simultaneously across major social API endpoints.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/dreamlaunch-client" },
+    ],
   },
   {
     num: "05",
     name: "VaultBank",
-    blurb: "Banking simulator & financial ledger",
-    year: "25",
-    category: "Spring Boot · Java",
-    details:
-      "A double-entry ledger and banking simulator built on Spring Boot, exploring transactional integrity at scale.",
-    stack: ["Spring Boot", "Java", "PostgreSQL"],
-    links: [{ label: "GitHub", href: "#" }],
+    classification: "Enterprise Simulation · Infosys Virtual Internship Program",
+    stack: "Java Enterprise Architecture, Spring, Spring Boot, MySQL, React.js",
+    description:
+      "A financial transaction and ledger simulation framework providing authenticated account controls, real-time balance sheets, automated bank statements, secure transaction notifications, and integrated analytical spreadsheets.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/VaultBank" },
+    ],
   },
   {
     num: "06",
     name: "DeployBridge",
-    blurb: "Multi-cloud deployment engine",
-    year: "25",
-    category: "MERN · DevOps",
-    details:
-      "Provisioning and orchestration across cloud providers with a clean operator-grade UI.",
-    stack: ["Node", "React", "AWS", "GCP"],
-    links: [{ label: "GitHub", href: "#" }],
+    classification: "National Level Technical Hackathon · Zignasa Platform Entry",
+    stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
+    description:
+      "An all-in-one build orchestration engine that accepts raw repository paths, automatically parses stack dependencies, identifies build syntax irregularities, isolates deployment barriers, selects optimal host structures (Vercel, Render, Netlify), and outputs fully operational live URLs.",
+    links: [
+      { Icon: GitHubIcon, label: "Code Repository", href: "https://github.com/sravansai-26/DeployBridge" },
+    ],
   },
   {
     num: "07",
-    name: "Sri-Wedding System",
-    blurb: "Elite digital ordering interface",
-    year: "26",
-    category: "TanStack · Cloud",
-    details:
-      "A premium digital ordering surface for an end-to-end wedding services operator.",
-    stack: ["TanStack", "React", "Cloud"],
-    links: [{ label: "Live", href: "#" }],
+    name: "Sri-Wedding System Architecture",
+    classification: "High-Fidelity Professional UX Contract Design",
+    stack: "Lovable AI Stack Execution Engine",
+    description:
+      "An elite digital ordering, product showcase, and fulfillment interface engineered for a premium Ethical Center business. Features minimalist UI structures optimized for rapid conversion metrics. Status: Contract Negotiation Phase / Expanding Advanced Client Core Engine.",
+    links: [
+      { Icon: DesignIcon, label: "Interactive UX Canvas", href: "https://sri-wedding.lovable.app" },
+    ],
   },
 ];
 
@@ -427,23 +523,18 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_auto] items-baseline gap-4 py-7 text-left transition-colors hover:opacity-90 md:grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_auto_28px] md:gap-8"
+        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-baseline gap-4 py-7 text-left md:grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
       >
         <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
         <div className="min-w-0">
-          <div className="font-display text-[26px] font-bold tracking-[-0.02em] text-ink md:text-[32px]">
+          <div className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
             {p.name}
           </div>
-          <div className="mt-1 text-[14px] text-ink-secondary md:hidden">
-            {p.blurb}
+          <div className="mt-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+            {p.classification}
           </div>
         </div>
-        <div className="hidden text-[16px] text-ink-secondary md:block">
-          {p.blurb}
-        </div>
-        <div className="hidden font-mono text-[12px] uppercase tracking-wider text-ink-muted md:block">
-          '{p.year} · {p.category}
-        </div>
+        <div className="hidden text-[15px] text-ink-secondary md:block">{p.stack}</div>
         <ArrowRight
           width={18}
           height={18}
@@ -462,27 +553,37 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
             transition={{ duration: 0.35 }}
             className="overflow-hidden"
           >
-            <div className="grid grid-cols-1 gap-4 pb-8 pl-11 pr-2 md:grid-cols-[1fr_auto] md:gap-12 md:pl-[68px]">
+            <div className="grid grid-cols-1 gap-8 pb-10 pl-11 pr-2 md:grid-cols-[1.4fr_1fr] md:gap-12 md:pl-[68px]">
               <div>
-                <p className="text-[16px] leading-[1.7] text-ink-secondary">
-                  {p.details}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <span key={s} className="code-tag">
-                      {s}
-                    </span>
-                  ))}
+                <p className="text-[16px] leading-[1.75] text-ink-secondary">{p.description}</p>
+                {p.note && (
+                  <p className="mt-4 border-l-2 border-[color:var(--hairline)] pl-4 text-[14px] italic leading-[1.7] text-ink-muted">
+                    {p.note}
+                  </p>
+                )}
+                <div className="mt-5 md:hidden">
+                  <span className="code-tag">{p.stack}</span>
                 </div>
               </div>
-              <div className="flex shrink-0 flex-col gap-2 md:items-end">
-                {p.links.map((l) => (
+              <div className="flex flex-col gap-3">
+                <div className="mono-label">Engineering Gateways</div>
+                {p.links.map(({ Icon, label, href }) => (
                   <a
-                    key={l.label}
-                    href={l.href}
-                    className="editorial-link inline-flex items-center gap-2 text-[15px]"
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center justify-between gap-3 border-t border-[color:var(--hairline)] pt-3 text-[15px] text-ink transition-colors hover:text-accent"
                   >
-                    {l.label} <ArrowRight width={14} height={14} />
+                    <span className="flex items-center gap-3">
+                      <Icon width={16} height={16} />
+                      {label}
+                    </span>
+                    <ExternalLink
+                      width={14}
+                      height={14}
+                      className="text-ink-muted transition-transform group-hover:translate-x-0.5"
+                    />
                   </a>
                 ))}
               </div>
@@ -496,10 +597,14 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
 
 function Work() {
   return (
-    <Container id="work" className="py-20 md:py-28">
-      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-        Selected Work.
-      </h2>
+    <Container id="work" className="py-24 md:py-32">
+      <SectionLabel>Project Repository · Interactive Showcases</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="mb-10 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        Seven shipped products — civic, cinema, logistics, fintech, devops, and enterprise.
+      </motion.h2>
       <div>
         {projects.map((p, i) => (
           <ProjectRow key={p.num} p={p} idx={i} />
@@ -509,41 +614,75 @@ function Work() {
   );
 }
 
-/* ---------- STACK ---------- */
-function Stack() {
-  const groups: { label: string; items: string[] }[] = [
-    {
-      label: "Full-Stack",
-      items: ["MongoDB", "Express", "React", "Node", "Spring Boot", "FastAPI"],
-    },
-    { label: "Mobile", items: ["React Native", "Expo", "Capacitor"] },
-    { label: "Languages", items: ["C", "Java", "Python", "JavaScript", "TypeScript"] },
-    { label: "Cloud", items: ["AWS", "GCP", "Cloudinary", "Git", "GitHub"] },
-    { label: "Enterprise", items: ["SAP ABAP", "S/4HANA Cloud", "ABAP RAP"] },
-  ];
+/* ---------- EXPERIENCE ---------- */
+const experience = [
+  {
+    role: "Founder & Chief Technical Architect",
+    org: "LYFSpot — Self-Employed / Hybrid Corporation",
+    tenure: "October 2020 – Present · 5 Years, 9 Months",
+    bullets: [
+      "Architected multi-sector technical frameworks across diverse production distributions including SaaS, Civic Tech, Logistics, and Fintech pipelines.",
+      "Oversaw the end-to-end full-stack lifecycle of major custom enterprise software distributions, maximizing cross-platform uptime and code maintainability.",
+    ],
+  },
+  {
+    role: "DevCon Associate — Enterprise SAP Track",
+    org: "Naxrita India — On-Site Internship Core, Hyderabad, TS",
+    tenure: "March 2026 – May 2026 · 3 Months",
+    bullets: [
+      "Acquired extensive practical skills across the SAP ABAP ecosystem, building scalable, modern custom extensions within SAP S/4HANA enterprise frameworks.",
+      "Programmed custom Data Dictionary (DDIC) structures, optimized internal tables, executed complex modularization routines, and integrated backend debugging patterns.",
+    ],
+  },
+];
 
+function Experience() {
   return (
-    <Container className="py-20 md:py-28">
-      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-        What I Build With.
-      </h2>
-      <div className="space-y-8">
-        {groups.map((g, i) => (
+    <Container id="experience" className="py-24 md:py-32">
+      <SectionLabel>Professional Experience & Internships</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        A corporate ledger of verified enterprise execution.
+      </motion.h2>
+
+      <div>
+        {experience.map((e, i) => (
           <motion.div
-            key={g.label}
             {...fadeUp}
-            transition={{ ...fadeUp.transition, delay: i * 0.04 }}
-            className="grid grid-cols-1 gap-2 border-t border-[color:var(--hairline)] pt-6 md:grid-cols-[200px_1fr] md:gap-8"
+            transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+            key={e.role}
+            className="grid grid-cols-1 gap-6 border-t border-[color:var(--hairline)] py-10 md:grid-cols-[260px_minmax(0,1fr)] md:gap-12 last:border-b"
           >
-            <div className="font-display text-[18px] font-semibold text-ink md:text-[20px]">
-              {g.label}
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)]">
+                  <ShieldIcon width={16} height={16} className="text-ink-secondary" />
+                </div>
+                <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                  {e.tenure}
+                </div>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {g.items.map((t) => (
-                <span key={t} className="code-tag">
-                  {t}
-                </span>
-              ))}
+            <div>
+              <h3 className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
+                {e.role}
+              </h3>
+              <div className="mt-2 font-display text-[18px] font-semibold text-ink-secondary">
+                {e.org}
+              </div>
+              <ul className="mt-5 space-y-3">
+                {e.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="grid grid-cols-[14px_1fr] gap-3 text-[16px] leading-[1.7] text-ink-secondary"
+                  >
+                    <span className="mt-[10px] block h-[2px] w-[10px] bg-ink-muted" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         ))}
@@ -553,264 +692,565 @@ function Stack() {
 }
 
 /* ---------- CREDENTIALS ---------- */
-type Cred = { title: string; issuer: string; date: string };
-const certifications: Cred[] = [
-  { title: "SAP Certified Associate — ABAP Cloud", issuer: "SAP / Naxrita India", date: "26" },
-  { title: "Full-Stack Web Development", issuer: "Self-Directed", date: "21 — Present" },
-  { title: "Cloud Foundations", issuer: "AWS / GCP", date: "24" },
+type Cred = {
+  title: string;
+  org: string;
+  date?: string;
+  gpa?: string;
+  skills?: string;
+  href?: string;
+  meta?: string;
+};
+
+const academic: Cred[] = [
+  {
+    title: "Bachelor of Technology — Computer Science and Engineering",
+    org: "MLR Institute of Technology (MLRIT), Dundigal, Hyderabad",
+    date: "2024 – May 2027 · Expected Graduation",
+    gpa: "Cumulative GPA · 8.23 / 10.0",
+  },
+  {
+    title: "Diploma in Computer Science and Engineering",
+    org: "Vathsalya Institute of Science and Technology, Anantharam, Bhongir",
+    date: "2021 – 2024",
+    gpa: "Cumulative GPA · 8.78 / 10.0",
+  },
 ];
+
+const certs: Cred[] = [
+  {
+    title: "SAP Certified Associate — Back-End Developer · ABAP Cloud",
+    org: "SAP SE",
+    meta: "Proctored Exam C_P2WAB_2507",
+    date: "Verified May 6, 2026",
+    skills:
+      "Advanced Business Application Programming, ABAP RESTful Application Programming Model (RAP), Object-Oriented Design, SAP BTP.",
+    href: "https://www.credly.com/badges/c777f4db-d3e0-440f-926a-a21b651b923a/linked_in_profile",
+  },
+  {
+    title: "IBM SkillsBuild · Cloud Computing Fundamentals",
+    org: "IBM Corporation",
+    skills:
+      "Virtualization, Containerization (Docker), Infrastructure Architecture (IaaS, PaaS, SaaS), Kubernetes Orchestration.",
+  },
+  {
+    title: "Infosys Springboard Virtual Internship 6.0 — Banking Simulation",
+    org: "Infosys Springboard",
+    meta: "Cohort ID · B 13",
+    date: "Verified June 2026",
+    skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
+  },
+  {
+    title: "ServiceNow Virtual Internship Program (AICTE Approved)",
+    org: "ServiceNow Corporation",
+    meta: "Credential ID · SNU2020716",
+    date: "Verified May 2026",
+    skills:
+      "ServiceNow System Administration, Flow Designer, Automated Test Framework (ATF), Certified System Administrator (CSA) Core Foundations.",
+  },
+  {
+    title: "SAP ABAP on S/4HANA Technical Track — Naxrita DevCon",
+    org: "Naxrita India",
+    date: "Verified May 2026",
+    skills:
+      "Modern SAP Enterprise Architecture, 18-Day Intensive Production Pipeline Simulations.",
+  },
+  {
+    title: "NPTEL Elite Certification — Industry 4.0 and Internet of Things",
+    org: "National Programme on Technology Enhanced Learning (India)",
+  },
+  {
+    title: "NPTEL Elite Certification — Cloud Computing Paradigms",
+    org: "National Programme on Technology Enhanced Learning (India)",
+  },
+];
+
+const honors: Cred[] = [
+  {
+    title: "National Level Cinema Hackathon Delegate & Presenter",
+    org: "FISAT, Kerala · in coordination with Pauly Jr. Pictures",
+    skills:
+      "Pitch-presented and modeled Shotweave, leading multi-disciplinary software squads under strict hackathon timeline constraints.",
+  },
+  {
+    title: "Executive Public Speaking Leadership Certification",
+    org: "Elite Impact Foundation · endorsed by Sri Gampa Nageshwar Rao Garu",
+    skills:
+      "Master-level verbal communications, group leadership capabilities, and strategic venture delivery skills.",
+  },
+];
+
+function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
+  return (
+    <motion.button
+      {...fadeUp}
+      onClick={onOpen}
+      className="group grid w-full grid-cols-[1fr_auto] items-start gap-6 border-t border-[color:var(--hairline)] py-7 text-left last:border-b"
+    >
+      <div>
+        <div className="font-display text-[18px] font-semibold tracking-[-0.01em] text-ink md:text-[20px]">
+          {c.title}
+        </div>
+        <div className="mt-1 text-[14px] text-ink-secondary">{c.org}</div>
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+          {c.date && <span>{c.date}</span>}
+          {c.gpa && <span>{c.gpa}</span>}
+          {c.meta && <span>{c.meta}</span>}
+        </div>
+      </div>
+      <ArrowRight
+        width={16}
+        height={16}
+        className="mt-2 text-ink-muted transition-transform group-hover:translate-x-1"
+      />
+    </motion.button>
+  );
+}
+
+function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }) {
+  return (
+    <AnimatePresence>
+      {c && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 grid place-items-center bg-[color:var(--deep-ink)]/55 px-6 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.98 }}
+            transition={{ duration: 0.25 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[680px] rounded-sm border border-[color:var(--hairline)] bg-[color:var(--background)] p-8 md:p-10"
+          >
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
+              aria-label="Close"
+            >
+              <Close />
+            </button>
+            <div className="mono-label mb-3">Verified Credential</div>
+            <h3 className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
+              {c.title}
+            </h3>
+            <div className="mt-2 text-[15px] text-ink-secondary">{c.org}</div>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+              {c.date && <span>{c.date}</span>}
+              {c.meta && <span>{c.meta}</span>}
+              {c.gpa && <span>{c.gpa}</span>}
+            </div>
+
+            <div className="mt-6 grid aspect-[4/3] place-items-center rounded-sm border border-dashed border-[color:var(--hairline)] bg-[color:var(--surface)] text-center">
+              <div>
+                <DocIcon width={28} height={28} className="mx-auto text-ink-muted" />
+                <div className="mt-3 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                  Certificate frame · upload PDF to render here
+                </div>
+              </div>
+            </div>
+
+            {c.skills && (
+              <div className="mt-6">
+                <div className="mono-label mb-2">Verified Skill Matrix</div>
+                <p className="text-[15px] leading-[1.7] text-ink-secondary">{c.skills}</p>
+              </div>
+            )}
+
+            {c.href && (
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noreferrer"
+                className="editorial-link mt-6 inline-flex items-center gap-2 text-[15px]"
+              >
+                Verify externally <ExternalLink width={14} height={14} />
+              </a>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
 
 function Credentials() {
   const [active, setActive] = useState<Cred | null>(null);
   return (
-    <Container id="credentials" className="py-20 md:py-28">
-      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-        Credentials.
-      </h2>
+    <Container id="credentials" className="py-24 md:py-32">
+      <SectionLabel>Credentials & Academic Background</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        Every credential, verifiable. Tap any row to open the native viewer.
+      </motion.h2>
+
+      <div className="mono-label mb-4">Academic Milestones</div>
       <div>
-        {certifications.map((c) => (
-          <motion.div
-            key={c.title}
-            {...fadeUp}
-            className="grid grid-cols-1 items-baseline gap-2 border-t border-[color:var(--hairline)] py-6 md:grid-cols-[1.4fr_1fr_auto] md:gap-8"
-          >
-            <div className="font-display text-[20px] font-semibold text-ink">
-              {c.title}
-            </div>
-            <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-              {c.issuer} · '{c.date}
-            </div>
-            <button
-              onClick={() => setActive(c)}
-              className="inline-flex items-center gap-2 justify-self-start text-[14px] text-ink-secondary transition-colors hover:text-ink md:justify-self-end"
-            >
-              View <ArrowRight width={14} height={14} />
-            </button>
-          </motion.div>
+        {academic.map((c) => (
+          <CredentialRow key={c.title} c={c} onOpen={() => setActive(c)} />
         ))}
       </div>
 
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-4"
-            style={{ background: "rgba(21,25,30,0.55)" }}
-            onClick={() => setActive(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-[640px] border border-[color:var(--hairline)] bg-background p-8"
-            >
-              <button
-                onClick={() => setActive(null)}
-                className="absolute right-4 top-4 text-ink-secondary hover:text-ink"
-              >
-                <Close width={20} height={20} />
-              </button>
-              <div className="mono-label mb-3">Certificate</div>
-              <h3 className="font-display text-[26px] font-bold tracking-tight text-ink">
-                {active.title}
-              </h3>
-              <div className="mt-1 font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-                {active.issuer} · '{active.date}
-              </div>
-              <div className="mt-6 grid aspect-[4/3] w-full place-items-center border border-dashed border-[color:var(--hairline)] bg-surface text-ink-muted">
-                <div className="text-center">
-                  <div className="font-display text-[18px] font-semibold">
-                    Document preview
-                  </div>
-                  <div className="mt-2 text-[13px]">
-                    PDF / image placeholder.
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="mono-label mb-4 mt-16">Professional Enterprise Certifications</div>
+      <div>
+        {certs.map((c) => (
+          <CredentialRow key={c.title} c={c} onOpen={() => setActive(c)} />
+        ))}
+      </div>
+
+      <div className="mono-label mb-4 mt-16">Major Honors & Leadership Accolades</div>
+      <div>
+        {honors.map((c) => (
+          <CredentialRow key={c.title} c={c} onOpen={() => setActive(c)} />
+        ))}
+      </div>
+
+      <CredentialModal c={active} onClose={() => setActive(null)} />
     </Container>
   );
 }
 
-/* ---------- THIS & THAT ---------- */
-function ThisAndThat() {
-  const round = [
-    "🎬  Telugu cinema over Bollywood. Always.",
-    "✈️  Window seat or nothing.",
-    "☕  Filter coffee. Non-negotiable.",
-    "🎵  A.R. Rahman's Roja over everything.",
-    "🛣️  The Uncharted Path over the well-trodden road.",
-    "🤟  The rest is negotiable.",
-  ];
+/* ---------- PUBLICATIONS ---------- */
+function Publications() {
   return (
-    <Container className="py-20 md:py-28">
-      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-        This &amp; That.
-      </h2>
-      <motion.p
+    <Container id="writing" className="py-24 md:py-32">
+      <SectionLabel>Publications & Literary Chronicles</SectionLabel>
+      <motion.h2
         {...fadeUp}
-        className="max-w-[820px] font-display font-bold tracking-[-0.02em] text-ink leading-[1.15] text-[28px] md:text-[40px]"
+        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
-        A lifelong builder chasing the product that changes everything. Telugu
-        cinema obsessive, guitarist in theory, golfer in ambition. Based in{" "}
-        <span className="font-mono font-medium tracking-tight text-[0.78em] align-baseline">
-          Hyderabad
-        </span>{" "}
-        with a head full of roadmaps.
-      </motion.p>
+        Written philosophy, industry essays, and creative pursuits.
+      </motion.h2>
 
-      <motion.div {...fadeUp} className="mt-16">
-        <div className="mono-label mb-5">Lightning Round ⚡️</div>
-        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          {round.map((r) => (
-            <li key={r} className="text-[17px] text-ink">
-              {r}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+      <motion.article
+        {...fadeUp}
+        className="border-t border-[color:var(--hairline)] py-10 last:border-b"
+      >
+        <div className="mono-label mb-3">Featured Professional Essay · Medium</div>
+        <h3 className="max-w-[820px] font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[32px]">
+          The Uncharted Path — Rewriting the Rules of Learning for a Life of True Worth.
+        </h3>
+        <p className="mt-4 max-w-[760px] text-[16px] leading-[1.75] text-ink-secondary">
+          An analytical dissection challenging rigid, traditional education paths. The essay
+          advocates for autonomous project ownership, deliberate architectural exploration,
+          and prioritizing real-world software engineering deployments over passive learning
+          patterns.
+        </p>
+        <a
+          href="https://medium.com/@sravansaivuppula/the-uncharted-path-rewriting-the-rules-of-learning-for-a-life-of-true-worth-0f3b55c6befb"
+          target="_blank"
+          rel="noreferrer"
+          className="editorial-link mt-5 inline-flex items-center gap-2 text-[15px]"
+        >
+          <MediumIcon width={16} height={16} /> Open Publication Node <ArrowRight width={14} height={14} />
+        </a>
+      </motion.article>
+
+      <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden border border-[color:var(--hairline)] sm:grid-cols-2">
+        <a
+          href="https://writco.in/LYFSpot"
+          target="_blank"
+          rel="noreferrer"
+          className="group flex items-center justify-between gap-4 bg-[color:var(--background)] px-5 py-6 outline outline-1 outline-[color:var(--hairline)] transition-colors hover:bg-[color:var(--surface)]"
+        >
+          <span className="flex items-center gap-3">
+            <WritcoIcon width={18} height={18} className="text-ink-secondary" />
+            <span>
+              <div className="text-[15px] text-ink">Official Writco Portal</div>
+              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                Telugu poetry · cultural prose · reflections
+              </div>
+            </span>
+          </span>
+          <ArrowRight width={14} height={14} className="text-ink-muted transition-transform group-hover:translate-x-1" />
+        </a>
+        <a
+          href="https://sailyfspot.blogspot.com"
+          target="_blank"
+          rel="noreferrer"
+          className="group flex items-center justify-between gap-4 bg-[color:var(--background)] px-5 py-6 outline outline-1 outline-[color:var(--hairline)] transition-colors hover:bg-[color:var(--surface)]"
+        >
+          <span className="flex items-center gap-3">
+            <BlogIcon width={18} height={18} className="text-ink-secondary" />
+            <span>
+              <div className="text-[15px] text-ink">Literary Reflections</div>
+              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                sailyfspot.blogspot.com
+              </div>
+            </span>
+          </span>
+          <ArrowRight width={14} height={14} className="text-ink-muted transition-transform group-hover:translate-x-1" />
+        </a>
+      </div>
+    </Container>
+  );
+}
+
+/* ---------- GITHUB PULSE ---------- */
+function GitHubPulse() {
+  return (
+    <Container id="pulse" className="py-24 md:py-32">
+      <SectionLabel>Live Engineering Pulse</SectionLabel>
+      <motion.h2
+        {...fadeUp}
+        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+      >
+        Real commits. Real cadence. Direct from{" "}
+        <a className="editorial-link" href="https://github.com/sravansai-26" target="_blank" rel="noreferrer">
+          github.com/sravansai-26
+        </a>
+        .
+      </motion.h2>
 
       <motion.div
         {...fadeUp}
-        className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2"
+        className="overflow-hidden rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6 md:p-10"
       >
-        <div className="border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6">
-          <div className="mono-label mb-3">Now Reading</div>
-          <p className="font-display text-[20px] font-semibold leading-snug text-ink">
-            The well-trodden road is comfortable. The uncharted one is honest.
-          </p>
-          <div className="mt-3 text-[13px] text-ink-muted">
-            — from a 2025 essay
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <GitHubIcon width={22} height={22} className="text-ink" />
+            <div>
+              <div className="font-display text-[18px] font-semibold text-ink">@sravansai-26</div>
+              <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                Contribution matrix · last 12 months
+              </div>
+            </div>
           </div>
+          <a
+            href="https://github.com/sravansai-26"
+            target="_blank"
+            rel="noreferrer"
+            className="editorial-link inline-flex items-center gap-2 text-[14px]"
+          >
+            Open profile <ArrowRight width={14} height={14} />
+          </a>
         </div>
-        <div className="border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6">
-          <div className="mono-label mb-3">Now Building</div>
-          <p className="font-display text-[20px] font-semibold leading-snug text-ink">
-            IVOpt — in active development
-          </p>
-          <div className="mt-3 text-[13px] text-ink-muted">
-            Internal LYFSpot framework · 2026
-          </div>
+        <div className="mt-6 overflow-x-auto">
+          <img
+            src="https://ghchart.rshah.org/2A6F8E/sravansai-26"
+            alt="GitHub contribution graph for sravansai-26"
+            className="w-full min-w-[640px]"
+            loading="lazy"
+          />
         </div>
       </motion.div>
-    </Container>
-  );
-}
-
-/* ---------- WRITING ---------- */
-function Writing() {
-  return (
-    <Container id="writing" className="py-20 md:py-28">
-      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
-        Words.
-      </h2>
-      <motion.article
-        {...fadeUp}
-        className="border-t border-[color:var(--hairline)] py-10"
-      >
-        <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-          Medium · '25
-        </div>
-        <h3 className="mt-3 max-w-[820px] font-display text-[28px] font-bold leading-snug tracking-[-0.02em] text-ink md:text-[36px]">
-          The Uncharted Path — rewriting the rules of learning for a life of
-          true worth.
-        </h3>
-        <p className="mt-5 max-w-[680px] text-[17px] leading-[1.7] text-ink-secondary">
-          An analytical dissection of why traditional education paths fail
-          independent thinkers — and what the alternative looks like.
-        </p>
-        <a
-          href="https://medium.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="mt-6 inline-flex items-center gap-2 text-[15px] text-ink transition-colors hover:text-[color:var(--accent-blue)]"
-        >
-          Read on Medium <ArrowRight width={14} height={14} />
-        </a>
-      </motion.article>
     </Container>
   );
 }
 
 /* ---------- CONTACT ---------- */
 function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const FORMSPREE = "https://formspree.io/f/your-formspree-endpoint"; // placeholder
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const data = new FormData(e.currentTarget);
+      const res = await fetch(FORMSPREE, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+      setStatus(res.ok ? "sent" : "error");
+      if (res.ok) e.currentTarget.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
-    <Container id="contact" className="py-20 md:py-32">
+    <Container id="contact" className="py-24 md:py-32">
+      <SectionLabel>Get in Touch · Direct Communication</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="max-w-[900px] font-display font-black tracking-[-0.03em] text-ink leading-[1.02] text-[42px] md:text-[72px] lg:text-[88px]"
+        className="mb-14 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[34px] md:text-[56px]"
       >
-        Let's build
-        <br />
-        something{" "}
-        <span className="font-mono font-medium text-[0.78em] tracking-tight align-baseline">
+        Let's build something{" "}
+        <span className="font-mono font-medium tracking-[-0.02em] text-[0.78em] align-baseline">
           real()
         </span>
         .
       </motion.h2>
 
-      <motion.ul
-        {...fadeUp}
-        className="mt-14 space-y-4 border-t border-[color:var(--hairline)] pt-10"
-      >
-        {[
-          { mail: "sai1234comon@gmail.com", label: "Personal" },
-          { mail: "lyfspot@zohomail.in", label: "LYFSpot Corporate" },
-          { mail: "lyfspot26@gmail.com", label: "General Inquiries" },
-        ].map((e) => (
-          <li
-            key={e.mail}
-            className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-6"
+      <div className="grid grid-cols-1 gap-14 md:grid-cols-[1fr_1.1fr] md:gap-20">
+        <motion.div {...fadeUp}>
+          <div className="mono-label mb-4">Direct Channels</div>
+          <div className="space-y-5">
+            {[
+              { label: "Personal Engineering Office", email: "sai1234comon@gmail.com" },
+              { label: "LYFSpot Corporate Desk", email: "lyfspot@zohomail.in" },
+              { label: "LYFSpot Inbound Desk", email: "lyfspot26@gmail.com" },
+            ].map((c) => (
+              <a
+                key={c.email}
+                href={`mailto:${c.email}`}
+                className="group block border-t border-[color:var(--hairline)] pt-4 last:border-b last:pb-4"
+              >
+                <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                  {c.label}
+                </div>
+                <div className="mt-1 flex items-center justify-between gap-3 font-display text-[18px] font-semibold text-ink transition-colors group-hover:text-accent">
+                  <span>{c.email}</span>
+                  <ArrowRight width={14} height={14} className="transition-transform group-hover:translate-x-1" />
+                </div>
+              </a>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.form
+          {...fadeUp}
+          onSubmit={onSubmit}
+          className="space-y-5 rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6 md:p-8"
+        >
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <Field name="name" label="Full Name" required />
+            <Field name="email" label="Email Address" type="email" required />
+          </div>
+          <SelectField
+            name="subject"
+            label="Subject"
+            options={[
+              "Collaboration Inquiry",
+              "Project Discussion",
+              "Job Opportunity",
+              "Feedback",
+              "General Query",
+              "Other",
+            ]}
+          />
+          <TextAreaField name="message" label="Message" required />
+
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink disabled:opacity-60"
           >
-            <a
-              className="editorial-link font-mono text-[15px]"
-              href={`mailto:${e.mail}`}
-            >
-              {e.mail}
-            </a>
-            <span className="text-[14px] text-ink-muted">— {e.label}</span>
-          </li>
-        ))}
-      </motion.ul>
+            <Send width={16} height={16} />
+            {status === "sending" ? "Sending…" : status === "sent" ? "Message sent" : "Send Message"}
+          </button>
+          {status === "error" && (
+            <div className="font-mono text-[12px] text-ink-muted">
+              Endpoint not configured — replace the Formspree URL in Contact.tsx.
+            </div>
+          )}
+        </motion.form>
+      </div>
     </Container>
+  );
+}
+
+function Field({
+  name,
+  label,
+  type = "text",
+  required,
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+}) {
+  return (
+    <label className="block">
+      <span className="mono-label mb-2 block">{label}</span>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        className="w-full border-b border-[color:var(--hairline)] bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+      />
+    </label>
+  );
+}
+
+function SelectField({
+  name,
+  label,
+  options,
+}: {
+  name: string;
+  label: string;
+  options: string[];
+}) {
+  return (
+    <label className="block">
+      <span className="mono-label mb-2 block">{label}</span>
+      <select
+        name={name}
+        defaultValue=""
+        className="w-full border-b border-[color:var(--hairline)] bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+      >
+        <option value="" disabled>
+          Select a subject
+        </option>
+        {options.map((o) => (
+          <option key={o} value={o}>{o}</option>
+        ))}
+      </select>
+    </label>
+  );
+}
+
+function TextAreaField({
+  name,
+  label,
+  required,
+}: {
+  name: string;
+  label: string;
+  required?: boolean;
+}) {
+  return (
+    <label className="block">
+      <span className="mono-label mb-2 block">{label}</span>
+      <textarea
+        name={name}
+        required={required}
+        rows={5}
+        className="w-full resize-none border border-[color:var(--hairline)] bg-transparent p-3 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+      />
+    </label>
   );
 }
 
 /* ---------- FOOTER ---------- */
 function Footer() {
   const socials = [
-    { Icon: LinkedInIcon, href: "https://www.linkedin.com/", label: "LinkedIn" },
-    { Icon: XIcon, href: "https://x.com/", label: "Twitter" },
-    { Icon: MediumIcon, href: "https://medium.com/", label: "Medium" },
-    { Icon: GitHubIcon, href: "https://github.com/", label: "GitHub" },
-    { Icon: LinktreeIcon, href: "https://linktr.ee/", label: "Linktree" },
+    { Icon: LinkedInIcon, href: "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba" },
+    { Icon: XIcon, href: "https://twitter.com/vuppula_sai" },
+    { Icon: MediumIcon, href: "https://medium.com/@sravansaivuppula" },
+    { Icon: LinktreeIcon, href: "https://linktr.ee/uneducatedcustomer" },
+    { Icon: GitHubIcon, href: "https://github.com/sravansai-26" },
   ];
   return (
-    <footer className="border-t border-[color:var(--hairline)] mt-12">
-      <Container className="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">
-        <div className="text-[13px] text-ink-muted">
-          © 2026 Sravan Sai Vuppula · LYFSpot
+    <footer className="mt-20 border-t border-[color:var(--hairline)]">
+      <Container className="flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center">
+        <div className="flex items-center gap-3">
+          <div className="grid h-8 w-8 place-items-center rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] font-mono text-[11px] font-bold text-ink">
+            LS
+          </div>
+          <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
+            © 2026 Sravan Sai Vuppula · Designed and Engineered by LYFSpot for its Originator
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-5">
-          {socials.map(({ Icon, href, label }) => (
+        <div className="flex items-center gap-2">
+          {socials.map(({ Icon, href }, i) => (
             <a
-              key={label}
+              key={i}
               href={href}
               target="_blank"
               rel="noreferrer"
-              aria-label={label}
-              className="flex items-center gap-2 text-[13px] text-ink-secondary transition-colors hover:text-ink"
+              className="grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
             >
-              <Icon width={15} height={15} />
-              <span>{label}</span>
+              <Icon width={16} height={16} />
             </a>
           ))}
         </div>
@@ -819,18 +1259,19 @@ function Footer() {
   );
 }
 
-/* ---------- ROOT EXPORT ---------- */
+/* ---------- ROOT ---------- */
 export default function Portfolio() {
   return (
-    <main className="overflow-hidden">
+    <main>
       <Hero />
-      <Intro />
-      <Journey />
+      <Identity />
+      <LyfspotJourney />
+      <EngineeringMatrix />
       <Work />
-      <Stack />
+      <Experience />
       <Credentials />
-      <ThisAndThat />
-      <Writing />
+      <Publications />
+      <GitHubPulse />
       <Contact />
       <Footer />
     </main>
