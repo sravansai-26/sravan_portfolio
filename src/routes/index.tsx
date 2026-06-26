@@ -1,29 +1,66 @@
 import { createFileRoute } from "@tanstack/react-router";
+import Portfolio from "@/components/portfolio/Portfolio";
+import { Nav } from "@/components/portfolio/Nav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Sravan Sai Vuppula — Founder & Lead Developer, LYFSpot" },
+      {
+        name: "description",
+        content:
+          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. Building products that reject rigid templates and elevate everyday lives through engineering, design, and systems thinking.",
+      },
+      { property: "og:title", content: "Sravan Sai Vuppula — Founder, LYFSpot" },
+      {
+        property: "og:description",
+        content:
+          "Founder & Lead Developer of LYFSpot. Architecting products across civic tech, cinema systems, logistics intelligence, and enterprise cloud.",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              name: "Sravan Sai Vuppula",
+              jobTitle: "Founder & Lead Developer",
+              worksFor: { "@type": "Organization", name: "LYFSpot" },
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Hyderabad",
+                addressRegion: "TS",
+                addressCountry: "IN",
+              },
+              email: "mailto:sai1234comon@gmail.com",
+            },
+            {
+              "@type": "Organization",
+              name: "LYFSpot",
+              founder: "Sravan Sai Vuppula",
+              foundingDate: "2020-10",
+            },
+            {
+              "@type": "WebSite",
+              name: "Sravan Sai Vuppula",
+              author: { "@type": "Person", name: "Sravan Sai Vuppula" },
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Nav />
+      <Portfolio />
+    </>
   );
 }
