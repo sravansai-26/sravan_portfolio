@@ -19,7 +19,7 @@ const fadeUp = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeOut" },
+  transition: { duration: 0.6 },
 };
 
 function Section({
@@ -138,7 +138,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.3 }}
           className="relative mx-auto w-full max-w-[420px] md:mx-0"
         >
           <div
@@ -311,7 +311,7 @@ function JourneyEntry({ e, index }: { e: Entry; index: number }) {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
+                transition={{ duration: 0.35 }}
                 className="mt-4 overflow-hidden"
               >
                 <div className="space-y-3 border-l border-[color:var(--hairline)] pl-5">
@@ -473,7 +473,7 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
+            transition={{ duration: 0.35 }}
             className="overflow-hidden"
           >
             <div className="grid grid-cols-1 gap-4 pb-8 pl-7 pr-2 md:grid-cols-[1fr_auto] md:gap-12 md:pl-[60px]">
