@@ -11,10 +11,9 @@ import {
   XIcon,
   MediumIcon,
   LinktreeIcon,
-  PlaceholderMark,
 } from "./Icons";
 
-/* ---------- shared motion helpers ---------- */
+/* ---------- motion helpers ---------- */
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
@@ -22,27 +21,20 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
-function Section({
+function Container({
   id,
-  label,
   children,
   className = "",
 }: {
   id?: string;
-  label?: string;
   children: ReactNode;
   className?: string;
 }) {
   return (
     <section
       id={id}
-      className={`mx-auto w-full max-w-[720px] px-6 md:px-0 ${className}`}
+      className={`mx-auto w-full max-w-[1180px] px-6 md:px-12 ${className}`}
     >
-      {label && (
-        <motion.div {...fadeUp} className="mono-label mb-10">
-          {label}
-        </motion.div>
-      )}
       {children}
     </section>
   );
@@ -50,70 +42,76 @@ function Section({
 
 /* ---------- HERO ---------- */
 function Hero() {
-  const lines = [
-    <>I build products,</>,
-    <>architect systems,</>,
-    <>
-      and{" "}
-      <span className="code-tag align-middle text-[0.78em]">ship</span> things
-    </>,
-    <>that matter.</>,
-  ];
-
   return (
-    <section id="top" className="pt-36 pb-24 md:pt-44 md:pb-32">
-      <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-[1.4fr_1fr] md:gap-16 md:px-12 lg:gap-24">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
+    <section id="top" className="relative pt-28 md:pt-32">
+      <div className="relative mx-auto grid min-h-[88vh] w-full max-w-[1400px] grid-cols-1 items-end gap-10 px-6 pb-16 md:grid-cols-[1.55fr_1fr] md:items-stretch md:gap-0 md:px-12 md:pb-0">
+        {/* Headline column */}
+        <div className="flex flex-col justify-center pt-10 md:pt-24 md:pb-28">
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mono-label mb-8"
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-display font-black tracking-[-0.035em] text-ink leading-[0.98] text-[44px] sm:text-[60px] md:text-[78px] lg:text-[96px]"
           >
-            Founder &amp; Lead Developer · LYFSpot · Hyderabad
-          </motion.div>
+            I build products,
+            <br />
+            architect{" "}
+            <span className="font-mono font-medium tracking-[-0.02em] text-[0.86em] align-baseline">
+              systems()
+            </span>
+            ,
+            <br />
+            and ship things
+            <br />
+            that matter.
+          </motion.h1>
+        </div>
 
-          <h1 className="font-display text-[44px] font-bold leading-[1.05] tracking-[-0.02em] text-ink md:text-[68px] lg:text-[78px]">
-            {lines.map((l, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: 0.15 + i * 0.08,
-                  
-                }}
-                className="block"
-              >
-                {l}
-              </motion.span>
-            ))}
-          </h1>
+        {/* Portrait column - full-bleed right edge */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.0, delay: 0.25 }}
+          className="relative h-[60vh] min-h-[420px] w-full md:h-auto md:min-h-[88vh]"
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(120% 80% at 80% 20%, #EEF4F6 0%, #DCE5EA 55%, #C9D5DC 100%)",
+            }}
+          />
+          <img
+            src={sravanImg}
+            alt="Sravan Sai Vuppula, Founder of LYFSpot"
+            className="absolute bottom-0 right-0 h-[100%] w-auto max-w-none object-contain object-bottom"
+            style={{ filter: "grayscale(0.25) contrast(1.02) brightness(1.02)" }}
+            loading="eager"
+            decoding="async"
+          />
+        </motion.div>
+      </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-10 max-w-[520px] text-[18px] leading-[1.8] text-ink-secondary md:text-[19px]"
-          >
-            Founder and Lead Developer of LYFSpot. Bridging robust system
-            architecture, MERN-stack applications, and enterprise deep-tech.
-            Building digital products that reject rigid templates and elevate
-            modern everyday lives.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-8 text-[16px] text-ink-secondary"
-          >
-            Email me at{" "}
-            <a className="editorial-link" href="mailto:sai1234comon@gmail.com">
-              sai1234comon@gmail.com
+      {/* Sub-block under hero, right-aligned like reference */}
+      <Container className="pb-20 pt-8 md:pb-28">
+        <motion.div
+          {...fadeUp}
+          className="ml-auto max-w-[520px] text-[16px] leading-[1.7] text-ink md:text-[17px]"
+        >
+          <p>
+            Currently, I'm{" "}
+            <span className="font-semibold">Founder &amp; Lead Developer</span> at{" "}
+            <a className="editorial-link" href="#work">
+              LYFSpot
             </a>
-            , or connect on{" "}
+            , architecting a multi-sector product ecosystem — from civic tech and
+            cinema systems to logistics intelligence and enterprise cloud.
+          </p>
+          <p className="mt-5">
+            <a className="editorial-link" href="mailto:sai1234comon@gmail.com">
+              Email me
+            </a>
+            , or shout over on{" "}
             <a
               className="editorial-link"
               href="https://www.linkedin.com/"
@@ -125,221 +123,205 @@ function Hero() {
             or{" "}
             <a
               className="editorial-link"
-              href="https://x.com/"
+              href="https://github.com/"
               target="_blank"
               rel="noreferrer"
             >
-              Twitter
+              GitHub
             </a>
             .
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="relative mx-auto w-full max-w-[420px] md:mx-0"
-        >
-          <div
-            className="relative overflow-hidden rounded-[4px] border border-[color:var(--hairline)]"
-            style={{
-              aspectRatio: "3/4",
-              background:
-                "linear-gradient(180deg, #EDE8DE 0%, #D9D0C0 100%)",
-            }}
-          >
-            <img
-              src={sravanImg}
-              alt="Sravan Sai Vuppula, Founder of LYFSpot"
-              className="absolute inset-x-0 bottom-0 mx-auto h-[108%] w-auto object-contain object-bottom"
-              loading="eager"
-              decoding="async"
-            />
-          </div>
-          <div className="mono-label mt-4 text-right">
-            Hyderabad — 2026
-          </div>
+          </p>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 }
 
-/* ---------- STAT BAR ---------- */
-function StatBar() {
-  const stats = ["5+ Years Building.", "7 Shipped Products.", "Startups to Enterprise."];
+/* ---------- INTRO STATEMENT ---------- */
+function Intro() {
   return (
-    <Section className="py-20 md:py-28">
-      <motion.div
-        {...fadeUp}
-        className="flex flex-col items-start gap-4 text-ink-secondary md:flex-row md:flex-wrap md:items-center md:gap-6"
-      >
-        {stats.map((s, i) => (
-          <div key={s} className="flex items-center gap-6">
-            <span className="font-display text-[20px] italic text-ink md:text-[22px]">
-              {s}
-            </span>
-            {i < stats.length - 1 && (
-              <span className="hidden h-4 w-px bg-[color:var(--hairline)] md:inline-block" />
-            )}
-          </div>
-        ))}
-      </motion.div>
-      <motion.p
-        {...fadeUp}
-        transition={{ ...fadeUp.transition, delay: 0.1 }}
-        className="mt-10 max-w-[640px] text-[18px] leading-[1.8] text-ink md:text-[19px]"
-      >
-        Over five years bridging design and development into products that
-        solve real problems — from civic tech to cinema systems, from logistics
-        to enterprise SAP environments.
-      </motion.p>
-    </Section>
+    <Container className="py-20 md:py-32">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_1fr] md:gap-20">
+        <motion.h2
+          {...fadeUp}
+          className="font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[32px] md:text-[48px] lg:text-[56px]"
+        >
+          Over five years bridging engineering and design into products that
+          quietly do the work.
+        </motion.h2>
+        <motion.div
+          {...fadeUp}
+          transition={{ ...fadeUp.transition, delay: 0.12 }}
+          className="flex flex-col justify-end gap-3 text-[17px] leading-[1.6] text-ink-secondary"
+        >
+          <div>5+ years building.</div>
+          <div>7 products shipped.</div>
+          <div>From a single blog to a full conglomerate.</div>
+        </motion.div>
+      </div>
+    </Container>
   );
 }
 
 /* ---------- JOURNEY ---------- */
 type Entry = {
-  num: string;
+  num: number;
   range: string;
   role: string;
   org: string;
-  orgMeta?: string;
   body: string;
   impact: string;
-  nested?: { year: string; text: string }[];
+  nested?: { range: string; role: string }[];
 };
 
 const entries: Entry[] = [
   {
-    num: "01",
-    range: "Oct 2020 — Present",
+    num: 1,
+    range: "20–Present",
     role: "Founder & Chief Technical Architect",
     org: "LYFSpot",
-    orgMeta: "Self-Founded · Hybrid Corporation",
     body:
-      "Architecting a multi-sector product ecosystem from the ground up — spanning civic tech, cinema production systems, logistics intelligence, and enterprise cloud deployments. Every product engineered for human utility, not vanity metrics.",
+      "Architecting a multi-sector product ecosystem from the ground up — spanning civic tech, cinema production systems, logistics intelligence, and enterprise cloud deployments.",
     impact:
-      "7 shipped products across MERN, React Native, Spring Boot, and SAP ecosystems. From a blog network to a full conglomerate.",
+      "7 shipped products across MERN, React Native, Spring Boot, and SAP ecosystems. From a single blog to a full conglomerate.",
   },
   {
-    num: "02",
-    range: "Mar 2026 — May 2026",
-    role: "DevCon Associate — Enterprise SAP Track",
+    num: 2,
+    range: "26",
+    role: "DevCon Associate — SAP Track",
     org: "Naxrita India",
-    orgMeta: "On-Site · Hyderabad, TS",
     body:
-      "Immersed in production-grade SAP ABAP environments. Programmed custom Data Dictionary structures, optimized internal table architectures, and acquired hands-on depth in the SAP S/4HANA Cloud backend ecosystem.",
+      "Production-grade SAP ABAP environments. Programmed custom Data Dictionary structures, optimized internal table architectures, shipped against the SAP S/4HANA Cloud backend.",
     impact:
-      "SAP Certified Associate — ABAP Cloud. Production-ready in enterprise architecture within 3 months.",
+      "SAP Certified Associate — ABAP Cloud. Production-ready in enterprise architecture within three months.",
   },
   {
-    num: "03",
-    range: "Oct 2020 — Present",
+    num: 3,
+    range: "20–Present",
     role: "Founder",
-    org: "Balcom & Nobody",
-    orgMeta: "equivalent: LYFSpot Studio Wing",
+    org: "Balcom & Nobody — LYFSpot Studio",
     body:
       "The studio arm of LYFSpot — incubating experiments, frameworks, and creative engineering bets that later graduate into the product portfolio.",
-    impact: "A continuous lab where everything LYFSpot ships is first prototyped.",
+    impact:
+      "A continuous lab where everything LYFSpot ships is first prototyped, broken, and re-built.",
     nested: [
-      { year: "2020", text: "Origin — sailyfspot.blogspot.com — first digital footprint." },
-      { year: "2022", text: "Phase I — IVOpt and UneCust framework initiation." },
-      { year: "2024", text: "Scale — full MERN deployment pipelines for Shotweave and DeployBridge." },
-      { year: "2026", text: "Convergence — Mobile (LoadMate), cloud, enterprise, deep tech research." },
+      { range: "20", role: "Origin — first digital footprint" },
+      { range: "22", role: "Phase I — IVOpt and UneCust framework initiation" },
+      { range: "24", role: "Scale — Shotweave and DeployBridge pipelines" },
+      { range: "26", role: "Convergence — mobile, cloud, enterprise, deep-tech research" },
     ],
+  },
+  {
+    num: 4,
+    range: "22–26",
+    role: "B.Tech, Computer Science Engineering",
+    org: "Independent Engineering Practice",
+    body:
+      "Self-directed full-stack practice in parallel with formal CS — shipping production code while completing the degree.",
+    impact:
+      "Built and deployed real products to real users before graduation.",
   },
 ];
 
-function JourneyEntry({ e, index }: { e: Entry; index: number }) {
-  const [open, setOpen] = useState(false);
-  const hasNested = !!e.nested?.length;
-  // Icon for org
-  const OrgMark = e.org === "LYFSpot" ? PlaceholderMark : PlaceholderMark;
-
+function JourneyEntry({ e, detailed }: { e: Entry; detailed: boolean }) {
   return (
     <motion.article
       {...fadeUp}
-      transition={{ ...fadeUp.transition, delay: index * 0.04 }}
-      className="border-t border-[color:var(--hairline)] py-12 first:border-t-0 first:pt-0"
+      className="grid grid-cols-[auto_minmax(0,1fr)] gap-6 border-t border-[color:var(--hairline)] py-12 md:grid-cols-[80px_120px_minmax(0,1fr)] md:gap-12"
     >
-      <div className="mono-label mb-3 flex items-center gap-4">
-        <span>{e.num}</span>
-        <span className="h-px w-8 bg-[color:var(--hairline)]" />
-        <span>{e.range}</span>
+      <div className="font-mono text-[13px] tracking-wide text-ink-muted">
+        {e.num}.
       </div>
-
-      <div className="flex items-start gap-4">
-        <div className="mt-1.5 grid h-10 w-10 shrink-0 place-items-center rounded-[4px] border border-[color:var(--hairline)] bg-surface text-ink-secondary">
-          <OrgMark width={18} height={18} />
-        </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="font-display text-[22px] font-semibold leading-tight text-ink md:text-[24px]">
-            {e.role}
-          </h3>
-          <p className="mt-1 text-[17px] text-gold">
-            {e.org}
-            {e.orgMeta && (
-              <span className="ml-2 text-[14px] text-ink-muted">· {e.orgMeta}</span>
-            )}
-          </p>
-        </div>
+      <div className="font-mono text-[13px] tracking-wide text-ink-muted md:pt-[2px]">
+        {e.range}
       </div>
+      <div className="col-span-2 md:col-span-1">
+        <h3 className="font-display font-bold tracking-[-0.02em] text-ink text-[26px] md:text-[34px] leading-[1.1]">
+          {e.role}
+        </h3>
+        <div className="mt-2 font-display text-[20px] font-semibold text-ink-secondary md:text-[22px]">
+          {e.org}
+        </div>
 
-      <p className="mt-5 text-[17px] leading-[1.8] text-ink-secondary">{e.body}</p>
-
-      <p className="mt-5 text-[17px] leading-[1.8] text-ink">
-        <span className="font-semibold">The Impact →</span>{" "}
-        <span className="text-ink-secondary">{e.impact}</span>
-      </p>
-
-      {hasNested && (
-        <>
-          <button
-            onClick={() => setOpen((o) => !o)}
-            className="mt-6 inline-flex items-center gap-2 text-[13px] text-ink-secondary transition-colors hover:text-gold"
-          >
-            {open ? <Minus width={14} height={14} /> : <Plus width={14} height={14} />}
-            <span className="font-mono uppercase tracking-[0.12em]">
-              {open ? "Hide phases" : "Show phases"}
-            </span>
-          </button>
-          <AnimatePresence initial={false}>
-            {open && (
-              <motion.ul
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35 }}
-                className="mt-4 overflow-hidden"
-              >
-                <div className="space-y-3 border-l border-[color:var(--hairline)] pl-5">
-                  {e.nested!.map((n) => (
-                    <li key={n.year} className="flex gap-4 text-[16px]">
-                      <span className="font-mono text-[12px] tracking-wider text-ink-muted">
-                        {n.year}
+        <AnimatePresence initial={false}>
+          {detailed && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="overflow-hidden"
+            >
+              <p className="mt-6 max-w-[640px] text-[17px] leading-[1.7] text-ink-secondary">
+                {e.body}
+              </p>
+              {e.nested && (
+                <ul className="mt-5 space-y-2 border-l border-[color:var(--hairline)] pl-5">
+                  {e.nested.map((n) => (
+                    <li
+                      key={n.range}
+                      className="flex gap-4 text-[15px] text-ink-secondary"
+                    >
+                      <span className="font-mono text-[12px] text-ink-muted">
+                        {n.range}
                       </span>
-                      <span className="text-ink-secondary">{n.text}</span>
+                      <span>{n.role}</span>
                     </li>
                   ))}
-                </div>
-              </motion.ul>
-            )}
-          </AnimatePresence>
-        </>
-      )}
+                </ul>
+              )}
+              <p className="mt-6 max-w-[640px] text-[16px] leading-[1.7] text-ink">
+                <span className="font-semibold">Bottom Line →</span>{" "}
+                <span className="text-ink-secondary">{e.impact}</span>
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.article>
   );
 }
 
 function Journey() {
+  const [detailed, setDetailed] = useState(false);
   return (
-    <Section id="about" label="The Journey" className="py-20 md:py-28">
-      {entries.map((e, i) => (
-        <JourneyEntry key={e.num} e={e} index={i} />
-      ))}
-    </Section>
+    <Container id="about" className="py-20 md:py-28">
+      <div className="mb-10 flex items-center justify-between">
+        <h2 className="font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+          The Journey.
+        </h2>
+        <div className="inline-flex items-center gap-1 rounded-full border border-[color:var(--hairline)] bg-[color:var(--surface)] p-1 text-[13px]">
+          <button
+            onClick={() => setDetailed(false)}
+            className={`rounded-full px-4 py-1.5 transition-colors ${
+              !detailed
+                ? "bg-ink text-background"
+                : "text-ink-secondary hover:text-ink"
+            }`}
+          >
+            Simple
+          </button>
+          <button
+            onClick={() => setDetailed(true)}
+            className={`rounded-full px-4 py-1.5 transition-colors ${
+              detailed
+                ? "bg-ink text-background"
+                : "text-ink-secondary hover:text-ink"
+            }`}
+          >
+            Detailed
+          </button>
+        </div>
+      </div>
+
+      <div>
+        {entries.map((e) => (
+          <JourneyEntry key={e.num} e={e} detailed={detailed} />
+        ))}
+      </div>
+
+      <div className="mt-10 flex justify-center text-ink-muted">↓</div>
+    </Container>
   );
 }
 
@@ -360,18 +342,18 @@ const projects: Project[] = [
     num: "01",
     name: "Resolveit",
     blurb: "Civic issue resolution infrastructure",
-    year: "2023",
+    year: "23",
     category: "MERN · Civic Tech",
     details:
       "A civic platform connecting citizens with municipal bodies through structured issue routing, status escalation, and transparent resolution timelines.",
-    stack: ["MongoDB", "Express.js", "React.js", "Node.js"],
+    stack: ["MongoDB", "Express", "React", "Node"],
     links: [{ label: "GitHub", href: "#" }],
   },
   {
     num: "02",
     name: "Smart LoadMate",
-    blurb: "AI logistics & route optimization mobile app",
-    year: "2024",
+    blurb: "AI logistics & route optimization",
+    year: "24",
     category: "React Native · FastAPI",
     details:
       "Mobile-first logistics intelligence — load-matching, AI-driven route optimization, and operational telemetry for fleet operators.",
@@ -382,7 +364,7 @@ const projects: Project[] = [
     num: "03",
     name: "Shotweave",
     blurb: "Cinema production operations dashboard",
-    year: "2024",
+    year: "24",
     category: "React · Python",
     details:
       "An operations layer for film sets — call sheets, shot tracking, and crew choreography for production houses that ship.",
@@ -392,8 +374,8 @@ const projects: Project[] = [
   {
     num: "04",
     name: "DreamLaunch",
-    blurb: "Content distribution engine for filmmakers",
-    year: "2024",
+    blurb: "Distribution engine for filmmakers",
+    year: "24",
     category: "MERN · Media",
     details:
       "Distribution pipelines for independent filmmakers — release scheduling, asset packaging, and audience analytics.",
@@ -404,7 +386,7 @@ const projects: Project[] = [
     num: "05",
     name: "VaultBank",
     blurb: "Banking simulator & financial ledger",
-    year: "2025",
+    year: "25",
     category: "Spring Boot · Java",
     details:
       "A double-entry ledger and banking simulator built on Spring Boot, exploring transactional integrity at scale.",
@@ -414,8 +396,8 @@ const projects: Project[] = [
   {
     num: "06",
     name: "DeployBridge",
-    blurb: "Multi-cloud automated deployment engine",
-    year: "2025",
+    blurb: "Multi-cloud deployment engine",
+    year: "25",
     category: "MERN · DevOps",
     details:
       "Provisioning and orchestration across cloud providers with a clean operator-grade UI.",
@@ -426,8 +408,8 @@ const projects: Project[] = [
     num: "07",
     name: "Sri-Wedding System",
     blurb: "Elite digital ordering interface",
-    year: "2026",
-    category: "Lovable AI Stack",
+    year: "26",
+    category: "TanStack · Cloud",
     details:
       "A premium digital ordering surface for an end-to-end wedding services operator.",
     stack: ["TanStack", "React", "Cloud"],
@@ -445,24 +427,28 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[28px_minmax(0,1fr)_auto] items-center gap-4 py-6 text-left transition-colors hover:bg-[rgba(193,127,62,0.04)] md:grid-cols-[36px_minmax(0,1.4fr)_minmax(0,1.4fr)_auto_28px] md:gap-6"
+        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_auto] items-baseline gap-4 py-7 text-left transition-colors hover:opacity-90 md:grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_auto_28px] md:gap-8"
       >
-        <span className="font-mono text-[12px] text-ink-muted">{p.num}</span>
+        <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
         <div className="min-w-0">
-          <div className="font-display text-[22px] font-semibold text-ink md:text-[24px]">
+          <div className="font-display text-[26px] font-bold tracking-[-0.02em] text-ink md:text-[32px]">
             {p.name}
           </div>
-          <div className="mt-1 text-[14px] text-ink-secondary md:hidden">{p.blurb}</div>
+          <div className="mt-1 text-[14px] text-ink-secondary md:hidden">
+            {p.blurb}
+          </div>
         </div>
-        <div className="hidden text-[15px] text-ink-secondary md:block">{p.blurb}</div>
+        <div className="hidden text-[16px] text-ink-secondary md:block">
+          {p.blurb}
+        </div>
         <div className="hidden font-mono text-[12px] uppercase tracking-wider text-ink-muted md:block">
-          {p.year} · {p.category}
+          '{p.year} · {p.category}
         </div>
         <ArrowRight
           width={18}
           height={18}
           className={`shrink-0 text-ink-secondary transition-transform duration-200 ${
-            open ? "rotate-90 text-gold" : "group-hover:translate-x-1"
+            open ? "rotate-90 text-ink" : "group-hover:translate-x-1"
           }`}
         />
       </button>
@@ -476,9 +462,11 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
             transition={{ duration: 0.35 }}
             className="overflow-hidden"
           >
-            <div className="grid grid-cols-1 gap-4 pb-8 pl-7 pr-2 md:grid-cols-[1fr_auto] md:gap-12 md:pl-[60px]">
+            <div className="grid grid-cols-1 gap-4 pb-8 pl-11 pr-2 md:grid-cols-[1fr_auto] md:gap-12 md:pl-[68px]">
               <div>
-                <p className="text-[17px] leading-[1.8] text-ink-secondary">{p.details}</p>
+                <p className="text-[16px] leading-[1.7] text-ink-secondary">
+                  {p.details}
+                </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.stack.map((s) => (
                     <span key={s} className="code-tag">
@@ -508,13 +496,16 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
 
 function Work() {
   return (
-    <Section id="work" label="Selected Work" className="py-20 md:py-28">
+    <Container id="work" className="py-20 md:py-28">
+      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+        Selected Work.
+      </h2>
       <div>
         {projects.map((p, i) => (
           <ProjectRow key={p.num} p={p} idx={i} />
         ))}
       </div>
-    </Section>
+    </Container>
   );
 }
 
@@ -523,91 +514,81 @@ function Stack() {
   const groups: { label: string; items: string[] }[] = [
     {
       label: "Full-Stack",
-      items: ["MongoDB", "Express.js", "React.js", "Node.js", "Spring Boot", "FastAPI"],
+      items: ["MongoDB", "Express", "React", "Node", "Spring Boot", "FastAPI"],
     },
-    { label: "Mobile", items: ["React Native", "Expo CLI", "Android Capacitor"] },
-    { label: "Languages", items: ["C", "Java", "Python", "JavaScript", "HTML5", "CSS3"] },
-    { label: "Cloud & DevOps", items: ["AWS", "GCP", "Cloudinary", "Git", "GitHub"] },
-    { label: "Enterprise", items: ["SAP ABAP", "SAP S/4HANA Cloud", "ABAP RAP"] },
+    { label: "Mobile", items: ["React Native", "Expo", "Capacitor"] },
+    { label: "Languages", items: ["C", "Java", "Python", "JavaScript", "TypeScript"] },
+    { label: "Cloud", items: ["AWS", "GCP", "Cloudinary", "Git", "GitHub"] },
+    { label: "Enterprise", items: ["SAP ABAP", "S/4HANA Cloud", "ABAP RAP"] },
   ];
 
   return (
-    <Section label="What I Build With" className="py-20 md:py-28">
-      <div className="space-y-7">
+    <Container className="py-20 md:py-28">
+      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+        What I Build With.
+      </h2>
+      <div className="space-y-8">
         {groups.map((g, i) => (
           <motion.div
             key={g.label}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.04 }}
-            className="text-[17px] leading-[2] text-ink"
+            className="grid grid-cols-1 gap-2 border-t border-[color:var(--hairline)] pt-6 md:grid-cols-[200px_1fr] md:gap-8"
           >
-            <span className="font-display text-[20px] italic text-ink">{g.label}:</span>{" "}
-            <span className="inline-flex flex-wrap gap-2 align-middle">
+            <div className="font-display text-[18px] font-semibold text-ink md:text-[20px]">
+              {g.label}
+            </div>
+            <div className="flex flex-wrap gap-2">
               {g.items.map((t) => (
                 <span key={t} className="code-tag">
                   {t}
                 </span>
               ))}
-            </span>
+            </div>
           </motion.div>
         ))}
       </div>
-    </Section>
+    </Container>
   );
 }
 
 /* ---------- CREDENTIALS ---------- */
 type Cred = { title: string; issuer: string; date: string };
-const academic: Cred[] = [
-  { title: "B.Tech, Computer Science Engineering", issuer: "(Institute Placeholder)", date: "2022 — 2026" },
-  { title: "Intermediate / Pre-University, MPC", issuer: "(Board Placeholder)", date: "2020 — 2022" },
-];
 const certifications: Cred[] = [
-  { title: "SAP Certified Associate — ABAP Cloud", issuer: "SAP / Naxrita India", date: "2026" },
-  { title: "Full-Stack Web Development", issuer: "Self-Directed / Open Source", date: "2021 — Present" },
-  { title: "Cloud Foundations", issuer: "AWS / GCP", date: "2024" },
+  { title: "SAP Certified Associate — ABAP Cloud", issuer: "SAP / Naxrita India", date: "26" },
+  { title: "Full-Stack Web Development", issuer: "Self-Directed", date: "21 — Present" },
+  { title: "Cloud Foundations", issuer: "AWS / GCP", date: "24" },
 ];
-const honors: Cred[] = [
-  { title: "Founder, LYFSpot", issuer: "Independent Recognition", date: "2020 — Present" },
-];
-
-function CredRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
-  return (
-    <motion.div
-      {...fadeUp}
-      className="grid grid-cols-1 items-center gap-2 border-t border-[color:var(--hairline)] py-5 md:grid-cols-[1.4fr_1fr_auto] md:gap-6"
-    >
-      <div className="font-sans text-[18px] font-semibold text-ink">{c.title}</div>
-      <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-        {c.issuer} · {c.date}
-      </div>
-      <button
-        onClick={onOpen}
-        className="inline-flex items-center gap-2 justify-self-start text-[14px] text-gold transition-colors hover:text-ink md:justify-self-end"
-      >
-        View Certificate <ArrowRight width={14} height={14} />
-      </button>
-    </motion.div>
-  );
-}
 
 function Credentials() {
   const [active, setActive] = useState<Cred | null>(null);
-  const section = (title: string, items: Cred[]) => (
-    <div className="mt-10 first:mt-0">
-      <div className="mono-label mb-4">{title}</div>
+  return (
+    <Container id="credentials" className="py-20 md:py-28">
+      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+        Credentials.
+      </h2>
       <div>
-        {items.map((c) => (
-          <CredRow key={c.title} c={c} onOpen={() => setActive(c)} />
+        {certifications.map((c) => (
+          <motion.div
+            key={c.title}
+            {...fadeUp}
+            className="grid grid-cols-1 items-baseline gap-2 border-t border-[color:var(--hairline)] py-6 md:grid-cols-[1.4fr_1fr_auto] md:gap-8"
+          >
+            <div className="font-display text-[20px] font-semibold text-ink">
+              {c.title}
+            </div>
+            <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
+              {c.issuer} · '{c.date}
+            </div>
+            <button
+              onClick={() => setActive(c)}
+              className="inline-flex items-center gap-2 justify-self-start text-[14px] text-ink-secondary transition-colors hover:text-ink md:justify-self-end"
+            >
+              View <ArrowRight width={14} height={14} />
+            </button>
+          </motion.div>
         ))}
       </div>
-    </div>
-  );
-  return (
-    <Section id="credentials" label="Verified Credentials" className="py-20 md:py-28">
-      {section("Academic", academic)}
-      {section("Certifications", certifications)}
-      {section("Honors", honors)}
 
       <AnimatePresence>
         {active && (
@@ -617,7 +598,7 @@ function Credentials() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center px-4"
-            style={{ background: "rgba(26,22,18,0.45)" }}
+            style={{ background: "rgba(21,25,30,0.55)" }}
             onClick={() => setActive(null)}
           >
             <motion.div
@@ -626,7 +607,7 @@ function Credentials() {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-[640px] rounded-[6px] border border-[color:var(--hairline)] bg-background p-8"
+              className="relative w-full max-w-[640px] border border-[color:var(--hairline)] bg-background p-8"
             >
               <button
                 onClick={() => setActive(null)}
@@ -635,17 +616,19 @@ function Credentials() {
                 <Close width={20} height={20} />
               </button>
               <div className="mono-label mb-3">Certificate</div>
-              <h3 className="font-display text-[26px] font-semibold text-ink">{active.title}</h3>
+              <h3 className="font-display text-[26px] font-bold tracking-tight text-ink">
+                {active.title}
+              </h3>
               <div className="mt-1 font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-                {active.issuer} · {active.date}
+                {active.issuer} · '{active.date}
               </div>
-              <div
-                className="mt-6 grid aspect-[4/3] w-full place-items-center rounded-[4px] border border-dashed border-[color:var(--hairline)] bg-surface text-ink-muted"
-              >
+              <div className="mt-6 grid aspect-[4/3] w-full place-items-center border border-dashed border-[color:var(--hairline)] bg-surface text-ink-muted">
                 <div className="text-center">
-                  <div className="font-display text-[20px] italic">Document preview</div>
+                  <div className="font-display text-[18px] font-semibold">
+                    Document preview
+                  </div>
                   <div className="mt-2 text-[13px]">
-                    PDF / image embed placeholder — wire to your asset URL.
+                    PDF / image placeholder.
                   </div>
                 </div>
               </div>
@@ -653,44 +636,43 @@ function Credentials() {
           </motion.div>
         )}
       </AnimatePresence>
-    </Section>
+    </Container>
   );
 }
 
 /* ---------- THIS & THAT ---------- */
 function ThisAndThat() {
   const round = [
-    "Always Telugu cinema over Bollywood.",
-    "Always window seat.",
-    "Filter coffee. Non-negotiable.",
-    "A.R. Rahman's Roja over everything.",
-    "The Uncharted Path over the well-trodden road.",
-    "The rest is negotiable.",
+    "🎬  Telugu cinema over Bollywood. Always.",
+    "✈️  Window seat or nothing.",
+    "☕  Filter coffee. Non-negotiable.",
+    "🎵  A.R. Rahman's Roja over everything.",
+    "🛣️  The Uncharted Path over the well-trodden road.",
+    "🤟  The rest is negotiable.",
   ];
   return (
-    <Section label="This & That" className="py-20 md:py-28">
-      <motion.p {...fadeUp} className="text-[18px] leading-[1.85] text-ink-secondary md:text-[19px]">
-        A lifelong builder chasing the product that changes everything. Telugu
-        cinema obsessive — watching films the way engineers read system
-        architecture. Guitarist in theory, golfer in ambition. Writing Telugu
-        poetry and philosophical essays when the compiler is behaving.
-      </motion.p>
+    <Container className="py-20 md:py-28">
+      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+        This &amp; That.
+      </h2>
       <motion.p
         {...fadeUp}
-        transition={{ ...fadeUp.transition, delay: 0.08 }}
-        className="mt-5 text-[18px] leading-[1.85] text-ink-secondary md:text-[19px]"
+        className="max-w-[820px] font-display font-bold tracking-[-0.02em] text-ink leading-[1.15] text-[28px] md:text-[40px]"
       >
-        Based in Hyderabad with a head full of roadmaps and a tab open on every
-        interesting problem.
+        A lifelong builder chasing the product that changes everything. Telugu
+        cinema obsessive, guitarist in theory, golfer in ambition. Based in{" "}
+        <span className="font-mono font-medium tracking-tight text-[0.78em] align-baseline">
+          Hyderabad
+        </span>{" "}
+        with a head full of roadmaps.
       </motion.p>
 
-      <motion.div {...fadeUp} className="mt-12">
-        <div className="mono-label mb-4">Lightning Round</div>
-        <ul className="space-y-3">
+      <motion.div {...fadeUp} className="mt-16">
+        <div className="mono-label mb-5">Lightning Round ⚡️</div>
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {round.map((r) => (
-            <li key={r} className="flex gap-3 text-[17px] text-ink">
-              <span className="text-gold">—</span>
-              <span>{r}</span>
+            <li key={r} className="text-[17px] text-ink">
+              {r}
             </li>
           ))}
         </ul>
@@ -698,44 +680,50 @@ function ThisAndThat() {
 
       <motion.div
         {...fadeUp}
-        className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-2"
+        className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2"
       >
-        <div className="rounded-[4px] border border-[color:var(--hairline)] bg-surface p-6">
-          <div className="mono-label mb-2">Now Reading</div>
-          <p className="font-display text-[18px] italic leading-snug text-ink">
-            "The well-trodden road is comfortable. The uncharted one is honest."
+        <div className="border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6">
+          <div className="mono-label mb-3">Now Reading</div>
+          <p className="font-display text-[20px] font-semibold leading-snug text-ink">
+            The well-trodden road is comfortable. The uncharted one is honest.
           </p>
-          <div className="mt-3 text-[13px] text-ink-muted">— from a 2025 Medium essay</div>
+          <div className="mt-3 text-[13px] text-ink-muted">
+            — from a 2025 essay
+          </div>
         </div>
-        <div className="rounded-[4px] border border-[color:var(--hairline)] bg-surface p-6">
-          <div className="mono-label mb-2">Now Building</div>
-          <p className="font-display text-[18px] italic leading-snug text-ink">
-            IVOpt — In Active Development
+        <div className="border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6">
+          <div className="mono-label mb-3">Now Building</div>
+          <p className="font-display text-[20px] font-semibold leading-snug text-ink">
+            IVOpt — in active development
           </p>
           <div className="mt-3 text-[13px] text-ink-muted">
             Internal LYFSpot framework · 2026
           </div>
         </div>
       </motion.div>
-    </Section>
+    </Container>
   );
 }
 
 /* ---------- WRITING ---------- */
 function Writing() {
   return (
-    <Section id="writing" label="Words" className="py-20 md:py-28">
+    <Container id="writing" className="py-20 md:py-28">
+      <h2 className="mb-10 font-display text-[22px] font-bold tracking-tight text-ink md:text-[26px]">
+        Words.
+      </h2>
       <motion.article
         {...fadeUp}
-        className="border-t border-[color:var(--hairline)] py-8"
+        className="border-t border-[color:var(--hairline)] py-10"
       >
-        <h3 className="font-display text-[22px] italic font-semibold leading-snug text-ink md:text-[24px]">
-          The Uncharted Path: Rewriting the Rules of Learning for a Life of True Worth
-        </h3>
-        <div className="mt-2 font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-          Medium · 2025
+        <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
+          Medium · '25
         </div>
-        <p className="mt-4 text-[17px] leading-[1.8] text-ink-secondary">
+        <h3 className="mt-3 max-w-[820px] font-display text-[28px] font-bold leading-snug tracking-[-0.02em] text-ink md:text-[36px]">
+          The Uncharted Path — rewriting the rules of learning for a life of
+          true worth.
+        </h3>
+        <p className="mt-5 max-w-[680px] text-[17px] leading-[1.7] text-ink-secondary">
           An analytical dissection of why traditional education paths fail
           independent thinkers — and what the alternative looks like.
         </p>
@@ -743,88 +731,56 @@ function Writing() {
           href="https://medium.com/"
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-flex items-center gap-2 text-[15px] text-gold transition-colors hover:text-ink"
+          className="mt-6 inline-flex items-center gap-2 text-[15px] text-ink transition-colors hover:text-[color:var(--accent-blue)]"
         >
           Read on Medium <ArrowRight width={14} height={14} />
         </a>
       </motion.article>
-    </Section>
+    </Container>
   );
 }
 
 /* ---------- CONTACT ---------- */
 function Contact() {
   return (
-    <Section id="contact" label="Let's Talk" className="py-20 md:py-28">
-      <motion.p
+    <Container id="contact" className="py-20 md:py-32">
+      <motion.h2
         {...fadeUp}
-        className="text-[18px] leading-[1.85] text-ink-secondary md:text-[19px]"
+        className="max-w-[900px] font-display font-black tracking-[-0.03em] text-ink leading-[1.02] text-[42px] md:text-[72px] lg:text-[88px]"
       >
-        Open to product conversations, collaboration, and ambitious ideas.
-        Reach me directly:
-      </motion.p>
+        Let's build
+        <br />
+        something{" "}
+        <span className="font-mono font-medium text-[0.78em] tracking-tight align-baseline">
+          real()
+        </span>
+        .
+      </motion.h2>
 
-      <motion.ul {...fadeUp} className="mt-8 space-y-4">
+      <motion.ul
+        {...fadeUp}
+        className="mt-14 space-y-4 border-t border-[color:var(--hairline)] pt-10"
+      >
         {[
-          { mail: "sai1234comon@gmail.com", label: "Personal Engineering Office" },
-          { mail: "lyfspot@zohomail.in", label: "LYFSpot Corporate Desk" },
+          { mail: "sai1234comon@gmail.com", label: "Personal" },
+          { mail: "lyfspot@zohomail.in", label: "LYFSpot Corporate" },
           { mail: "lyfspot26@gmail.com", label: "General Inquiries" },
         ].map((e) => (
-          <li key={e.mail} className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-6">
-            <a className="editorial-link font-mono text-[15px]" href={`mailto:${e.mail}`}>
+          <li
+            key={e.mail}
+            className="flex flex-col gap-1 md:flex-row md:items-baseline md:gap-6"
+          >
+            <a
+              className="editorial-link font-mono text-[15px]"
+              href={`mailto:${e.mail}`}
+            >
               {e.mail}
             </a>
             <span className="text-[14px] text-ink-muted">— {e.label}</span>
           </li>
         ))}
       </motion.ul>
-
-      <motion.form
-        {...fadeUp}
-        action="https://formspree.io/f/your-id-here"
-        method="POST"
-        className="mt-14 grid grid-cols-1 gap-4"
-      >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <label className="block">
-            <span className="mono-label mb-2 block">Name</span>
-            <input
-              required
-              name="name"
-              type="text"
-              className="w-full border border-[color:var(--hairline)] bg-transparent px-4 py-3 text-[15px] text-ink outline-none transition-colors focus:border-gold"
-            />
-          </label>
-          <label className="block">
-            <span className="mono-label mb-2 block">Email</span>
-            <input
-              required
-              name="email"
-              type="email"
-              className="w-full border border-[color:var(--hairline)] bg-transparent px-4 py-3 text-[15px] text-ink outline-none transition-colors focus:border-gold"
-            />
-          </label>
-        </div>
-        <label className="block">
-          <span className="mono-label mb-2 block">Message</span>
-          <textarea
-            required
-            name="message"
-            rows={6}
-            className="w-full resize-none border border-[color:var(--hairline)] bg-transparent px-4 py-3 text-[15px] text-ink outline-none transition-colors focus:border-gold"
-          />
-        </label>
-        <div className="mt-2">
-          <button
-            type="submit"
-            className="group inline-flex items-center gap-3 border border-ink bg-ink px-6 py-3 text-[14px] font-medium text-background transition-colors hover:bg-gold hover:border-gold"
-          >
-            Send message
-            <ArrowRight width={16} height={16} className="transition-transform group-hover:translate-x-1" />
-          </button>
-        </div>
-      </motion.form>
-    </Section>
+    </Container>
   );
 }
 
@@ -838,33 +794,27 @@ function Footer() {
     { Icon: LinktreeIcon, href: "https://linktr.ee/", label: "Linktree" },
   ];
   return (
-    <footer
-      className="mt-24"
-      style={{ background: "var(--deep-ink)", color: "var(--surface)" }}
-    >
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-6 py-14 md:flex-row md:items-center md:justify-between md:px-12">
-        <div className="text-[14px] text-[color:var(--surface)]/80">
-          © 2026 Sravan Sai Vuppula · Designed &amp; Engineered by LYFSpot
+    <footer className="border-t border-[color:var(--hairline)] mt-12">
+      <Container className="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">
+        <div className="text-[13px] text-ink-muted">
+          © 2026 Sravan Sai Vuppula · LYFSpot
         </div>
         <div className="flex flex-wrap items-center gap-5">
-          {socials.map(({ Icon, href, label }, i) => (
+          {socials.map(({ Icon, href, label }) => (
             <a
               key={label}
               href={href}
               target="_blank"
               rel="noreferrer"
               aria-label={label}
-              className="group flex items-center gap-2 text-[14px] text-[color:var(--surface)]/80 transition-colors hover:text-gold"
+              className="flex items-center gap-2 text-[13px] text-ink-secondary transition-colors hover:text-ink"
             >
-              <Icon width={16} height={16} />
+              <Icon width={15} height={15} />
               <span>{label}</span>
-              {i < socials.length - 1 && (
-                <span className="ml-3 hidden h-3 w-px bg-[color:var(--surface)]/20 md:inline-block" />
-              )}
             </a>
           ))}
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
@@ -874,7 +824,7 @@ export default function Portfolio() {
   return (
     <main className="overflow-hidden">
       <Hero />
-      <StatBar />
+      <Intro />
       <Journey />
       <Work />
       <Stack />
