@@ -699,6 +699,8 @@ type Cred = {
   skills?: string;
   href?: string;
   meta?: string;
+  file?: string; // path under /public for viewer (pdf or image)
+  fileType?: "pdf" | "image";
 };
 
 const academic: Cred[] = [
@@ -738,6 +740,8 @@ const certs: Cred[] = [
     meta: "Cohort ID · B 13",
     date: "Verified June 2026",
     skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
+    file: "/credentials/infosys.pdf",
+    fileType: "pdf",
   },
   {
     title: "ServiceNow Virtual Internship Program (AICTE Approved)",
@@ -746,21 +750,30 @@ const certs: Cred[] = [
     date: "Verified May 2026",
     skills:
       "ServiceNow System Administration, Flow Designer, Automated Test Framework (ATF), Certified System Administrator (CSA) Core Foundations.",
+    file: "/credentials/servicenow.pdf",
+    fileType: "pdf",
   },
   {
     title: "SAP ABAP on S/4HANA Technical Track — Naxrita DevCon",
-    org: "Naxrita India",
-    date: "Verified May 2026",
+    org: "Naxrita India · Emax Technologies · MLRIT",
+    date: "Awarded May 09, 2026",
+    meta: "18-Day Industry Readiness Program",
     skills:
-      "Modern SAP Enterprise Architecture, 18-Day Intensive Production Pipeline Simulations.",
+      "Modern SAP Enterprise Architecture, S/4HANA fundamentals, Core ABAP, CDS Views, OData exposure, professional delivery practices.",
+    file: "/credentials/naxrita.png",
+    fileType: "image",
   },
   {
     title: "NPTEL Elite Certification — Industry 4.0 and Internet of Things",
     org: "National Programme on Technology Enhanced Learning (India)",
+    file: "/credentials/nptel-iot.pdf",
+    fileType: "pdf",
   },
   {
     title: "NPTEL Elite Certification — Cloud Computing Paradigms",
     org: "National Programme on Technology Enhanced Learning (India)",
+    file: "/credentials/nptel-cloud.pdf",
+    fileType: "pdf",
   },
 ];
 
