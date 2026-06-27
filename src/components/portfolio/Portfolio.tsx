@@ -1268,35 +1268,65 @@ function TextAreaField({
 /* ---------- FOOTER ---------- */
 function Footer() {
   const socials = [
-    { Icon: LinkedInIcon, href: "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba" },
-    { Icon: XIcon, href: "https://twitter.com/vuppula_sai" },
-    { Icon: MediumIcon, href: "https://medium.com/@sravansaivuppula" },
-    { Icon: LinktreeIcon, href: "https://linktr.ee/uneducatedcustomer" },
-    { Icon: GitHubIcon, href: "https://github.com/sravansai-26" },
+    { Icon: LinkedInIcon, href: "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba", label: "LinkedIn" },
+    { Icon: XIcon, href: "https://twitter.com/vuppula_sai", label: "X" },
+    { Icon: MediumIcon, href: "https://medium.com/@sravansaivuppula", label: "Medium" },
+    { Icon: LinktreeIcon, href: "https://linktr.ee/uneducatedcustomer", label: "Linktree" },
+    { Icon: GitHubIcon, href: "https://github.com/sravansai-26", label: "GitHub" },
+    { Icon: InstagramIcon, href: "https://instagram.com/lyfspot", label: "Instagram" },
+    { Icon: TelegramIcon, href: "https://t.me/lyfspot", label: "Telegram" },
   ];
   return (
     <footer className="mt-20 border-t border-[color:var(--hairline)]">
-      <Container className="flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center">
-        <div className="flex items-center gap-3">
-          <div className="grid h-8 w-8 place-items-center rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] font-mono text-[11px] font-bold text-ink">
-            LS
-          </div>
-          <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-            © 2026 Sravan Sai Vuppula · Designed and Engineered by LYFSpot for its Originator
+      <Container className="py-16 md:py-20">
+        {/* Marquee-style quote */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-12">
+          <div className="mono-label mb-4">Manifesto · The Untapped Potential</div>
+          <p className="font-display text-[28px] font-bold leading-[1.18] tracking-[-0.025em] text-ink md:text-[40px] lg:text-[48px]">
+            The journey you've taken so far represents the{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">untapped potential</span>
+              <span className="absolute inset-x-0 bottom-1 z-0 h-2 bg-[color:var(--accent-blue)]/30" />
+            </span>{" "}
+            of an{" "}
+            <span className="font-mono text-[0.78em] font-medium tracking-[-0.02em] align-baseline">
+              uneducated_customer()
+            </span>{" "}
+            <span className="text-ink-muted">:)</span>
+          </p>
+          <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+            <span className="h-px w-10 bg-ink-muted" />
+            Signed, the Originator
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          {socials.map(({ Icon, href }, i) => (
-            <a
-              key={i}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
-            >
-              <Icon width={16} height={16} />
-            </a>
-          ))}
+
+        {/* Bottom strip */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+          <div className="flex items-center gap-4">
+            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-[color:var(--deep-ink)] ring-1 ring-[color:var(--hairline)]">
+              <img src={ssvMark} alt="SSV" className="h-9 w-9 object-contain" />
+            </span>
+            <div>
+              <div className="font-display text-[16px] font-bold text-ink">Sravan Sai Vuppula</div>
+              <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                © 2026 · Designed and Engineered by LYFSpot for its Originator
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            {socials.map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="grid h-12 w-12 place-items-center rounded-full border border-[color:var(--hairline)] bg-white/40 text-ink-secondary backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:text-ink"
+              >
+                <Icon width={20} height={20} />
+              </a>
+            ))}
+          </div>
         </div>
       </Container>
     </footer>
@@ -1304,10 +1334,10 @@ function Footer() {
 }
 
 /* ---------- ROOT ---------- */
-export default function Portfolio() {
+export default function Portfolio({ onLaunchResume }: { onLaunchResume: () => void }) {
   return (
     <main>
-      <Hero />
+      <Hero onLaunchResume={onLaunchResume} />
       <Identity />
       <LyfspotJourney />
       <EngineeringMatrix />
