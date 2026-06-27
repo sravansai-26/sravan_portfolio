@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sravanImg from "@/assets/sravan-cutout.png";
+import ssvMark from "@/assets/ssv-mark.png";
 import {
   ArrowRight,
   Close,
@@ -26,7 +27,7 @@ import {
   FacebookIcon,
   WritcoIcon,
 } from "./Icons";
-import { SkillsRadar } from "./SkillsRadar";
+import { ArchitecturePlayground } from "./ArchitecturePlayground";
 
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
@@ -56,10 +57,10 @@ function SectionLabel({ children }: { children: ReactNode }) {
 }
 
 /* ---------- HERO ---------- */
-function Hero() {
+function Hero({ onLaunchResume }: { onLaunchResume: () => void }) {
   return (
     <section id="top" className="relative pt-28 md:pt-32">
-      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-10 md:grid-cols-[1.35fr_1fr] md:gap-12 md:px-12 md:pb-0">
+      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-10 md:grid-cols-[1.3fr_1fr] md:gap-16 md:px-12 md:pb-0">
         <div className="flex flex-col justify-center md:pt-16 md:pb-24">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -91,12 +92,12 @@ function Hero() {
             transition={{ ...fadeUp.transition, delay: 0.3 }}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
-            <a
-              href="#resume"
+            <button
+              onClick={onLaunchResume}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
             >
               <DocIcon width={16} height={16} /> Launch Interactive Resume
-            </a>
+            </button>
             <a href="#contact" className="editorial-link inline-flex items-center gap-2 text-[14px]">
               Get in touch <ArrowRight width={14} height={14} />
             </a>
@@ -107,22 +108,20 @@ function Hero() {
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.0, delay: 0.25 }}
-          className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-6 lg:translate-x-12"
+          className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-10 lg:translate-x-16"
         >
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
+          <div className="relative aspect-[4/5] w-full">
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 rounded-[2px]"
               style={{
                 background:
-                  "radial-gradient(120% 80% at 70% 30%, #EEF4F6 0%, #DCE5EA 55%, #C2D0D8 100%)",
+                  "radial-gradient(120% 80% at 70% 30%, rgba(238,244,246,0.6) 0%, rgba(220,229,234,0.3) 55%, rgba(194,208,216,0) 100%)",
               }}
             />
-            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[color:var(--hairline)]" />
             <img
               src={sravanImg}
               alt="Sravan Sai Vuppula, Founder of LYFSpot"
-              className="absolute inset-x-0 bottom-0 mx-auto h-[105%] w-auto max-w-none object-contain object-bottom"
-              style={{ filter: "grayscale(0.18) contrast(1.04) brightness(1.02)" }}
+              className="absolute inset-x-0 bottom-0 mx-auto h-[110%] w-auto max-w-none object-contain object-bottom"
               loading="eager"
               decoding="async"
             />
@@ -409,8 +408,8 @@ function EngineeringMatrix() {
       </div>
 
       <div className="mt-20">
-        <div className="mono-label mb-8">Skills Radar · Live Proficiency Index</div>
-        <SkillsRadar />
+        <SectionLabel>Enterprise Architecture Playground · Interactive Workflow Graph</SectionLabel>
+        <ArchitecturePlayground />
       </div>
     </Container>
   );
@@ -700,6 +699,8 @@ type Cred = {
   skills?: string;
   href?: string;
   meta?: string;
+  file?: string; // path under /public for viewer (pdf or image)
+  fileType?: "pdf" | "image";
 };
 
 const academic: Cred[] = [
@@ -739,6 +740,8 @@ const certs: Cred[] = [
     meta: "Cohort ID · B 13",
     date: "Verified June 2026",
     skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
+    file: "/credentials/infosys.pdf",
+    fileType: "pdf",
   },
   {
     title: "ServiceNow Virtual Internship Program (AICTE Approved)",
@@ -747,21 +750,30 @@ const certs: Cred[] = [
     date: "Verified May 2026",
     skills:
       "ServiceNow System Administration, Flow Designer, Automated Test Framework (ATF), Certified System Administrator (CSA) Core Foundations.",
+    file: "/credentials/servicenow.pdf",
+    fileType: "pdf",
   },
   {
     title: "SAP ABAP on S/4HANA Technical Track — Naxrita DevCon",
-    org: "Naxrita India",
-    date: "Verified May 2026",
+    org: "Naxrita India · Emax Technologies · MLRIT",
+    date: "Awarded May 09, 2026",
+    meta: "18-Day Industry Readiness Program",
     skills:
-      "Modern SAP Enterprise Architecture, 18-Day Intensive Production Pipeline Simulations.",
+      "Modern SAP Enterprise Architecture, S/4HANA fundamentals, Core ABAP, CDS Views, OData exposure, professional delivery practices.",
+    file: "/credentials/naxrita.png",
+    fileType: "image",
   },
   {
     title: "NPTEL Elite Certification — Industry 4.0 and Internet of Things",
     org: "National Programme on Technology Enhanced Learning (India)",
+    file: "/credentials/nptel-iot.pdf",
+    fileType: "pdf",
   },
   {
     title: "NPTEL Elite Certification — Cloud Computing Paradigms",
     org: "National Programme on Technology Enhanced Learning (India)",
+    file: "/credentials/nptel-cloud.pdf",
+    fileType: "pdf",
   },
 ];
 
@@ -815,7 +827,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 grid place-items-center bg-[color:var(--deep-ink)]/55 px-6 backdrop-blur-sm"
+          className="fixed inset-0 z-50 grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
@@ -824,52 +836,83 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[680px] rounded-sm border border-[color:var(--hairline)] bg-[color:var(--background)] p-8 md:p-10"
+            className="relative flex max-h-[92vh] w-full max-w-[1080px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/75 shadow-2xl backdrop-blur-2xl md:flex-row"
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
+              className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/70 text-ink-secondary backdrop-blur transition-colors hover:bg-white hover:text-ink"
               aria-label="Close"
             >
               <Close />
             </button>
-            <div className="mono-label mb-3">Verified Credential</div>
-            <h3 className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
-              {c.title}
-            </h3>
-            <div className="mt-2 text-[15px] text-ink-secondary">{c.org}</div>
-            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-              {c.date && <span>{c.date}</span>}
-              {c.meta && <span>{c.meta}</span>}
-              {c.gpa && <span>{c.gpa}</span>}
-            </div>
 
-            <div className="mt-6 grid aspect-[4/3] place-items-center rounded-sm border border-dashed border-[color:var(--hairline)] bg-[color:var(--surface)] text-center">
-              <div>
-                <DocIcon width={28} height={28} className="mx-auto text-ink-muted" />
-                <div className="mt-3 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-                  Certificate frame · upload PDF to render here
+            {/* Metadata panel */}
+            <div className="flex w-full flex-col gap-3 overflow-y-auto p-6 md:w-[380px] md:shrink-0 md:border-r md:border-white/40 md:p-7">
+              <div className="mono-label">System Live · Verified Credential</div>
+              <h3 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink md:text-[24px]">
+                {c.title}
+              </h3>
+              <div className="text-[14px] text-ink-secondary">{c.org}</div>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10.5px] uppercase tracking-wider text-ink-muted">
+                {c.date && <span>{c.date}</span>}
+                {c.meta && <span>{c.meta}</span>}
+                {c.gpa && <span>{c.gpa}</span>}
+              </div>
+              {c.skills && (
+                <div className="mt-3 rounded-xl border border-white/50 bg-white/50 p-4">
+                  <div className="mono-label mb-1.5">Verified Skill Matrix</div>
+                  <p className="text-[13.5px] leading-[1.65] text-ink-secondary">{c.skills}</p>
                 </div>
+              )}
+              <div className="mt-auto flex flex-wrap gap-2 pt-3">
+                {c.href && (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-[12px] font-medium text-background hover:bg-deep-ink"
+                  >
+                    Verify externally <ExternalLink width={12} height={12} />
+                  </a>
+                )}
+                {c.file && (
+                  <a
+                    href={c.file}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hairline)] bg-white/70 px-3.5 py-1.5 text-[12px] text-ink hover:bg-white"
+                  >
+                    Open file <ExternalLink width={12} height={12} />
+                  </a>
+                )}
               </div>
             </div>
 
-            {c.skills && (
-              <div className="mt-6">
-                <div className="mono-label mb-2">Verified Skill Matrix</div>
-                <p className="text-[15px] leading-[1.7] text-ink-secondary">{c.skills}</p>
-              </div>
-            )}
-
-            {c.href && (
-              <a
-                href={c.href}
-                target="_blank"
-                rel="noreferrer"
-                className="editorial-link mt-6 inline-flex items-center gap-2 text-[15px]"
-              >
-                Verify externally <ExternalLink width={14} height={14} />
-              </a>
-            )}
+            {/* Document viewer */}
+            <div className="grid min-h-[320px] flex-1 place-items-center bg-gradient-to-br from-white/40 to-white/10 p-3 md:min-h-0">
+              {c.file && c.fileType === "image" && (
+                <img
+                  src={c.file}
+                  alt={c.title}
+                  className="max-h-[80vh] w-full rounded-lg object-contain shadow-lg"
+                />
+              )}
+              {c.file && c.fileType === "pdf" && (
+                <iframe
+                  src={`${c.file}#toolbar=0&view=FitH`}
+                  title={c.title}
+                  className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
+                />
+              )}
+              {!c.file && (
+                <div className="text-center">
+                  <DocIcon width={32} height={32} className="mx-auto text-ink-muted" />
+                  <div className="mt-3 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                    Document placeholder · attach a file to render here
+                  </div>
+                </div>
+              )}
+            </div>
           </motion.div>
         </motion.div>
       )}
@@ -881,12 +924,13 @@ function Credentials() {
   const [active, setActive] = useState<Cred | null>(null);
   return (
     <Container id="credentials" className="py-24 md:py-32">
-      <SectionLabel>Credentials & Academic Background</SectionLabel>
+      <SectionLabel>Credentials · System-Live Verification Dashboard</SectionLabel>
       <motion.h2
         {...fadeUp}
         className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
-        Every credential, verifiable. Tap any row to open the native viewer.
+        Every credential is verifiable. Click any certification to inspect its
+        live metadata and original document.
       </motion.h2>
 
       <div className="mono-label mb-4">Academic Milestones</div>
@@ -1224,35 +1268,65 @@ function TextAreaField({
 /* ---------- FOOTER ---------- */
 function Footer() {
   const socials = [
-    { Icon: LinkedInIcon, href: "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba" },
-    { Icon: XIcon, href: "https://twitter.com/vuppula_sai" },
-    { Icon: MediumIcon, href: "https://medium.com/@sravansaivuppula" },
-    { Icon: LinktreeIcon, href: "https://linktr.ee/uneducatedcustomer" },
-    { Icon: GitHubIcon, href: "https://github.com/sravansai-26" },
+    { Icon: LinkedInIcon, href: "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba", label: "LinkedIn" },
+    { Icon: XIcon, href: "https://twitter.com/vuppula_sai", label: "X" },
+    { Icon: MediumIcon, href: "https://medium.com/@sravansaivuppula", label: "Medium" },
+    { Icon: LinktreeIcon, href: "https://linktr.ee/uneducatedcustomer", label: "Linktree" },
+    { Icon: GitHubIcon, href: "https://github.com/sravansai-26", label: "GitHub" },
+    { Icon: InstagramIcon, href: "https://instagram.com/lyfspot", label: "Instagram" },
+    { Icon: TelegramIcon, href: "https://t.me/lyfspot", label: "Telegram" },
   ];
   return (
     <footer className="mt-20 border-t border-[color:var(--hairline)]">
-      <Container className="flex flex-col items-start justify-between gap-6 py-10 md:flex-row md:items-center">
-        <div className="flex items-center gap-3">
-          <div className="grid h-8 w-8 place-items-center rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] font-mono text-[11px] font-bold text-ink">
-            LS
-          </div>
-          <div className="font-mono text-[12px] uppercase tracking-wider text-ink-muted">
-            © 2026 Sravan Sai Vuppula · Designed and Engineered by LYFSpot for its Originator
+      <Container className="py-16 md:py-20">
+        {/* Marquee-style quote */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-12">
+          <div className="mono-label mb-4">Manifesto · The Untapped Potential</div>
+          <p className="font-display text-[28px] font-bold leading-[1.18] tracking-[-0.025em] text-ink md:text-[40px] lg:text-[48px]">
+            The journey you've taken so far represents the{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">untapped potential</span>
+              <span className="absolute inset-x-0 bottom-1 z-0 h-2 bg-[color:var(--accent-blue)]/30" />
+            </span>{" "}
+            of an{" "}
+            <span className="font-mono text-[0.78em] font-medium tracking-[-0.02em] align-baseline">
+              uneducated_customer()
+            </span>{" "}
+            <span className="text-ink-muted">:)</span>
+          </p>
+          <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+            <span className="h-px w-10 bg-ink-muted" />
+            Signed, the Originator
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          {socials.map(({ Icon, href }, i) => (
-            <a
-              key={i}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
-            >
-              <Icon width={16} height={16} />
-            </a>
-          ))}
+
+        {/* Bottom strip */}
+        <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+          <div className="flex items-center gap-4">
+            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-[color:var(--deep-ink)] ring-1 ring-[color:var(--hairline)]">
+              <img src={ssvMark} alt="SSV" className="h-9 w-9 object-contain" />
+            </span>
+            <div>
+              <div className="font-display text-[16px] font-bold text-ink">Sravan Sai Vuppula</div>
+              <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                © 2026 · Designed and Engineered by LYFSpot for its Originator
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            {socials.map(({ Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="grid h-12 w-12 place-items-center rounded-full border border-[color:var(--hairline)] bg-white/40 text-ink-secondary backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:text-ink"
+              >
+                <Icon width={20} height={20} />
+              </a>
+            ))}
+          </div>
         </div>
       </Container>
     </footer>
@@ -1260,10 +1334,10 @@ function Footer() {
 }
 
 /* ---------- ROOT ---------- */
-export default function Portfolio() {
+export default function Portfolio({ onLaunchResume }: { onLaunchResume: () => void }) {
   return (
     <main>
-      <Hero />
+      <Hero onLaunchResume={onLaunchResume} />
       <Identity />
       <LyfspotJourney />
       <EngineeringMatrix />

@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import Portfolio from "@/components/portfolio/Portfolio";
 import { Nav } from "@/components/portfolio/Nav";
+import { LoadingSplash } from "@/components/portfolio/LoadingSplash";
+import { ResumeModal } from "@/components/portfolio/ResumeModal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,10 +60,13 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [resumeOpen, setResumeOpen] = useState(false);
   return (
     <>
-      <Nav />
-      <Portfolio />
+      <LoadingSplash />
+      <Nav onLaunchResume={() => setResumeOpen(true)} />
+      <Portfolio onLaunchResume={() => setResumeOpen(true)} />
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </>
   );
 }
