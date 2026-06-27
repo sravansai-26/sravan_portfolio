@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, Close, DocIcon } from "./Icons";
+import ssvMark from "@/assets/ssv-mark.png";
 
 const links = [
   { label: "Home", href: "#top" },
@@ -12,7 +13,7 @@ const links = [
   { label: "Contact", href: "#contact" },
 ];
 
-export function Nav() {
+export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -27,40 +28,42 @@ export function Nav() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-          scrolled
-            ? "backdrop-blur bg-[color:var(--background)]/75 border-b border-[color:var(--hairline)]"
-            : "bg-transparent"
+          scrolled ? "bg-[color:var(--background)]/30 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-6 py-4 md:px-12">
-          <a href="#top" className="flex items-center gap-3">
-            <span className="grid h-8 w-8 place-items-center rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] font-mono text-[11px] font-bold text-ink">
-              LS
+        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-4 md:px-10">
+          <a href="#top" className="flex items-center gap-3 group">
+            <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-full bg-[color:var(--deep-ink)] ring-1 ring-[color:var(--hairline)] transition-transform group-hover:scale-105">
+              <img src={ssvMark} alt="SSV" className="h-8 w-8 object-contain" />
             </span>
-            <span className="font-display text-[14px] font-semibold tracking-tight text-ink">
+            <span className="font-display text-[19px] md:text-[22px] font-bold tracking-[-0.02em] text-ink">
               Sravan Sai Vuppula
             </span>
           </a>
 
-          <nav className="hidden items-center gap-7 lg:flex">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-secondary transition-colors hover:text-ink"
-              >
-                {l.label}
-              </a>
-            ))}
+          {/* Glass tube nav */}
+          <nav className="hidden lg:flex">
+            <ul className="flex items-center gap-1 rounded-full border border-white/40 bg-white/30 px-2 py-1.5 shadow-[0_8px_24px_-12px_rgba(26,33,40,0.18)] backdrop-blur-xl">
+              {links.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="block rounded-full px-3.5 py-1.5 font-display text-[12.5px] font-medium text-ink-secondary transition-colors hover:bg-white/60 hover:text-ink"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           <div className="flex items-center gap-3">
-            <a
-              href="#resume"
-              className="hidden items-center gap-2 rounded-full border border-[color:var(--hairline)] px-4 py-2 text-[12px] font-medium text-ink transition-colors hover:bg-[color:var(--surface)] md:inline-flex"
+            <button
+              onClick={onLaunchResume}
+              className="hidden items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/40 px-4 py-2 text-[12px] font-medium text-ink backdrop-blur transition-colors hover:bg-white/70 md:inline-flex"
             >
               <DocIcon width={14} height={14} /> Launch Resume
-            </a>
+            </button>
             <button
               onClick={() => setOpen(true)}
               className="grid h-9 w-9 place-items-center rounded-sm text-ink lg:hidden"
@@ -95,6 +98,15 @@ export function Nav() {
                 {l.label}
               </a>
             ))}
+            <button
+              onClick={() => {
+                setOpen(false);
+                onLaunchResume?.();
+              }}
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[13px] font-medium text-ink"
+            >
+              <DocIcon width={14} height={14} /> Launch Resume
+            </button>
           </nav>
         </div>
       )}
