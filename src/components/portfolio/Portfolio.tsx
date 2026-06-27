@@ -408,8 +408,8 @@ function EngineeringMatrix() {
       </div>
 
       <div className="mt-20">
-        <div className="mono-label mb-8">Skills Radar · Live Proficiency Index</div>
-        <SkillsRadar />
+        <SectionLabel>Enterprise Architecture Playground · Interactive Workflow Graph</SectionLabel>
+        <ArchitecturePlayground />
       </div>
     </Container>
   );
