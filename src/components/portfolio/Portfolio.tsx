@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sravanImg from "@/assets/sravan-cutout.png";
+import ssvMark from "@/assets/ssv-mark.png";
 import {
   ArrowRight,
   Close,
@@ -26,7 +27,7 @@ import {
   FacebookIcon,
   WritcoIcon,
 } from "./Icons";
-import { SkillsRadar } from "./SkillsRadar";
+import { ArchitecturePlayground } from "./ArchitecturePlayground";
 
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
@@ -56,10 +57,10 @@ function SectionLabel({ children }: { children: ReactNode }) {
 }
 
 /* ---------- HERO ---------- */
-function Hero() {
+function Hero({ onLaunchResume }: { onLaunchResume: () => void }) {
   return (
     <section id="top" className="relative pt-28 md:pt-32">
-      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-10 md:grid-cols-[1.35fr_1fr] md:gap-12 md:px-12 md:pb-0">
+      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 px-6 pb-10 md:grid-cols-[1.3fr_1fr] md:gap-16 md:px-12 md:pb-0">
         <div className="flex flex-col justify-center md:pt-16 md:pb-24">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -91,12 +92,12 @@ function Hero() {
             transition={{ ...fadeUp.transition, delay: 0.3 }}
             className="mt-8 flex flex-wrap items-center gap-4"
           >
-            <a
-              href="#resume"
+            <button
+              onClick={onLaunchResume}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
             >
               <DocIcon width={16} height={16} /> Launch Interactive Resume
-            </a>
+            </button>
             <a href="#contact" className="editorial-link inline-flex items-center gap-2 text-[14px]">
               Get in touch <ArrowRight width={14} height={14} />
             </a>
@@ -107,22 +108,20 @@ function Hero() {
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.0, delay: 0.25 }}
-          className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-6 lg:translate-x-12"
+          className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-10 lg:translate-x-16"
         >
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
+          <div className="relative aspect-[4/5] w-full">
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 rounded-[2px]"
               style={{
                 background:
-                  "radial-gradient(120% 80% at 70% 30%, #EEF4F6 0%, #DCE5EA 55%, #C2D0D8 100%)",
+                  "radial-gradient(120% 80% at 70% 30%, rgba(238,244,246,0.6) 0%, rgba(220,229,234,0.3) 55%, rgba(194,208,216,0) 100%)",
               }}
             />
-            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[color:var(--hairline)]" />
             <img
               src={sravanImg}
               alt="Sravan Sai Vuppula, Founder of LYFSpot"
-              className="absolute inset-x-0 bottom-0 mx-auto h-[105%] w-auto max-w-none object-contain object-bottom"
-              style={{ filter: "grayscale(0.18) contrast(1.04) brightness(1.02)" }}
+              className="absolute inset-x-0 bottom-0 mx-auto h-[110%] w-auto max-w-none object-contain object-bottom"
               loading="eager"
               decoding="async"
             />
