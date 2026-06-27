@@ -827,7 +827,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 grid place-items-center bg-[color:var(--deep-ink)]/55 px-6 backdrop-blur-sm"
+          className="fixed inset-0 z-50 grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
@@ -836,52 +836,83 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[680px] rounded-sm border border-[color:var(--hairline)] bg-[color:var(--background)] p-8 md:p-10"
+            className="relative flex max-h-[92vh] w-full max-w-[1080px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/75 shadow-2xl backdrop-blur-2xl md:flex-row"
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition-colors hover:bg-[color:var(--surface)] hover:text-ink"
+              className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/70 text-ink-secondary backdrop-blur transition-colors hover:bg-white hover:text-ink"
               aria-label="Close"
             >
               <Close />
             </button>
-            <div className="mono-label mb-3">Verified Credential</div>
-            <h3 className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
-              {c.title}
-            </h3>
-            <div className="mt-2 text-[15px] text-ink-secondary">{c.org}</div>
-            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-              {c.date && <span>{c.date}</span>}
-              {c.meta && <span>{c.meta}</span>}
-              {c.gpa && <span>{c.gpa}</span>}
-            </div>
 
-            <div className="mt-6 grid aspect-[4/3] place-items-center rounded-sm border border-dashed border-[color:var(--hairline)] bg-[color:var(--surface)] text-center">
-              <div>
-                <DocIcon width={28} height={28} className="mx-auto text-ink-muted" />
-                <div className="mt-3 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-                  Certificate frame · upload PDF to render here
+            {/* Metadata panel */}
+            <div className="flex w-full flex-col gap-3 overflow-y-auto p-6 md:w-[380px] md:shrink-0 md:border-r md:border-white/40 md:p-7">
+              <div className="mono-label">System Live · Verified Credential</div>
+              <h3 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink md:text-[24px]">
+                {c.title}
+              </h3>
+              <div className="text-[14px] text-ink-secondary">{c.org}</div>
+              <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10.5px] uppercase tracking-wider text-ink-muted">
+                {c.date && <span>{c.date}</span>}
+                {c.meta && <span>{c.meta}</span>}
+                {c.gpa && <span>{c.gpa}</span>}
+              </div>
+              {c.skills && (
+                <div className="mt-3 rounded-xl border border-white/50 bg-white/50 p-4">
+                  <div className="mono-label mb-1.5">Verified Skill Matrix</div>
+                  <p className="text-[13.5px] leading-[1.65] text-ink-secondary">{c.skills}</p>
                 </div>
+              )}
+              <div className="mt-auto flex flex-wrap gap-2 pt-3">
+                {c.href && (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-[12px] font-medium text-background hover:bg-deep-ink"
+                  >
+                    Verify externally <ExternalLink width={12} height={12} />
+                  </a>
+                )}
+                {c.file && (
+                  <a
+                    href={c.file}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hairline)] bg-white/70 px-3.5 py-1.5 text-[12px] text-ink hover:bg-white"
+                  >
+                    Open file <ExternalLink width={12} height={12} />
+                  </a>
+                )}
               </div>
             </div>
 
-            {c.skills && (
-              <div className="mt-6">
-                <div className="mono-label mb-2">Verified Skill Matrix</div>
-                <p className="text-[15px] leading-[1.7] text-ink-secondary">{c.skills}</p>
-              </div>
-            )}
-
-            {c.href && (
-              <a
-                href={c.href}
-                target="_blank"
-                rel="noreferrer"
-                className="editorial-link mt-6 inline-flex items-center gap-2 text-[15px]"
-              >
-                Verify externally <ExternalLink width={14} height={14} />
-              </a>
-            )}
+            {/* Document viewer */}
+            <div className="grid min-h-[320px] flex-1 place-items-center bg-gradient-to-br from-white/40 to-white/10 p-3 md:min-h-0">
+              {c.file && c.fileType === "image" && (
+                <img
+                  src={c.file}
+                  alt={c.title}
+                  className="max-h-[80vh] w-full rounded-lg object-contain shadow-lg"
+                />
+              )}
+              {c.file && c.fileType === "pdf" && (
+                <iframe
+                  src={`${c.file}#toolbar=0&view=FitH`}
+                  title={c.title}
+                  className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
+                />
+              )}
+              {!c.file && (
+                <div className="text-center">
+                  <DocIcon width={32} height={32} className="mx-auto text-ink-muted" />
+                  <div className="mt-3 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                    Document placeholder · attach a file to render here
+                  </div>
+                </div>
+              )}
+            </div>
           </motion.div>
         </motion.div>
       )}
@@ -893,12 +924,13 @@ function Credentials() {
   const [active, setActive] = useState<Cred | null>(null);
   return (
     <Container id="credentials" className="py-24 md:py-32">
-      <SectionLabel>Credentials & Academic Background</SectionLabel>
+      <SectionLabel>Credentials · System-Live Verification Dashboard</SectionLabel>
       <motion.h2
         {...fadeUp}
         className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
-        Every credential, verifiable. Tap any row to open the native viewer.
+        Every credential is verifiable. Click any certification to inspect its
+        live metadata and original document.
       </motion.h2>
 
       <div className="mono-label mb-4">Academic Milestones</div>
