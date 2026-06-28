@@ -439,6 +439,7 @@ const projects: Project[] = [
     num: "02",
     name: "Smart LoadMate",
     classification: "Academic Innovation · Minor Project Board (MLRIT)",
+    logo: "/projects/loadmate.png",
     stack: "React Native, Expo, Python FastAPI, MongoDB",
     description:
       "An intelligent, dual-interface logistics delivery and route optimization mobile application designed to seamlessly coordinate tasks between commercial haulers and drivers.",
