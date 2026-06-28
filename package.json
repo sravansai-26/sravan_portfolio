@@ -3,6 +3,10 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
+  "supportedArchitectures": {
+    "os": ["current", "linux"],
+    "cpu": ["current", "x64"]
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
