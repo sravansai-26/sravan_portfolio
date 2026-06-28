@@ -81,13 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. Building products that reject rigid templates and elevate everyday lives through engineering, design, and systems thinking.",
+          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. MERN, SAP ABAP, and enterprise cloud engineer building civic tech, cinema systems, and logistics intelligence from Hyderabad, India.",
       },
       { name: "author", content: "Sravan Sai Vuppula" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
       {
         name: "keywords",
         content:
-          "Sravan Sai Vuppula, Sravan Sai, Sravan Vuppula, LYFSpot, lyfspot, LYFSPOT, founder, developer, MERN, SAP ABAP, Hyderabad",
+          "Sravan Sai Vuppula, Sravan Sai, Sravan Vuppula, Vuppula Sravan Sai, LYFSpot, lyfspot, founder LYFSpot, MERN developer Hyderabad, SAP ABAP S/4HANA, full-stack engineer India, Resolveit, Shotweave, LoadMate",
       },
       { property: "og:title", content: "Sravan Sai Vuppula — Founder, LYFSpot" },
       {
@@ -96,17 +97,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Founder & Lead Developer of LYFSpot. Architecting products across civic tech, cinema systems, logistics intelligence, and enterprise cloud.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Sravan Sai Vuppula" },
+      { property: "og:url", content: "https://warm-ink-portfolio.lovable.app/" },
+      { property: "og:image", content: "https://warm-ink-portfolio.lovable.app/favicon.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sravan Sai Vuppula — Founder, LYFSpot" },
+      { name: "twitter:description", content: "Founder & Lead Developer of LYFSpot — engineering products that elevate everyday lives." },
+      { name: "theme-color", content: "#15191E" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "canonical", href: "https://warm-ink-portfolio.lovable.app/" },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap",
       },
     ],
   }),
