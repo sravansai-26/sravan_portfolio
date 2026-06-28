@@ -416,6 +416,7 @@ type Project = {
   stack: string;
   description: string;
   note?: string;
+  logo?: string; // image placeholder path under /public
   links: { Icon: typeof WebIcon; label: string; href: string }[];
 };
 
