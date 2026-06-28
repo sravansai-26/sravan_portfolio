@@ -787,12 +787,16 @@ const honors: Cred[] = [
     org: "FISAT, Kerala · in coordination with Pauly Jr. Pictures",
     skills:
       "Pitch-presented and modeled Shotweave, leading multi-disciplinary software squads under strict hackathon timeline constraints.",
+    file: "/credentials/cinehack.pdf",
+    fileType: "pdf",
   },
   {
     title: "Executive Public Speaking Leadership Certification",
     org: "Elite Impact Foundation · endorsed by Sri Gampa Nageshwar Rao Garu",
     skills:
       "Master-level verbal communications, group leadership capabilities, and strategic venture delivery skills.",
+    file: "/credentials/eps-impact.pdf",
+    fileType: "pdf",
   },
 ];
 
