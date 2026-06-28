@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, Close, DocIcon } from "./Icons";
-import ssvMark from "@/assets/ssv-mark.png";
+import ssvLogo from "@/assets/ssv-name.png";
 
 const links = [
   { label: "Home", href: "#top" },
