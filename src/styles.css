@@ -109,6 +109,14 @@
   color: var(--ink-muted);
 }
 
+/* Use clean Roboto for all small uppercase labels regardless of inline classes. */
+.font-mono.uppercase,
+[class*="font-mono"].uppercase {
+  font-family: "Roboto", "Open Sans", ui-sans-serif, system-ui, sans-serif !important;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+}
+
 @utility code-tag {
   font-family: var(--font-mono);
   font-size: 0.88em;
