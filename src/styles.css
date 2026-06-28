@@ -101,11 +101,20 @@
 }
 
 @utility mono-label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-family: "Roboto", "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-muted);
+}
+
+/* Use clean Roboto for all small uppercase labels regardless of inline classes. */
+.font-mono.uppercase,
+[class*="font-mono"].uppercase {
+  font-family: "Roboto", "Open Sans", ui-sans-serif, system-ui, sans-serif !important;
+  letter-spacing: 0.14em;
+  font-weight: 500;
 }
 
 @utility code-tag {

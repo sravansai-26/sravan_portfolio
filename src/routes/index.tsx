@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Portfolio from "@/components/portfolio/Portfolio";
 import { Nav } from "@/components/portfolio/Nav";
 import { LoadingSplash } from "@/components/portfolio/LoadingSplash";
@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. Building products that reject rigid templates and elevate everyday lives through engineering, design, and systems thinking.",
+          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. MERN, SAP ABAP and enterprise cloud engineer crafting civic tech, cinema systems, logistics intelligence, and creative products from Hyderabad.",
       },
       { property: "og:title", content: "Sravan Sai Vuppula — Founder, LYFSpot" },
       {
@@ -20,7 +20,9 @@ export const Route = createFileRoute("/")({
         content:
           "Founder & Lead Developer of LYFSpot. Architecting products across civic tech, cinema systems, logistics intelligence, and enterprise cloud.",
       },
+      { property: "og:url", content: "https://warm-ink-portfolio.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://warm-ink-portfolio.lovable.app/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -30,6 +32,7 @@ export const Route = createFileRoute("/")({
             {
               "@type": "Person",
               name: "Sravan Sai Vuppula",
+              alternateName: ["Sravan Sai", "Sravan Vuppula"],
               jobTitle: "Founder & Lead Developer",
               worksFor: { "@type": "Organization", name: "LYFSpot" },
               address: {
@@ -39,16 +42,25 @@ export const Route = createFileRoute("/")({
                 addressCountry: "IN",
               },
               email: "mailto:sai1234comon@gmail.com",
+              url: "https://warm-ink-portfolio.lovable.app/",
+              sameAs: [
+                "https://github.com/sravansai-26",
+                "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba",
+                "https://medium.com/@sravansaivuppula",
+                "https://twitter.com/vuppula_sai",
+              ],
             },
             {
               "@type": "Organization",
               name: "LYFSpot",
               founder: "Sravan Sai Vuppula",
               foundingDate: "2020-10",
+              url: "https://warm-ink-portfolio.lovable.app/",
             },
             {
               "@type": "WebSite",
               name: "Sravan Sai Vuppula",
+              url: "https://warm-ink-portfolio.lovable.app/",
               author: { "@type": "Person", name: "Sravan Sai Vuppula" },
             },
           ],
@@ -61,12 +73,36 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [resumeOpen, setResumeOpen] = useState(false);
+
+  // Sync modal with URL hash so back/forward navigation works.
+  useEffect(() => {
+    const sync = () => setResumeOpen(window.location.hash === "#resume");
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+
+  const open = useCallback(() => {
+    if (window.location.hash !== "#resume") {
+      window.history.pushState(null, "", "#resume");
+    }
+    setResumeOpen(true);
+  }, []);
+
+  const close = useCallback(() => {
+    if (window.location.hash === "#resume") {
+      window.history.back();
+    } else {
+      setResumeOpen(false);
+    }
+  }, []);
+
   return (
     <>
       <LoadingSplash />
-      <Nav onLaunchResume={() => setResumeOpen(true)} />
-      <Portfolio onLaunchResume={() => setResumeOpen(true)} />
-      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+      <Nav onLaunchResume={open} />
+      <Portfolio onLaunchResume={open} />
+      <ResumeModal open={resumeOpen} onClose={close} />
     </>
   );
 }

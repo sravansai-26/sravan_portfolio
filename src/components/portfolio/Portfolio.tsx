@@ -1,7 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sravanImg from "@/assets/sravan-cutout.png";
-import ssvMark from "@/assets/ssv-mark.png";
+import ssvLogo from "@/assets/ssv-name.png";
 import {
   ArrowRight,
   Close,
@@ -111,13 +111,6 @@ function Hero({ onLaunchResume }: { onLaunchResume: () => void }) {
           className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-10 lg:translate-x-16"
         >
           <div className="relative aspect-[4/5] w-full">
-            <div
-              className="absolute inset-0 rounded-[2px]"
-              style={{
-                background:
-                  "radial-gradient(120% 80% at 70% 30%, rgba(238,244,246,0.6) 0%, rgba(220,229,234,0.3) 55%, rgba(194,208,216,0) 100%)",
-              }}
-            />
             <img
               src={sravanImg}
               alt="Sravan Sai Vuppula, Founder of LYFSpot"
@@ -423,6 +416,7 @@ type Project = {
   stack: string;
   description: string;
   note?: string;
+  logo?: string; // image placeholder path under /public
   links: { Icon: typeof WebIcon; label: string; href: string }[];
 };
 
@@ -431,6 +425,7 @@ const projects: Project[] = [
     num: "01",
     name: "Resolveit",
     classification: "Civic Tech · Startup Core Platform (LYFSpot Ecosystem)",
+    logo: "/projects/resolveit.png",
     stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
     description:
       "A highly secure, public issue-solving infrastructure built to transparently log, track, and resolve community and civic discrepancies through streamlined administrator dashboards.",
@@ -444,6 +439,7 @@ const projects: Project[] = [
     num: "02",
     name: "Smart LoadMate",
     classification: "Academic Innovation · Minor Project Board (MLRIT)",
+    logo: "/projects/loadmate.png",
     stack: "React Native, Expo, Python FastAPI, MongoDB",
     description:
       "An intelligent, dual-interface logistics delivery and route optimization mobile application designed to seamlessly coordinate tasks between commercial haulers and drivers.",
@@ -458,6 +454,7 @@ const projects: Project[] = [
     num: "03",
     name: "Shotweave",
     classification: "National Level Cinema Hackathon Feature",
+    logo: "/projects/shotweave.png",
     stack: "React.js, Python Backend Framework, MongoDB",
     description:
       "A powerful AI-driven operations dashboard engineered specifically for cinema production houses. Provides real-time financial tracking, predictive analytics for rolling film budgets, daily expense sheet optimization, dynamic script breakdowns, and cross-department scheduling syncs.",
@@ -522,9 +519,16 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-baseline gap-4 py-7 text-left md:grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
+        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-center gap-4 py-7 text-left md:grid-cols-[60px_56px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
       >
         <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
+        {p.logo ? (
+          <span className="hidden h-12 w-12 shrink-0 overflow-hidden rounded-md bg-[color:var(--surface)] ring-1 ring-[color:var(--hairline)] md:block">
+            <img src={p.logo} alt={`${p.name} logo`} className="h-full w-full object-cover" />
+          </span>
+        ) : (
+          <span className="hidden md:block" aria-hidden />
+        )}
         <div className="min-w-0">
           <div className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
             {p.name}
@@ -783,12 +787,16 @@ const honors: Cred[] = [
     org: "FISAT, Kerala · in coordination with Pauly Jr. Pictures",
     skills:
       "Pitch-presented and modeled Shotweave, leading multi-disciplinary software squads under strict hackathon timeline constraints.",
+    file: "/credentials/cinehack.pdf",
+    fileType: "pdf",
   },
   {
     title: "Executive Public Speaking Leadership Certification",
     org: "Elite Impact Foundation · endorsed by Sri Gampa Nageshwar Rao Garu",
     skills:
       "Master-level verbal communications, group leadership capabilities, and strategic venture delivery skills.",
+    file: "/credentials/eps-impact.pdf",
+    fileType: "pdf",
   },
 ];
 
@@ -1087,6 +1095,140 @@ function GitHubPulse() {
   );
 }
 
+/* ---------- LIFE QUESTIONNAIRE ---------- */
+function LifeQuestionnaire() {
+  const [submitted, setSubmitted] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const FORMSPREE = "https://formspree.io/f/your-formspree-endpoint"; // placeholder
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    try {
+      await fetch(FORMSPREE, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+    } catch {
+      /* swallow — placeholder endpoint */
+    }
+    setSubmitted(true);
+    e.currentTarget.reset();
+    setAnswer("");
+  }
+
+  return (
+    <Container id="questionnaire" className="py-24 md:py-32">
+      <SectionLabel>Open Call · A One-Question Audition for LYFSpot Creative</SectionLabel>
+
+      <div className="relative overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-[color:var(--accent-blue)]/12 via-white/30 to-white/10 p-7 backdrop-blur-2xl md:p-14">
+        {/* decorative gradient orbs */}
+        <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-[color:var(--accent-blue)]/25 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-28 -left-12 h-72 w-72 rounded-full bg-[color:var(--deep-ink)]/10 blur-3xl" />
+
+        <motion.div
+          {...fadeUp}
+          className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
+        >
+          <div>
+            <div
+              className="text-[11.5px] font-semibold uppercase tracking-[0.18em] text-accent"
+              style={{ fontFamily: "Roboto, sans-serif" }}
+            >
+              One word. One thought. One opportunity.
+            </div>
+            <h2 className="mt-4 font-display text-[34px] font-black leading-[1.04] tracking-[-0.025em] text-ink md:text-[56px]">
+              What is the first thing that comes to your mind when you hear the word{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 italic">LIFE</span>
+                <span className="absolute inset-x-0 bottom-1 z-0 h-3 bg-[color:var(--accent-blue)]/35" />
+              </span>
+              ?
+            </h2>
+            <p className="mt-6 max-w-[520px] text-[15.5px] leading-[1.7] text-ink-secondary">
+              No formula. No right answer. Selected, meaningful responses get an
+              invitation to collaborate inside the creative wing of LYFSpot — writing,
+              cinema, product, or research. Share your raw instinct.
+            </p>
+            <div
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[12px] text-ink-secondary"
+              style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.08em" }}
+            >
+              <SparkIcon width={14} height={14} className="text-accent" />
+              Reviewed personally by the founder
+            </div>
+          </div>
+
+          <form
+            onSubmit={onSubmit}
+            className="relative rounded-2xl border border-white/50 bg-white/65 p-6 shadow-[0_20px_60px_-30px_rgba(26,33,40,0.35)] backdrop-blur-xl md:p-8"
+          >
+            {submitted ? (
+              <div className="flex h-full min-h-[280px] flex-col items-start justify-center">
+                <div className="mono-label mb-3">Response Logged</div>
+                <h3 className="font-display text-[26px] font-bold tracking-[-0.02em] text-ink">
+                  Thank you — your word is heard.
+                </h3>
+                <p className="mt-3 text-[15px] leading-[1.7] text-ink-secondary">
+                  Selected entries will receive a personal reply at the email you provided.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="mt-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white px-4 py-2 text-[13px] text-ink hover:bg-[color:var(--surface)]"
+                >
+                  Submit another response
+                </button>
+              </div>
+            ) : (
+              <>
+                <label className="block">
+                  <span className="mono-label mb-2 block">Your Word, Phrase or Thought</span>
+                  <textarea
+                    name="life_answer"
+                    required
+                    rows={3}
+                    maxLength={400}
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    placeholder="LIFE is…"
+                    className="w-full resize-none rounded-xl border border-[color:var(--hairline)] bg-white/80 p-4 font-display text-[22px] font-semibold leading-[1.3] tracking-[-0.01em] text-ink outline-none transition-colors placeholder:text-ink-muted/70 focus:border-ink"
+                  />
+                  <div
+                    className="mt-1 text-right text-[11px] text-ink-muted"
+                    style={{ fontFamily: "Roboto, sans-serif" }}
+                  >
+                    {answer.length} / 400
+                  </div>
+                </label>
+
+                <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <Field name="entrant_name" label="Your Name" required />
+                  <Field name="entrant_email" label="Email Address" type="email" required />
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
+                >
+                  <Send width={16} height={16} /> Submit my response
+                </button>
+                <p
+                  className="mt-3 text-[11px] text-ink-muted"
+                  style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.06em" }}
+                >
+                  Your email is used only for follow-up — never shared or listed.
+                </p>
+              </>
+            )}
+          </form>
+        </motion.div>
+      </div>
+    </Container>
+  );
+}
+
 /* ---------- CONTACT ---------- */
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -1279,37 +1421,34 @@ function Footer() {
   return (
     <footer className="mt-20 border-t border-[color:var(--hairline)]">
       <Container className="py-16 md:py-20">
-        {/* Marquee-style quote */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-12">
-          <div className="mono-label mb-4">Manifesto · The Untapped Potential</div>
-          <p className="font-display text-[28px] font-bold leading-[1.18] tracking-[-0.025em] text-ink md:text-[40px] lg:text-[48px]">
-            The journey you've taken so far represents the{" "}
+        {/* Philosophy quote */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-14">
+          <div className="mono-label mb-5">Philosophy · The Founder's Mantra</div>
+          <p className="font-display text-[44px] font-black leading-[1.05] tracking-[-0.03em] text-ink md:text-[88px] lg:text-[112px]">
+            Work{" "}
+            <span className="text-ink-muted">&amp;</span>{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">untapped potential</span>
-              <span className="absolute inset-x-0 bottom-1 z-0 h-2 bg-[color:var(--accent-blue)]/30" />
-            </span>{" "}
-            of an{" "}
-            <span className="font-mono text-[0.78em] font-medium tracking-[-0.02em] align-baseline">
-              uneducated_customer()
+              <span className="relative z-10">Enjoy</span>
+              <span className="absolute inset-x-0 bottom-2 z-0 h-3 bg-[color:var(--accent-blue)]/30" />
             </span>{" "}
             <span className="text-ink-muted">:)</span>
           </p>
-          <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+          <div className="mt-8 flex items-center gap-3 text-[13px] text-ink-secondary md:text-[15px]">
             <span className="h-px w-10 bg-ink-muted" />
-            Signed, the Originator
+            <span className="font-display font-semibold tracking-tight">— Sravan Sai Vuppula</span>
           </div>
         </div>
 
         {/* Bottom strip */}
         <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="flex items-center gap-4">
-            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-[color:var(--deep-ink)] ring-1 ring-[color:var(--hairline)]">
-              <img src={ssvMark} alt="SSV" className="h-9 w-9 object-contain" />
+            <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-[color:var(--hairline)]">
+              <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-14 w-14 object-cover" />
             </span>
             <div>
               <div className="font-display text-[16px] font-bold text-ink">Sravan Sai Vuppula</div>
               <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-                © 2026 · Designed and Engineered by LYFSpot for its Originator
+                Designed and Engineered by LYFSpot for its Originator
               </div>
             </div>
           </div>
@@ -1326,6 +1465,15 @@ function Footer() {
                 <Icon width={20} height={20} />
               </a>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-[color:var(--hairline)] pt-6 text-center">
+          <div
+            className="text-[12px] uppercase tracking-[0.18em] text-ink-muted"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
+            © 2026 Sravan Sai Vuppula. All rights reserved.
           </div>
         </div>
       </Container>
@@ -1346,6 +1494,7 @@ export default function Portfolio({ onLaunchResume }: { onLaunchResume: () => vo
       <Credentials />
       <Publications />
       <GitHubPulse />
+      <LifeQuestionnaire />
       <Contact />
       <Footer />
     </main>
