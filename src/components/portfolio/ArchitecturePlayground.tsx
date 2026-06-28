@@ -1,15 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
-type NodeId =
-  | "client"
-  | "gateway"
-  | "auth"
-  | "controller"
-  | "service"
-  | "model"
-  | "db"
-  | "cdn";
+type NodeId = "client" | "gateway" | "auth" | "controller" | "service" | "model" | "db" | "cdn";
 
 type Edge = { from: NodeId; to: NodeId; label?: string };
 
@@ -69,14 +61,14 @@ const flows: Flow[] = [
 ];
 
 const layout: Record<NodeId, { x: number; y: number; label: string; sub: string }> = {
-  client:    { x: 40,  y: 180, label: "Client",     sub: "React / RN" },
-  gateway:   { x: 200, y: 180, label: "Gateway",    sub: "Express / FastAPI" },
-  auth:      { x: 360, y: 60,  label: "Auth",       sub: "JWT / Session" },
-  controller:{ x: 360, y: 180, label: "Controller", sub: "Route handler" },
-  service:   { x: 520, y: 180, label: "Service",    sub: "Business logic" },
-  model:     { x: 680, y: 180, label: "Model",      sub: "Mongoose / ODM" },
-  db:        { x: 840, y: 180, label: "MongoDB",    sub: "Atlas cluster" },
-  cdn:       { x: 520, y: 320, label: "Cloudinary", sub: "Media store" },
+  client: { x: 40, y: 180, label: "Client", sub: "React / RN" },
+  gateway: { x: 200, y: 180, label: "Gateway", sub: "Express / FastAPI" },
+  auth: { x: 360, y: 60, label: "Auth", sub: "JWT / Session" },
+  controller: { x: 360, y: 180, label: "Controller", sub: "Route handler" },
+  service: { x: 520, y: 180, label: "Service", sub: "Business logic" },
+  model: { x: 680, y: 180, label: "Model", sub: "Mongoose / ODM" },
+  db: { x: 840, y: 180, label: "MongoDB", sub: "Atlas cluster" },
+  cdn: { x: 520, y: 320, label: "Cloudinary", sub: "Media store" },
 };
 
 const NODE_W = 130;
@@ -234,7 +226,9 @@ export function ArchitecturePlayground() {
                     width={NODE_W}
                     height={NODE_H}
                     rx={12}
-                    fill={isFocus ? "var(--accent-blue)" : isHi ? "var(--deep-ink)" : "var(--surface)"}
+                    fill={
+                      isFocus ? "var(--accent-blue)" : isHi ? "var(--deep-ink)" : "var(--surface)"
+                    }
                     stroke={isFocus ? "var(--accent-blue)" : "var(--hairline)"}
                     strokeWidth={isFocus ? 2 : 1}
                   />
@@ -281,8 +275,8 @@ export function ArchitecturePlayground() {
 
           {focusNode && (
             <div className="mt-4 rounded-lg border border-[color:var(--accent-blue)]/30 bg-[color:var(--accent-blue)]/10 px-3 py-2 text-[12px] text-ink">
-              Focused on <span className="font-semibold">{layout[focusNode].label}</span> —
-              showing only the routes that touch this node.
+              Focused on <span className="font-semibold">{layout[focusNode].label}</span> — showing
+              only the routes that touch this node.
             </div>
           )}
 
@@ -316,7 +310,9 @@ export function ArchitecturePlayground() {
                       {layout[p.to].label}
                     </button>
                     {p.label && (
-                      <span className="ml-2 font-mono text-[11px] text-accent-blue">· {p.label}</span>
+                      <span className="ml-2 font-mono text-[11px] text-accent-blue">
+                        · {p.label}
+                      </span>
                     )}
                   </span>
                 </li>

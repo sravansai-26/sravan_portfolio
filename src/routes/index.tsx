@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import Portfolio from "@/components/portfolio/Portfolio";
-import { Nav } from "@/components/portfolio/Nav";
 import { LoadingSplash } from "@/components/portfolio/LoadingSplash";
+import { Nav } from "@/components/portfolio/Nav";
 import { ResumeModal } from "@/components/portfolio/ResumeModal";
 
 export const Route = createFileRoute("/")({

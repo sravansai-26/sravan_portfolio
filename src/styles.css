@@ -45,33 +45,33 @@
 :root {
   --radius: 0.5rem;
   /* Cool editorial blue-grey palette */
-  --background: #E5ECEF;
-  --surface: #DEE6EA;
-  --foreground: #1A2128;
-  --ink: #1A2128;
-  --ink-secondary: #4A5560;
-  --ink-muted: #8A949C;
-  --accent-blue: #2A6F8E;
-  --deep-ink: #15191E;
+  --background: #e5ecef;
+  --surface: #dee6ea;
+  --foreground: #1a2128;
+  --ink: #1a2128;
+  --ink-secondary: #4a5560;
+  --ink-muted: #8a949c;
+  --accent-blue: #2a6f8e;
+  --deep-ink: #15191e;
   --hairline: rgba(26, 33, 40, 0.14);
 
-  --card: #E5ECEF;
-  --card-foreground: #1A2128;
-  --popover: #E5ECEF;
-  --popover-foreground: #1A2128;
-  --primary: #1A2128;
-  --primary-foreground: #E5ECEF;
-  --secondary: #DEE6EA;
-  --secondary-foreground: #1A2128;
-  --muted: #DEE6EA;
-  --muted-foreground: #4A5560;
-  --accent: #2A6F8E;
-  --accent-foreground: #E5ECEF;
+  --card: #e5ecef;
+  --card-foreground: #1a2128;
+  --popover: #e5ecef;
+  --popover-foreground: #1a2128;
+  --primary: #1a2128;
+  --primary-foreground: #e5ecef;
+  --secondary: #dee6ea;
+  --secondary-foreground: #1a2128;
+  --muted: #dee6ea;
+  --muted-foreground: #4a5560;
+  --accent: #2a6f8e;
+  --accent-foreground: #e5ecef;
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: #E5ECEF;
+  --destructive-foreground: #e5ecef;
   --border: rgba(26, 33, 40, 0.14);
   --input: rgba(26, 33, 40, 0.18);
-  --ring: #2A6F8E;
+  --ring: #2a6f8e;
 }
 
 @layer base {
@@ -84,7 +84,7 @@
   }
 
   body {
-    background: linear-gradient(135deg, #D8E2E7 0%, #E5ECEF 45%, #EEF4F6 100%);
+    background: linear-gradient(135deg, #d8e2e7 0%, #e5ecef 45%, #eef4f6 100%);
     background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -139,7 +139,9 @@
   text-underline-offset: 4px;
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(26, 33, 40, 0.35);
-  transition: color 200ms ease, text-decoration-color 200ms ease;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
 }
 @utility editorial-link {
   &:hover {

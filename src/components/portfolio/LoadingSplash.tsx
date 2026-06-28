@@ -8,7 +8,6 @@ export function LoadingSplash() {
     const t = setTimeout(() => setShow(false), 1900);
     return () => clearTimeout(t);
   }, []);
-
   return (
     <AnimatePresence>
       {show && (
