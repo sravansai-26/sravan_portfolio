@@ -111,13 +111,6 @@ function Hero({ onLaunchResume }: { onLaunchResume: () => void }) {
           className="relative mx-auto w-full max-w-[460px] md:max-w-none md:translate-x-10 lg:translate-x-16"
         >
           <div className="relative aspect-[4/5] w-full">
-            <div
-              className="absolute inset-0 rounded-[2px]"
-              style={{
-                background:
-                  "radial-gradient(120% 80% at 70% 30%, rgba(238,244,246,0.6) 0%, rgba(220,229,234,0.3) 55%, rgba(194,208,216,0) 100%)",
-              }}
-            />
             <img
               src={sravanImg}
               alt="Sravan Sai Vuppula, Founder of LYFSpot"
