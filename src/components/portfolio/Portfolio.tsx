@@ -425,6 +425,7 @@ const projects: Project[] = [
     num: "01",
     name: "Resolveit",
     classification: "Civic Tech · Startup Core Platform (LYFSpot Ecosystem)",
+    logo: "/projects/resolveit.png",
     stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
     description:
       "A highly secure, public issue-solving infrastructure built to transparently log, track, and resolve community and civic discrepancies through streamlined administrator dashboards.",
