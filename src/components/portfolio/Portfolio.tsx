@@ -1494,6 +1494,7 @@ export default function Portfolio({ onLaunchResume }: { onLaunchResume: () => vo
       <Credentials />
       <Publications />
       <GitHubPulse />
+      <LifeQuestionnaire />
       <Contact />
       <Footer />
     </main>
