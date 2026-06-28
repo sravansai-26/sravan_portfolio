@@ -1287,37 +1287,34 @@ function Footer() {
   return (
     <footer className="mt-20 border-t border-[color:var(--hairline)]">
       <Container className="py-16 md:py-20">
-        {/* Marquee-style quote */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-12">
-          <div className="mono-label mb-4">Manifesto · The Untapped Potential</div>
-          <p className="font-display text-[28px] font-bold leading-[1.18] tracking-[-0.025em] text-ink md:text-[40px] lg:text-[48px]">
-            The journey you've taken so far represents the{" "}
+        {/* Philosophy quote */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/40 bg-gradient-to-br from-white/50 to-white/10 p-8 backdrop-blur-xl md:p-14">
+          <div className="mono-label mb-5">Philosophy · The Founder's Mantra</div>
+          <p className="font-display text-[44px] font-black leading-[1.05] tracking-[-0.03em] text-ink md:text-[88px] lg:text-[112px]">
+            Work{" "}
+            <span className="text-ink-muted">&amp;</span>{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">untapped potential</span>
-              <span className="absolute inset-x-0 bottom-1 z-0 h-2 bg-[color:var(--accent-blue)]/30" />
-            </span>{" "}
-            of an{" "}
-            <span className="font-mono text-[0.78em] font-medium tracking-[-0.02em] align-baseline">
-              uneducated_customer()
+              <span className="relative z-10">Enjoy</span>
+              <span className="absolute inset-x-0 bottom-2 z-0 h-3 bg-[color:var(--accent-blue)]/30" />
             </span>{" "}
             <span className="text-ink-muted">:)</span>
           </p>
-          <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted">
+          <div className="mt-8 flex items-center gap-3 text-[13px] text-ink-secondary md:text-[15px]">
             <span className="h-px w-10 bg-ink-muted" />
-            Signed, the Originator
+            <span className="font-display font-semibold tracking-tight">— Sravan Sai Vuppula</span>
           </div>
         </div>
 
         {/* Bottom strip */}
         <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="flex items-center gap-4">
-            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-[color:var(--deep-ink)] ring-1 ring-[color:var(--hairline)]">
-              <img src={ssvMark} alt="SSV" className="h-9 w-9 object-contain" />
+            <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-[color:var(--hairline)]">
+              <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-14 w-14 object-cover" />
             </span>
             <div>
               <div className="font-display text-[16px] font-bold text-ink">Sravan Sai Vuppula</div>
               <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-                © 2026 · Designed and Engineered by LYFSpot for its Originator
+                Designed and Engineered by LYFSpot for its Originator
               </div>
             </div>
           </div>
@@ -1334,6 +1331,15 @@ function Footer() {
                 <Icon width={20} height={20} />
               </a>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-[color:var(--hairline)] pt-6 text-center">
+          <div
+            className="text-[12px] uppercase tracking-[0.18em] text-ink-muted"
+            style={{ fontFamily: "Roboto, sans-serif" }}
+          >
+            © 2026 Sravan Sai Vuppula. All rights reserved.
           </div>
         </div>
       </Container>
