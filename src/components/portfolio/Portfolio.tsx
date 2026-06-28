@@ -454,6 +454,7 @@ const projects: Project[] = [
     num: "03",
     name: "Shotweave",
     classification: "National Level Cinema Hackathon Feature",
+    logo: "/projects/shotweave.png",
     stack: "React.js, Python Backend Framework, MongoDB",
     description:
       "A powerful AI-driven operations dashboard engineered specifically for cinema production houses. Provides real-time financial tracking, predictive analytics for rolling film budgets, daily expense sheet optimization, dynamic script breakdowns, and cross-department scheduling syncs.",
