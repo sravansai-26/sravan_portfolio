@@ -1,7 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import sravanImg from "@/assets/sravan-cutout.png";
-import ssvMark from "@/assets/ssv-mark.png";
+import ssvLogo from "@/assets/ssv-name.png";
 import {
   ArrowRight,
   Close,
