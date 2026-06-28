@@ -519,9 +519,16 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     >
       <button
         onClick={() => setOpen((o) => !o)}
-        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-baseline gap-4 py-7 text-left md:grid-cols-[60px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
+        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-center gap-4 py-7 text-left md:grid-cols-[60px_56px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
       >
         <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
+        {p.logo ? (
+          <span className="hidden h-12 w-12 shrink-0 overflow-hidden rounded-md bg-[color:var(--surface)] ring-1 ring-[color:var(--hairline)] md:block">
+            <img src={p.logo} alt={`${p.name} logo`} className="h-full w-full object-cover" />
+          </span>
+        ) : (
+          <span className="hidden md:block" aria-hidden />
+        )}
         <div className="min-w-0">
           <div className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
             {p.name}
