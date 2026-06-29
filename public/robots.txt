@@ -1,4 +1,5 @@
 User-agent: *
+
 Allow: /
 
-Sitemap: https://warm-ink-portfolio.lovable.app/sitemap.xml
+Sitemap: https://buildwithsravan.dev/sitemap.xml
