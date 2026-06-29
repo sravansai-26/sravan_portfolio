@@ -11,15 +11,15 @@
     "module": "ESNext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],
-
+    
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": false,
     "noEmit": true,
 
-    "baseUrl": ".",
+    // Removed baseUrl and fixed paths to use './'
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"] // Ensure paths are relative
     },
 
     "skipLibCheck": true,
@@ -27,6 +27,9 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    
+    // Added forceConsistentCasingInFileNames
+    "forceConsistentCasingInFileNames": true 
   }
 }
