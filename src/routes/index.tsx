@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:image",
-        content: "https://buildwithsravan.dev/og-image.png",
+        content: "https://buildwithsravan.dev/og-image-v2.png",
       },
       {
         property: "og:image:width",
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image",
-        content: "https://buildwithsravan.dev/og-image.png",
+        content: "https://buildwithsravan.dev/og-image-v2.png",
       },
     ],
 
