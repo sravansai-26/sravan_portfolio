@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer, Founder of LYFSpot, and creator of products in civic tech, AI, logistics, and enterprise software.",
+          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer, Founder of LYFSpot, & creator of products in civic tech, AI, logistics, & enterprise software.",
       },
       { property: "og:title", content: "Sravan Sai Vuppula | Portfolio" },
       {
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:image",
-        content: "https://buildwithsravan.dev/og-image-v2.png",
+        content: "https://buildwithsravan.dev/og-image-v3.png",
       },
       {
         property: "og:image:width",
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:image",
-        content: "https://buildwithsravan.dev/og-image-v2.png",
+        content: "https://buildwithsravan.dev/og-image-v3.png",
       },
     ],
 
