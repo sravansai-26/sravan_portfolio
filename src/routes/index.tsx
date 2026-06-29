@@ -9,21 +9,68 @@ import { ResumeModal } from "@/components/portfolio/ResumeModal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sravan Sai Vuppula — Founder & Lead Developer, LYFSpot" },
+      { title: "Sravan Sai Vuppula | Portfolio" },
       {
         name: "description",
         content:
-          "Sravan Sai Vuppula — Founder & Lead Developer of LYFSpot. MERN, SAP ABAP and enterprise cloud engineer crafting civic tech, cinema systems, logistics intelligence, and creative products from Hyderabad.",
+          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer, Founder of LYFSpot, and creator of products in civic tech, AI, logistics, and enterprise software.",
       },
-      { property: "og:title", content: "Sravan Sai Vuppula — Founder, LYFSpot" },
+      { property: "og:title", content: "Sravan Sai Vuppula | Portfolio" },
       {
         property: "og:description",
         content:
-          "Founder & Lead Developer of LYFSpot. Architecting products across civic tech, cinema systems, logistics intelligence, and enterprise cloud.",
+          "Explore the official portfolio of Sravan Sai Vuppula, Full Stack Developer and Founder of LYFSpot.",
       },
-      { property: "og:url", content: "https://warm-ink-portfolio.lovable.app/" },
+      {
+        property: "og:url",
+        content: "https://buildwithsravan.dev",
+      },
+      {
+        property: "og:image",
+        content: "https://buildwithsravan.dev/og-image.png",
+      },
+      {
+        property: "og:image:width",
+        content: "1200",
+      },
+      {
+        property: "og:image:height",
+        content: "630",
+      },
+      {
+        property: "og:image:type",
+        content: "image/png",
+      },
+      {
+        property: "og:image:alt",
+        content: "Sravan Sai Vuppula | Full Stack Developer Portfolio",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Sravan Sai Vuppula | Portfolio",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer and Founder of LYFSpot.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://buildwithsravan.dev/og-image.png",
+      },
     ],
-    links: [{ rel: "canonical", href: "https://warm-ink-portfolio.lovable.app/" }],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://buildwithsravan.dev",
+      },
+    ],
+
     scripts: [
       {
         type: "application/ld+json",
@@ -34,16 +81,19 @@ export const Route = createFileRoute("/")({
               "@type": "Person",
               name: "Sravan Sai Vuppula",
               alternateName: ["Sravan Sai", "Sravan Vuppula"],
-              jobTitle: "Founder & Lead Developer",
-              worksFor: { "@type": "Organization", name: "LYFSpot" },
+              jobTitle: "Founder & Full Stack Developer",
+              worksFor: {
+                "@type": "Organization",
+                name: "LYFSpot",
+              },
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Hyderabad",
-                addressRegion: "TS",
+                addressRegion: "Telangana",
                 addressCountry: "IN",
               },
               email: "mailto:sai1234comon@gmail.com",
-              url: "https://warm-ink-portfolio.lovable.app/",
+              url: "https://buildwithsravan.dev",
               sameAs: [
                 "https://github.com/sravansai-26",
                 "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba",
@@ -56,13 +106,16 @@ export const Route = createFileRoute("/")({
               name: "LYFSpot",
               founder: "Sravan Sai Vuppula",
               foundingDate: "2020-10",
-              url: "https://warm-ink-portfolio.lovable.app/",
+              url: "https://buildwithsravan.dev",
             },
             {
               "@type": "WebSite",
               name: "Sravan Sai Vuppula",
-              url: "https://warm-ink-portfolio.lovable.app/",
-              author: { "@type": "Person", name: "Sravan Sai Vuppula" },
+              url: "https://buildwithsravan.dev",
+              author: {
+                "@type": "Person",
+                name: "Sravan Sai Vuppula",
+              },
             },
           ],
         }),
@@ -107,3 +160,5 @@ function Index() {
     </>
   );
 }
+
+export default Route;
