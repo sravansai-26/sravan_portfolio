@@ -1,17 +1,9 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Close, ExternalLink, DocIcon } from "./Icons";
 
-const PdfViewer = lazy(() => import("./common/PdfViewer"));
-
-export function ResumeModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
+export function ResumeModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -47,7 +39,6 @@ export function ResumeModal({
                   <div className="font-display text-[15px] font-semibold text-ink">
                     Interactive Resume · Sravan Sai Vuppula
                   </div>
-
                   <div className="font-mono text-[10px] uppercase tracking-wider text-ink-muted">
                     Read-only preview
                   </div>
@@ -66,6 +57,7 @@ export function ResumeModal({
                 </a>
 
                 <button
+                  type="button"
                   onClick={onClose}
                   className="grid h-9 w-9 place-items-center rounded-full text-ink-secondary transition hover:bg-white hover:text-ink"
                   aria-label="Close"
@@ -75,22 +67,17 @@ export function ResumeModal({
               </div>
             </div>
 
-            {/* PDF Viewer */}
-            <div className="flex-1 overflow-auto bg-[#f3f4f6] p-4">
+            <div className="flex-1 overflow-hidden bg-[#f3f4f6]">
               {!mounted ? (
                 <div className="flex h-full items-center justify-center text-ink-secondary">
                   Loading PDF...
                 </div>
               ) : (
-                <Suspense
-                  fallback={
-                    <div className="flex h-full items-center justify-center text-ink-secondary">
-                      Loading PDF...
-                    </div>
-                  }
-                >
-                  <PdfViewer file="/sravan-resume.pdf" />
-                </Suspense>
+                <iframe
+                  src="/sravan-resume.pdf"
+                  title="Resume"
+                  className="h-full w-full border-0"
+                />
               )}
             </div>
           </motion.div>
