@@ -22,7 +22,10 @@ const timeline = [
   {
     year: "2020",
     title: "Origin",
-    body: "Launched the primary digital footprint via the foundational blog network at sailyfspot.blogspot.com, establishing initial technical discourse and product ideation channels.",
+    body: "Launched the primary digital footprint via the foundational blog network at ",
+    link: "https://sailyfspot.blogspot.com",
+    linkText: "sailyfspot.blogspot.com",
+    bodyEnd: ", establishing initial technical discourse and product ideation channels.",
   },
   {
     year: "2022",
@@ -52,8 +55,11 @@ const pipeline = [
   },
   {
     name: "UneCust",
-    body: "An interactive conversational knowledge agent built for rapid information discovery and responsive instant answers.",
-    cta: { label: "Visit UneCust's Demo", href: "https://unecust-bot-93c0a9.zapier.app/" },
+    body: "An interactive conversational knowledge chatbot built for rapid information discovery and responsive instant answers.",
+    cta: {
+      label: "Visit UneCust's Demo built with Zapier Technologies",
+      href: "https://unecust-bot-93c0a9.zapier.app/",
+    },
   },
   {
     name: "Project Classified — Deep Tech Division",
@@ -134,7 +140,22 @@ export default function LyfspotJourney() {
                 {t.title}
               </div>
               <div className="col-span-2 max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary md:col-span-1">
-                {t.body}
+                {t.link ? (
+                  <>
+                    {t.body}
+                    <a
+                      href={t.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[color:var(--accent-blue)] hover:underline font-medium"
+                    >
+                      {t.linkText}
+                    </a>
+                    {t.bodyEnd}
+                  </>
+                ) : (
+                  t.body
+                )}
               </div>
             </motion.div>
           ))}
