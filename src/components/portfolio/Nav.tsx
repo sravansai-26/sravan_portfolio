@@ -33,7 +33,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
       >
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-4 md:px-10">
           <a href="#top" className="flex items-center gap-3 group">
-            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-[color:var(--hairline)] transition-transform group-hover:scale-105">
+            <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full transition-transform group-hover:scale-105">
               <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-12 w-12 object-cover" />
             </span>
             <span className="font-display text-[19px] md:text-[22px] font-bold tracking-[-0.02em] text-ink">

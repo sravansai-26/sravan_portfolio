@@ -76,7 +76,7 @@ export default function Footer() {
         {/* Bottom strip */}
         <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="flex items-center gap-4">
-            <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-[color:var(--hairline)]">
+            <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full transition-transform hover:scale-105">
               <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-14 w-14 object-cover" />
             </span>
             <div>
