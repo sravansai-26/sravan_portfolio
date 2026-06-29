@@ -72,104 +72,128 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-
-      { title: "Sravan Sai Vuppula | Portfolio" },
-
+      {
+        title: "Sravan Sai Vuppula | Full-Stack Developer",
+      },
       {
         name: "description",
         content:
-          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer building modern web applications, AI-powered solutions, and scalable software products.",
+          "Official portfolio of Sravan Sai Vuppula, a Full-Stack Developer specializing in React, TypeScript, Node.js, Java, Python, SAP, and scalable software engineering.",
       },
-
       {
         name: "author",
         content: "Sravan Sai Vuppula",
       },
-
       {
         name: "robots",
-        content: "index, follow",
+        content: "index, follow, max-image-preview:large",
       },
-
-      {
-        property: "og:type",
-        content: "website",
-      },
-
-      {
-        property: "og:title",
-        content: "Sravan Sai Vuppula | Portfolio",
-      },
-
-      {
-        property: "og:description",
-        content:
-          "Explore the portfolio of Sravan Sai Vuppula, Full Stack Developer specializing in React, TypeScript, Node.js and AI.",
-      },
-
-      {
-        property: "og:url",
-        content: "https://buildwithsravan.dev",
-      },
-
-      {
-        property: "og:site_name",
-        content: "Sravan Sai Vuppula",
-      },
-
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
-      },
-
-      {
-        name: "twitter:title",
-        content: "Sravan Sai Vuppula | Portfolio",
-      },
-
-      {
-        name: "twitter:description",
-        content: "Official portfolio of Sravan Sai Vuppula.",
-      },
-
       {
         name: "theme-color",
         content: "#15191E",
       },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:site_name",
+        content: "Sravan Sai Vuppula",
+      },
+      {
+        property: "og:title",
+        content: "Sravan Sai Vuppula | Full-Stack Developer",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore the official portfolio of Sravan Sai Vuppula showcasing software engineering projects, modern web applications, AI solutions, and enterprise systems.",
+      },
+      {
+        property: "og:url",
+        content: "https://buildwithsravan.dev",
+      },
+      {
+        property: "og:image",
+        content: "https://buildwithsravan.dev/og-image.png",
+      },
+      {
+        property: "og:image:width",
+        content: "1200",
+      },
+      {
+        property: "og:image:height",
+        content: "630",
+      },
+      {
+        property: "og:image:type",
+        content: "image/png",
+      },
+      {
+        property: "og:image:alt",
+        content: "Sravan Sai Vuppula | Full-Stack Developer Portfolio",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:title",
+        content: "Sravan Sai Vuppula | Full-Stack Developer",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Official portfolio of Sravan Sai Vuppula showcasing software engineering projects and technical expertise.",
+      },
+      {
+        name: "twitter:image",
+        content: "https://buildwithsravan.dev/og-image.png",
+      },
     ],
-
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-
       {
         rel: "canonical",
         href: "https://buildwithsravan.dev",
       },
-
       {
         rel: "icon",
-        href: "/favicon.png",
+        href: "/favicon.ico",
       },
-
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
       {
         rel: "apple-touch-icon",
-        href: "/favicon.png",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
       },
-
+      {
+        rel: "manifest",
+        href: "/site.webmanifest",
+      },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",
       },
-
       {
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
       },
-
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap",

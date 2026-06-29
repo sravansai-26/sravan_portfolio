@@ -56,7 +56,10 @@ export default function Contact() {
           <div className="mono-label mb-4">Direct Channels</div>
           <div className="space-y-5">
             {[
-              { label: "Personal Engineering Office", email: "sai1234comon@gmail.com" },
+              {
+                label: "Personal Engineering Office",
+                email: "sai1234comon@gmail.com",
+              },
               { label: "LYFSpot Corporate Desk", email: "lyfspot@zohomail.in" },
               { label: "LYFSpot Inbound Desk", email: "lyfspot26@gmail.com" },
             ].map((c) => (

@@ -168,7 +168,10 @@ export default function LifeQuestionnaire() {
 
                 <p
                   className="mt-3 text-[11px] text-ink-muted"
-                  style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.06em" }}
+                  style={{
+                    fontFamily: "Roboto, sans-serif",
+                    letterSpacing: "0.06em",
+                  }}
                 >
                   Your email is used only for follow-up — never shared or listed.
                 </p>

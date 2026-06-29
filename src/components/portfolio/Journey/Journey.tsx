@@ -63,7 +63,11 @@ const pipeline = [
 
 const networks = [
   { Icon: BlogIcon, label: "Primary Web Node", href: "https://sailyfspot.blogspot.com" },
-  { Icon: LinkedInIcon, label: "Corporate Hub", href: "https://www.linkedin.com/company/lyfspot" },
+  {
+    Icon: LinkedInIcon,
+    label: "Corporate Hub",
+    href: "https://www.linkedin.com/company/lyfspot",
+  },
   { Icon: TelegramIcon, label: "Channel Matrix", href: "https://t.me/lyfspot" },
   {
     Icon: WhatsAppIcon,

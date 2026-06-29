@@ -237,7 +237,11 @@ export function ArchitecturePlayground() {
                     y={n.y + 26}
                     textAnchor="middle"
                     fill={isFocus || isHi ? "white" : "var(--ink)"}
-                    style={{ fontFamily: "DM Sans", fontSize: 14, fontWeight: 700 }}
+                    style={{
+                      fontFamily: "DM Sans",
+                      fontSize: 14,
+                      fontWeight: 700,
+                    }}
                   >
                     {n.label}
                   </text>
