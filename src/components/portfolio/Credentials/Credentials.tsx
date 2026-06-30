@@ -99,7 +99,7 @@ const certs: Cred[] = [
     skills:
       "Modern SAP Enterprise Architecture, S/4HANA fundamentals, Core ABAP, CDS Views, OData exposure, professional delivery practices.",
     file: "/credentials/naxrita.pdf",
-    fileType: "image",
+    fileType: "pdf",
   },
   {
     title: "NPTEL Elite Certification — Industry 4.0 and Internet of Things",
