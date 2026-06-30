@@ -98,7 +98,7 @@ const certs: Cred[] = [
     meta: "18-Day Industry Readiness Program",
     skills:
       "Modern SAP Enterprise Architecture, S/4HANA fundamentals, Core ABAP, CDS Views, OData exposure, professional delivery practices.",
-    file: "/credentials/naxrita.png",
+    file: "/credentials/naxrita.pdf",
     fileType: "image",
   },
   {
