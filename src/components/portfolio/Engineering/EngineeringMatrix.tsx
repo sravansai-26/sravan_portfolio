@@ -29,7 +29,10 @@ const matrix = [
     group: "Core Engineering & Scripts",
     items: ["C", "Java", "Python", "JavaScript", "HTML5", "CSS3"],
   },
-  { group: "Cloud, DevOps & Data Storage", items: ["AWS", "GCP", "Cloudinary", "Git", "GitHub"] },
+  {
+    group: "Cloud, DevOps & Data Storage",
+    items: ["AWS", "GCP", "Cloudinary", "Cloudfare", "Git", "GitHub"],
+  },
   {
     group: "Enterprise Software Suite",
     items: [

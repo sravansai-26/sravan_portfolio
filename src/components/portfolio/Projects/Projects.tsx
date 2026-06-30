@@ -137,13 +137,13 @@ const projects: Project[] = [
     name: "Sri-Wedding System Architecture",
     classification: "High-Fidelity Professional UX Contract Design",
     logo: "/projects/sri-wedding.png",
-    stack: "Lovable AI Stack Execution Engine",
+    stack: "AI Stack Execution Engine",
     description:
       "An elite digital ordering, product showcase, and fulfillment interface engineered for a premium Ethical Center business. Features minimalist UI structures optimized for rapid conversion metrics. Status: Contract Negotiation Phase / Expanding Advanced Client Core Engine.",
     links: [
       {
         Icon: DesignIcon,
-        label: "Interactive UX Canvas",
+        label: "Interactive UI/UX Canvas",
         href: "https://sri-wedding.lovable.app",
       },
     ],

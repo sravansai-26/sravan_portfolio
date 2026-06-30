@@ -57,11 +57,17 @@ export default function Contact() {
           <div className="space-y-5">
             {[
               {
-                label: "Personal Engineering Office",
-                email: "sai1234comon@gmail.com",
+                label: "Professional Contact Desk",
+                email: "contact@buildwithsravan.dev",
               },
-              { label: "LYFSpot Corporate Desk", email: "lyfspot@zohomail.in" },
-              { label: "LYFSpot Inbound Desk", email: "lyfspot26@gmail.com" },
+              {
+                label: "LYFSpot Corporate Desk",
+                email: "lyfspot@zohomail.in",
+              },
+              {
+                label: "LYFSpot Inbound Desk",
+                email: "lyfspot26@gmail.com",
+              },
             ].map((c) => (
               <a
                 key={c.email}
