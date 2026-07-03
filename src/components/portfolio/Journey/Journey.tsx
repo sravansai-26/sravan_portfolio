@@ -62,6 +62,10 @@ const pipeline = [
     },
   },
   {
+    name: "#ProjectYR",
+    body: "The flagship initiative under LYFSpot — a revolutionary Life Operating System engineered to become the central nervous system of daily human existence. Currently in the Engineering Architecture phase, this ambitious undertaking is designed to fundamentally reshape how individuals organize, optimize, and experience their personal and professional lives. Details remain classified as we architect the backbone of tomorrow's digital ecosystem.",
+  },
+  {
     name: "Project Classified — Deep Tech Division",
     body: "An advanced project merging proprietary software with advanced hardware configurations, integrating hologram, AR, and VR wearable technologies intended to provide critical situational alert safety networks. Status: Architectural Schematics Phase.",
   },
@@ -171,14 +175,29 @@ export default function LyfspotJourney() {
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: i * 0.05 }}
               key={p.name}
-              className="border-t border-[color:var(--hairline)] py-8 md:py-10 last:border-b"
+              className={`border-t border-[color:var(--hairline)] py-8 md:py-10 ${
+                p.name === "#ProjectYR" ? "bg-[color:var(--surface)]/30" : ""
+              } ${i === pipeline.length - 1 ? "border-b" : ""}`}
             >
               <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12">
-                <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px]">
+                <div
+                  className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
+                    p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
+                  }`}
+                >
                   {p.name}
+                  {p.name === "#ProjectYR" && (
+                    <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
+                      Flagship
+                    </span>
+                  )}
                 </div>
                 <div>
-                  <p className="max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary">
+                  <p
+                    className={`max-w-[640px] text-[16px] leading-[1.7] ${
+                      p.name === "#ProjectYR" ? "text-ink font-medium" : "text-ink-secondary"
+                    }`}
+                  >
                     {p.body}
                   </p>
                   {p.cta && (
