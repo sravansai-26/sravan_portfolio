@@ -134,7 +134,7 @@ const projects: Project[] = [
   },
   {
     num: "07",
-    name: "Sri-Wedding System Architecture",
+    name: "Sri-Wedding",
     classification: "High-Fidelity Professional UX Contract Design",
     logo: "/projects/sri-wedding.png",
     stack: "AI Stack Execution Engine",
