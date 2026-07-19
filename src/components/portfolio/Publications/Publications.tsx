@@ -13,6 +13,7 @@ export default function Publications() {
 
   // PDF path - place your PDF in the public/credentials/ folder
   const pdfPath = "/credentials/ayn-rand.pdf";
+  const youtubeVideoUrl = "https://youtu.be/cBhe-F_o9go?si=Gl0wrLzyoZB4kmKi";
 
   useEffect(() => {
     const checkMobile = () => {
@@ -106,7 +107,9 @@ export default function Publications() {
               <p className="font-mono text-[12px] text-ink-muted">— Ayn Rand</p>
             </div>
 
+            {/* Links Row - PDF + YouTube */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
+              {/* PDF Button */}
               <button
                 onClick={handleViewPdf}
                 className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-background transition-all hover:bg-deep-ink hover:scale-[1.02]"
@@ -126,12 +129,34 @@ export default function Publications() {
                     : "Explore Her Collection"}
               </button>
 
-              <span className="h-6 w-px bg-[color:var(--hairline)]" />
+              {/* YouTube Link */}
+              <a
+                href={youtubeVideoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/50 px-6 py-3 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
+              >
+                <svg className="h-4 w-4 text-ink" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                Watch Presentation
+                <ArrowRight
+                  width={14}
+                  height={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </a>
+            </div>
 
-              <div className="flex items-center gap-2 text-[12px] text-ink-muted">
-                <span className="font-mono uppercase tracking-wider">12 Works</span>
+            {/* Divider & Meta */}
+            <div className="mt-6 flex flex-wrap items-center gap-4">
+              <span className="h-px w-8 bg-[color:var(--hairline)]" />
+              <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-ink-muted">
+                <span>PDF Collection</span>
                 <span className="opacity-30">·</span>
-                <span className="font-mono uppercase tracking-wider">PDF Included</span>
+                <span>12 Works</span>
+                <span className="opacity-30">·</span>
+                <span>Video Presentation</span>
               </div>
             </div>
           </div>
@@ -158,7 +183,7 @@ export default function Publications() {
                 </div>
                 <div className="mt-3 flex items-center justify-between">
                   <p className="font-mono text-[11px] text-ink-muted">
-                    📄 Use the toolbar to navigate, zoom, or download
+                    Use the toolbar to navigate, zoom, or download
                   </p>
                   <button
                     onClick={() => window.open(pdfPath, "_blank")}
@@ -203,6 +228,13 @@ export default function Publications() {
             </p>
           </div>
         )}
+
+        {/* Footer */}
+        <div className="border-t border-white/20 px-8 py-4 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+            Crafted with care by <b>Sravan Sai Vuppula</b> for a cause that matters
+          </p>
+        </div>
       </motion.div>
 
       {/* Premium Redesigned Literary Reflections Section */}
