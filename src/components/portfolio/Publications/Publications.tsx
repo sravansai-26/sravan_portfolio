@@ -25,11 +25,8 @@ export default function Publications() {
   }, []);
 
   const handleViewPdf = () => {
-    if (isMobile) {
-      window.open(pdfPath, "_blank");
-    } else {
-      setShowPdfViewer(!showPdfViewer);
-    }
+    // Always open in new tab for both desktop and mobile
+    window.open(pdfPath, "_blank");
   };
 
   return (
@@ -109,7 +106,7 @@ export default function Publications() {
 
             {/* Links Row - PDF + YouTube */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              {/* PDF Button */}
+              {/* PDF Button - Always opens in new tab */}
               <button
                 onClick={handleViewPdf}
                 className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-background transition-all hover:bg-deep-ink hover:scale-[1.02]"
@@ -122,11 +119,7 @@ export default function Publications() {
                     d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   />
                 </svg>
-                {showPdfViewer && !isMobile
-                  ? "Close Collection"
-                  : isMobile
-                    ? "Open PDF Collection"
-                    : "Explore Her Collection"}
+                Open PDF Collection
               </button>
 
               {/* YouTube Link */}
@@ -160,80 +153,6 @@ export default function Publications() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* PDF Viewer - Desktop Only */}
-        <AnimatePresence>
-          {showPdfViewer && !isMobile && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="border-t border-white/20 bg-black/5 backdrop-blur-sm"
-            >
-              <div className="p-6">
-                <div className="overflow-hidden rounded-xl border border-white/20 bg-white/90 dark:bg-gray-900">
-                  <iframe
-                    src={`${pdfPath}#toolbar=1&navpanes=1&scrollbar=1&page=1&view=FitH`}
-                    className="h-[600px] w-full"
-                    title="Ayn Rand - Objectivism Collection"
-                    style={{ border: "none" }}
-                  />
-                </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <p className="font-mono text-[11px] text-ink-muted">
-                    Use the toolbar to navigate, zoom, or download
-                  </p>
-                  <button
-                    onClick={() => window.open(pdfPath, "_blank")}
-                    className="inline-flex items-center gap-1 text-[12px] font-medium text-ink transition-colors hover:text-deep-ink"
-                  >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                    Open in New Tab
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile Notice */}
-        {isMobile && (
-          <div className="border-t border-white/20 bg-black/5 px-6 py-4">
-            <p className="flex items-center gap-2 text-[13px] text-ink-secondary">
-              <svg
-                className="h-5 w-5 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-                />
-              </svg>
-              <span>
-                Tap <strong>"Open PDF Collection"</strong> to view all works in a new tab.
-              </span>
-            </p>
-          </div>
-        )}
-
-        {/* Footer */}
-        <div className="border-t border-white/20 px-8 py-4 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-            Crafted with care by <b>Sravan Sai Vuppula</b> for a cause that matters
-          </p>
         </div>
       </motion.div>
 
