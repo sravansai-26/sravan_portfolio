@@ -8,11 +8,12 @@ import { fadeUp } from "../common/animations";
 import { ArrowRight, BlogIcon, MediumIcon } from "../Icons";
 
 export default function Publications() {
-  const [showPdfViewer, setShowPdfViewer] = useState(false);
+  const [showStartupPdf, setShowStartupPdf] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // PDF path - place your PDF in the public/credentials/ folder
-  const pdfPath = "/credentials/ayn-rand.pdf";
+  // PDF Paths - placed in public/credentials/
+  const aynRandPdfPath = "/credentials/ayn-rand.pdf";
+  const startupGuidePdfPath = "/credentials/startup-guide.pdf#toolbar=0&navpanes=0&scrollbar=0";
   const youtubeVideoUrl = "https://youtu.be/cBhe-F_o9go?si=Gl0wrLzyoZB4kmKi";
 
   useEffect(() => {
@@ -24,9 +25,12 @@ export default function Publications() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleViewPdf = () => {
-    // Always open in new tab for both desktop and mobile
-    window.open(pdfPath, "_blank");
+  const handleViewAynRandPdf = () => {
+    window.open(aynRandPdfPath, "_blank");
+  };
+
+  const handleOpenStartupGuide = () => {
+    setShowStartupPdf(true);
   };
 
   return (
@@ -39,6 +43,7 @@ export default function Publications() {
         Written philosophy, industry essays, and creative pursuits.
       </motion.h2>
 
+      {/* Featured Essay Article */}
       <motion.article
         {...fadeUp}
         className="border-t border-[color:var(--hairline)] py-10 last:border-b"
@@ -97,7 +102,7 @@ export default function Publications() {
               <p>
                 Ayn Rand, a visionary writer and philosopher, is renowned for her advocacy of
                 individualism, reason, and rational self-interest. Her philosophy, known as
-                Objectivism, champions the power of the individual to shape their own destiny
+                Objectivism, champions the power of the individual to shape their own destiny &amp;
                 happiness unapologetically.
               </p>
               <p className="italic text-ink">"If it's worth doing, it's worth doing well."</p>
@@ -106,9 +111,8 @@ export default function Publications() {
 
             {/* Links Row - PDF + YouTube */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              {/* PDF Button - Always opens in new tab */}
               <button
-                onClick={handleViewPdf}
+                onClick={handleViewAynRandPdf}
                 className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[14px] font-medium text-background transition-all hover:bg-deep-ink hover:scale-[1.02]"
               >
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +126,6 @@ export default function Publications() {
                 Open PDF Collection
               </button>
 
-              {/* YouTube Link */}
               <a
                 href={youtubeVideoUrl}
                 target="_blank"
@@ -151,6 +154,123 @@ export default function Publications() {
                 <span className="opacity-30">·</span>
                 <span>Video Presentation</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* STARTUP UNLOCKED - FEATURED PUBLICATION */}
+      <motion.div
+        {...fadeUp}
+        className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* Left Content Column */}
+          <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-14">
+            <div className="mono-label mb-4">Foundational Knowledge · LYFSpot Reference</div>
+
+            <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-[-0.025em] text-ink md:text-[42px]">
+              From Zero to Scale —{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">A Real-World Startup Compendium</span>
+                <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+              </span>
+            </h3>
+
+            <p className="mt-4 text-[15px] leading-relaxed text-ink-secondary">
+              A comprehensive field guide written for ambitious creators, builders, and aspiring
+              entrepreneurs. Covers core legal foundations, product development cycles, unit
+              metrics, fundraising strategies, and scaling mechanics.
+            </p>
+
+            {/* Feature Topics */}
+            <div className="mt-6 grid grid-cols-2 gap-3 font-mono text-[12px] text-ink-secondary">
+              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+                <span className="font-bold text-ink">01</span> Incorporation &amp; Legal
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+                <span className="font-bold text-ink">02</span> Building the MVP
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+                <span className="font-bold text-ink">03</span> Unit Economics &amp; Moats
+              </div>
+              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+                <span className="font-bold text-ink">04</span> A–Z Founder Glossary
+              </div>
+            </div>
+
+            {/* Simple Relatable Action Button */}
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <button
+                onClick={handleOpenStartupGuide}
+                className="inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-background transition-all hover:bg-deep-ink hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+                Open Guide
+                <ArrowRight width={14} height={14} />
+              </button>
+            </div>
+
+            {/* Meta Tags */}
+            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[color:var(--hairline)] pt-4">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                07 Parts
+              </span>
+              <span className="opacity-30">·</span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                Interactive Reader
+              </span>
+              <span className="opacity-30">·</span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                View Only
+              </span>
+            </div>
+          </div>
+
+          {/* Right Visual Cover Card */}
+          <div className="relative flex flex-col justify-between overflow-hidden bg-ink p-8 text-background lg:p-12">
+            {/* Top Row - Brand Title & Properly Scaled LYFSpot Logo */}
+            <div className="relative z-10 flex items-center justify-between gap-4">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-background/60">
+                LYFSpot Editions
+              </span>
+              <img
+                src="credentials/lyfspot-logo.png"
+                alt="LYFSpot Logo"
+                className="h-10 w-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+            </div>
+
+            {/* Main Title Section */}
+            <div className="relative z-10 my-auto py-8">
+              <div className="font-mono text-xs uppercase tracking-widest text-background/70 mb-2">
+                A Founder's Field Guide
+              </div>
+              <h4 className="font-display text-3xl font-black tracking-tight text-background md:text-5xl leading-tight">
+                STARTUP
+                <br />
+                UNLOCKED
+              </h4>
+              <p className="mt-4 text-xs md:text-sm text-background/80 max-w-[320px] leading-relaxed">
+                Everything a first-time founder needs to know — from legal registration to Series A
+                and global scaling.
+              </p>
+            </div>
+
+            {/* Card Footer Info */}
+            <div className="relative z-10 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] text-background/60">
+              <span>Sravan Sai Vuppula</span>
+              <span>Legal &amp; Funding</span>
             </div>
           </div>
         </div>
@@ -198,6 +318,58 @@ export default function Publications() {
           </div>
         </a>
       </motion.div>
+
+      {/* READ-ONLY VIEW-ONLY PDF MODAL */}
+      <AnimatePresence>
+        {showStartupPdf && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 md:p-8 backdrop-blur-md"
+            onClick={() => setShowStartupPdf(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative flex h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/20 bg-slate-900 shadow-2xl"
+            >
+              {/* Modal Header Bar */}
+              <div className="flex items-center justify-between border-b border-white/10 bg-slate-950 px-6 py-4 text-white">
+                <span className="font-display font-semibold text-sm md:text-base tracking-wide">
+                  Startup Unlocked — LYFSpot Founder Guide
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <span className="hidden md:inline-block font-mono text-[11px] uppercase tracking-wider text-slate-400 bg-white/5 px-3 py-1 rounded-full">
+                    Read-Only Digital Edition
+                  </span>
+                  <button
+                    onClick={() => setShowStartupPdf(false)}
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                    aria-label="Close PDF Viewer"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {/* Secure Embed View Container */}
+              <div className="relative flex-1 bg-slate-950">
+                <object data={startupGuidePdfPath} type="application/pdf" className="h-full w-full">
+                  <iframe
+                    src={startupGuidePdfPath}
+                    className="h-full w-full border-0"
+                    title="Startup Unlocked Guide Viewer"
+                  />
+                </object>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Container>
   );
 }
