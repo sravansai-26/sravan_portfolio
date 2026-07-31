@@ -18,8 +18,9 @@ export default function Publications() {
   const startupGuidePdfPath = "/credentials/startup-guide.pdf#toolbar=0&navpanes=0&scrollbar=0";
   const aynRandYoutubeUrl = "https://youtu.be/cBhe-F_o9go?si=Gl0wrLzyoZB4kmKi";
 
-  // Teaser Media Assets & External Links
-  const storyTeaserVideoPath = "/credentials/teaser-glimpse.mp4";
+  // Teaser Media Assets & External Links (Hosted via Vercel Blob CDN)
+  const storyTeaserVideoUrl =
+    "https://im6emjdg0usbvzpe.public.blob.vercel-storage.com/teaser-glimpse.mp4";
   const storyTeaserThumbnailPath = "/credentials/thumbnail.png";
   const dlLogoPath = "/credentials/dl-logo.png";
   const storyTeaserYoutubeUrl = "https://youtu.be/FEP1wO878wA?si=58EHiohJStZxWq8b";
@@ -76,7 +77,7 @@ export default function Publications() {
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20 bg-slate-950 shadow-2xl">
           <video
             ref={videoRef}
-            src={storyTeaserVideoPath}
+            src={storyTeaserVideoUrl}
             poster={storyTeaserThumbnailPath}
             controls={isPlayingTeaser}
             preload="metadata"
@@ -85,7 +86,7 @@ export default function Publications() {
             onPause={() => setIsPlayingTeaser(false)}
           />
 
-          {/* YouTube Style Initial Thumbnail & Play Badge Overlay */}
+          {/* Initial Poster & Play Badge Overlay */}
           {!isPlayingTeaser && (
             <div
               onClick={handleStartInlineVideo}
@@ -101,7 +102,7 @@ export default function Publications() {
                 </span>
               </div>
 
-              {/* Center YouTube Style Play Circle */}
+              {/* Center Play Circle */}
               <div className="my-auto self-center">
                 <div className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full border border-white/40 bg-slate-950/60 text-white shadow-2xl backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-slate-950">
                   <svg className="h-8 w-8 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
