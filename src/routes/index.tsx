@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, startTransition } from "react";
 
 import Portfolio from "@/components/portfolio/Portfolio";
 import { LoadingSplash } from "@/components/portfolio/LoadingSplash";
@@ -9,17 +9,17 @@ import { ResumeModal } from "@/components/portfolio/ResumeModal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sravan Sai Vuppula | Portfolio" },
+      { title: "Sravan Sai Vuppula | Full-Stack Developer & Founder" },
       {
         name: "description",
         content:
-          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer, Founder of LYFSpot, & creator of products in civic tech, AI, logistics, & enterprise software.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
-      { property: "og:title", content: "Sravan Sai Vuppula | Portfolio" },
+      { property: "og:title", content: "Sravan Sai Vuppula | Full-Stack Developer & Founder" },
       {
         property: "og:description",
         content:
-          "Explore the official portfolio of Sravan Sai Vuppula, Full Stack Developer and Founder of LYFSpot.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
       {
         property: "og:url",
@@ -51,12 +51,12 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "twitter:title",
-        content: "Sravan Sai Vuppula | Portfolio",
+        content: "Sravan Sai Vuppula | Full-Stack Developer & Founder",
       },
       {
         name: "twitter:description",
         content:
-          "Official portfolio of Sravan Sai Vuppula. Full Stack Developer and Founder of LYFSpot.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
       {
         name: "twitter:image",
@@ -79,45 +79,37 @@ export const Route = createFileRoute("/")({
           "@graph": [
             {
               "@type": "Person",
-              name: "Sravan Sai Vuppula",
-              alternateName: ["Sravan Sai", "Sravan Vuppula"],
-              jobTitle: "Founder & Full Stack Developer",
-              worksFor: {
+              "@id": "https://buildwithsravan.dev/#person",
+              "name": "Sravan Sai Vuppula",
+              "alternateName": "Vuppula Sravan Sai",
+              "url": "https://buildwithsravan.dev",
+              "image": "https://buildwithsravan.dev/assets/sravan-cutout.webp",
+              "jobTitle": "Full-Stack Software Engineer & Founder",
+              "worksFor": {
                 "@type": "Organization",
-                name: "LYFSpot",
+                "name": "LYFSpot",
+                "url": "https://linktr.ee/lyfspot"
               },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Hyderabad",
-                addressRegion: "Telangana",
-                addressCountry: "IN",
-              },
-              email: "mailto:sai1234comon@gmail.com",
-              url: "https://buildwithsravan.dev",
-              sameAs: [
+              "sameAs": [
                 "https://github.com/sravansai-26",
-                "https://www.linkedin.com/in/sravan-sai-vuppula-753b711ba",
-                "https://medium.com/@sravansaivuppula",
+                "https://linkedin.com/in/sravan-sai-vuppula-753b711ba",
                 "https://twitter.com/vuppula_sai",
-              ],
-            },
-            {
-              "@type": "Organization",
-              name: "LYFSpot",
-              founder: "Sravan Sai Vuppula",
-              foundingDate: "2020-10",
-              url: "https://buildwithsravan.dev",
+                "https://instagram.com/lyfspot",
+                "https://medium.com/@sravansaivuppula"
+              ]
             },
             {
               "@type": "WebSite",
-              name: "Sravan Sai Vuppula",
-              url: "https://buildwithsravan.dev",
-              author: {
-                "@type": "Person",
-                name: "Sravan Sai Vuppula",
+              "@id": "https://buildwithsravan.dev/#website",
+              "url": "https://buildwithsravan.dev",
+              "name": "Sravan Sai Vuppula Portfolio",
+              "description": "Official portfolio of Sravan Sai Vuppula — Full-Stack Developer & Founder of LYFSpot.",
+              "publisher": {
+                "@id": "https://buildwithsravan.dev/#person"
               },
-            },
-          ],
+              "inLanguage": "en"
+            }
+          ]
         }),
       },
     ],
@@ -130,7 +122,11 @@ function Index() {
 
   // Sync modal with URL hash so back/forward navigation works.
   useEffect(() => {
-    const sync = () => setResumeOpen(window.location.hash === "#resume");
+    const sync = () => {
+      startTransition(() => {
+        setResumeOpen(window.location.hash === "#resume");
+      });
+    };
     sync();
     window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
@@ -140,14 +136,18 @@ function Index() {
     if (window.location.hash !== "#resume") {
       window.history.pushState(null, "", "#resume");
     }
-    setResumeOpen(true);
+    startTransition(() => {
+      setResumeOpen(true);
+    });
   }, []);
 
   const close = useCallback(() => {
     if (window.location.hash === "#resume") {
       window.history.back();
     } else {
-      setResumeOpen(false);
+      startTransition(() => {
+        setResumeOpen(false);
+      });
     }
   }, []);
 

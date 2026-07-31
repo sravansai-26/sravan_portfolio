@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ssvMark from "@/assets/ssv-mark.png";
+import ssvMark from "@/assets/ssv-mark.webp";
 
 export function LoadingSplash() {
   const [show, setShow] = useState(true);

@@ -1,5 +1,5 @@
-import ssvLogo from "@/assets/ssv-name.png";
-import catImg from "@/assets/footer-cat.jpeg";
+import ssvLogo from "@/assets/ssv-name.webp";
+import catImg from "@/assets/footer-cat.webp";
 
 import {
   LinkedInIcon,
@@ -60,6 +60,8 @@ export default function Footer() {
                 src={catImg}
                 alt="Work & Enjoy"
                 className="absolute inset-0 h-full w-full object-cover object-center scale-[1.12] transition-transform duration-700"
+                loading="lazy"
+                decoding="async"
               />
 
               {/* Soft blend into text */}
@@ -77,7 +79,15 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div className="flex items-center gap-4">
             <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full transition-transform hover:scale-105">
-              <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-14 w-14 object-cover" />
+              <img
+                src={ssvLogo}
+                alt="Sravan Sai Vuppula"
+                className="h-14 w-14 object-cover"
+                loading="lazy"
+                decoding="async"
+                width="56"
+                height="56"
+              />
             </span>
             <div>
               <div className="font-display text-[16px] font-bold text-ink">Sravan Sai Vuppula</div>
@@ -104,8 +114,7 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-[color:var(--hairline)] pt-6 text-center">
           <div
-            className="text-[12px] uppercase tracking-[0.18em] text-ink-muted"
-            style={{ fontFamily: "Roboto, sans-serif" }}
+            className="font-['Roboto',sans-serif] text-[12px] uppercase tracking-[0.18em] text-ink-muted"
           >
             © 2026 Sravan Sai Vuppula. All rights reserved.
           </div>

@@ -1,0 +1,28 @@
+# Sravan Sai Vuppula — Professional Summary & Entity Profile
+
+> Official canonical profile for Sravan Sai Vuppula, Full-Stack Software Engineer, Founder of LYFSpot, and creator of enterprise, civic tech, logistics, and cinema operations software.
+
+## Core Identity
+- **Name:** Sravan Sai Vuppula
+- **Role:** Full-Stack Software Developer & Product Founder
+- **Website:** https://buildwithsravan.dev
+- **Startup Entity:** LYFSpot (Founded Oct 2020)
+- **Primary Tech Stack:** React, React Native, Node.js, Express, MongoDB, Python FastAPI, Java, Vite, Docker, Cloudflare
+
+## Key Software Engineering Projects
+1. **Resolveit:** Civic issue resolution platform (MERN Stack).
+2. **Smart LoadMate:** Mobile logistics & driver route optimization app (React Native, Expo, FastAPI, MongoDB).
+3. **Shotweave:** AI-powered cinema production tracking dashboard.
+4. **DreamLaunch:** Content orchestration & promotional asset distribution system.
+5. **VaultBank:** Enterprise transaction simulation engine (Java Spring Boot, React, MySQL).
+6. **DeployBridge:** Automated deployment orchestration engine.
+
+## Publications & Writing
+- "Startup Unlocked: A Real-World Startup Compendium" (37-page founder field guide).
+- "The Uncharted Path" (Published essay on Medium).
+- "కథలో..." (Original story & literary chronicle).
+
+## Official Social & Node Links
+- GitHub: https://github.com/sravansai-26
+- LinkedIn: https://linkedin.com/in/sravan-sai-vuppula-753b711ba
+- Medium: https://medium.com/@sravansaivuppula

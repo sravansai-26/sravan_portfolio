@@ -79,10 +79,7 @@ export default function LifeQuestionnaire() {
           className="relative grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16"
         >
           <div>
-            <div
-              className="text-[11.5px] font-semibold uppercase tracking-[0.18em] text-accent"
-              style={{ fontFamily: "Roboto, sans-serif" }}
-            >
+            <div className="font-['Roboto',sans-serif] text-[11.5px] font-semibold uppercase tracking-[0.18em] text-accent">
               One word. One thought. One opportunity.
             </div>
             <h2 className="mt-4 font-display text-[34px] font-black leading-[1.04] tracking-[-0.025em] text-ink md:text-[56px]">
@@ -98,10 +95,7 @@ export default function LifeQuestionnaire() {
               collaborate inside the creative wing of LYFSpot — writing, cinema, product, or
               research. Share your raw instinct.
             </p>
-            <div
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[12px] text-ink-secondary"
-              style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.08em" }}
-            >
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[12px] text-ink-secondary font-['Roboto',sans-serif] tracking-[0.08em]">
               <SparkIcon width={14} height={14} className="text-accent" />
               Reviewed personally by the founder
             </div>
@@ -143,8 +137,7 @@ export default function LifeQuestionnaire() {
                     className="w-full resize-none rounded-xl border border-[color:var(--hairline)] bg-white/80 p-4 font-display text-[22px] font-semibold leading-[1.3] tracking-[-0.01em] text-ink outline-none transition-colors placeholder:text-ink-muted/70 focus:border-ink"
                   />
                   <div
-                    className="mt-1 text-right text-[11px] text-ink-muted"
-                    style={{ fontFamily: "Roboto, sans-serif" }}
+                    className="mt-1 text-right text-[11px] text-ink-muted font-['Roboto',sans-serif]"
                   >
                     {answer.length} / 400
                   </div>
@@ -167,11 +160,7 @@ export default function LifeQuestionnaire() {
                 {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
                 <p
-                  className="mt-3 text-[11px] text-ink-muted"
-                  style={{
-                    fontFamily: "Roboto, sans-serif",
-                    letterSpacing: "0.06em",
-                  }}
+                  className="mt-3 text-[11px] text-ink-muted font-['Roboto',sans-serif] tracking-[0.06em]"
                 >
                   Your email is used only for follow-up — never shared or listed.
                 </p>

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import sravanImg from "@/assets/sravan-cutout.png";
+import sravanImg from "@/assets/sravan-cutout.webp";
 
 import { ArrowRight, DocIcon } from "../Icons";
 
@@ -17,12 +17,21 @@ export default function Hero({ onLaunchResume }: { onLaunchResume: () => void })
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-display font-black tracking-[-0.035em] text-ink leading-[1.02] text-[40px] sm:text-[52px] md:text-[64px] lg:text-[78px]"
           >
-            Engineering full-stack digital{" "}
+            Engineering Full-Stack Digital{" "}
             <span className="font-mono font-medium tracking-[-0.02em] text-[0.78em] align-baseline">
-              ecosystems()
+              Ecosystems()
             </span>{" "}
-            with architectural precision and human-centric purpose.
+            & Products
           </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="mt-4 font-display font-bold tracking-[-0.02em] text-ink-muted text-[22px] sm:text-[26px] md:text-[32px] leading-[1.2]"
+          >
+            with architectural precision and human-centric purpose.
+          </motion.p>
 
           <motion.p
             {...fadeUp}
@@ -45,13 +54,13 @@ export default function Hero({ onLaunchResume }: { onLaunchResume: () => void })
           >
             <button
               onClick={onLaunchResume}
-              className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
             >
               <DocIcon width={16} height={16} /> Launch Interactive Resume
             </button>
             <a
               href="#contact"
-              className="editorial-link inline-flex items-center gap-2 text-[14px]"
+              className="editorial-link inline-flex min-h-[48px] items-center gap-2 text-[14px]"
             >
               Get in touch <ArrowRight width={14} height={14} />
             </a>
@@ -71,6 +80,8 @@ export default function Hero({ onLaunchResume }: { onLaunchResume: () => void })
               className="absolute inset-x-0 bottom-0 mx-auto h-[110%] w-auto max-w-none object-contain object-bottom"
               loading="eager"
               decoding="async"
+              width="460"
+              height="575"
             />
           </div>
         </motion.div>

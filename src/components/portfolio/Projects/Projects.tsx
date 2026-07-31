@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, startTransition } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Container from "../common/Container";
@@ -159,7 +159,7 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
       className="border-t border-[color:var(--hairline)] last:border-b"
     >
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => startTransition(() => setOpen((o) => !o))}
         className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-center gap-4 py-7 text-left md:grid-cols-[60px_56px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
       >
         <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>

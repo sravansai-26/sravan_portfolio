@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, startTransition } from "react";
 
 import Container from "../common/Container";
 import SectionLabel from "../common/SectionLabel";
@@ -40,7 +40,7 @@ export default function Publications() {
   };
 
   const handleOpenStartupGuide = () => {
-    setShowStartupPdf(true);
+    startTransition(() => setShowStartupPdf(true));
   };
 
   const handleStartInlineVideo = () => {
@@ -507,7 +507,7 @@ export default function Publications() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 md:p-8 backdrop-blur-md"
-            onClick={() => setShowStartupPdf(false)}
+            onClick={() => startTransition(() => setShowStartupPdf(false))}
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -527,7 +527,7 @@ export default function Publications() {
                     Read-Only Digital Edition
                   </span>
                   <button
-                    onClick={() => setShowStartupPdf(false)}
+                    onClick={() => startTransition(() => setShowStartupPdf(false))}
                     className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 cursor-pointer"
                     aria-label="Close PDF Viewer"
                   >

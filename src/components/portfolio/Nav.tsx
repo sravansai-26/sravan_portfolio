@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import { Menu, Close, DocIcon } from "./Icons";
-import ssvLogo from "@/assets/ssv-name.png";
+import ssvLogo from "@/assets/ssv-name.webp";
 
 const links = [
   { label: "Home", href: "#top" },
@@ -34,7 +34,15 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-4 md:px-10">
           <a href="#top" className="flex items-center gap-3 group">
             <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full transition-transform group-hover:scale-105">
-              <img src={ssvLogo} alt="Sravan Sai Vuppula" className="h-12 w-12 object-cover" />
+              <img
+                src={ssvLogo}
+                alt="Sravan Sai Vuppula"
+                className="h-12 w-12 object-cover"
+                loading="eager"
+                decoding="async"
+                width="48"
+                height="48"
+              />
             </span>
             <span className="font-display text-[19px] md:text-[22px] font-bold tracking-[-0.02em] text-ink">
               Sravan Sai Vuppula
@@ -65,8 +73,8 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               <DocIcon width={14} height={14} /> Launch Resume
             </button>
             <button
-              onClick={() => setOpen(true)}
-              className="grid h-9 w-9 place-items-center rounded-sm text-ink lg:hidden"
+              onClick={() => startTransition(() => setOpen(true))}
+              className="grid h-12 w-12 place-items-center rounded-sm text-ink lg:hidden"
               aria-label="Open menu"
             >
               <Menu />
@@ -80,8 +88,8 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
           <div className="flex items-center justify-between">
             <span className="font-display text-[14px] font-semibold text-ink">Menu</span>
             <button
-              onClick={() => setOpen(false)}
-              className="grid h-9 w-9 place-items-center rounded-sm text-ink"
+              onClick={() => startTransition(() => setOpen(false))}
+              className="grid h-12 w-12 place-items-center rounded-sm text-ink"
               aria-label="Close menu"
             >
               <Close />
@@ -92,7 +100,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
+                onClick={() => startTransition(() => setOpen(false))}
                 className="font-display text-[28px] font-bold tracking-[-0.02em] text-ink"
               >
                 {l.label}
@@ -100,7 +108,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
             ))}
             <button
               onClick={() => {
-                setOpen(false);
+                startTransition(() => setOpen(false));
                 onLaunchResume?.();
               }}
               className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[13px] font-medium text-ink"

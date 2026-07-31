@@ -71,14 +71,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0" },
       {
-        title: "Sravan Sai Vuppula | Full-Stack Developer",
+        title: "Sravan Sai Vuppula | Full-Stack Developer & Founder",
       },
       {
         name: "description",
         content:
-          "Official portfolio of Sravan Sai Vuppula, a Full-Stack Developer specializing in React, TypeScript, Node.js, Java, Python, SAP, and scalable software engineering.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
       {
         name: "author",
@@ -102,12 +102,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         property: "og:title",
-        content: "Sravan Sai Vuppula | Full-Stack Developer",
+        content: "Sravan Sai Vuppula | Full-Stack Developer & Founder",
       },
       {
         property: "og:description",
         content:
-          "Explore the official portfolio of Sravan Sai Vuppula showcasing software engineering projects, modern web applications, AI solutions, and enterprise systems.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
       {
         property: "og:url",
@@ -139,12 +139,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         name: "twitter:title",
-        content: "Sravan Sai Vuppula | Full-Stack Developer",
+        content: "Sravan Sai Vuppula | Full-Stack Developer & Founder",
       },
       {
         name: "twitter:description",
         content:
-          "Official portfolio of Sravan Sai Vuppula showcasing software engineering projects and technical expertise.",
+          "Portfolio of Sravan Sai Vuppula — Full-Stack Engineer, Founder of LYFSpot, and creator of scalable web & enterprise software.",
       },
       {
         name: "twitter:image",
@@ -159,6 +159,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "canonical",
         href: "https://buildwithsravan.dev",
+      },
+      {
+        rel: "alternate",
+        href: "https://buildwithsravan.dev",
+        hrefLang: "en",
+      },
+      {
+        rel: "alternate",
+        href: "https://buildwithsravan.dev",
+        hrefLang: "x-default",
       },
       {
         rel: "icon",

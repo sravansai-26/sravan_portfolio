@@ -196,8 +196,7 @@ export function ArchitecturePlayground() {
                       x={(a.x + NODE_W + b.x) / 2}
                       y={(a.y + b.y) / 2 + 22}
                       textAnchor="middle"
-                      fill={isHi ? "var(--ink-secondary)" : "var(--ink-muted)"}
-                      style={{ fontFamily: "JetBrains Mono", fontSize: 10 }}
+                      className="font-['JetBrains_Mono'] text-[10px] text-white/80"
                     >
                       {p.label}
                     </text>
@@ -232,19 +231,13 @@ export function ArchitecturePlayground() {
                     stroke={isFocus ? "var(--accent-blue)" : "var(--hairline)"}
                     strokeWidth={isFocus ? 2 : 1}
                   />
-                  <text
-                    x={n.x + NODE_W / 2}
-                    y={n.y + 26}
-                    textAnchor="middle"
-                    fill={isFocus || isHi ? "white" : "var(--ink)"}
-                    style={{
-                      fontFamily: "DM Sans",
-                      fontSize: 14,
-                      fontWeight: 700,
-                    }}
-                  >
-                    {n.label}
-                  </text>
+                  <foreignObject x={n.x} y={n.y + 15} width={NODE_W} height={NODE_H}>
+                    <div className="flex justify-center">
+                      <div className="rounded-full bg-slate-900/80 px-2 py-0.5 text-[10px] font-medium text-white shadow-sm ring-1 ring-white/20">
+                        {n.label}
+                      </div>
+                    </div>
+                  </foreignObject>
                   <text
                     x={n.x + NODE_W / 2}
                     y={n.y + 44}
@@ -259,8 +252,7 @@ export function ArchitecturePlayground() {
             })}
           </svg>
           <div
-            className="mt-2 px-2 text-[11px] text-ink-muted"
-            style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.06em" }}
+            className="font-['Roboto',sans-serif] mx-auto mt-10 max-w-2xl text-center text-[13px] text-white/50"
           >
             Tip — click any node to focus its inbound and outbound routes.
           </div>
@@ -270,8 +262,7 @@ export function ArchitecturePlayground() {
           <div className="mono-label mb-2">Active Flow</div>
           <div className="font-display text-[20px] font-bold text-ink">{flow.name}</div>
           <div
-            className="mt-1 text-[11px] uppercase text-ink-muted"
-            style={{ fontFamily: "Roboto, sans-serif", letterSpacing: "0.14em" }}
+            className="font-['Roboto',sans-serif] mt-6 text-sm leading-relaxed text-slate-300"
           >
             {flow.stack}
           </div>
@@ -314,7 +305,7 @@ export function ArchitecturePlayground() {
                       {layout[p.to].label}
                     </button>
                     {p.label && (
-                      <span className="ml-2 font-mono text-[11px] text-accent-blue">
+                      <span className="cursor-pointer font-['JetBrains_Mono'] text-[11px] font-medium tracking-wider text-white ml-2">
                         · {p.label}
                       </span>
                     )}
