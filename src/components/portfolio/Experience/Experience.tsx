@@ -9,6 +9,8 @@ const experience = [
     role: "Founder & Chief Technical Architect",
     org: "LYFSpot — Self-Employed / Hybrid Corporation",
     logo: "/experience/lyfspotlogo.png",
+    width: 500,
+    height: 500,
     tenure: "October 2020 – Present · 5 Years, 9 Months",
     bullets: [
       "Architected multi-sector technical frameworks across diverse production distributions including SaaS, Civic Tech, Logistics, and Fintech pipelines.",
@@ -19,6 +21,8 @@ const experience = [
     role: "DevCon Associate — Enterprise SAP Track",
     org: "Naxrita India — On-Site Internship Core, Hyderabad, TS",
     logo: "/experience/naxritalogo.png",
+    width: 204,
+    height: 192,
     tenure: "March 2026 – May 2026 · 3 Months",
     bullets: [
       "Acquired extensive practical skills across the SAP ABAP ecosystem, building scalable, modern custom extensions within SAP S/4HANA enterprise frameworks.",
@@ -56,6 +60,9 @@ export default function Experience() {
                     alt={`${e.org} logo`}
                     className="h-11 w-auto object-contain"
                     loading="lazy"
+                    decoding="async"
+                    width={e.width}
+                    height={e.height}
                   />
                 </div>
 

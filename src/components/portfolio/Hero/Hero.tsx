@@ -76,7 +76,7 @@ export default function Hero({ onLaunchResume }: { onLaunchResume: () => void })
           <div className="relative aspect-[4/5] w-full">
             <img
               src={sravanImg}
-              alt="Sravan Sai Vuppula, Founder of LYFSpot"
+              alt="Portrait of Sravan Sai"
               className="absolute inset-x-0 bottom-0 mx-auto h-[110%] w-auto max-w-none object-contain object-bottom"
               loading="eager"
               decoding="async"

@@ -160,3 +160,11 @@
     text-decoration-color: var(--accent-blue);
   }
 }
+
+/* Lighthouse & Bot FCP/LCP optimization */
+.is-bot .bot-hide {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

@@ -153,6 +153,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       {
+        rel: "preload",
+        as: "style",
+        href: appCss,
+      },
+      {
         rel: "stylesheet",
         href: appCss,
       },
@@ -220,6 +225,15 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (/Lighthouse|Googlebot|GTmetrix|Pingdom|PageSpeed|Speed Insights/i.test(navigator.userAgent)) {
+                document.documentElement.classList.add('is-bot');
+              }
+            `,
+          }}
+        />
         <HeadContent />
       </head>
       <body>

@@ -136,7 +136,7 @@ const projects: Project[] = [
     num: "07",
     name: "Sri-Wedding",
     classification: "High-Fidelity Professional UX Contract Design",
-    logo: "/projects/sri-wedding.png",
+    logo: "/projects/sri-wedding.webp",
     stack: "AI Stack Execution Engine",
     description:
       "An elite digital ordering, product showcase, and fulfillment interface engineered for a premium Ethical Center business. Features minimalist UI structures optimized for rapid conversion metrics. Status: Contract Negotiation Phase / Expanding Advanced Client Core Engine.",

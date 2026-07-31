@@ -11,6 +11,8 @@ type Cred = {
   title: string;
   org: string;
   logo?: string;
+  width?: number;
+  height?: number;
   date?: string;
   gpa?: string;
   skills?: string;
@@ -25,6 +27,8 @@ const academic: Cred[] = [
     title: "Bachelor of Technology — Computer Science and Engineering",
     org: "MLR Institute of Technology (MLRIT), Dundigal, Hyderabad",
     logo: "/projects/btechlogo.png",
+    width: 397,
+    height: 127,
     meta: "JNTUH Affiliated · AICTE Approved",
     date: "2024 – May 2027 · Expected Graduation",
     gpa: "Cumulative GPA · 8.23 / 10.0",
@@ -37,6 +41,8 @@ const academic: Cred[] = [
     title: "Diploma in Computer Science and Engineering",
     org: "Vathsalya Institute of Science and Technology, Anantharam, Bhongir",
     logo: "/projects/diplomalogo.png",
+    width: 238,
+    height: 212,
     meta: "SBTET Telangana · C21 Scheme",
     date: "2021 – 2024",
     gpa: "Cumulative GPA · 8.78 / 10.0",
@@ -161,6 +167,9 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
               alt={`${c.org} logo`}
               className="h-14 w-auto shrink-0 object-contain"
               loading="lazy"
+              decoding="async"
+              width={c.width}
+              height={c.height}
             />
           )}
 

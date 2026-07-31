@@ -21,7 +21,7 @@ export default function Publications() {
   // Teaser Media Assets & External Links (Hosted via Vercel Blob CDN)
   const storyTeaserVideoUrl =
     "https://im6emjdg0usbvzpe.public.blob.vercel-storage.com/teaser-glimpse.mp4";
-  const storyTeaserThumbnailPath = "/credentials/thumbnail.png";
+  const storyTeaserThumbnailPath = "/credentials/thumbnail.webp";
   const dlLogoPath = "/credentials/dl-logo.png";
   const storyTeaserYoutubeUrl = "https://youtu.be/FEP1wO878wA?si=58EHiohJStZxWq8b";
   const divyaPriyaYoutubeUrl = "https://youtube.com/@divyapriyadegala638?si=3c-Q4DRnpcweUNi7";
@@ -156,7 +156,7 @@ export default function Publications() {
               className="flex items-center gap-3 cursor-pointer group transition-opacity hover:opacity-80"
             >
               <img
-                src={dlLogoPath}
+                src="/credentials/dl-logo.webp"
                 alt="DreamLaunch Logo"
                 className="h-10 md:h-12 w-auto object-contain"
                 loading="lazy"
@@ -434,7 +434,7 @@ export default function Publications() {
                 LYFSpot Editions
               </span>
               <img
-                src="credentials/lyfspot-logo.png"
+                src="credentials/lyfspot-logo.webp"
                 alt="LYFSpot Logo"
                 className="h-10 w-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
                 loading="lazy"

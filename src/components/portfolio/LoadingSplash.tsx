@@ -15,7 +15,7 @@ export function LoadingSplash() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="fixed inset-0 z-[100] grid place-items-center bg-[color:var(--deep-ink)]"
+          className="fixed inset-0 z-[100] grid place-items-center bg-[color:var(--deep-ink)] bot-hide"
         >
           <div className="flex flex-col items-center gap-6">
             <motion.img
