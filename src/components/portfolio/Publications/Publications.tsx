@@ -84,7 +84,9 @@ export default function Publications() {
             className="h-full w-full object-cover"
             onPlay={() => setIsPlayingTeaser(true)}
             onPause={() => setIsPlayingTeaser(false)}
-          />
+          >
+            <track kind="captions" srcLang="en" label="English captions" src="/credentials/empty-captions.vtt" default={false} />
+          </video>
 
           {/* Initial Poster & Play Badge Overlay */}
           {!isPlayingTeaser && (
@@ -157,6 +159,10 @@ export default function Publications() {
                 src={dlLogoPath}
                 alt="DreamLaunch Logo"
                 className="h-10 md:h-12 w-auto object-contain"
+                loading="lazy"
+                decoding="async"
+                width={120}
+                height={48}
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}
@@ -271,6 +277,10 @@ export default function Publications() {
               src="credentials/ayn-rand-landscape.jpg"
               alt="Ayn Rand"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              loading="lazy"
+              decoding="async"
+              width={800}
+              height={500}
               onError={(e) => {
                 e.currentTarget.style.display = "none";
               }}
@@ -427,6 +437,10 @@ export default function Publications() {
                 src="credentials/lyfspot-logo.png"
                 alt="LYFSpot Logo"
                 className="h-10 w-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
+                loading="lazy"
+                decoding="async"
+                width={40}
+                height={40}
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
                 }}

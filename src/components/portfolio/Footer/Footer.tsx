@@ -62,6 +62,8 @@ export default function Footer() {
                 className="absolute inset-0 h-full w-full object-cover object-center scale-[1.12] transition-transform duration-700"
                 loading="lazy"
                 decoding="async"
+                width={800}
+                height={800}
               />
 
               {/* Soft blend into text */}
