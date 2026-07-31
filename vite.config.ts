@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    // Force absolute root base path for generated JS/CSS bundles
+    // Prevents 404 errors on Cloudflare Pages asset chunk routing
+    base: "/",
+  },
 });
