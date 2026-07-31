@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Container from "../common/Container";
 import SectionLabel from "../common/SectionLabel";
@@ -9,12 +9,21 @@ import { ArrowRight, BlogIcon, MediumIcon } from "../Icons";
 
 export default function Publications() {
   const [showStartupPdf, setShowStartupPdf] = useState(false);
+  const [isPlayingTeaser, setIsPlayingTeaser] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // PDF Paths - placed in public/credentials/
+  // File Paths & Links (located in public/credentials/)
   const aynRandPdfPath = "/credentials/ayn-rand.pdf";
   const startupGuidePdfPath = "/credentials/startup-guide.pdf#toolbar=0&navpanes=0&scrollbar=0";
-  const youtubeVideoUrl = "https://youtu.be/cBhe-F_o9go?si=Gl0wrLzyoZB4kmKi";
+  const aynRandYoutubeUrl = "https://youtu.be/cBhe-F_o9go?si=Gl0wrLzyoZB4kmKi";
+
+  // Teaser Media Assets & External Links
+  const storyTeaserVideoPath = "/credentials/teaser-glimpse.mp4";
+  const storyTeaserThumbnailPath = "/credentials/thumbnail.png";
+  const dlLogoPath = "/credentials/dl-logo.png";
+  const storyTeaserYoutubeUrl = "https://youtu.be/FEP1wO878wA?si=58EHiohJStZxWq8b";
+  const divyaPriyaYoutubeUrl = "https://youtube.com/@divyapriyadegala638?si=3c-Q4DRnpcweUNi7";
 
   useEffect(() => {
     const checkMobile = () => {
@@ -33,15 +42,197 @@ export default function Publications() {
     setShowStartupPdf(true);
   };
 
+  const handleStartInlineVideo = () => {
+    setIsPlayingTeaser(true);
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleScrollToDreamLaunch = () => {
+    // Searches for specific DreamLaunch element ID first, falls back to general work section
+    const targetElement = document.getElementById("dreamlaunch") || document.getElementById("work");
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   return (
     <Container id="writing" className="py-24 md:py-32">
-      <SectionLabel>Publications & Literary Chronicles</SectionLabel>
+      <SectionLabel>Publications &amp; Literary Chronicles</SectionLabel>
       <motion.h2
         {...fadeUp}
         className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Written philosophy, industry essays, and creative pursuits.
       </motion.h2>
+
+      {/* SPECIAL LITERARY FEATURE: "కథలో..." STORY TEASER & DREAMLAUNCH */}
+      <motion.div
+        {...fadeUp}
+        className="mb-16 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)] p-8 md:p-12 lg:p-14"
+      >
+        {/* 1. TOP SECTION: Horizontal 16:9 Cinema Video Player with YouTube Thumbnail Overlay */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20 bg-slate-950 shadow-2xl">
+          <video
+            ref={videoRef}
+            src={storyTeaserVideoPath}
+            poster={storyTeaserThumbnailPath}
+            controls={isPlayingTeaser}
+            preload="metadata"
+            className="h-full w-full object-cover"
+            onPlay={() => setIsPlayingTeaser(true)}
+            onPause={() => setIsPlayingTeaser(false)}
+          />
+
+          {/* YouTube Style Initial Thumbnail & Play Badge Overlay */}
+          {!isPlayingTeaser && (
+            <div
+              onClick={handleStartInlineVideo}
+              className="absolute inset-0 flex flex-col justify-between p-6 bg-slate-950/30 transition-all duration-300 hover:bg-slate-950/10 cursor-pointer group"
+            >
+              {/* Top Header Labels */}
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs uppercase tracking-widest text-white/90 bg-slate-950/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10">
+                  Official Book Teaser
+                </span>
+                <span className="font-mono text-xs text-white/90 bg-slate-950/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10">
+                  Story by సాయి
+                </span>
+              </div>
+
+              {/* Center YouTube Style Play Circle */}
+              <div className="my-auto self-center">
+                <div className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full border border-white/40 bg-slate-950/60 text-white shadow-2xl backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-slate-950">
+                  <svg className="h-8 w-8 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Bottom Instruction Tag */}
+              <div className="font-mono text-xs text-white/90 bg-slate-950/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 w-fit">
+                Click to play teaser video directly
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 2. BOTTOM SECTION: Narrative Details & Context */}
+        <div className="mt-8 max-w-4xl">
+          <div className="mono-label mb-3">Literary Chronicle · Original Story</div>
+
+          <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-[-0.025em] text-ink md:text-[44px]">
+            కథలో... —{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">The Way It Actually Happens</span>
+              <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+            </span>
+          </h3>
+
+          {/* Telugu Excerpt Banner */}
+          <div className="mt-5 rounded-2xl border border-[color:var(--hairline)] bg-white/40 p-5 backdrop-blur-sm">
+            <p className="font-serif text-[16px] italic leading-relaxed text-ink md:text-[17px]">
+              "మాటలు రాని ప్రేమకి, మౌనం రాసిన కథ ఇది... వస్తారని కాదు, కానీ మరచిపోవడం ఎలా అన్న ఆలోచన
+              మాత్రమే అలానే మిగిలిపోయింది."
+            </p>
+          </div>
+
+          <p className="mt-5 text-[15px] leading-relaxed text-ink-secondary md:text-[16px]">
+            A glimpse into an essence that feels more like real life than fiction. Not drama. Not
+            fantasy. Just something that stayed — even when it didn't have to. Brought to life
+            through the interwoven journeys of{" "}
+            <strong className="text-ink font-semibold">Sai, Kumudha, Chinni, and Amrutha</strong>.
+          </p>
+
+          {/* DreamLaunch Section with Original Logo & Creator Link */}
+          <div className="mt-5 flex flex-wrap items-center gap-3 rounded-2xl border border-[color:var(--hairline)] bg-white/30 p-4 backdrop-blur-sm">
+            {/* Clickable DreamLaunch Navigation Group */}
+            <div
+              onClick={handleScrollToDreamLaunch}
+              className="flex items-center gap-3 cursor-pointer group transition-opacity hover:opacity-80"
+            >
+              <img
+                src={dlLogoPath}
+                alt="DreamLaunch Logo"
+                className="h-10 md:h-12 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+              <span className="font-display font-bold text-[15px] text-ink transition-colors group-hover:text-ink-secondary">
+                DreamLaunch Platform
+              </span>
+            </div>
+
+            <span className="text-ink-muted">·</span>
+
+            {/* Divya Priya Degala YouTube Channel Link */}
+            <span className="text-[13.5px] text-ink-secondary">
+              First official launch presented &amp; unveiled by{" "}
+              <a
+                href={divyaPriyaYoutubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-ink transition-colors hover:text-ink-secondary"
+              >
+                Divya Priya Degala
+              </a>
+            </span>
+          </div>
+        </div>
+
+        {/* Bottom Actions Bar */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[color:var(--hairline)] pt-6">
+          <div className="flex flex-wrap items-center gap-4">
+            {!isPlayingTeaser ? (
+              <button
+                onClick={handleStartInlineVideo}
+                className="inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 text-[14px] font-medium text-background transition-all hover:bg-deep-ink hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                Play Teaser Video
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  if (videoRef.current) {
+                    videoRef.current.pause();
+                    setIsPlayingTeaser(false);
+                  }
+                }}
+                className="inline-flex items-center gap-2.5 rounded-full border border-[color:var(--hairline)] bg-white/50 px-7 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white cursor-pointer"
+              >
+                Pause Video
+              </button>
+            )}
+
+            {/* Navigation Link to YouTube */}
+            <a
+              href={storyTeaserYoutubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/50 px-6 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
+            >
+              <svg className="h-4 w-4 text-ink" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              Watch on YouTube
+              <ArrowRight
+                width={14}
+                height={14}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </a>
+          </div>
+
+          <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+            Book Coming Soon · #somethingthatstays
+          </div>
+        </div>
+      </motion.div>
 
       {/* Featured Essay Article */}
       <motion.article
@@ -74,7 +265,6 @@ export default function Publications() {
         className="mt-16 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
       >
         <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr]">
-          {/* Left - Clear & Perfect Image Block */}
           <div className="relative min-h-[400px] overflow-hidden md:min-h-[500px]">
             <img
               src="credentials/ayn-rand-landscape.jpg"
@@ -86,7 +276,6 @@ export default function Publications() {
             />
           </div>
 
-          {/* Right - Content */}
           <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-14">
             <div className="mono-label mb-4">Special Feature · Objectivism</div>
 
@@ -109,7 +298,6 @@ export default function Publications() {
               <p className="font-mono text-[12px] text-ink-muted">— Ayn Rand</p>
             </div>
 
-            {/* Links Row - PDF + YouTube */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 onClick={handleViewAynRandPdf}
@@ -127,7 +315,7 @@ export default function Publications() {
               </button>
 
               <a
-                href={youtubeVideoUrl}
+                href={aynRandYoutubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/50 px-6 py-3 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
@@ -144,7 +332,6 @@ export default function Publications() {
               </a>
             </div>
 
-            {/* Divider & Meta */}
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <span className="h-px w-8 bg-[color:var(--hairline)]" />
               <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-ink-muted">
@@ -165,7 +352,6 @@ export default function Publications() {
         className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Left Content Column */}
           <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-14">
             <div className="mono-label mb-4">Foundational Knowledge · LYFSpot Reference</div>
 
@@ -183,7 +369,6 @@ export default function Publications() {
               metrics, fundraising strategies, and scaling mechanics.
             </p>
 
-            {/* Feature Topics */}
             <div className="mt-6 grid grid-cols-2 gap-3 font-mono text-[12px] text-ink-secondary">
               <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
                 <span className="font-bold text-ink">01</span> Incorporation &amp; Legal
@@ -199,7 +384,6 @@ export default function Publications() {
               </div>
             </div>
 
-            {/* Simple Relatable Action Button */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <button
                 onClick={handleOpenStartupGuide}
@@ -218,10 +402,9 @@ export default function Publications() {
               </button>
             </div>
 
-            {/* Meta Tags */}
             <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[color:var(--hairline)] pt-4">
               <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
-                07 Parts
+                37 Pages
               </span>
               <span className="opacity-30">·</span>
               <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
@@ -234,9 +417,7 @@ export default function Publications() {
             </div>
           </div>
 
-          {/* Right Visual Cover Card */}
           <div className="relative flex flex-col justify-between overflow-hidden bg-ink p-8 text-background lg:p-12">
-            {/* Top Row - Brand Title & Properly Scaled LYFSpot Logo */}
             <div className="relative z-10 flex items-center justify-between gap-4">
               <span className="font-mono text-[11px] uppercase tracking-widest text-background/60">
                 LYFSpot Editions
@@ -251,7 +432,6 @@ export default function Publications() {
               />
             </div>
 
-            {/* Main Title Section */}
             <div className="relative z-10 my-auto py-8">
               <div className="font-mono text-xs uppercase tracking-widest text-background/70 mb-2">
                 A Founder's Field Guide
@@ -267,7 +447,6 @@ export default function Publications() {
               </p>
             </div>
 
-            {/* Card Footer Info */}
             <div className="relative z-10 flex items-center justify-between border-t border-white/15 pt-4 font-mono text-[11px] text-background/60">
               <span>Sravan Sai Vuppula</span>
               <span>Legal &amp; Funding</span>
@@ -348,7 +527,7 @@ export default function Publications() {
                   </span>
                   <button
                     onClick={() => setShowStartupPdf(false)}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 cursor-pointer"
                     aria-label="Close PDF Viewer"
                   >
                     ✕

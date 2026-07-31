@@ -88,7 +88,7 @@ const projects: Project[] = [
     num: "04",
     name: "DreamLaunch",
     classification: "Media Distribution Systems (LYFSpot Ecosystem)",
-    logo: "/projects/dreamlaunch.png",
+    logo: "/projects/dreamlaunch.jpeg",
     stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
     description:
       "A content orchestration platform built for filmmakers, screenwriters, and independent producers. Empowers creators to centrally manage major promotional assets — teasers, trailers, script previews — and safely deploy them simultaneously across major social API endpoints.",
