@@ -1,5 +1,6 @@
-const PORTFOLIO_LOGO = 'src/assets/ssv-name.png';
-const LYFSPOT_LOGO = 'public/credentials/lyfspot-logo.png';
+const PORTFOLIO_LOGO = 'https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/src/assets/ssv-name.png';
+const LYFSPOT_LOGO = 'https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/public/credentials/lyfspot-logo.png';
+
 const styles = {
   main: `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f7f7f9; color: #171717; margin: 0; padding: 40px 20px; -webkit-font-smoothing: antialiased;`,
   container: `max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);`,
@@ -45,7 +46,7 @@ function getFooter(appName: string, companyName: string, isInternal: boolean = f
 export function generateContactNotificationTemplate(data: { name: string; email: string; subject: string; message: string; ip?: string }) {
   const appName = process.env.APP_NAME || 'Portfolio';
   const companyName = process.env.COMPANY_NAME || 'LYFSpot';
-  
+
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -91,7 +92,7 @@ export function generateContactAutoReplyTemplate(name: string) {
   const appName = process.env.APP_NAME || 'Portfolio';
   const companyName = process.env.COMPANY_NAME || 'LYFSpot';
   const fromEmail = process.env.FROM_EMAIL || 'contact@buildwithsravan.dev';
-  
+
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -122,7 +123,7 @@ export function generateContactAutoReplyTemplate(name: string) {
 export function generateQuestionnaireNotificationTemplate(data: { name: string; email: string; answer: string }) {
   const appName = process.env.APP_NAME || 'Portfolio';
   const companyName = process.env.COMPANY_NAME || 'LYFSpot';
-  
+
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -166,7 +167,7 @@ export function generateQuestionnaireNotificationTemplate(data: { name: string; 
 export function generateQuestionnaireAutoReplyTemplate(name: string) {
   const appName = process.env.APP_NAME || 'Portfolio';
   const companyName = process.env.COMPANY_NAME || 'LYFSpot';
-  
+
   return `
     <!DOCTYPE html>
     <html lang="en">
