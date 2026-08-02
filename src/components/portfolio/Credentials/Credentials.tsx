@@ -271,7 +271,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
               )}
               {c.file && c.fileType === "pdf" && (
                 <object
-                  data={`${c.file}#toolbar=0&view=FitH`}
+                  data={`${c.file}?v=2#toolbar=0&view=FitH`}
                   type="application/pdf"
                   className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
                 >
