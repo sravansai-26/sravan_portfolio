@@ -203,12 +203,12 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
           onClick={onClose}
         >
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.98 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex max-h-[92vh] w-full max-w-[1080px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/75 shadow-2xl backdrop-blur-2xl md:flex-row"
+            className="relative flex max-h-[92vh] w-full max-w-[1080px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/95 shadow-2xl md:flex-row"
           >
             <button
               onClick={onClose}
@@ -270,11 +270,15 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                 />
               )}
               {c.file && c.fileType === "pdf" && (
-                <iframe
-                  src={`${c.file}#toolbar=0&view=FitH`}
-                  title={c.title}
+                <object
+                  data={`${c.file}#toolbar=0&view=FitH`}
+                  type="application/pdf"
                   className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
-                />
+                >
+                  <p className="p-4 text-center text-sm text-ink-muted">
+                    Unable to display PDF inline. <a href={c.file} target="_blank" rel="noreferrer" className="text-accent underline">Download here</a>.
+                  </p>
+                </object>
               )}
               {!c.file && (
                 <div className="text-center">
