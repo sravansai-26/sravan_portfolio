@@ -275,9 +275,23 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                   type="application/pdf"
                   className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
                 >
-                  <p className="p-4 text-center text-sm text-ink-muted">
-                    Unable to display PDF inline. <a href={c.file} target="_blank" rel="noreferrer" className="text-accent underline">Download here</a>.
-                  </p>
+                  <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-lg border border-white/40 bg-white/60 p-6 text-center">
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ink/5 text-ink-secondary">
+                      <DocIcon width={32} height={32} />
+                    </div>
+                    <h4 className="mb-2 font-display text-lg font-semibold tracking-tight text-ink">Document Ready</h4>
+                    <p className="mb-6 max-w-[280px] text-[13.5px] leading-relaxed text-ink-muted">
+                      Your mobile browser doesn't support inline PDF viewing.
+                    </p>
+                    <a
+                      href={c.file}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-blue-600 px-8 text-[14px] font-medium text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-blue-600/30 active:scale-95"
+                    >
+                      Open PDF <ExternalLink width={14} height={14} />
+                    </a>
+                  </div>
                 </object>
               )}
               {!c.file && (
