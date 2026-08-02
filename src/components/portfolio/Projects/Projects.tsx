@@ -164,11 +164,19 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
       >
         <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
         {p.logo ? (
-          <span className="hidden h-12 w-12 shrink-0 overflow-hidden rounded-md bg-[color:var(--surface)] ring-1 ring-[color:var(--hairline)] md:block">
-            <img src={p.logo} alt={`${p.name} logo`} className="h-full w-full object-cover" />
+          <span className="hidden shrink-0 items-center justify-center md:flex h-14 w-14">
+            <img
+              src={p.logo}
+              alt={`${p.name} logo`}
+              className={`max-h-full max-w-full object-contain mix-blend-multiply ${
+                ["DreamLaunch", "VaultBank", "DeployBridge"].includes(p.name)
+                  ? "scale-125"
+                  : ""
+              }`}
+            />
           </span>
         ) : (
-          <span className="hidden md:block" aria-hidden />
+          <span className="hidden w-14 md:block" aria-hidden />
         )}
         <div className="min-w-0">
           <div className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">

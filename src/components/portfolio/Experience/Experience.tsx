@@ -54,11 +54,13 @@ export default function Experience() {
             {/* Left Column */}
             <div>
               <div className="flex flex-col gap-4">
-                <div className="flex h-11 items-center">
+                <div className="flex min-h-[56px] items-center">
                   <img
                     src={e.logo}
                     alt={`${e.org} logo`}
-                    className="h-11 w-auto object-contain"
+                    className={`w-auto object-contain ${
+                      e.org.includes("Naxrita") ? "h-14" : "h-11"
+                    }`}
                     loading="lazy"
                     decoding="async"
                     width={e.width}
