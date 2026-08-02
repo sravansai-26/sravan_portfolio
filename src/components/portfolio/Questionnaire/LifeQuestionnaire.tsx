@@ -33,7 +33,7 @@ export default function LifeQuestionnaire() {
   const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const FORMSPREE = import.meta.env.VITE_FORMSPREE_QUESTION as string;
+  const ENDPOINT = "/api/questionnaire";
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,7 +45,7 @@ export default function LifeQuestionnaire() {
     const data = new FormData(form);
 
     try {
-      const response = await fetch(FORMSPREE, {
+      const response = await fetch(ENDPOINT, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },

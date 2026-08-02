@@ -9,7 +9,7 @@ import { fadeUp } from "../common/animations";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const FORMSPREE = import.meta.env.VITE_FORMSPREE_CONTACT; // using env variable
+  const ENDPOINT = "/api/contact";
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,7 +18,7 @@ export default function Contact() {
       const form = e.currentTarget;
       const data = new FormData(form);
 
-      const response = await fetch(FORMSPREE, {
+      const response = await fetch(ENDPOINT, {
         method: "POST",
         body: data,
         headers: {
@@ -29,6 +29,11 @@ export default function Contact() {
       if (response.ok) {
         form.reset();
         setStatus("sent");
+        
+        // Reset status to idle after 5 seconds to allow multiple submissions
+        setTimeout(() => {
+          setStatus("idle");
+        }, 5000);
       } else {
         setStatus("error");
       }
