@@ -9,9 +9,9 @@ import {
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 const formspreeEndpoint = process.env.VITE_FORMSPREE_CONTACT;
-const supportEmail = process.env.SUPPORT_EMAIL || 'lyfspot@zohomail.in';
-const fromEmail = process.env.FROM_EMAIL || 'contact@buildwithsravan.dev';
-const replyToEmail = process.env.REPLY_TO_EMAIL || 'contact@buildwithsravan.dev';
+const supportEmail = process.env.CONTACT_SUPPORT_EMAIL || 'contact@buildwithsravan.dev';
+const fromEmail = process.env.CONTACT_FROM_EMAIL || 'contact@buildwithsravan.dev';
+const replyToEmail = process.env.CONTACT_REPLY_TO_EMAIL || 'contact@buildwithsravan.dev';
 
 // Rate limiter: Max 5 requests per minute per IP
 const limiter = rateLimit({ interval: 60000, uniqueTokenPerInterval: 500 });
