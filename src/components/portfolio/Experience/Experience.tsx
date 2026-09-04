@@ -124,46 +124,46 @@ export default function Experience() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#0070F2]/10 md:p-8"
+                  className="mt-8 rounded-xl border border-[color:var(--hairline)] bg-white/30 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white/50 md:p-8"
                 >
                   <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                     <div>
-                      <h4 className="font-display text-[20px] font-bold text-white md:text-[24px]">
+                      <h4 className="font-display text-[20px] font-bold text-ink md:text-[24px]">
                         {e.project.title}
                       </h4>
-                      <div className="mt-1 font-mono text-[13px] text-[#0A85EA]">
+                      <div className="mt-1 font-mono text-[13px] text-[color:var(--accent-blue)]">
                         {e.project.domain}
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {e.project.badges.map((badge) => (
                       <span
                         key={badge}
-                        className={`rounded-full px-3 py-1 text-[12px] font-medium tracking-wide ${badge === "Clean Core" || badge === "Approved" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-[#0070F2]/10 text-[#0070F2] border border-[#0070F2]/20"}`}
+                        className="code-tag !text-[11.5px] border border-[color:var(--hairline)] !bg-white/60 !py-1 !px-3"
                       >
                         {badge}
                       </span>
                     ))}
                   </div>
 
-                  <p className="mt-5 text-[15px] leading-[1.6] text-slate-300">
+                  <p className="mt-5 text-[15px] leading-[1.6] text-ink-secondary">
                     {e.project.summary}
                   </p>
 
                   <div className="mt-6">
-                    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       {e.project.highlights.map((highlight, idx) => {
                         const [boldPart, rest] = highlight.split(": ");
                         return (
                           <li
                             key={idx}
-                            className="flex items-start gap-2 text-[14px] leading-[1.6] text-slate-400"
+                            className="grid grid-cols-[14px_1fr] gap-3 text-[14px] leading-[1.6] text-ink-secondary"
                           >
-                            <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#0A85EA]" />
+                            <span className="mt-[8px] block h-[2px] w-[10px] bg-ink-muted" />
                             <span>
-                              <strong className="text-slate-200">{boldPart}:</strong> {rest}
+                              <strong className="text-ink">{boldPart}:</strong> {rest}
                             </span>
                           </li>
                         );
@@ -171,19 +171,19 @@ export default function Experience() {
                     </ul>
                   </div>
 
-                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <div className="mt-8 flex flex-wrap items-center gap-5">
                     <a
                       href={e.project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-2 rounded-lg bg-[#0070F2] px-5 py-2.5 text-[14px] font-semibold text-white transition-all hover:bg-[#0A85EA]"
+                      className="group flex items-center gap-2 rounded-lg bg-ink px-5 py-2.5 text-[14px] font-semibold text-white transition-all hover:bg-ink-secondary"
                       aria-label="View Project on GitHub"
                     >
                       <Github className="h-4 w-4" />
                       <span>View Repository</span>
                       <ExternalLink className="h-3 w-3 opacity-70 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </a>
-                    <div className="text-[13px] font-medium text-slate-500">
+                    <div className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-ink-muted">
                       {e.project.secondaryTag}
                     </div>
                   </div>
