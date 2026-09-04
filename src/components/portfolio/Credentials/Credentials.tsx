@@ -18,6 +18,7 @@ type Cred = {
   skills?: string;
   href?: string;
   meta?: string;
+  projectOrigin?: string;
   file?: string;
   fileType?: "pdf" | "image";
 };
@@ -84,6 +85,7 @@ const certs: Cred[] = [
     meta: "Cohort ID · B13",
     date: "Verified June 2026",
     skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
+    projectOrigin: "VaultBank project origin",
     file: "/credentials/infosys.pdf",
     fileType: "pdf",
   },
@@ -135,6 +137,7 @@ const honors: Cred[] = [
     org: "FISAT, Kerala · in coordination with Pauly Jr. Pictures",
     skills:
       "Pitch-presented and modeled Shotweave, leading multi-disciplinary software squads under strict hackathon timeline constraints.",
+    projectOrigin: "Shotweave project origin",
     file: "/credentials/cinehack.pdf",
     fileType: "pdf",
   },
@@ -180,6 +183,11 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
           {c.date && <span>{c.date}</span>}
           {c.gpa && <span>{c.gpa}</span>}
           {c.meta && <span>{c.meta}</span>}
+          {c.projectOrigin && (
+            <span className="rounded border border-[color:var(--hairline)] bg-white/50 px-2 py-0.5 text-[color:var(--accent-blue)]">
+              {c.projectOrigin}
+            </span>
+          )}
         </div>
       </div>
       <ArrowRight
@@ -225,10 +233,15 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                 {c.title}
               </h3>
               <div className="text-[14px] text-ink-secondary">{c.org}</div>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10.5px] uppercase tracking-wider text-ink-muted">
-                {c.date && <span>{c.date}</span>}
-                {c.meta && <span>{c.meta}</span>}
-                {c.gpa && <span>{c.gpa}</span>}
+              <div className="flex flex-wrap gap-x-3 gap-y-2 font-mono text-[10.5px] uppercase tracking-wider text-ink-muted">
+                {c.date && <span className="flex items-center">{c.date}</span>}
+                {c.meta && <span className="flex items-center">{c.meta}</span>}
+                {c.gpa && <span className="flex items-center">{c.gpa}</span>}
+                {c.projectOrigin && (
+                  <span className="rounded border border-[color:var(--hairline)] bg-white/50 px-2 py-0.5 text-[color:var(--accent-blue)]">
+                    {c.projectOrigin}
+                  </span>
+                )}
               </div>
               {c.skills && (
                 <div className="mt-3 rounded-xl border border-white/50 bg-white/50 p-4">
