@@ -279,7 +279,9 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ink/5 text-ink-secondary">
                       <DocIcon width={32} height={32} />
                     </div>
-                    <h4 className="mb-2 font-display text-lg font-semibold tracking-tight text-ink">Document Ready</h4>
+                    <h4 className="mb-2 font-display text-lg font-semibold tracking-tight text-ink">
+                      Document Ready
+                    </h4>
                     <p className="mb-6 max-w-[280px] text-[13.5px] leading-relaxed text-ink-muted">
                       Your mobile browser doesn't support inline PDF viewing.
                     </p>

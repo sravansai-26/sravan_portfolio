@@ -168,10 +168,9 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
             <img
               src={p.logo}
               alt={`${p.name} logo`}
-              className={`max-h-full max-w-full object-contain mix-blend-multiply ${["DreamLaunch", "VaultBank", "DeployBridge"].includes(p.name)
-                ? "scale-125"
-                : ""
-                }`}
+              className={`max-h-full max-w-full object-contain mix-blend-multiply ${
+                ["DreamLaunch", "VaultBank", "DeployBridge"].includes(p.name) ? "scale-125" : ""
+              }`}
             />
           </span>
         ) : (
@@ -189,8 +188,9 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
         <ArrowRight
           width={18}
           height={18}
-          className={`shrink-0 text-ink-secondary transition-transform duration-200 ${open ? "rotate-90 text-ink" : "group-hover:translate-x-1"
-            }`}
+          className={`shrink-0 text-ink-secondary transition-transform duration-200 ${
+            open ? "rotate-90 text-ink" : "group-hover:translate-x-1"
+          }`}
         />
       </button>
 

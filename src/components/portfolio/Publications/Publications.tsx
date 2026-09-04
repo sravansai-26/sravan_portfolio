@@ -85,7 +85,13 @@ export default function Publications() {
             onPlay={() => setIsPlayingTeaser(true)}
             onPause={() => setIsPlayingTeaser(false)}
           >
-            <track kind="captions" srcLang="en" label="English captions" src="/credentials/empty-captions.vtt" default={false} />
+            <track
+              kind="captions"
+              srcLang="en"
+              label="English captions"
+              src="/credentials/empty-captions.vtt"
+              default={false}
+            />
           </video>
 
           {/* Initial Poster & Play Badge Overlay */}

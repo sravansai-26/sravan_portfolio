@@ -136,9 +136,7 @@ export default function LifeQuestionnaire() {
                     placeholder="LIFE is…"
                     className="w-full resize-none rounded-xl border border-[color:var(--hairline)] bg-white/80 p-4 font-display text-[22px] font-semibold leading-[1.3] tracking-[-0.01em] text-ink outline-none transition-colors placeholder:text-ink-muted/70 focus:border-ink"
                   />
-                  <div
-                    className="mt-1 text-right text-[11px] text-ink-muted font-['Roboto',sans-serif]"
-                  >
+                  <div className="mt-1 text-right text-[11px] text-ink-muted font-['Roboto',sans-serif]">
                     {answer.length} / 400
                   </div>
                 </label>
@@ -159,9 +157,7 @@ export default function LifeQuestionnaire() {
 
                 {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
-                <p
-                  className="mt-3 text-[11px] text-ink-muted font-['Roboto',sans-serif] tracking-[0.06em]"
-                >
+                <p className="mt-3 text-[11px] text-ink-muted font-['Roboto',sans-serif] tracking-[0.06em]">
                   Your email is used only for follow-up — never shared or listed.
                 </p>
               </>

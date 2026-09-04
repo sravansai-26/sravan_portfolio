@@ -79,12 +79,12 @@ It is designed with a strong focus on:
 
 ## Lighthouse
 
-| Category | Score |
-|-----------|------:|
-| Performance | 56+ *(Improving)* |
-| Accessibility | 96 |
-| Best Practices | 100 |
-| SEO | 100 |
+| Category       |             Score |
+| -------------- | ----------------: |
+| Performance    | 56+ _(Improving)_ |
+| Accessibility  |                96 |
+| Best Practices |               100 |
+| SEO            |               100 |
 
 ---
 

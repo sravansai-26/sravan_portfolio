@@ -1,5 +1,7 @@
-const PORTFOLIO_LOGO = 'https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/src/assets/ssv-name.png';
-const LYFSPOT_LOGO = 'https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/public/credentials/lyfspot-logo.png';
+const PORTFOLIO_LOGO =
+  "https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/src/assets/ssv-name.png";
+const LYFSPOT_LOGO =
+  "https://raw.githubusercontent.com/sravansai-26/sravan_portfolio/main/public/credentials/lyfspot-logo.png";
 
 const styles = {
   main: `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f7f7f9; color: #171717; margin: 0; padding: 40px 20px; -webkit-font-smoothing: antialiased;`,
@@ -34,7 +36,7 @@ function getFooter(appName: string, companyName: string, isInternal: boolean = f
     <div style="${styles.footer}">
       <p style="${styles.footerText}">
         &copy; ${new Date().getFullYear()} ${companyName}. All rights reserved.<br/>
-        ${isInternal ? 'This is an internal system notification.' : 'You are receiving this email because you contacted us through the portfolio.'}
+        ${isInternal ? "This is an internal system notification." : "You are receiving this email because you contacted us through the portfolio."}
       </p>
       <p style="margin: 0;">
         <a href="https://buildwithsravan.dev" style="${styles.footerLink}">${appName}</a>
@@ -43,9 +45,15 @@ function getFooter(appName: string, companyName: string, isInternal: boolean = f
   `;
 }
 
-export function generateContactNotificationTemplate(data: { name: string; email: string; subject: string; message: string; ip?: string }) {
-  const appName = process.env.APP_NAME || 'Portfolio';
-  const companyName = process.env.COMPANY_NAME || 'LYFSpot';
+export function generateContactNotificationTemplate(data: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  ip?: string;
+}) {
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
 
   return `
     <!DOCTYPE html>
@@ -78,7 +86,7 @@ export function generateContactNotificationTemplate(data: { name: string; email:
             
             <div style="${styles.metaContainer}">
               <p style="${styles.metaText}">Timestamp: ${new Date().toLocaleString()}</p>
-              ${data.ip ? `<p style="${styles.metaText}">IP: ${data.ip}</p>` : ''}
+              ${data.ip ? `<p style="${styles.metaText}">IP: ${data.ip}</p>` : ""}
             </div>
           </div>
           ${getFooter(appName, companyName, true)}
@@ -89,9 +97,9 @@ export function generateContactNotificationTemplate(data: { name: string; email:
 }
 
 export function generateContactAutoReplyTemplate(name: string) {
-  const appName = process.env.APP_NAME || 'Portfolio';
-  const companyName = process.env.COMPANY_NAME || 'LYFSpot';
-  const fromEmail = process.env.FROM_EMAIL || 'contact@buildwithsravan.dev';
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
+  const fromEmail = process.env.FROM_EMAIL || "contact@buildwithsravan.dev";
 
   return `
     <!DOCTYPE html>
@@ -120,9 +128,13 @@ export function generateContactAutoReplyTemplate(name: string) {
   `;
 }
 
-export function generateQuestionnaireNotificationTemplate(data: { name: string; email: string; answer: string }) {
-  const appName = process.env.APP_NAME || 'Portfolio';
-  const companyName = process.env.COMPANY_NAME || 'LYFSpot';
+export function generateQuestionnaireNotificationTemplate(data: {
+  name: string;
+  email: string;
+  answer: string;
+}) {
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
 
   return `
     <!DOCTYPE html>
@@ -165,8 +177,8 @@ export function generateQuestionnaireNotificationTemplate(data: { name: string; 
 }
 
 export function generateQuestionnaireAutoReplyTemplate(name: string) {
-  const appName = process.env.APP_NAME || 'Portfolio';
-  const companyName = process.env.COMPANY_NAME || 'LYFSpot';
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
 
   return `
     <!DOCTYPE html>

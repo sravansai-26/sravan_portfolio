@@ -115,9 +115,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t border-[color:var(--hairline)] pt-6 text-center">
-          <div
-            className="font-['Roboto',sans-serif] text-[12px] uppercase tracking-[0.18em] text-ink-muted"
-          >
+          <div className="font-['Roboto',sans-serif] text-[12px] uppercase tracking-[0.18em] text-ink-muted">
             © 2026 Sravan Sai Vuppula. All rights reserved.
           </div>
         </div>

@@ -251,9 +251,7 @@ export function ArchitecturePlayground() {
               );
             })}
           </svg>
-          <div
-            className="font-['Roboto',sans-serif] mx-auto mt-10 max-w-2xl text-center text-[13px] text-white/50"
-          >
+          <div className="font-['Roboto',sans-serif] mx-auto mt-10 max-w-2xl text-center text-[13px] text-white/50">
             Tip — click any node to focus its inbound and outbound routes.
           </div>
         </div>
@@ -261,9 +259,7 @@ export function ArchitecturePlayground() {
         <div className="rounded-xl border border-[color:var(--hairline)] bg-white/50 p-5">
           <div className="mono-label mb-2">Active Flow</div>
           <div className="font-display text-[20px] font-bold text-ink">{flow.name}</div>
-          <div
-            className="font-['Roboto',sans-serif] mt-6 text-sm leading-relaxed text-slate-300"
-          >
+          <div className="font-['Roboto',sans-serif] mt-6 text-sm leading-relaxed text-slate-300">
             {flow.stack}
           </div>
           <p className="mt-3 text-[13.5px] leading-[1.65] text-ink-secondary">{flow.summary}</p>

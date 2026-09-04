@@ -1,6 +1,6 @@
-import sharp from 'sharp';
-import fs from 'fs/promises';
-import path from 'path';
+import sharp from "sharp";
+import fs from "fs/promises";
+import path from "path";
 
 async function processImage(inputPath, outputPath, maxWidth, quality = 80) {
   try {
@@ -16,21 +16,71 @@ async function processImage(inputPath, outputPath, maxWidth, quality = 80) {
 }
 
 async function main() {
-  const publicDir = './public/credentials';
-  const projectsDir = './public/projects';
-  const rootPublicDir = './public';
+  const publicDir = "./public/credentials";
+  const projectsDir = "./public/projects";
+  const rootPublicDir = "./public";
 
   const targets = [
-    { input: path.join(publicDir, 'thumbnail.png'), output: path.join(publicDir, 'thumbnail.webp'), width: 960, quality: 75 },
-    { input: path.join(publicDir, 'dl-logo.png'), output: path.join(publicDir, 'dl-logo.webp'), width: 150, quality: 80 },
-    { input: path.join(projectsDir, 'sri-wedding.png'), output: path.join(projectsDir, 'sri-wedding.webp'), width: 150, quality: 80 },
-    { input: path.join(publicDir, 'lyfspot-logo.png'), output: path.join(publicDir, 'lyfspot-logo.webp'), width: 150, quality: 80 },
-    { input: path.join(rootPublicDir, 'lyfspot-logo.png'), output: path.join(rootPublicDir, 'lyfspot-logo.webp'), width: 150, quality: 80 },
-    { input: path.join(publicDir, 'lyfspot-logo.jpg'), output: path.join(publicDir, 'lyfspot-logo.webp'), width: 150, quality: 80 },
-    { input: path.join(rootPublicDir, 'naxrita.png'), output: path.join(rootPublicDir, 'naxrita.webp'), width: 150, quality: 80 },
-    { input: path.join(publicDir, 'naxrita.png'), output: path.join(publicDir, 'naxrita.webp'), width: 150, quality: 80 },
-    { input: path.join(rootPublicDir, 'mlr.png'), output: path.join(rootPublicDir, 'mlr.webp'), width: 150, quality: 80 },
-    { input: path.join(publicDir, 'mlr.png'), output: path.join(publicDir, 'mlr.webp'), width: 150, quality: 80 }
+    {
+      input: path.join(publicDir, "thumbnail.png"),
+      output: path.join(publicDir, "thumbnail.webp"),
+      width: 960,
+      quality: 75,
+    },
+    {
+      input: path.join(publicDir, "dl-logo.png"),
+      output: path.join(publicDir, "dl-logo.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(projectsDir, "sri-wedding.png"),
+      output: path.join(projectsDir, "sri-wedding.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(publicDir, "lyfspot-logo.png"),
+      output: path.join(publicDir, "lyfspot-logo.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(rootPublicDir, "lyfspot-logo.png"),
+      output: path.join(rootPublicDir, "lyfspot-logo.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(publicDir, "lyfspot-logo.jpg"),
+      output: path.join(publicDir, "lyfspot-logo.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(rootPublicDir, "naxrita.png"),
+      output: path.join(rootPublicDir, "naxrita.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(publicDir, "naxrita.png"),
+      output: path.join(publicDir, "naxrita.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(rootPublicDir, "mlr.png"),
+      output: path.join(rootPublicDir, "mlr.webp"),
+      width: 150,
+      quality: 80,
+    },
+    {
+      input: path.join(publicDir, "mlr.png"),
+      output: path.join(publicDir, "mlr.webp"),
+      width: 150,
+      quality: 80,
+    },
   ];
 
   for (const t of targets) {

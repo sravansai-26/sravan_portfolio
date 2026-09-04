@@ -29,7 +29,7 @@ export default function Contact() {
       if (response.ok) {
         form.reset();
         setStatus("sent");
-        
+
         // Reset status to idle after 5 seconds to allow multiple submissions
         setTimeout(() => {
           setStatus("idle");

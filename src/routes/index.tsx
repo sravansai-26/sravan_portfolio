@@ -80,36 +80,37 @@ export const Route = createFileRoute("/")({
             {
               "@type": "Person",
               "@id": "https://buildwithsravan.dev/#person",
-              "name": "Sravan Sai Vuppula",
-              "alternateName": "Vuppula Sravan Sai",
-              "url": "https://buildwithsravan.dev",
-              "image": "https://buildwithsravan.dev/assets/sravan-cutout.webp",
-              "jobTitle": "Full-Stack Software Engineer & Founder",
-              "worksFor": {
+              name: "Sravan Sai Vuppula",
+              alternateName: "Vuppula Sravan Sai",
+              url: "https://buildwithsravan.dev",
+              image: "https://buildwithsravan.dev/assets/sravan-cutout.webp",
+              jobTitle: "Full-Stack Software Engineer & Founder",
+              worksFor: {
                 "@type": "Organization",
-                "name": "LYFSpot",
-                "url": "https://linktr.ee/lyfspot"
+                name: "LYFSpot",
+                url: "https://linktr.ee/lyfspot",
               },
-              "sameAs": [
+              sameAs: [
                 "https://github.com/sravansai-26",
                 "https://linkedin.com/in/sravan-sai-vuppula-753b711ba",
                 "https://twitter.com/vuppula_sai",
                 "https://instagram.com/lyfspot",
-                "https://medium.com/@sravansaivuppula"
-              ]
+                "https://medium.com/@sravansaivuppula",
+              ],
             },
             {
               "@type": "WebSite",
               "@id": "https://buildwithsravan.dev/#website",
-              "url": "https://buildwithsravan.dev",
-              "name": "Sravan Sai Vuppula Portfolio",
-              "description": "Official portfolio of Sravan Sai Vuppula — Full-Stack Developer & Founder of LYFSpot.",
-              "publisher": {
-                "@id": "https://buildwithsravan.dev/#person"
+              url: "https://buildwithsravan.dev",
+              name: "Sravan Sai Vuppula Portfolio",
+              description:
+                "Official portfolio of Sravan Sai Vuppula — Full-Stack Developer & Founder of LYFSpot.",
+              publisher: {
+                "@id": "https://buildwithsravan.dev/#person",
               },
-              "inLanguage": "en"
-            }
-          ]
+              inLanguage: "en",
+            },
+          ],
         }),
       },
     ],

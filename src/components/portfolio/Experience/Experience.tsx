@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
 
 import Container from "../common/Container";
 import SectionLabel from "../common/SectionLabel";
@@ -28,6 +29,27 @@ const experience = [
       "Acquired extensive practical skills across the SAP ABAP ecosystem, building scalable, modern custom extensions within SAP S/4HANA enterprise frameworks.",
       "Programmed custom Data Dictionary (DDIC) structures, optimized internal tables, executed complex modularization routines, and integrated backend debugging patterns.",
     ],
+    project: {
+      title: "Enterprise Supplier SLA & Penalty Settlement Engine",
+      domain: "Clean Core Side-by-Side Extension | SAP BTP ABAP Environment",
+      badges: [
+        "ABAP Cloud",
+        "RAP (Managed Draft)",
+        "CDS & OData V4",
+        "SAP Fiori Elements",
+        "Clean Core",
+      ],
+      summary:
+        "Engineered a full-lifecycle SAP BTP enterprise extension automating supply chain liquidated damages calculation without modifying standard S/4HANA core tables. Features dynamic delivery delay determinations (Delay × Rate), strict date integrity validations, and auditable EML-powered state machine transitions (Approve/Waive).",
+      highlights: [
+        "Managed RAP & Draft Persistency: Stateless draft lifecycle with active (ZSLARECORD) and draft (ZSLARECORD_D) dual-layer tables.",
+        "Reactive Business Logic: Determinations triggered on modify for monetary fine evaluation; validations enforcing delivery-date integrity on save.",
+        "Transactional State Machine: Custom RAP actions (approvePenalty, waivePenalty) implemented via ABAP EML local handler classes.",
+        "Enterprise UI: Semantic CDS Metadata Extensions generating an SAP Fiori Elements List Report and Object Page over OData V4.",
+      ],
+      githubUrl: "https://github.com/sravansai-26/sap-btp-supplier-sla-engine",
+      secondaryTag: "OData V4 Architecture & Clean Core Pattern",
+    },
   },
 ];
 
@@ -95,6 +117,78 @@ export default function Experience() {
                   </li>
                 ))}
               </ul>
+
+              {e.project && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="mt-8 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#0070F2]/10 md:p-8"
+                >
+                  <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <h4 className="font-display text-[20px] font-bold text-white md:text-[24px]">
+                        {e.project.title}
+                      </h4>
+                      <div className="mt-1 font-mono text-[13px] text-[#0A85EA]">
+                        {e.project.domain}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {e.project.badges.map((badge) => (
+                      <span
+                        key={badge}
+                        className={`rounded-full px-3 py-1 text-[12px] font-medium tracking-wide ${badge === "Clean Core" || badge === "Approved" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-[#0070F2]/10 text-[#0070F2] border border-[#0070F2]/20"}`}
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="mt-5 text-[15px] leading-[1.6] text-slate-300">
+                    {e.project.summary}
+                  </p>
+
+                  <div className="mt-6">
+                    <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                      {e.project.highlights.map((highlight, idx) => {
+                        const [boldPart, rest] = highlight.split(": ");
+                        return (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-2 text-[14px] leading-[1.6] text-slate-400"
+                          >
+                            <span className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#0A85EA]" />
+                            <span>
+                              <strong className="text-slate-200">{boldPart}:</strong> {rest}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <a
+                      href={e.project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 rounded-lg bg-[#0070F2] px-5 py-2.5 text-[14px] font-semibold text-white transition-all hover:bg-[#0A85EA]"
+                      aria-label="View Project on GitHub"
+                    >
+                      <Github className="h-4 w-4" />
+                      <span>View Repository</span>
+                      <ExternalLink className="h-3 w-3 opacity-70 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
+                    <div className="text-[13px] font-medium text-slate-500">
+                      {e.project.secondaryTag}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         ))}
