@@ -69,6 +69,14 @@ const pipeline = [
     name: "Project Classified — Deep Tech Division",
     body: "An advanced project merging proprietary software with advanced hardware configurations, integrating hologram, AR, and VR wearable technologies intended to provide critical situational alert safety networks. Status: Architectural Schematics Phase.",
   },
+  {
+    name: "The Story Lab",
+    body: "A character-driven creative initiative bridging the gap between engineering execution and storytelling. Built to explore narratives, test interactive 3D capabilities, and invite imaginative collaboration.",
+    cta: {
+      label: "Enter The Story Lab",
+      href: "/story-lab",
+    },
+  },
 ];
 
 const networks = [
@@ -203,8 +211,8 @@ export default function LyfspotJourney() {
                   {p.cta && (
                     <a
                       href={p.cta.href}
-                      target="_blank"
-                      rel="noreferrer"
+                      target={p.cta.href.startsWith('/') ? "_self" : "_blank"}
+                      rel={p.cta.href.startsWith('/') ? undefined : "noreferrer"}
                       className="editorial-link mt-4 inline-flex items-center gap-2 text-[15px]"
                     >
                       <SparkIcon width={14} height={14} /> {p.cta.label}{" "}

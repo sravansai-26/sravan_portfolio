@@ -206,3 +206,103 @@ export function generateQuestionnaireAutoReplyTemplate(name: string) {
     </html>
   `;
 }
+
+export function generateStoryLabNotificationTemplate(data: {
+  category: string;
+  title?: string;
+  description: string;
+  nickname?: string;
+  hasConsent: boolean;
+  ip?: string;
+  referenceId: string;
+}) {
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <body style="${styles.main}">
+        <div style="${styles.container}">
+          <div style="${styles.header}">
+            <img src="${LYFSPOT_LOGO}" alt="${companyName}" style="${styles.logo}" />
+          </div>
+          <div style="${styles.content}">
+            <h1 style="${styles.heading}">New Character Idea</h1>
+            <p style="${styles.subheading}">A new idea was submitted to The Story Lab.</p>
+            
+            <div style="${styles.card}">
+              <div style="${styles.cardRow}">
+                <p style="${styles.label}">Category</p>
+                <p style="${styles.value}"><strong>${data.category}</strong></p>
+              </div>
+              
+              ${data.title ? `
+              <div style="${styles.cardRow}">
+                <p style="${styles.label}">Title</p>
+                <p style="${styles.value}">${data.title}</p>
+              </div>
+              ` : ''}
+              
+              <div style="${styles.cardRow}">
+                <p style="${styles.label}">Idea Description</p>
+                <p style="${styles.value}">${data.description}</p>
+              </div>
+              
+              <hr style="${styles.divider}" />
+              
+              <div style="${styles.cardRow}">
+                <p style="${styles.label}">Contributor Nickname</p>
+                <p style="${styles.value}">${data.nickname || 'Anonymous'}</p>
+              </div>
+              
+              <div style="${styles.cardRowLast}">
+                <p style="${styles.label}">Consent Provided</p>
+                <p style="${styles.value}">${data.hasConsent ? 'Yes (Parent/Guardian)' : 'No / N/A'}</p>
+              </div>
+            </div>
+            
+            <div style="${styles.metaContainer}">
+              <p style="${styles.metaText}">Ref ID: ${data.referenceId}</p>
+              <p style="${styles.metaText}">Timestamp: ${new Date().toLocaleString()}</p>
+              ${data.ip ? `<p style="${styles.metaText}">IP: ${data.ip}</p>` : ""}
+            </div>
+          </div>
+          ${getFooter(appName, companyName, true)}
+        </div>
+      </body>
+    </html>
+  `;
+}
+
+export function generateStoryLabAutoReplyTemplate(nickname: string) {
+  const appName = process.env.APP_NAME || "Portfolio";
+  const companyName = process.env.COMPANY_NAME || "LYFSpot";
+  const fromEmail = process.env.FROM_EMAIL || "contact@buildwithsravan.dev";
+
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <body style="${styles.main}">
+        <div style="${styles.container}">
+          <div style="${styles.header}">
+            <img src="${PORTFOLIO_LOGO}" alt="${appName}" style="${styles.logoLarge}" />
+          </div>
+          <div style="${styles.content}">
+            <h1 style="${styles.heading}">Every great story starts with an idea.</h1>
+            <p style="${styles.text}">Hello${nickname ? ' ' + nickname : ''},</p>
+            <p style="${styles.text}">Thank you for sharing your imagination with The Story Lab! Your idea has been safely received.</p>
+            <p style="${styles.text}">We are currently exploring who this character could become, and every idea helps build the world. Please note that while we read everything sent to us, we cannot promise that any specific idea will become part of the official story, and submissions are not publicly displayed automatically.</p>
+            <p style="${styles.text}">Keep creating and keep exploring.</p>
+            
+            <div style="${styles.signatureBlock}">
+              <p style="${styles.signatureName}">Sravan Sai Vuppula</p>
+              <p style="${styles.signatureTitle}">The Story Lab / ${companyName}</p>
+            </div>
+          </div>
+          ${getFooter(appName, companyName, false)}
+        </div>
+      </body>
+    </html>
+  `;
+}

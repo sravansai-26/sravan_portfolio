@@ -9,11 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StoryLabRouteImport } from './routes/story-lab'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiStoryLabRouteImport } from './routes/api/story-lab'
 import { Route as ApiQuestionnaireRouteImport } from './routes/api/questionnaire'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 
+const StoryLabRoute = StoryLabRouteImport.update({
+  id: '/story-lab',
+  path: '/story-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -22,6 +29,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStoryLabRoute = ApiStoryLabRouteImport.update({
+  id: '/api/story-lab',
+  path: '/api/story-lab',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiQuestionnaireRoute = ApiQuestionnaireRouteImport.update({
@@ -38,39 +50,73 @@ const ApiContactRoute = ApiContactRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story-lab': typeof StoryLabRoute
   '/api/contact': typeof ApiContactRoute
   '/api/questionnaire': typeof ApiQuestionnaireRoute
+  '/api/story-lab': typeof ApiStoryLabRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story-lab': typeof StoryLabRoute
   '/api/contact': typeof ApiContactRoute
   '/api/questionnaire': typeof ApiQuestionnaireRoute
+  '/api/story-lab': typeof ApiStoryLabRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story-lab': typeof StoryLabRoute
   '/api/contact': typeof ApiContactRoute
   '/api/questionnaire': typeof ApiQuestionnaireRoute
+  '/api/story-lab': typeof ApiStoryLabRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/api/contact' | '/api/questionnaire'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/story-lab'
+    | '/api/contact'
+    | '/api/questionnaire'
+    | '/api/story-lab'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/api/contact' | '/api/questionnaire'
-  id: '__root__' | '/' | '/sitemap.xml' | '/api/contact' | '/api/questionnaire'
+  to:
+    | '/'
+    | '/sitemap.xml'
+    | '/story-lab'
+    | '/api/contact'
+    | '/api/questionnaire'
+    | '/api/story-lab'
+  id:
+    | '__root__'
+    | '/'
+    | '/sitemap.xml'
+    | '/story-lab'
+    | '/api/contact'
+    | '/api/questionnaire'
+    | '/api/story-lab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StoryLabRoute: typeof StoryLabRoute
   ApiContactRoute: typeof ApiContactRoute
   ApiQuestionnaireRoute: typeof ApiQuestionnaireRoute
+  ApiStoryLabRoute: typeof ApiStoryLabRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/story-lab': {
+      id: '/story-lab'
+      path: '/story-lab'
+      fullPath: '/story-lab'
+      preLoaderRoute: typeof StoryLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -83,6 +129,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/story-lab': {
+      id: '/api/story-lab'
+      path: '/api/story-lab'
+      fullPath: '/api/story-lab'
+      preLoaderRoute: typeof ApiStoryLabRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/questionnaire': {
@@ -105,8 +158,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StoryLabRoute: StoryLabRoute,
   ApiContactRoute: ApiContactRoute,
   ApiQuestionnaireRoute: ApiQuestionnaireRoute,
+  ApiStoryLabRoute: ApiStoryLabRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
