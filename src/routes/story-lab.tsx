@@ -9,24 +9,8 @@ import Container from "@/components/portfolio/common/Container";
 import { fadeUp } from "@/components/portfolio/common/animations";
 
 import refImage from "@/assets/convert-this-image-into-a-3d-model.jpg";
+import whiteMeshUrl from "@/assets/white_mesh.glb";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "model-viewer": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-        src?: string;
-        alt?: string;
-        "auto-rotate"?: boolean;
-        "camera-controls"?: boolean;
-        "shadow-intensity"?: string;
-        "shadow-softness"?: string;
-        "environment-image"?: string;
-        exposure?: string;
-        "interaction-prompt"?: string;
-      };
-    }
-  }
-}
 
 export const Route = createFileRoute("/story-lab")({
   head: () => ({
@@ -201,9 +185,8 @@ function StoryLab() {
             <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
               {/* 3D Model Box - Light Black */}
               <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border border-hairline bg-[#111] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-                {/* @ts-expect-error custom element */}
                 <model-viewer
-                  src="/src/assets/white_mesh.glb"
+                  src={whiteMeshUrl}
                   alt="A 3D model of the character"
                   auto-rotate
                   camera-controls
