@@ -9,7 +9,7 @@ import Container from "@/components/portfolio/common/Container";
 import { fadeUp } from "@/components/portfolio/common/animations";
 
 import refImage from "@/assets/convert-this-image-into-a-3d-model.jpg";
-import whiteMeshUrl from "@/assets/white_mesh.glb";
+
 
 
 export const Route = createFileRoute("/story-lab")({
@@ -186,7 +186,7 @@ function StoryLab() {
               {/* 3D Model Box - Light Black */}
               <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border border-hairline bg-[#111] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                 <model-viewer
-                  src={whiteMeshUrl}
+                  src="/models/white_mesh.glb"
                   alt="A 3D model of the character"
                   auto-rotate
                   camera-controls

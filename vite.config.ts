@@ -16,6 +16,5 @@ export default defineConfig({
     // Force absolute root base path for generated JS/CSS bundles
     // Prevents 404 errors on Cloudflare Pages asset chunk routing
     base: "/",
-    assetsInclude: ['**/*.glb', '**/*.gltf'],
   },
 });
