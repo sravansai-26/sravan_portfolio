@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Sparkles, Image as ImageIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Image as ImageIcon, X } from "lucide-react";
 
 import { Nav } from "@/components/portfolio/Nav";
 import Footer from "@/components/portfolio/Footer/Footer";
@@ -59,6 +59,7 @@ function StoryLab() {
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [referenceId, setReferenceId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -115,35 +116,35 @@ function StoryLab() {
   };
 
   const universePrompts = [
-    { 
-      q: "The Setting", 
-      a: "A dusty desert town? A floating city? A quiet forest?", 
-      img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Setting",
+      a: "A dusty desert town? A floating city? A quiet forest?",
+      img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800"
     },
-    { 
-      q: "The Companion", 
-      a: "A loyal robotic dog? A grumpy traveler? A magical creature?", 
-      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Companion",
+      a: "A loyal robotic dog? A grumpy traveler? A magical creature?",
+      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"
     },
-    { 
-      q: "The Adventure", 
-      a: "Finding a lost map? Escaping a collapsing cave? Solving a mystery?", 
-      img: "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Adventure",
+      a: "Finding a lost map? Escaping a collapsing cave? Solving a mystery?",
+      img: "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800"
     },
-    { 
-      q: "The Quirks", 
-      a: "Always loses their hat? Can't stop telling bad jokes? Terrified of spiders?", 
-      img: "https://images.unsplash.com/photo-1514820402329-de527fdd2e6d?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Quirks",
+      a: "Always loses their hat? Can't stop telling bad jokes? Terrified of spiders?",
+      img: "https://images.unsplash.com/photo-1514820402329-de527fdd2e6d?auto=format&fit=crop&q=80&w=800"
     },
-    { 
-      q: "The Rival", 
-      a: "A treasure hunter? A severe sandstorm? A broken time machine?", 
-      img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Rival",
+      a: "A treasure hunter? A severe sandstorm? A broken time machine?",
+      img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=80&w=800"
     },
-    { 
-      q: "The Memory", 
-      a: "The great train chase. The festival of lanterns. The silent canyon.", 
-      img: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=800" 
+    {
+      q: "The Memory",
+      a: "The great train chase. The festival of lanterns. The silent canyon.",
+      img: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=800"
     },
   ];
 
@@ -151,13 +152,13 @@ function StoryLab() {
     <div className="min-h-screen bg-background text-foreground selection:bg-accent-blue/20 relative overflow-hidden">
       <Nav onLaunchResume={() => { window.location.href = "/#resume"; }} />
 
-      <main className="relative z-10 pt-24 pb-32">
+      <main className="relative z-10 pt-24">
         {/* SECTION A: THE INVITATION */}
         <Container className="pt-16 md:pt-28">
           <motion.div {...fadeUp} className="mx-auto max-w-4xl text-center flex flex-col items-center">
-            <img 
+            <img
               src="/experience/lyfspotlogo.png"
-              alt="LYFSpot" 
+              alt="LYFSpot"
               className="w-auto h-16 mb-8 opacity-90"
               loading="eager"
             />
@@ -173,16 +174,16 @@ function StoryLab() {
             <p className="mx-auto mt-8 max-w-2xl text-[16px] leading-relaxed text-ink-secondary md:text-[18px]">
               One character. An unexplored world. Endless possibilities. We're exploring who this character could become, the world it might live in, and the stories it could tell. Have an idea? Help us imagine what comes next.
             </p>
-            
+
             <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
-              <button 
+              <button
                 onClick={() => document.getElementById("meet-the-character")?.scrollIntoView({ behavior: "smooth" })}
                 className="group relative overflow-hidden rounded-full bg-ink px-8 py-3.5 text-[14px] font-semibold text-white transition-all hover:scale-105 shadow-xl shadow-ink/20"
               >
                 <span className="relative z-10">Meet the Character</span>
                 <div className="absolute inset-0 -translate-x-full bg-accent-blue transition-transform duration-300 ease-out group-hover:translate-x-0" />
               </button>
-              <button 
+              <button
                 onClick={scrollToForm}
                 className="rounded-full border border-hairline bg-white px-8 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-surface hover:shadow-lg"
               >
@@ -196,8 +197,9 @@ function StoryLab() {
         <Container id="meet-the-character" className="mt-40">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-start">
             <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
-              {/* 3D Model Box - Light Ash/Grey */}
-              <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border-4 border-slate-200 bg-slate-100 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+              {/* 3D Model Box - Light Black */}
+              <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border border-hairline bg-[#111] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+                {/* @ts-expect-error custom element */}
                 <model-viewer
                   src="/src/assets/white_mesh.glb"
                   alt="A 3D model of the character"
@@ -210,26 +212,24 @@ function StoryLab() {
                   style={{ width: "100%", height: "100%", backgroundColor: "transparent" }}
                   interaction-prompt="hover-2d"
                 >
-                  <div slot="poster" className="absolute inset-0 grid place-items-center bg-slate-100">
-                    <span className="font-mono text-[12px] tracking-widest text-ink/40 animate-pulse">Initializing Canvas...</span>
+                  <div slot="poster" className="absolute inset-0 grid place-items-center bg-[#111]">
+                    <span className="font-mono text-[12px] tracking-widest text-white/40 animate-pulse">Initializing Canvas...</span>
                   </div>
                 </model-viewer>
-                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 backdrop-blur-md border border-hairline">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-ink">Interactive</span>
+                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-[#222]/80 px-4 py-2 backdrop-blur-md border border-white/10">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-white">Interactive</span>
                 </div>
               </div>
 
               {/* Reference Image / Inspiration Board (Clickable) */}
-              <a 
-                href={refImage}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-4xl border border-hairline bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group cursor-pointer hover:bg-surface/50 transition-colors"
+              <button 
+                onClick={() => setIsImageModalOpen(true)}
+                className="w-full text-left rounded-4xl border border-hairline bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group cursor-pointer hover:bg-surface/50 transition-colors"
               >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl shadow-md">
-                  <img 
-                    src={refImage} 
-                    alt="Character Reference" 
+                  <img
+                    src={refImage}
+                    alt="Character Reference"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -242,7 +242,7 @@ function StoryLab() {
                     This original artwork sparked the initiative. Click to view and visualize the character in your mind as you build their story.
                   </p>
                 </div>
-              </a>
+              </button>
             </motion.div>
 
             <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="order-1 lg:order-2 lg:sticky lg:top-32">
@@ -250,13 +250,13 @@ function StoryLab() {
                 Who is under the hat?
               </h2>
               <p className="mt-6 text-[18px] leading-relaxed text-ink-secondary font-light">
-                The hat is on. The scarf has a story to tell. But who is this character, really? That's still part of the adventure. The canvas is blank, and the mesh is pure. 
+                The hat is on. The scarf has a story to tell. But who is this character, really? That's still part of the adventure. The canvas is blank, and the mesh is pure.
               </p>
-              
+
               {/* Box style applied from Life Questionnaire */}
-              <div className="mt-12 relative overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-[color:var(--accent-blue)]/12 via-white/30 to-white/10 p-10 backdrop-blur-2xl shadow-sm">
-                <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-[color:var(--accent-blue)]/25 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-28 -left-12 h-72 w-72 rounded-full bg-[color:var(--deep-ink)]/10 blur-3xl" />
+              <div className="mt-12 relative overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-(--accent-blue)/12 via-white/30 to-white/10 p-10 backdrop-blur-2xl shadow-sm">
+                <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-(--accent-blue)/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 -left-12 h-72 w-72 rounded-full bg-(--deep-ink)/10 blur-3xl" />
 
                 <h3 className="font-mono text-[13px] uppercase tracking-widest text-ink-muted mb-8 relative z-10">Character Profile (Blank)</h3>
                 <ul className="space-y-6 relative z-10">
@@ -290,22 +290,22 @@ function StoryLab() {
 
           <div className="mt-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {universePrompts.map((prompt, i) => (
-              <motion.div 
-                key={i} 
-                {...fadeUp} 
+              <motion.div
+                key={i}
+                {...fadeUp}
                 transition={{ delay: i * 0.1 }}
                 className="group relative h-80 overflow-hidden rounded-4xl shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl"
               >
                 {/* Stunning HD Unsplash Background */}
                 <div className="absolute inset-0">
-                  <img 
-                    src={prompt.img} 
-                    alt={prompt.q} 
+                  <img
+                    src={prompt.img}
+                    alt={prompt.q}
                     className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/60" />
                 </div>
-                
+
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
                   <h4 className="font-serif text-[28px] font-medium italic translate-y-4 transition-transform duration-500 group-hover:translate-y-0">{prompt.q}</h4>
@@ -343,7 +343,7 @@ function StoryLab() {
                   Reference ID: {referenceId}
                 </div>
                 <div className="mt-10">
-                  <button 
+                  <button
                     onClick={() => setSubmitState("idle")}
                     className="rounded-full border border-hairline bg-white px-8 py-3 text-[14px] font-medium text-ink transition-all hover:bg-slate-50 hover:scale-105"
                   >
@@ -355,10 +355,10 @@ function StoryLab() {
               <form onSubmit={handleSubmit} className="relative z-10 mt-16 space-y-8">
                 <div>
                   <label htmlFor="category" className="mono-label mb-3 block">Contribution Category <span className="text-red-500">*</span></label>
-                  <select 
-                    id="category" 
-                    name="category" 
-                    required 
+                  <select
+                    id="category"
+                    name="category"
+                    required
                     value={formData.category}
                     onChange={handleChange}
                     className="w-full appearance-none rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white"
@@ -374,10 +374,10 @@ function StoryLab() {
 
                 <div>
                   <label htmlFor="title" className="mono-label mb-3 block">Idea Title <span className="text-ink-muted/50 font-normal normal-case tracking-normal">(Optional)</span></label>
-                  <input 
-                    type="text" 
-                    id="title" 
-                    name="title" 
+                  <input
+                    type="text"
+                    id="title"
+                    name="title"
                     placeholder="e.g., The Desert Train Chase"
                     value={formData.title}
                     onChange={handleChange}
@@ -388,10 +388,10 @@ function StoryLab() {
 
                 <div>
                   <label htmlFor="description" className="mono-label mb-3 block">Your Idea <span className="text-red-500">*</span></label>
-                  <textarea 
-                    id="description" 
-                    name="description" 
-                    required 
+                  <textarea
+                    id="description"
+                    name="description"
+                    required
                     placeholder="Describe your idea in a few sentences..."
                     rows={6}
                     value={formData.description}
@@ -404,10 +404,10 @@ function StoryLab() {
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                   <div>
                     <label htmlFor="nickname" className="mono-label mb-3 block">Your Nickname <span className="text-ink-muted/50 font-normal normal-case tracking-normal">(Optional)</span></label>
-                    <input 
-                      type="text" 
-                      id="nickname" 
-                      name="nickname" 
+                    <input
+                      type="text"
+                      id="nickname"
+                      name="nickname"
                       placeholder="e.g., StarExplorer99"
                       value={formData.nickname}
                       onChange={handleChange}
@@ -417,11 +417,11 @@ function StoryLab() {
                   </div>
                   <div>
                     <label htmlFor="parentEmail" className="mono-label mb-3 block">Email <span className="text-red-500">*</span></label>
-                    <input 
-                      type="email" 
-                      id="parentEmail" 
-                      name="parentEmail" 
-                      required 
+                    <input
+                      type="email"
+                      id="parentEmail"
+                      name="parentEmail"
+                      required
                       placeholder="For confirmation (Parent/Guardian)"
                       value={formData.parentEmail}
                       onChange={handleChange}
@@ -433,10 +433,10 @@ function StoryLab() {
                 <div className="rounded-2xl border border-blue-100 bg-blue-50/50 p-6">
                   <div className="flex items-start gap-5">
                     <div className="mt-1 flex items-center h-5">
-                      <input 
-                        id="hasConsent" 
-                        name="hasConsent" 
-                        type="checkbox" 
+                      <input
+                        id="hasConsent"
+                        name="hasConsent"
+                        type="checkbox"
                         required
                         checked={formData.hasConsent}
                         onChange={handleChange}
@@ -456,8 +456,8 @@ function StoryLab() {
                 )}
 
                 <div className="pt-6">
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     disabled={isSubmitting}
                     className="flex w-full items-center justify-center gap-3 rounded-[20px] bg-ink px-8 py-5 text-[16px] font-semibold text-white transition-all hover:bg-accent-blue hover:scale-[1.02] hover:shadow-xl hover:shadow-accent-blue/20 disabled:hover:scale-100 disabled:opacity-50"
                   >
@@ -489,13 +489,13 @@ function StoryLab() {
               Why Imagination Matters
             </h2>
             <p className="font-light text-[17px] leading-relaxed text-ink-secondary mb-6">
-              The world isn't shaped by those who simply accept what is—it is crafted by those who imagine what could be. 
-              Storytelling is the oldest form of human collaboration. It transcends engineering, defies logic, and builds bridges 
+              The world isn't shaped by those who simply accept what is—it is crafted by those who imagine what could be.
+              Storytelling is the oldest form of human collaboration. It transcends engineering, defies logic, and builds bridges
               between the impossible and the real.
             </p>
             <p className="font-light text-[17px] leading-relaxed text-ink-secondary">
-              When you share an idea, you aren't just typing words into a form. You are participating in a collective dream. 
-              You are exercising the most powerful muscle in the human mind: <span className="font-cursive text-[24px] text-accent-blue">creativity</span>. 
+              When you share an idea, you aren't just typing words into a form. You are participating in a collective dream.
+              You are exercising the most powerful muscle in the human mind: <span className="font-cursive text-[24px] text-accent-blue">creativity</span>.
               Here in the Story Lab, genuine thought and imaginative teamwork define the standards of tomorrow's narrative.
             </p>
           </motion.div>
@@ -510,8 +510,38 @@ function StoryLab() {
           </div>
         </Container>
 
+        {/* Modal for 2D Image */}
+        <AnimatePresence>
+          {isImageModalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsImageModalOpen(false)}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+            >
+              <button
+                onClick={() => setIsImageModalOpen(false)}
+                className="absolute right-6 top-6 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              <motion.img
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                src={refImage}
+                alt="Character Reference Full"
+                className="max-h-[90vh] max-w-full rounded-2xl shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </main>
-      
+
       <Footer />
     </div>
   );

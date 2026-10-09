@@ -56,7 +56,7 @@ export default function Hero({ onLaunchResume }: { onLaunchResume: () => void })
               onClick={onLaunchResume}
               className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ink px-5 py-3 text-[14px] font-medium text-background transition-colors hover:bg-deep-ink"
             >
-              <DocIcon width={16} height={16} /> Launch Interactive Resume
+              <DocIcon width={16} height={16} /> Explore Resume
             </button>
             <a
               href="#contact"

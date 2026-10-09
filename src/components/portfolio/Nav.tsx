@@ -78,7 +78,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               onClick={onLaunchResume}
               className="hidden items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/40 px-4 py-2 text-[12px] font-medium text-ink backdrop-blur transition-colors hover:bg-white/70 md:inline-flex"
             >
-              <DocIcon width={14} height={14} /> Launch Resume
+              <DocIcon width={14} height={14} /> View Resume
             </button>
             <button
               onClick={() => startTransition(() => setOpen(true))}
@@ -128,7 +128,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               }}
               className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[13px] font-medium text-ink"
             >
-              <DocIcon width={14} height={14} /> Launch Resume
+              <DocIcon width={14} height={14} /> View Resume
             </button>
           </nav>
         </div>
