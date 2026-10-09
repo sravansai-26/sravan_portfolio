@@ -37,6 +37,12 @@ export const Route = createFileRoute("/story-lab")({
         content: "A character waiting to be discovered. A world waiting to be imagined. Stories that could begin with your idea.",
       },
     ],
+    scripts: [
+      {
+        type: "module",
+        src: "https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js",
+      }
+    ]
   }),
   component: StoryLab,
 });
@@ -50,10 +56,6 @@ function StoryLab() {
     parentEmail: "",
     hasConsent: false,
   });
-
-  useEffect(() => {
-    import("@google/model-viewer").catch(console.error);
-  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
