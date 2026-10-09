@@ -1,12 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Globe2, Map, Users, Star, Compass, BookOpen } from "lucide-react";
+import { Sparkles, Image as ImageIcon } from "lucide-react";
 
 import { Nav } from "@/components/portfolio/Nav";
 import Footer from "@/components/portfolio/Footer/Footer";
 import Container from "@/components/portfolio/common/Container";
 import { fadeUp } from "@/components/portfolio/common/animations";
+
+import ssvMark from "@/assets/ssv-mark.webp";
+import refImage from "@/assets/convert-this-image-into-a-3d-model.jpg";
 
 export const Route = createFileRoute("/story-lab")({
   head: () => ({
@@ -95,12 +98,36 @@ function StoryLab() {
   };
 
   const universePrompts = [
-    { q: "The Setting", a: "A dusty desert town? A floating city? A quiet forest?", icon: <Map className="w-8 h-8 opacity-20" /> },
-    { q: "The Companion", a: "A loyal robotic dog? A grumpy traveler? A magical creature?", icon: <Users className="w-8 h-8 opacity-20" /> },
-    { q: "The Adventure", a: "Finding a lost map? Escaping a collapsing cave? Solving a mystery?", icon: <Compass className="w-8 h-8 opacity-20" /> },
-    { q: "The Quirks", a: "Always loses their hat? Can't stop telling bad jokes? Terrified of spiders?", icon: <Star className="w-8 h-8 opacity-20" /> },
-    { q: "The Rival", a: "A treasure hunter? A severe sandstorm? A broken time machine?", icon: <Globe2 className="w-8 h-8 opacity-20" /> },
-    { q: "The Memory", a: "The great train chase. The festival of lanterns. The silent canyon.", icon: <BookOpen className="w-8 h-8 opacity-20" /> },
+    { 
+      q: "The Setting", 
+      a: "A dusty desert town? A floating city? A quiet forest?", 
+      img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      q: "The Companion", 
+      a: "A loyal robotic dog? A grumpy traveler? A magical creature?", 
+      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      q: "The Adventure", 
+      a: "Finding a lost map? Escaping a collapsing cave? Solving a mystery?", 
+      img: "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      q: "The Quirks", 
+      a: "Always loses their hat? Can't stop telling bad jokes? Terrified of spiders?", 
+      img: "https://images.unsplash.com/photo-1514820402329-de527fdd2e6d?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      q: "The Rival", 
+      a: "A treasure hunter? A severe sandstorm? A broken time machine?", 
+      img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      q: "The Memory", 
+      a: "The great train chase. The festival of lanterns. The silent canyon.", 
+      img: "https://images.unsplash.com/photo-1519781542704-957f86eb49b0?auto=format&fit=crop&q=80&w=800" 
+    },
   ];
 
   return (
@@ -109,13 +136,21 @@ function StoryLab() {
 
       <main className="relative z-10 pt-24 pb-32">
         {/* SECTION A: THE INVITATION */}
-        <Container className="pt-12 md:pt-20">
-          <motion.div {...fadeUp} className="mx-auto max-w-4xl text-center">
-            <div className="mono-label mb-6">A LYFSpot Creative Initiative</div>
+        <Container className="pt-16 md:pt-28">
+          <motion.div {...fadeUp} className="mx-auto max-w-4xl text-center flex flex-col items-center">
+            <img 
+              src={ssvMark} 
+              alt="LYFSpot" 
+              className="w-16 h-16 mb-8 opacity-80"
+              loading="eager"
+            />
+            <div className="mono-label mb-6 bg-[color:var(--hairline)] px-4 py-1.5 rounded-full inline-block">
+              A LYFSpot Creative Initiative
+            </div>
             <h1 className="font-serif text-[48px] font-medium italic leading-[1.1] tracking-tight text-ink md:text-[80px]">
               The Story Lab
             </h1>
-            <p className="font-cursive mt-6 text-[32px] md:text-[48px] text-ink-secondary leading-none">
+            <p className="font-cursive mt-6 text-[32px] md:text-[48px] text-accent-blue leading-none">
               Every great story starts with an idea...
             </p>
             <p className="mx-auto mt-8 max-w-2xl text-[16px] leading-relaxed text-ink-secondary md:text-[18px]">
@@ -125,14 +160,14 @@ function StoryLab() {
             <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
               <button 
                 onClick={() => document.getElementById("meet-the-character")?.scrollIntoView({ behavior: "smooth" })}
-                className="group relative overflow-hidden rounded-full bg-ink px-8 py-3.5 text-[14px] font-semibold text-white transition-all hover:scale-105"
+                className="group relative overflow-hidden rounded-full bg-ink px-8 py-3.5 text-[14px] font-semibold text-white transition-all hover:scale-105 shadow-xl shadow-ink/20"
               >
                 <span className="relative z-10">Meet the Character</span>
-                <div className="absolute inset-0 -translate-x-full bg-ink-secondary transition-transform duration-300 ease-out group-hover:translate-x-0" />
+                <div className="absolute inset-0 -translate-x-full bg-accent-blue transition-transform duration-300 ease-out group-hover:translate-x-0" />
               </button>
               <button 
                 onClick={scrollToForm}
-                className="rounded-full border border-ink/20 bg-transparent px-8 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-ink/5"
+                className="rounded-full border border-[color:var(--hairline)] bg-white px-8 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-surface hover:shadow-lg"
               >
                 Share an Idea
               </button>
@@ -141,20 +176,17 @@ function StoryLab() {
         </Container>
 
         {/* SECTION B & C: MEET THE CHARACTER & 3D VIEWER */}
-        <Container id="meet-the-character" className="mt-32">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-center">
-            <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col">
-              <div className="group relative aspect-square w-full overflow-hidden rounded-3xl border border-[color:var(--hairline)] bg-[#0a0a0c] shadow-2xl">
-                {/* 
-                  Using @google/model-viewer 
-                  Dark background as requested, specifically only in this box.
-                */}
+        <Container id="meet-the-character" className="mt-40">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-start">
+            <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
+              {/* 3D Model Box - Strictly Black as requested */}
+              <div className="group relative aspect-square w-full overflow-hidden rounded-[32px] border-4 border-[#0a0a0c] bg-[#0a0a0c] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                 <model-viewer
                   src="/src/assets/white_mesh.glb"
                   alt="A 3D model of the character"
                   auto-rotate
                   camera-controls
-                  shadow-intensity="1.5"
+                  shadow-intensity="2"
                   shadow-softness="1"
                   environment-image="neutral"
                   exposure="0.9"
@@ -162,37 +194,58 @@ function StoryLab() {
                   interaction-prompt="hover-2d"
                 >
                   <div slot="poster" className="absolute inset-0 grid place-items-center bg-[#0a0a0c]">
-                    <span className="font-mono text-[12px] tracking-widest text-white/40 animate-pulse">Initializing Mesh...</span>
+                    <span className="font-mono text-[12px] tracking-widest text-white/40 animate-pulse">Initializing Canvas...</span>
                   </div>
                 </model-viewer>
-                
-                {/* Decorative UI elements for the viewer */}
-                <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1.5 backdrop-blur-md border border-white/10">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-white/70">Interactive</span>
+                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 backdrop-blur-md border border-white/10">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-white">Interactive</span>
+                </div>
+              </div>
+
+              {/* Reference Image / Inspiration Board */}
+              <div className="rounded-[32px] border border-[color:var(--hairline)] bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group">
+                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl shadow-md">
+                  <img 
+                    src={refImage} 
+                    alt="Character Reference" 
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ImageIcon className="text-white w-6 h-6" />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-serif text-[18px] italic text-ink font-semibold">The 2D Blueprint</h4>
+                  <p className="text-[14px] text-ink-secondary mt-1">
+                    This original artwork sparked the initiative. Use it to visualize the character in your mind as you build their story.
+                  </p>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="order-1 lg:order-2">
-              <h2 className="font-serif text-[40px] italic text-ink md:text-[52px]">
+            <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="order-1 lg:order-2 lg:sticky lg:top-32">
+              <h2 className="font-serif text-[40px] italic text-ink md:text-[56px] leading-[1.1]">
                 Who is under the hat?
               </h2>
-              <p className="mt-6 text-[16px] leading-relaxed text-ink-secondary">
+              <p className="mt-6 text-[18px] leading-relaxed text-ink-secondary font-light">
                 The hat is on. The scarf has a story to tell. But who is this character, really? That's still part of the adventure. The canvas is blank, and the mesh is pure. 
               </p>
               
-              <div className="mt-12 rounded-3xl border border-[color:var(--hairline)] bg-surface/30 p-8">
-                <h3 className="font-mono text-[12px] uppercase tracking-widest text-ink-muted mb-6">Character Profile (Blank)</h3>
-                <ul className="space-y-5">
+              <div className="mt-12 rounded-[32px] border border-[color:var(--hairline)] bg-white p-10 shadow-sm relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-8 opacity-5">
+                  <Sparkles className="w-32 h-32" />
+                </div>
+                <h3 className="font-mono text-[13px] uppercase tracking-widest text-ink-muted mb-8">Character Profile (Blank)</h3>
+                <ul className="space-y-6 relative z-10">
                   {[
                     "Name — waiting to be spoken.",
                     "Personality — waiting to be defined.",
                     "Home — waiting to be built.",
                     "Strengths & Quirks — waiting to be discovered."
                   ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-4">
-                      <span className="font-cursive mt-0 text-[24px] text-accent-blue">{i + 1}.</span>
-                      <span className="text-ink-secondary pt-1">{item}</span>
+                    <li key={i} className="flex items-start gap-5">
+                      <span className="font-cursive mt-0 text-[28px] text-accent-blue">{i + 1}.</span>
+                      <span className="text-ink-secondary pt-2 text-[16px]">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -204,10 +257,10 @@ function StoryLab() {
         {/* SECTION D: BUILD THE STORY WORLD */}
         <Container className="mt-40">
           <motion.div {...fadeUp} className="mx-auto max-w-4xl text-center">
-            <h2 className="font-serif text-[40px] italic text-ink md:text-[52px]">
+            <h2 className="font-serif text-[40px] italic text-ink md:text-[56px]">
               Build the Universe
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-relaxed text-ink-secondary">
+            <p className="mx-auto mt-6 max-w-2xl text-[18px] leading-relaxed text-ink-secondary font-light">
               Imagine what surrounds the character. Every universe needs a setting, conflicts, and memorable moments. Step into the director's chair.
             </p>
           </motion.div>
@@ -218,13 +271,23 @@ function StoryLab() {
                 key={i} 
                 {...fadeUp} 
                 transition={{ delay: i * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-[color:var(--hairline)] bg-white/40 p-8 backdrop-blur-sm transition-all hover:bg-white/80 hover:shadow-sm"
+                className="group relative h-[320px] overflow-hidden rounded-[32px] shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl"
               >
-                <div className="absolute -right-4 -top-4 text-[color:var(--hairline)] transition-transform duration-500 group-hover:scale-110 group-hover:text-accent-blue/10">
-                  {prompt.icon}
+                {/* Stunning HD Unsplash Background */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={prompt.img} 
+                    alt={prompt.q} 
+                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/60" />
                 </div>
-                <h4 className="relative z-10 font-serif text-[24px] text-ink">{prompt.q}</h4>
-                <p className="relative z-10 mt-4 text-[15px] leading-relaxed text-ink-secondary">{prompt.a}</p>
+                
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
+                  <h4 className="font-serif text-[28px] font-medium italic translate-y-4 transition-transform duration-500 group-hover:translate-y-0">{prompt.q}</h4>
+                  <p className="mt-3 text-[15px] leading-relaxed text-white/80 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">{prompt.a}</p>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -232,12 +295,12 @@ function StoryLab() {
 
         {/* SECTION E: SHARE AN IDEA */}
         <Container id="share-an-idea" className="mt-40 max-w-4xl">
-          <motion.div {...fadeUp} className="relative overflow-hidden rounded-[40px] border border-[color:var(--hairline)] bg-white/70 p-8 shadow-sm backdrop-blur-xl md:p-16">
+          <motion.div {...fadeUp} className="relative overflow-hidden rounded-[40px] border border-[color:var(--hairline)] bg-white p-8 shadow-2xl md:p-16">
             <div className="relative z-10 text-center">
-              <h2 className="font-cursive text-[48px] text-ink md:text-[64px]">
+              <h2 className="font-cursive text-[48px] text-ink md:text-[72px]">
                 Share your imagination
               </h2>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-secondary">
+              <p className="mt-2 text-[16px] leading-relaxed text-ink-secondary">
                 Have a concept for the character, a name, or a story? Submit it below.
               </p>
             </div>
@@ -259,7 +322,7 @@ function StoryLab() {
                 <div className="mt-10">
                   <button 
                     onClick={() => setSubmitState("idle")}
-                    className="rounded-full border border-[color:var(--hairline)] bg-white px-8 py-3 text-[14px] font-medium text-ink transition-all hover:bg-slate-50"
+                    className="rounded-full border border-[color:var(--hairline)] bg-white px-8 py-3 text-[14px] font-medium text-ink transition-all hover:bg-slate-50 hover:scale-105"
                   >
                     Submit Another Idea
                   </button>
@@ -275,7 +338,7 @@ function StoryLab() {
                     required 
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full appearance-none rounded-2xl border border-[color:var(--hairline)] bg-white px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue"
+                    className="w-full appearance-none rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white"
                   >
                     <option value="" disabled>Select a category...</option>
                     <option value="Character Name & Personality">Character Name & Personality</option>
@@ -296,7 +359,7 @@ function StoryLab() {
                     value={formData.title}
                     onChange={handleChange}
                     maxLength={100}
-                    className="w-full rounded-2xl border border-[color:var(--hairline)] bg-white px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue placeholder:text-ink-muted"
+                    className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                   />
                 </div>
 
@@ -311,7 +374,7 @@ function StoryLab() {
                     value={formData.description}
                     onChange={handleChange}
                     maxLength={2000}
-                    className="w-full resize-y rounded-2xl border border-[color:var(--hairline)] bg-white px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue placeholder:text-ink-muted"
+                    className="w-full resize-y rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                   />
                 </div>
 
@@ -326,7 +389,7 @@ function StoryLab() {
                       value={formData.nickname}
                       onChange={handleChange}
                       maxLength={50}
-                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-white px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue placeholder:text-ink-muted"
+                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                     />
                   </div>
                   <div>
@@ -339,7 +402,7 @@ function StoryLab() {
                       placeholder="For confirmation (Parent/Guardian)"
                       value={formData.parentEmail}
                       onChange={handleChange}
-                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-white px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue placeholder:text-ink-muted"
+                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                     />
                   </div>
                 </div>
@@ -373,7 +436,7 @@ function StoryLab() {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="flex w-full items-center justify-center gap-3 rounded-full bg-ink px-8 py-5 text-[16px] font-semibold text-white transition-all hover:bg-ink-secondary hover:scale-[1.02] disabled:hover:scale-100 disabled:opacity-50"
+                    className="flex w-full items-center justify-center gap-3 rounded-[20px] bg-ink px-8 py-5 text-[16px] font-semibold text-white transition-all hover:bg-accent-blue hover:scale-[1.02] hover:shadow-xl hover:shadow-accent-blue/20 disabled:hover:scale-100 disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>
@@ -393,8 +456,30 @@ function StoryLab() {
           </motion.div>
         </Container>
 
-        {/* SECTION F: A QUIET PROGRESS AREA */}
-        <Container className="mt-32 mb-10 text-center">
+        {/* SECTION F: THE POWER OF IMAGINATION (NEW CREATIVE SECTION) */}
+        <Container className="mt-40 mb-20">
+          <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center border-y border-[color:var(--hairline)] py-16 relative">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-6 text-accent-blue">
+              <Sparkles className="w-8 h-8 opacity-50" />
+            </div>
+            <h2 className="font-serif text-[32px] italic text-ink md:text-[42px] mb-6">
+              Why Imagination Matters
+            </h2>
+            <p className="font-light text-[17px] leading-relaxed text-ink-secondary mb-6">
+              The world isn't shaped by those who simply accept what is—it is crafted by those who imagine what could be. 
+              Storytelling is the oldest form of human collaboration. It transcends engineering, defies logic, and builds bridges 
+              between the impossible and the real.
+            </p>
+            <p className="font-light text-[17px] leading-relaxed text-ink-secondary">
+              When you share an idea, you aren't just typing words into a form. You are participating in a collective dream. 
+              You are exercising the most powerful muscle in the human mind: <span className="font-cursive text-[24px] text-accent-blue">creativity</span>. 
+              Here in the Story Lab, genuine thought and imaginative teamwork define the standards of tomorrow's narrative.
+            </p>
+          </motion.div>
+        </Container>
+
+        {/* SECTION G: A QUIET PROGRESS AREA */}
+        <Container className="mb-10 text-center">
           <div className="inline-block rounded-full border border-[color:var(--hairline)] bg-surface/50 px-6 py-3">
             <p className="font-mono text-[12px] uppercase tracking-widest text-ink-muted">
               The story world is currently being explored. Thank you for your imagination.
