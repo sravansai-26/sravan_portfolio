@@ -8,8 +8,25 @@ import Footer from "@/components/portfolio/Footer/Footer";
 import Container from "@/components/portfolio/common/Container";
 import { fadeUp } from "@/components/portfolio/common/animations";
 
-import ssvMark from "@/assets/ssv-mark.webp";
 import refImage from "@/assets/convert-this-image-into-a-3d-model.jpg";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "model-viewer": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        src?: string;
+        alt?: string;
+        "auto-rotate"?: boolean;
+        "camera-controls"?: boolean;
+        "shadow-intensity"?: string;
+        "shadow-softness"?: string;
+        "environment-image"?: string;
+        exposure?: string;
+        "interaction-prompt"?: string;
+      };
+    }
+  }
+}
 
 export const Route = createFileRoute("/story-lab")({
   head: () => ({
@@ -126,7 +143,7 @@ function StoryLab() {
     { 
       q: "The Memory", 
       a: "The great train chase. The festival of lanterns. The silent canyon.", 
-      img: "https://images.unsplash.com/photo-1519781542704-957f86eb49b0?auto=format&fit=crop&q=80&w=800" 
+      img: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=800" 
     },
   ];
 
@@ -139,12 +156,12 @@ function StoryLab() {
         <Container className="pt-16 md:pt-28">
           <motion.div {...fadeUp} className="mx-auto max-w-4xl text-center flex flex-col items-center">
             <img 
-              src={ssvMark} 
+              src="/experience/lyfspotlogo.png"
               alt="LYFSpot" 
-              className="w-16 h-16 mb-8 opacity-80"
+              className="w-auto h-16 mb-8 opacity-90"
               loading="eager"
             />
-            <div className="mono-label mb-6 bg-[color:var(--hairline)] px-4 py-1.5 rounded-full inline-block">
+            <div className="mono-label mb-6 bg-hairline px-4 py-1.5 rounded-full inline-block">
               A LYFSpot Creative Initiative
             </div>
             <h1 className="font-serif text-[48px] font-medium italic leading-[1.1] tracking-tight text-ink md:text-[80px]">
@@ -167,7 +184,7 @@ function StoryLab() {
               </button>
               <button 
                 onClick={scrollToForm}
-                className="rounded-full border border-[color:var(--hairline)] bg-white px-8 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-surface hover:shadow-lg"
+                className="rounded-full border border-hairline bg-white px-8 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-surface hover:shadow-lg"
               >
                 Share an Idea
               </button>
@@ -179,31 +196,36 @@ function StoryLab() {
         <Container id="meet-the-character" className="mt-40">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-start">
             <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
-              {/* 3D Model Box - Strictly Black as requested */}
-              <div className="group relative aspect-square w-full overflow-hidden rounded-[32px] border-4 border-[#0a0a0c] bg-[#0a0a0c] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+              {/* 3D Model Box - Light Ash/Grey */}
+              <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border-4 border-slate-200 bg-slate-100 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
                 <model-viewer
                   src="/src/assets/white_mesh.glb"
                   alt="A 3D model of the character"
                   auto-rotate
                   camera-controls
-                  shadow-intensity="2"
+                  shadow-intensity="1.5"
                   shadow-softness="1"
                   environment-image="neutral"
                   exposure="0.9"
                   style={{ width: "100%", height: "100%", backgroundColor: "transparent" }}
                   interaction-prompt="hover-2d"
                 >
-                  <div slot="poster" className="absolute inset-0 grid place-items-center bg-[#0a0a0c]">
-                    <span className="font-mono text-[12px] tracking-widest text-white/40 animate-pulse">Initializing Canvas...</span>
+                  <div slot="poster" className="absolute inset-0 grid place-items-center bg-slate-100">
+                    <span className="font-mono text-[12px] tracking-widest text-ink/40 animate-pulse">Initializing Canvas...</span>
                   </div>
                 </model-viewer>
-                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-black/60 px-4 py-2 backdrop-blur-md border border-white/10">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-white">Interactive</span>
+                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 backdrop-blur-md border border-hairline">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-ink">Interactive</span>
                 </div>
               </div>
 
-              {/* Reference Image / Inspiration Board */}
-              <div className="rounded-[32px] border border-[color:var(--hairline)] bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group">
+              {/* Reference Image / Inspiration Board (Clickable) */}
+              <a 
+                href={refImage}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-4xl border border-hairline bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group cursor-pointer hover:bg-surface/50 transition-colors"
+              >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl shadow-md">
                   <img 
                     src={refImage} 
@@ -215,12 +237,12 @@ function StoryLab() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-serif text-[18px] italic text-ink font-semibold">The 2D Blueprint</h4>
+                  <h4 className="font-serif text-[18px] italic text-ink font-semibold group-hover:text-accent-blue transition-colors">The 2D Blueprint</h4>
                   <p className="text-[14px] text-ink-secondary mt-1">
-                    This original artwork sparked the initiative. Use it to visualize the character in your mind as you build their story.
+                    This original artwork sparked the initiative. Click to view and visualize the character in your mind as you build their story.
                   </p>
                 </div>
-              </div>
+              </a>
             </motion.div>
 
             <motion.div {...fadeUp} transition={{ delay: 0.2 }} className="order-1 lg:order-2 lg:sticky lg:top-32">
@@ -231,11 +253,12 @@ function StoryLab() {
                 The hat is on. The scarf has a story to tell. But who is this character, really? That's still part of the adventure. The canvas is blank, and the mesh is pure. 
               </p>
               
-              <div className="mt-12 rounded-[32px] border border-[color:var(--hairline)] bg-white p-10 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-5">
-                  <Sparkles className="w-32 h-32" />
-                </div>
-                <h3 className="font-mono text-[13px] uppercase tracking-widest text-ink-muted mb-8">Character Profile (Blank)</h3>
+              {/* Box style applied from Life Questionnaire */}
+              <div className="mt-12 relative overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-[color:var(--accent-blue)]/12 via-white/30 to-white/10 p-10 backdrop-blur-2xl shadow-sm">
+                <div className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-[color:var(--accent-blue)]/25 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-28 -left-12 h-72 w-72 rounded-full bg-[color:var(--deep-ink)]/10 blur-3xl" />
+
+                <h3 className="font-mono text-[13px] uppercase tracking-widest text-ink-muted mb-8 relative z-10">Character Profile (Blank)</h3>
                 <ul className="space-y-6 relative z-10">
                   {[
                     "Name — waiting to be spoken.",
@@ -271,7 +294,7 @@ function StoryLab() {
                 key={i} 
                 {...fadeUp} 
                 transition={{ delay: i * 0.1 }}
-                className="group relative h-[320px] overflow-hidden rounded-[32px] shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl"
+                className="group relative h-80 overflow-hidden rounded-4xl shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl"
               >
                 {/* Stunning HD Unsplash Background */}
                 <div className="absolute inset-0">
@@ -280,7 +303,7 @@ function StoryLab() {
                     alt={prompt.q} 
                     className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/60" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/60" />
                 </div>
                 
                 {/* Content */}
@@ -295,7 +318,7 @@ function StoryLab() {
 
         {/* SECTION E: SHARE AN IDEA */}
         <Container id="share-an-idea" className="mt-40 max-w-4xl">
-          <motion.div {...fadeUp} className="relative overflow-hidden rounded-[40px] border border-[color:var(--hairline)] bg-white p-8 shadow-2xl md:p-16">
+          <motion.div {...fadeUp} className="relative overflow-hidden rounded-4xl border border-hairline bg-white p-8 shadow-2xl md:p-16">
             <div className="relative z-10 text-center">
               <h2 className="font-cursive text-[48px] text-ink md:text-[72px]">
                 Share your imagination
@@ -316,13 +339,13 @@ function StoryLab() {
                 <p className="mt-4 text-[16px] text-ink-secondary">
                   Thank you for contributing to The Story Lab. Your idea has been safely recorded in the archives.
                 </p>
-                <div className="mt-6 font-mono text-[12px] text-ink-muted bg-white inline-block px-4 py-2 rounded-full border border-[color:var(--hairline)]">
+                <div className="mt-6 font-mono text-[12px] text-ink-muted bg-white inline-block px-4 py-2 rounded-full border border-hairline">
                   Reference ID: {referenceId}
                 </div>
                 <div className="mt-10">
                   <button 
                     onClick={() => setSubmitState("idle")}
-                    className="rounded-full border border-[color:var(--hairline)] bg-white px-8 py-3 text-[14px] font-medium text-ink transition-all hover:bg-slate-50 hover:scale-105"
+                    className="rounded-full border border-hairline bg-white px-8 py-3 text-[14px] font-medium text-ink transition-all hover:bg-slate-50 hover:scale-105"
                   >
                     Submit Another Idea
                   </button>
@@ -338,7 +361,7 @@ function StoryLab() {
                     required 
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full appearance-none rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white"
+                    className="w-full appearance-none rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white"
                   >
                     <option value="" disabled>Select a category...</option>
                     <option value="Character Name & Personality">Character Name & Personality</option>
@@ -359,7 +382,7 @@ function StoryLab() {
                     value={formData.title}
                     onChange={handleChange}
                     maxLength={100}
-                    className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
+                    className="w-full rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                   />
                 </div>
 
@@ -374,7 +397,7 @@ function StoryLab() {
                     value={formData.description}
                     onChange={handleChange}
                     maxLength={2000}
-                    className="w-full resize-y rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
+                    className="w-full resize-y rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                   />
                 </div>
 
@@ -389,7 +412,7 @@ function StoryLab() {
                       value={formData.nickname}
                       onChange={handleChange}
                       maxLength={50}
-                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
+                      className="w-full rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                     />
                   </div>
                   <div>
@@ -402,7 +425,7 @@ function StoryLab() {
                       placeholder="For confirmation (Parent/Guardian)"
                       value={formData.parentEmail}
                       onChange={handleChange}
-                      className="w-full rounded-2xl border border-[color:var(--hairline)] bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
+                      className="w-full rounded-2xl border border-hairline bg-surface/30 px-6 py-4 text-[16px] text-ink outline-none transition-all focus:border-accent-blue focus:ring-1 focus:ring-accent-blue focus:bg-white placeholder:text-ink-muted"
                     />
                   </div>
                 </div>
@@ -457,8 +480,8 @@ function StoryLab() {
         </Container>
 
         {/* SECTION F: THE POWER OF IMAGINATION (NEW CREATIVE SECTION) */}
-        <Container className="mt-40 mb-20">
-          <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center border-y border-[color:var(--hairline)] py-16 relative">
+        <Container className="mt-40 mb-8">
+          <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center border-y border-hairline py-16 relative">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-6 text-accent-blue">
               <Sparkles className="w-8 h-8 opacity-50" />
             </div>
@@ -480,7 +503,7 @@ function StoryLab() {
 
         {/* SECTION G: A QUIET PROGRESS AREA */}
         <Container className="mb-10 text-center">
-          <div className="inline-block rounded-full border border-[color:var(--hairline)] bg-surface/50 px-6 py-3">
+          <div className="inline-block rounded-full border border-hairline bg-surface/50 px-6 py-3">
             <p className="font-mono text-[12px] uppercase tracking-widest text-ink-muted">
               The story world is currently being explored. Thank you for your imagination.
             </p>
