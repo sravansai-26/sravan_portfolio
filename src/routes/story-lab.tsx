@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import "@google/model-viewer";
 
 import { Nav } from "@/components/portfolio/Nav";
 import Footer from "@/components/portfolio/Footer/Footer";
@@ -30,6 +29,10 @@ function StoryLab() {
     parentEmail: "",
     hasConsent: false,
   });
+
+  useEffect(() => {
+    import("@google/model-viewer").catch(console.error);
+  }, []);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<"idle" | "success" | "error">("idle");
   const [referenceId, setReferenceId] = useState("");
