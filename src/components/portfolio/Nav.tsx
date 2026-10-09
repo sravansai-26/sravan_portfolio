@@ -3,14 +3,14 @@ import { Menu, Close, DocIcon } from "./Icons";
 import ssvLogo from "@/assets/ssv-name.webp";
 
 const links = [
-  { label: "Home", href: "#top" },
-  { label: "About", href: "#about" },
-  { label: "LYFSpot", href: "#lyfspot" },
-  { label: "Matrix", href: "#stack" },
-  { label: "Work", href: "#work" },
-  { label: "Credentials", href: "#credentials" },
-  { label: "Writing", href: "#writing" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#top" },
+  { label: "About", href: "/#about" },
+  { label: "LYFSpot", href: "/#lyfspot" },
+  { label: "Matrix", href: "/#stack" },
+  { label: "Work", href: "/#work" },
+  { label: "Credentials", href: "/#credentials" },
+  { label: "Writing", href: "/#writing" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
@@ -62,6 +62,18 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
                   </a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/story-lab"
+                  className="ml-1 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-slate-800 to-black px-3.5 py-1.5 font-serif text-[12.5px] italic text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/20"
+                >
+                  Story Lab
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -106,6 +118,17 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
                 {l.label}
               </a>
             ))}
+            <a
+              href="/story-lab"
+              onClick={() => startTransition(() => setOpen(false))}
+              className="font-serif text-[32px] font-bold italic tracking-tight text-ink flex items-center gap-3 mt-2"
+            >
+              The Story Lab
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+              </span>
+            </a>
             <button
               onClick={() => {
                 startTransition(() => setOpen(false));

@@ -185,13 +185,16 @@ export default function LyfspotJourney() {
               key={p.name}
               className={`border-t border-[color:var(--hairline)] py-8 md:py-10 ${
                 p.name === "#ProjectYR" ? "bg-[color:var(--surface)]/30" : ""
-              } ${i === pipeline.length - 1 ? "border-b" : ""}`}
+              } ${p.name === "The Story Lab" ? "bg-gradient-to-br from-[#121214] to-[#0a0a0c] rounded-[32px] border border-[color:var(--hairline)] my-6 px-6 md:px-12 py-12 shadow-2xl relative overflow-hidden" : ""} ${i === pipeline.length - 1 && p.name !== "The Story Lab" ? "border-b" : ""}`}
             >
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12">
+              {p.name === "The Story Lab" && (
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+              )}
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12 relative z-10">
                 <div
                   className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
                     p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
-                  }`}
+                  } ${p.name === "The Story Lab" ? "font-serif italic text-white !text-[32px] md:!text-[40px] tracking-normal" : ""}`}
                 >
                   {p.name}
                   {p.name === "#ProjectYR" && (
@@ -203,7 +206,7 @@ export default function LyfspotJourney() {
                 <div>
                   <p
                     className={`max-w-[640px] text-[16px] leading-[1.7] ${
-                      p.name === "#ProjectYR" ? "text-ink font-medium" : "text-ink-secondary"
+                      p.name === "#ProjectYR" ? "text-ink font-medium" : p.name === "The Story Lab" ? "text-white/70 font-light text-[18px]" : "text-ink-secondary"
                     }`}
                   >
                     {p.body}
@@ -213,10 +216,10 @@ export default function LyfspotJourney() {
                       href={p.cta.href}
                       target={p.cta.href.startsWith('/') ? "_self" : "_blank"}
                       rel={p.cta.href.startsWith('/') ? undefined : "noreferrer"}
-                      className="editorial-link mt-4 inline-flex items-center gap-2 text-[15px]"
+                      className={`mt-6 inline-flex items-center gap-3 text-[15px] ${p.name === "The Story Lab" ? "bg-white text-black px-6 py-3 rounded-full font-semibold transition-transform hover:scale-105" : "editorial-link"}`}
                     >
                       <SparkIcon width={14} height={14} /> {p.cta.label}{" "}
-                      <ArrowRight width={14} height={14} />
+                      {p.name !== "The Story Lab" && <ArrowRight width={14} height={14} />}
                     </a>
                   )}
                 </div>
