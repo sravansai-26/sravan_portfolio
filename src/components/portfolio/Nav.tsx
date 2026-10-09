@@ -68,10 +68,6 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
                   className="ml-1 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-slate-800 to-black px-3.5 py-1.5 font-serif text-[12.5px] italic text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/20"
                 >
                   Story Lab
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                  </span>
                 </a>
               </li>
             </ul>
@@ -124,10 +120,6 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               className="font-serif text-[32px] font-bold italic tracking-tight text-ink flex items-center gap-3 mt-2"
             >
               The Story Lab
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
-              </span>
             </a>
             <button
               onClick={() => {

@@ -185,7 +185,7 @@ export default function LyfspotJourney() {
               key={p.name}
               className={`border-t border-[color:var(--hairline)] py-8 md:py-10 ${
                 p.name === "#ProjectYR" ? "bg-[color:var(--surface)]/30" : ""
-              } ${p.name === "The Story Lab" ? "bg-gradient-to-br from-[#121214] to-[#0a0a0c] rounded-[32px] border border-[color:var(--hairline)] my-6 px-6 md:px-12 py-12 shadow-2xl relative overflow-hidden" : ""} ${i === pipeline.length - 1 && p.name !== "The Story Lab" ? "border-b" : ""}`}
+              } ${p.name === "The Story Lab" ? "bg-gradient-to-br from-[#2b2d31] to-[#1e1f22] rounded-[32px] border border-[color:var(--hairline)] my-6 px-6 md:px-12 py-12 shadow-2xl relative overflow-hidden" : ""} ${i === pipeline.length - 1 && p.name !== "The Story Lab" ? "border-b" : ""}`}
             >
               {p.name === "The Story Lab" && (
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
