@@ -45,7 +45,7 @@ const projects: Project[] = [
     num: "02",
     name: "Smart LoadMate",
     classification: "Academic Innovation · Minor Project Board (MLRIT)",
-    logo: "/projects/loadmate.png",
+    logo: "/projects/loadmate-clean.png",
     stack: "React Native, Expo, Python FastAPI, MongoDB",
     description:
       "An intelligent, dual-interface logistics delivery and route optimization mobile application designed to seamlessly coordinate tasks between commercial haulers and drivers.",
@@ -88,7 +88,7 @@ const projects: Project[] = [
     num: "04",
     name: "DreamLaunch",
     classification: "Media Distribution Systems (LYFSpot Ecosystem)",
-    logo: "/projects/dreamlaunch.jpeg",
+    logo: "/projects/dreamlaunch-clean.png",
     stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
     description:
       "A content orchestration platform built for filmmakers, screenwriters, and independent producers. Empowers creators to centrally manage major promotional assets — teasers, trailers, script previews — and safely deploy them simultaneously across major social API endpoints.",
@@ -104,7 +104,7 @@ const projects: Project[] = [
     num: "05",
     name: "VaultBank",
     classification: "Enterprise Simulation · Infosys Virtual Internship Program",
-    logo: "/projects/vaultbank.png",
+    logo: "/projects/vaultbank-clean.png",
     stack: "Java Enterprise Architecture, Spring, Spring Boot, MySQL, React.js",
     description:
       "A financial transaction and ledger simulation framework providing authenticated account controls, real-time balance sheets, automated bank statements, secure transaction notifications, and integrated analytical spreadsheets.",
@@ -120,7 +120,7 @@ const projects: Project[] = [
     num: "06",
     name: "DeployBridge",
     classification: "National Level Technical Hackathon · Zignasa Platform Entry",
-    logo: "/projects/deploybridge.png",
+    logo: "/projects/deploybridge-clean.png",
     stack: "MERN Stack — MongoDB, Express.js, React.js, Node.js",
     description:
       "An intelligent deployment orchestration engine that analyzes repositories, detects framework dependencies, resolves build failures, recommends optimal cloud infrastructure, and automates deployment workflows across modern hosting platforms including Vercel, Render, and Netlify.",
@@ -160,27 +160,27 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     >
       <button
         onClick={() => startTransition(() => setOpen((o) => !o))}
-        className="group grid w-full grid-cols-[40px_minmax(0,1fr)_28px] items-center gap-4 py-7 text-left md:grid-cols-[60px_56px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8"
+        className="group grid w-full grid-cols-[30px_46px_minmax(0,1fr)_24px] items-center gap-3 py-6 text-left md:grid-cols-[60px_56px_minmax(0,1fr)_minmax(0,1fr)_28px] md:gap-8 md:py-7"
       >
-        <span className="font-mono text-[13px] text-ink-muted">{p.num}.</span>
+        <span className="font-mono text-[12px] md:text-[13px] text-ink-muted">{p.num}.</span>
         {p.logo ? (
-          <span className="hidden shrink-0 items-center justify-center md:flex h-14 w-14">
+          <span className="flex shrink-0 items-center justify-center h-11 w-11 md:h-14 md:w-14">
             <img
               src={p.logo}
               alt={`${p.name} logo`}
-              className={`max-h-full max-w-full object-contain mix-blend-multiply ${
-                ["DreamLaunch", "VaultBank", "DeployBridge"].includes(p.name) ? "scale-125" : ""
-              }`}
+              className="max-h-full max-w-full object-contain"
+              loading="lazy"
+              decoding="async"
             />
           </span>
         ) : (
-          <span className="hidden w-14 md:block" aria-hidden />
+          <span className="w-11 md:w-14" aria-hidden />
         )}
         <div className="min-w-0">
-          <div className="font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
+          <div className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink md:text-[30px]">
             {p.name}
           </div>
-          <div className="mt-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+          <div className="mt-1 font-mono text-[10px] md:text-[11px] uppercase tracking-wider text-ink-muted truncate md:whitespace-normal">
             {p.classification}
           </div>
         </div>

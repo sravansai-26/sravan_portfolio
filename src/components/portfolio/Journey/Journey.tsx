@@ -44,17 +44,30 @@ const timeline = [
   },
 ];
 
-const pipeline = [
+type PipelineItem = {
+  name: string;
+  body: string;
+  logo?: string;
+  cta?: {
+    label: string;
+    href: string;
+  };
+};
+
+const pipeline: PipelineItem[] = [
   {
     name: "Philistine",
+    logo: "/credentials/philistine-lg.png",
     body: "A strategic development gateway engineered for innovators, problem solvers, and upcoming entrepreneurs — providing critical technical architecture frameworks and moral execution support to launch raw concepts.",
   },
   {
     name: "IVOpt",
+    logo: "/credentials/ivopt-lg.png",
     body: "An enterprise billing and financial tracking engine meticulously optimized to streamline fiscal workflows for small-to-medium enterprises.",
   },
   {
     name: "UneCust",
+    logo: "/credentials/unecust-lg.png",
     body: "An interactive conversational knowledge chatbot built for rapid information discovery and responsive instant answers.",
     cta: {
       label: "Visit UneCust's Demo built with Zapier Technologies",
@@ -191,17 +204,32 @@ export default function LyfspotJourney() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
               )}
               <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12 relative z-10">
-                <div
-                  className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
-                    p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
-                  } ${p.name === "The Story Lab" ? "font-serif italic text-ink !text-[32px] md:!text-[40px] tracking-normal" : ""}`}
-                >
-                  {p.name}
-                  {p.name === "#ProjectYR" && (
-                    <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
-                      Flagship
-                    </span>
+                <div className="flex flex-col gap-2.5">
+                  {p.logo && (
+                    <div className={`flex items-center ${p.name === "Philistine" ? "h-14 md:h-20" : "h-11 md:h-14"}`}>
+                      <img
+                        src={p.logo}
+                        alt={`${p.name} logo`}
+                        className={`w-auto max-w-[140px] md:max-w-[180px] object-contain transition-transform duration-300 hover:scale-105 ${
+                          p.name === "Philistine" ? "h-14 md:h-20" : "h-10 md:h-12"
+                        }`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
                   )}
+                  <div
+                    className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
+                      p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
+                    } ${p.name === "The Story Lab" ? "font-serif italic text-ink !text-[32px] md:!text-[40px] tracking-normal" : ""}`}
+                  >
+                    {p.name}
+                    {p.name === "#ProjectYR" && (
+                      <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
+                        Flagship
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div>
                   <p

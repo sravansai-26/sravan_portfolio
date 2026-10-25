@@ -440,7 +440,7 @@ export default function Publications() {
                 LYFSpot Editions
               </span>
               <img
-                src="credentials/lyfspot-logo.webp"
+                src="/credentials/lyfspot-logo.webp"
                 alt="LYFSpot Logo"
                 className="h-10 w-10 rounded-full object-contain bg-white p-0.5 shadow-sm"
                 loading="lazy"

@@ -21,9 +21,9 @@ const experience = [
   {
     role: "DevCon Associate — Enterprise SAP Track",
     org: "Naxrita India — On-Site Internship Core, Hyderabad, TS",
-    logo: "/experience/naxritalogo.png",
-    width: 204,
-    height: 192,
+    logo: "/credentials/naxrita-transparent-dark.png",
+    width: 193,
+    height: 174,
     tenure: "March 2026 – May 2026 · 3 Months",
     bullets: [
       "Acquired extensive practical skills across the SAP ABAP ecosystem, building scalable, modern custom extensions within SAP S/4HANA enterprise frameworks.",

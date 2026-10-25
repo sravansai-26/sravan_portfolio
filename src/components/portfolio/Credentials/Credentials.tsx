@@ -58,6 +58,9 @@ const certs: Cred[] = [
   {
     title: "SAP Certified Associate — Back-End Developer · ABAP Cloud",
     org: "SAP SE",
+    logo: "/credentials/sap-lg.svg",
+    width: 148,
+    height: 74,
     meta: "Proctored Exam · C_P2WAB_2507",
     date: "Issued May 06, 2026 · Expires May 07, 2027",
     skills:
@@ -70,6 +73,9 @@ const certs: Cred[] = [
   {
     title: "IBM SkillsBuild · Cloud Computing Fundamentals",
     org: "IBM SkillsBuild",
+    logo: "/credentials/ibmskillsbuild-transparent.png",
+    width: 368,
+    height: 48,
     meta: "Professional Credential · Credly Verified",
     date: "Issued May 09, 2026",
     skills:
@@ -82,6 +88,9 @@ const certs: Cred[] = [
   {
     title: "Infosys Springboard Virtual Internship 6.0 — Banking Simulation",
     org: "Infosys Springboard",
+    logo: "/credentials/infosys-lg.svg",
+    width: 290,
+    height: 107,
     meta: "Cohort ID · B13",
     date: "Verified June 2026",
     skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
@@ -92,6 +101,9 @@ const certs: Cred[] = [
   {
     title: "ServiceNow Virtual Internship Program (AICTE Approved)",
     org: "ServiceNow Corporation",
+    logo: "/credentials/servicenow-lg.svg",
+    width: 685,
+    height: 100,
     meta: "Credential ID · SNU2020716",
     date: "Verified May 2026",
     skills:
@@ -102,6 +114,9 @@ const certs: Cred[] = [
   {
     title: "SAP ABAP on S/4HANA Technical Track — Naxrita DevCon",
     org: "Naxrita India · Emax Technologies · MLRIT",
+    logo: "/credentials/naxrita-transparent-dark.png",
+    width: 193,
+    height: 174,
     date: "Awarded May 09, 2026",
     meta: "18-Day Industry Readiness Program",
     skills:
@@ -112,6 +127,9 @@ const certs: Cred[] = [
   {
     title: "NPTEL Elite Certification — Industry 4.0 and Internet of Things",
     org: "National Programme on Technology Enhanced Learning (NPTEL) · IIT Kharagpur",
+    logo: "/credentials/nptel-transparent.png",
+    width: 268,
+    height: 80,
     meta: "Elite Certification · SWAYAM",
     date: "2026",
     skills:
@@ -122,6 +140,9 @@ const certs: Cred[] = [
   {
     title: "NPTEL Elite Certification — Cloud Computing Paradigms",
     org: "National Programme on Technology Enhanced Learning (NPTEL) · IIT Kharagpur",
+    logo: "/credentials/nptel-transparent.png",
+    width: 268,
+    height: 80,
     meta: "Elite Certification · 12-Week Course · 4 Credits",
     date: "Jan–Apr 2026 · Score: 72%",
     skills:
@@ -135,6 +156,9 @@ const honors: Cred[] = [
   {
     title: "National Level Cinema Hackathon Delegate & Presenter",
     org: "FISAT, Kerala · in coordination with Pauly Jr. Pictures",
+    logo: "/credentials/fisat-transparent.png",
+    width: 737,
+    height: 309,
     skills:
       "Pitch-presented and modeled Shotweave, leading multi-disciplinary software squads under strict hackathon timeline constraints.",
     projectOrigin: "Shotweave project origin",
@@ -144,6 +168,9 @@ const honors: Cred[] = [
   {
     title: "Executive Public Speaking Leadership Certification",
     org: "Elite Impact Foundation · endorsed by Sri Gampa Nageshwar Rao Garu",
+    logo: "/credentials/impact-transparent.png",
+    width: 219,
+    height: 64,
     skills:
       "Master-level verbal communications, group leadership capabilities, and strategic venture delivery skills.",
     file: "/credentials/eps-impact.pdf",
@@ -156,27 +183,29 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
     <motion.button
       {...fadeUp}
       onClick={onOpen}
-      className="group grid w-full grid-cols-[1fr_auto] items-start gap-6 border-t border-[color:var(--hairline)] py-7 text-left last:border-b"
+      className="group grid w-full grid-cols-[1fr_auto] items-start gap-4 md:gap-6 border-t border-[color:var(--hairline)] py-6 md:py-7 text-left last:border-b"
     >
-      <div>
-        <div className="font-display text-[18px] font-semibold tracking-[-0.01em] text-ink md:text-[20px]">
+      <div className="min-w-0">
+        <div className="font-display text-[17px] font-semibold tracking-[-0.01em] text-ink md:text-[20px]">
           {c.title}
         </div>
 
-        <div className="mt-3 flex items-center gap-4">
+        <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
           {c.logo && (
-            <img
-              src={c.logo}
-              alt={`${c.org} logo`}
-              className="h-14 w-auto shrink-0 object-contain"
-              loading="lazy"
-              decoding="async"
-              width={c.width}
-              height={c.height}
-            />
+            <div className="flex h-10 md:h-12 max-w-[120px] md:max-w-[150px] shrink-0 items-center justify-start">
+              <img
+                src={c.logo}
+                alt={`${c.org} logo`}
+                className="max-h-full max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
+                width={c.width}
+                height={c.height}
+              />
+            </div>
           )}
 
-          <div className="text-[14px] leading-relaxed text-ink-secondary">{c.org}</div>
+          <div className="text-[13.5px] md:text-[14px] leading-relaxed text-ink-secondary">{c.org}</div>
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
@@ -232,7 +261,16 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
               <h3 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink md:text-[24px]">
                 {c.title}
               </h3>
-              <div className="text-[14px] text-ink-secondary">{c.org}</div>
+              <div className="flex items-center gap-3">
+                {c.logo && (
+                  <img
+                    src={c.logo}
+                    alt={`${c.org} logo`}
+                    className="h-8 max-w-[110px] shrink-0 object-contain"
+                  />
+                )}
+                <div className="text-[14px] text-ink-secondary">{c.org}</div>
+              </div>
               <div className="flex flex-wrap gap-x-3 gap-y-2 font-mono text-[10.5px] uppercase tracking-wider text-ink-muted">
                 {c.date && <span className="flex items-center">{c.date}</span>}
                 {c.meta && <span className="flex items-center">{c.meta}</span>}
