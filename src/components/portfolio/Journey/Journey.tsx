@@ -122,14 +122,14 @@ export default function LyfspotJourney() {
       <SectionLabel>The LYFSpot Ecosystem · Oct 2020 – Present · 5y 9m</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         A decentralized product ecosystem that refines, simplifies, and elevates corporate, civic,
         and creative operations.
       </motion.h2>
 
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
-        <motion.div {...fadeUp} className="border-t border-[color:var(--hairline)] pt-6">
+        <motion.div {...fadeUp} className="border-t border-hairline pt-6">
           <div className="mono-label mb-3">Mission</div>
           <p className="text-[17px] leading-[1.7] text-ink">
             Transforming complex computational patterns into accessible, high-performance digital
@@ -139,7 +139,7 @@ export default function LyfspotJourney() {
         <motion.div
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
-          className="border-t border-[color:var(--hairline)] pt-6"
+          className="border-t border-hairline pt-6"
         >
           <div className="mono-label mb-3">Vision</div>
           <p className="text-[17px] leading-[1.7] text-ink">
@@ -158,13 +158,13 @@ export default function LyfspotJourney() {
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: i * 0.05 }}
               key={t.year}
-              className="grid grid-cols-[80px_minmax(0,1fr)] gap-6 border-t border-[color:var(--hairline)] py-8 md:grid-cols-[120px_220px_minmax(0,1fr)] md:gap-12 md:py-10"
+              className="grid grid-cols-[80px_minmax(0,1fr)] gap-6 border-t border-hairline py-8 md:grid-cols-[120px_220px_minmax(0,1fr)] md:gap-12 md:py-10"
             >
               <div className="font-mono text-[13px] text-ink-muted md:pt-1">{t.year}</div>
               <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px]">
                 {t.title}
               </div>
-              <div className="col-span-2 max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary md:col-span-1">
+              <div className="col-span-2 max-w-160 text-[16px] leading-[1.7] text-ink-secondary md:col-span-1">
                 {t.link ? (
                   <>
                     {t.body}
@@ -172,7 +172,7 @@ export default function LyfspotJourney() {
                       href={t.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[color:var(--accent-blue)] hover:underline font-medium"
+                      className="text-gold hover:underline font-medium"
                     >
                       {t.linkText}
                     </a>
@@ -196,12 +196,12 @@ export default function LyfspotJourney() {
               {...fadeUp}
               transition={{ ...fadeUp.transition, delay: i * 0.05 }}
               key={p.name}
-              className={`border-t border-[color:var(--hairline)] py-8 md:py-10 ${
-                p.name === "#ProjectYR" ? "bg-[color:var(--surface)]/30" : ""
-              } ${p.name === "The Story Lab" ? "bg-slate-100 rounded-[32px] border border-[color:var(--hairline)] my-6 px-6 md:px-12 py-12 shadow-sm relative overflow-hidden" : ""} ${i === pipeline.length - 1 && p.name !== "The Story Lab" ? "border-b" : ""}`}
+              className={`border-t border-hairline py-8 md:py-10 ${
+                p.name === "#ProjectYR" ? "bg-(--surface)/30" : ""
+              } ${p.name === "The Story Lab" ? "bg-slate-100 rounded-4xl border border-hairline my-6 px-6 md:px-12 py-12 shadow-sm relative overflow-hidden" : ""} ${i === pipeline.length - 1 && p.name !== "The Story Lab" ? "border-b" : ""}`}
             >
               {p.name === "The Story Lab" && (
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+                <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-indigo-500 to-purple-500" />
               )}
               {p.logo ? (
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-[260px_minmax(0,1fr)] md:gap-12 relative z-10">
@@ -213,8 +213,8 @@ export default function LyfspotJourney() {
                         alt={`${p.name} logo`}
                         className={`w-auto object-contain ${
                           p.name === "Philistine"
-                            ? "h-14 sm:h-16 max-w-[65px]"
-                            : "h-11 sm:h-12 max-w-[140px]"
+                            ? "h-14 sm:h-16 max-w-16.25"
+                            : "h-11 sm:h-12 max-w-35"
                         }`}
                         loading="lazy"
                         decoding="async"
@@ -232,8 +232,8 @@ export default function LyfspotJourney() {
                       alt={`${p.name} logo`}
                       className={`w-auto object-contain transition-transform duration-300 hover:scale-105 ${
                         p.name === "Philistine"
-                          ? "h-20 lg:h-24 max-w-[85px] lg:max-w-[100px]"
-                          : "h-14 lg:h-16 max-w-[180px] lg:max-w-[210px]"
+                          ? "h-20 lg:h-24 max-w-21.25 lg:max-w-25"
+                          : "h-14 lg:h-16 max-w-45 lg:max-w-52.5"
                       }`}
                       loading="lazy"
                       decoding="async"
@@ -245,7 +245,7 @@ export default function LyfspotJourney() {
                     <div className="hidden md:block font-display text-[24px] lg:text-[28px] font-semibold tracking-[-0.02em] text-ink mb-2.5">
                       {p.name}
                     </div>
-                    <p className="max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary">
+                    <p className="max-w-160 text-[16px] leading-[1.7] text-ink-secondary">
                       {p.body}
                     </p>
                     {p.cta && (
@@ -266,16 +266,16 @@ export default function LyfspotJourney() {
                   <div>
                     <div
                       className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
-                        p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
+                        p.name === "#ProjectYR" ? "text-(--accent-purple)" : ""
                       } ${
                         p.name === "The Story Lab"
-                          ? "font-serif italic text-ink !text-[32px] md:!text-[40px] tracking-normal"
+                          ? "font-serif italic text-ink text-[32px]! md:text-[40px]! tracking-normal"
                           : ""
                       }`}
                     >
                       {p.name}
                       {p.name === "#ProjectYR" && (
-                        <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
+                        <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-widest text-ink-muted bg-hairline px-2 py-0.5 rounded">
                           Flagship
                         </span>
                       )}
@@ -283,7 +283,7 @@ export default function LyfspotJourney() {
                   </div>
                   <div>
                     <p
-                      className={`max-w-[640px] text-[16px] leading-[1.7] ${
+                      className={`max-w-160 text-[16px] leading-[1.7] ${
                         p.name === "#ProjectYR"
                           ? "text-ink font-medium"
                           : p.name === "The Story Lab"
@@ -319,14 +319,14 @@ export default function LyfspotJourney() {
       {/* Network */}
       <div className="mt-20">
         <div className="mono-label mb-8">Executive Communication Network</div>
-        <div className="grid grid-cols-1 gap-px overflow-hidden border border-[color:var(--hairline)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px overflow-hidden border border-hairline sm:grid-cols-2 lg:grid-cols-3">
           {networks.map(({ Icon, label, href }) => (
             <a
               key={label}
               href={href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center justify-between gap-4 bg-[color:var(--background)] px-5 py-5 outline outline-1 outline-[color:var(--hairline)] transition-colors hover:bg-[color:var(--surface)]"
+              className="group flex items-center justify-between gap-4 bg-background px-5 py-5 outline outline-hairline transition-colors hover:bg-surface"
             >
               <span className="flex items-center gap-3">
                 <Icon width={18} height={18} className="text-ink-secondary" />

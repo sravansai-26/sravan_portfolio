@@ -28,11 +28,11 @@ export default function Footer() {
     { Icon: TelegramIcon, href: "https://t.me/uneducated26", label: "Telegram" },
   ];
   return (
-    <footer className="mt-20 border-t border-[color:var(--hairline)]">
+    <footer className="mt-20 border-t border-hairline">
       <Container className="py-16 md:py-20">
         {/* Philosophy quote */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]">
-          <div className="grid min-h-[420px] grid-cols-1 md:grid-cols-[0.85fr_1.15fr]">
+        <div className="relative overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]">
+          <div className="grid min-h-105 grid-cols-1 md:grid-cols-[0.85fr_1.15fr]">
             {/* Left Content */}
             <div className="relative z-20 flex flex-col justify-center p-8 md:px-12 md:py-14">
               <div className="mono-label mb-6">Philosophy · The Founder's Mantra</div>
@@ -41,7 +41,7 @@ export default function Footer() {
                 Work <span className="text-ink-muted">&amp;</span>{" "}
                 <span className="relative inline-block">
                   <span className="relative z-10">Enjoy!</span>
-                  <span className="absolute inset-x-0 bottom-2 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+                  <span className="absolute inset-x-0 bottom-2 z-0 h-2.5 rounded-full bg-(--accent-blue)/30" />
                 </span>{" "}
                 <span className="text-ink-muted">:)</span>
               </p>
@@ -55,7 +55,7 @@ export default function Footer() {
             </div>
 
             {/* Right Image */}
-            <div className="relative h-[340px] overflow-hidden md:h-full">
+            <div className="relative h-85 overflow-hidden md:h-full">
               <img
                 src={catImg}
                 alt="Work & Enjoy"
@@ -67,13 +67,13 @@ export default function Footer() {
               />
 
               {/* Soft blend into text */}
-              <div className="absolute inset-0 bg-gradient-to-r from-white via-white/18 to-transparent md:from-white/95 md:via-white/12 md:to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-r from-white via-white/18 to-transparent md:from-white/95 md:via-white/12 md:to-transparent" />
 
               {/* Premium vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/5" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-black/5" />
 
               {/* Soft highlight */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-transparent" />
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={label}
-                className="grid h-12 w-12 place-items-center rounded-full border border-[color:var(--hairline)] bg-white/40 text-ink-secondary backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:text-ink"
+                className="grid h-12 w-12 place-items-center rounded-full border border-hairline bg-white/40 text-ink-secondary backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:text-ink"
               >
                 <Icon width={20} height={20} />
               </a>
@@ -114,7 +114,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[color:var(--hairline)] pt-6 text-center">
+        <div className="mt-10 border-t border-hairline pt-6 text-center">
           <div className="font-['Roboto',sans-serif] text-[12px] uppercase tracking-[0.18em] text-ink-muted">
             © 2026 Sravan Sai Vuppula. All rights reserved.
           </div>

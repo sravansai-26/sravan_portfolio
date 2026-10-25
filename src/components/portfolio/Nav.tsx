@@ -28,10 +28,10 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
-          scrolled ? "bg-[color:var(--background)]/30 backdrop-blur-md" : "bg-transparent"
+          scrolled ? "bg-(--background)/30 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-6 py-4 md:px-10">
+        <div className="mx-auto flex max-w-375 items-center justify-between gap-6 px-6 py-4 md:px-10">
           <a href="#top" className="flex items-center gap-3 group">
             <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full transition-transform group-hover:scale-105">
               <img
@@ -65,7 +65,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
               <li>
                 <a
                   href="/story-lab"
-                  className="ml-1 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-slate-800 to-black px-3.5 py-1.5 font-serif text-[12.5px] italic text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/20"
+                  className="ml-1 flex items-center gap-1.5 rounded-full bg-linear-to-r from-slate-800 to-black px-3.5 py-1.5 font-serif text-[12.5px] italic text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-black/20"
                 >
                   Story Lab
                 </a>
@@ -76,7 +76,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
           <div className="flex items-center gap-3">
             <button
               onClick={onLaunchResume}
-              className="hidden items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/40 px-4 py-2 text-[12px] font-medium text-ink backdrop-blur transition-colors hover:bg-white/70 md:inline-flex"
+              className="hidden items-center gap-2 rounded-full border border-hairline bg-white/40 px-4 py-2 text-[12px] font-medium text-ink backdrop-blur transition-colors hover:bg-white/70 md:inline-flex"
             >
               <DocIcon width={14} height={14} /> View Resume
             </button>
@@ -92,7 +92,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
       </header>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-[color:var(--background)] px-6 py-6 lg:hidden">
+        <div className="fixed inset-0 z-50 flex flex-col bg-background px-6 py-6 lg:hidden">
           <div className="flex items-center justify-between">
             <span className="font-display text-[14px] font-semibold text-ink">Menu</span>
             <button
@@ -126,7 +126,7 @@ export function Nav({ onLaunchResume }: { onLaunchResume?: () => void }) {
                 startTransition(() => setOpen(false));
                 onLaunchResume?.();
               }}
-              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/60 px-4 py-2 text-[13px] font-medium text-ink"
+              className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-hairline bg-white/60 px-4 py-2 text-[13px] font-medium text-ink"
             >
               <DocIcon width={14} height={14} /> View Resume
             </button>

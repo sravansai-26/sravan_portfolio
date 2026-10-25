@@ -156,7 +156,7 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
     <motion.div
       {...fadeUp}
       transition={{ ...fadeUp.transition, delay: idx * 0.03 }}
-      className="border-t border-[color:var(--hairline)] last:border-b"
+      className="border-t border-hairline last:border-b"
     >
       <button
         onClick={() => startTransition(() => setOpen((o) => !o))}
@@ -203,11 +203,11 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
             transition={{ duration: 0.35 }}
             className="overflow-hidden"
           >
-            <div className="grid grid-cols-1 gap-8 pb-10 pl-11 pr-2 md:grid-cols-[1.4fr_1fr] md:gap-12 md:pl-[68px]">
+            <div className="grid grid-cols-1 gap-8 pb-10 pl-11 pr-2 md:grid-cols-[1.4fr_1fr] md:gap-12 md:pl-17">
               <div>
                 <p className="text-[16px] leading-[1.75] text-ink-secondary">{p.description}</p>
                 {p.note && (
-                  <p className="mt-4 border-l-2 border-[color:var(--hairline)] pl-4 text-[14px] italic leading-[1.7] text-ink-muted">
+                  <p className="mt-4 border-l-2 border-hairline pl-4 text-[14px] italic leading-[1.7] text-ink-muted">
                     {p.note}
                   </p>
                 )}
@@ -223,7 +223,7 @@ function ProjectRow({ p, idx }: { p: Project; idx: number }) {
                     href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex items-center justify-between gap-3 border-t border-[color:var(--hairline)] pt-3 text-[15px] text-ink transition-colors hover:text-accent"
+                    className="group flex items-center justify-between gap-3 border-t border-hairline pt-3 text-[15px] text-ink transition-colors hover:text-accent"
                   >
                     <span className="flex items-center gap-3">
                       <Icon width={16} height={16} />
@@ -251,7 +251,7 @@ export default function Work() {
       <SectionLabel>Project Repository · Interactive Showcases</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="mb-10 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="mb-10 max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Seven shipped products — civic, cinema, logistics, fintech, devops, and enterprise.
       </motion.h2>

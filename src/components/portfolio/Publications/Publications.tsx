@@ -63,7 +63,7 @@ export default function Publications() {
       <SectionLabel>Publications &amp; Literary Chronicles</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="mb-12 max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Written philosophy, industry essays, and creative pursuits.
       </motion.h2>
@@ -71,7 +71,7 @@ export default function Publications() {
       {/* SPECIAL LITERARY FEATURE: "కథలో..." STORY TEASER & DREAMLAUNCH */}
       <motion.div
         {...fadeUp}
-        className="mb-16 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)] p-8 md:p-12 lg:p-14"
+        className="mb-16 overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)] p-8 md:p-12 lg:p-14"
       >
         {/* 1. TOP SECTION: Horizontal 16:9 Cinema Video Player with YouTube Thumbnail Overlay */}
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/20 bg-slate-950 shadow-2xl">
@@ -131,16 +131,16 @@ export default function Publications() {
         <div className="mt-8 max-w-4xl">
           <div className="mono-label mb-3">Literary Chronicle · Original Story</div>
 
-          <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-[-0.025em] text-ink md:text-[44px]">
+          <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-tight text-ink md:text-[44px]">
             కథలో... —{" "}
             <span className="relative inline-block">
               <span className="relative z-10">The Way It Actually Happens</span>
-              <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+              <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-(--accent-blue)/30" />
             </span>
           </h3>
 
           {/* Telugu Excerpt Banner */}
-          <div className="mt-5 rounded-2xl border border-[color:var(--hairline)] bg-white/40 p-5 backdrop-blur-sm">
+          <div className="mt-5 rounded-2xl border border-hairline bg-white/40 p-5 backdrop-blur-sm">
             <p className="font-serif text-[16px] italic leading-relaxed text-ink md:text-[17px]">
               "మాటలు రాని ప్రేమకి, మౌనం రాసిన కథ ఇది... వస్తారని కాదు, కానీ మరచిపోవడం ఎలా అన్న ఆలోచన
               మాత్రమే అలానే మిగిలిపోయింది."
@@ -155,7 +155,7 @@ export default function Publications() {
           </p>
 
           {/* DreamLaunch Section with Original Logo & Creator Link */}
-          <div className="mt-5 flex flex-wrap items-center gap-3 rounded-2xl border border-[color:var(--hairline)] bg-white/30 p-4 backdrop-blur-sm">
+          <div className="mt-5 flex flex-wrap items-center gap-3 rounded-2xl border border-hairline bg-white/30 p-4 backdrop-blur-sm">
             {/* Clickable DreamLaunch Navigation Group */}
             <div
               onClick={handleScrollToDreamLaunch}
@@ -196,7 +196,7 @@ export default function Publications() {
         </div>
 
         {/* Bottom Actions Bar */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[color:var(--hairline)] pt-6">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-6">
           <div className="flex flex-wrap items-center gap-4">
             {!isPlayingTeaser ? (
               <button
@@ -216,7 +216,7 @@ export default function Publications() {
                     setIsPlayingTeaser(false);
                   }
                 }}
-                className="inline-flex items-center gap-2.5 rounded-full border border-[color:var(--hairline)] bg-white/50 px-7 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white cursor-pointer"
+                className="inline-flex items-center gap-2.5 rounded-full border border-hairline bg-white/50 px-7 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white cursor-pointer"
               >
                 Pause Video
               </button>
@@ -227,7 +227,7 @@ export default function Publications() {
               href={storyTeaserYoutubeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/50 px-6 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
+              className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white/50 px-6 py-3.5 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
             >
               <svg className="h-4 w-4 text-ink" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -250,13 +250,13 @@ export default function Publications() {
       {/* Featured Essay Article */}
       <motion.article
         {...fadeUp}
-        className="border-t border-[color:var(--hairline)] py-10 last:border-b"
+        className="border-t border-hairline py-10 last:border-b"
       >
         <div className="mono-label mb-3">Featured Professional Essay · Medium</div>
-        <h3 className="max-w-[820px] font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[32px]">
+        <h3 className="max-w-205 font-display text-[24px] font-bold tracking-[-0.02em] text-ink md:text-[32px]">
           The Uncharted Path — Rewriting the Rules of Learning for a Life of True Worth.
         </h3>
-        <p className="mt-4 max-w-[760px] text-[16px] leading-[1.75] text-ink-secondary">
+        <p className="mt-4 max-w-190 text-[16px] leading-[1.75] text-ink-secondary">
           An analytical dissection challenging rigid, traditional education paths. The essay
           advocates for autonomous project ownership, deliberate architectural exploration, and
           prioritizing real-world software engineering deployments over passive learning patterns.
@@ -275,10 +275,10 @@ export default function Publications() {
       {/* Ayn Rand - Objectivism Special Section */}
       <motion.div
         {...fadeUp}
-        className="mt-16 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
+        className="mt-16 overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
       >
         <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative min-h-[400px] overflow-hidden md:min-h-[500px]">
+          <div className="relative min-h-100 overflow-hidden md:min-h-125">
             <img
               src="credentials/ayn-rand-landscape.jpg"
               alt="Ayn Rand"
@@ -296,11 +296,11 @@ export default function Publications() {
           <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-14">
             <div className="mono-label mb-4">Special Feature · Objectivism</div>
 
-            <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-[-0.025em] text-ink md:text-[44px]">
+            <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-tight text-ink md:text-[44px]">
               Ayn Rand's{" "}
               <span className="relative inline-block">
                 <span className="relative z-10">Philosophy</span>
-                <span className="absolute inset-x-0 bottom-2 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+                <span className="absolute inset-x-0 bottom-2 z-0 h-2.5 rounded-full bg-(--accent-blue)/30" />
               </span>
             </h3>
 
@@ -335,7 +335,7 @@ export default function Publications() {
                 href={aynRandYoutubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[color:var(--hairline)] bg-white/50 px-6 py-3 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
+                className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white/50 px-6 py-3 text-[14px] font-medium text-ink transition-all hover:bg-white hover:shadow-md hover:scale-[1.02] group"
               >
                 <svg className="h-4 w-4 text-ink" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -350,7 +350,7 @@ export default function Publications() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-4">
-              <span className="h-px w-8 bg-[color:var(--hairline)]" />
+              <span className="h-px w-8 bg-hairline" />
               <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-ink-muted">
                 <span>PDF Collection</span>
                 <span className="opacity-30">·</span>
@@ -366,17 +366,17 @@ export default function Publications() {
       {/* STARTUP UNLOCKED - FEATURED PUBLICATION */}
       <motion.div
         {...fadeUp}
-        className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
+        className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative z-10 flex flex-col justify-center p-8 md:p-12 lg:p-14">
             <div className="mono-label mb-4">Foundational Knowledge · LYFSpot Reference</div>
 
-            <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-[-0.025em] text-ink md:text-[42px]">
+            <h3 className="font-display text-[32px] font-black leading-[1.08] tracking-tight text-ink md:text-[42px]">
               From Zero to Scale —{" "}
               <span className="relative inline-block">
                 <span className="relative z-10">A Real-World Startup Compendium</span>
-                <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-[color:var(--accent-blue)]/30" />
+                <span className="absolute inset-x-0 bottom-1.5 z-0 h-2.5 rounded-full bg-(--accent-blue)/30" />
               </span>
             </h3>
 
@@ -387,16 +387,16 @@ export default function Publications() {
             </p>
 
             <div className="mt-6 grid grid-cols-2 gap-3 font-mono text-[12px] text-ink-secondary">
-              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+              <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white/40 p-2.5">
                 <span className="font-bold text-ink">01</span> Incorporation &amp; Legal
               </div>
-              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+              <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white/40 p-2.5">
                 <span className="font-bold text-ink">02</span> Building the MVP
               </div>
-              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+              <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white/40 p-2.5">
                 <span className="font-bold text-ink">03</span> Unit Economics &amp; Moats
               </div>
-              <div className="flex items-center gap-2 rounded-xl border border-[color:var(--hairline)] bg-white/40 p-2.5">
+              <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white/40 p-2.5">
                 <span className="font-bold text-ink">04</span> A–Z Founder Glossary
               </div>
             </div>
@@ -419,7 +419,7 @@ export default function Publications() {
               </button>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-[color:var(--hairline)] pt-4">
+            <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-hairline pt-4">
               <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
                 37 Pages
               </span>
@@ -479,16 +479,16 @@ export default function Publications() {
       {/* Premium Redesigned Literary Reflections Section */}
       <motion.div
         {...fadeUp}
-        className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-gradient-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)]"
+        className="mt-12 overflow-hidden rounded-3xl border border-white/40 bg-linear-to-br from-white/60 to-white/15 backdrop-blur-xl shadow-[0_20px_50px_-30px_rgba(15,23,42,0.2)]"
       >
         <a
           href="https://sailyfspot.blogspot.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col md:flex-row md:items-center justify-between gap-6 px-8 py-8 md:py-10 bg-[color:var(--background)]/40 transition-all duration-300 hover:bg-[color:var(--surface)]/60"
+          className="group flex flex-col md:flex-row md:items-center justify-between gap-6 px-8 py-8 md:py-10 bg-(--background)/40 transition-all duration-300 hover:bg-(--surface)/60"
         >
           <div className="flex items-start md:items-center gap-5">
-            <div className="flex-shrink-0 rounded-2xl bg-ink/5 p-4 text-ink-secondary transition-all duration-300 group-hover:bg-ink group-hover:text-background shadow-sm">
+            <div className="shrink-0 rounded-2xl bg-ink/5 p-4 text-ink-secondary transition-all duration-300 group-hover:bg-ink group-hover:text-background shadow-sm">
               <BlogIcon width={24} height={24} />
             </div>
             <div>
@@ -496,14 +496,14 @@ export default function Publications() {
               <h4 className="font-display text-[22px] md:text-[26px] font-bold tracking-[-0.02em] text-ink leading-tight flex items-center gap-2">
                 Literary Reflections
               </h4>
-              <p className="mt-1.5 text-[14px] text-ink-secondary max-w-[600px] leading-relaxed hidden md:block">
+              <p className="mt-1.5 text-[14px] text-ink-secondary max-w-150 leading-relaxed hidden md:block">
                 A curated digital canvas exploring written cultural critique, architectural essays,
                 and creative expressions.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center justify-between border-t border-[color:var(--hairline)] pt-4 md:pt-0 md:border-0">
+          <div className="flex items-center justify-between border-t border-hairline pt-4 md:pt-0 md:border-0">
             <div className="flex flex-col items-start md:items-end md:mr-4">
               <span className="font-mono text-[13px] font-medium tracking-wide text-ink">
                 sailyfspot.blogspot.com
@@ -512,7 +512,7 @@ export default function Publications() {
                 Node Link
               </span>
             </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--hairline)] bg-background transition-all duration-300 group-hover:translate-x-1 group-hover:border-ink group-hover:bg-ink group-hover:text-background">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-background transition-all duration-300 group-hover:translate-x-1 group-hover:border-ink group-hover:bg-ink group-hover:text-background">
               <ArrowRight width={16} height={16} />
             </div>
           </div>

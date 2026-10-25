@@ -60,7 +60,7 @@ export default function Experience() {
 
       <motion.h2
         {...fadeUp}
-        className="mb-12 max-w-[900px] font-display text-[30px] font-bold leading-[1.08] tracking-[-0.025em] text-ink md:text-[44px]"
+        className="mb-12 max-w-225 font-display text-[30px] font-bold leading-[1.08] tracking-tight text-ink md:text-[44px]"
       >
         A corporate ledger of verified enterprise execution.
       </motion.h2>
@@ -71,18 +71,18 @@ export default function Experience() {
             key={e.role}
             {...fadeUp}
             transition={{ ...fadeUp.transition, delay: i * 0.05 }}
-            className="grid grid-cols-1 gap-6 border-t border-[color:var(--hairline)] py-10 md:grid-cols-[240px_minmax(0,1fr)] md:gap-12 last:border-b"
+            className="grid grid-cols-1 gap-6 border-t border-hairline py-10 md:grid-cols-[240px_minmax(0,1fr)] md:gap-12 last:border-b"
           >
             {/* Left Column */}
             <div>
               <div className="flex flex-col gap-4">
-                <div className="flex min-h-[56px] items-center">
+                <div className="flex min-h-14 items-center">
                   <img
                     src={e.logo}
                     alt={`${e.org} logo`}
                     className={`w-auto object-contain ${
                       e.org.includes("Naxrita")
-                        ? "h-9 md:h-10 max-w-[180px] md:max-w-[210px]"
+                        ? "h-9 md:h-10 max-w-45 md:max-w-52.5"
                         : "h-11"
                     }`}
                     loading="lazy"
@@ -114,7 +114,7 @@ export default function Experience() {
                     key={b}
                     className="grid grid-cols-[14px_1fr] gap-3 text-[16px] leading-[1.7] text-ink-secondary"
                   >
-                    <span className="mt-[10px] block h-[2px] w-[10px] bg-ink-muted" />
+                    <span className="mt-2.5 block h-0.5 w-2.5 bg-ink-muted" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -126,14 +126,14 @@ export default function Experience() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="mt-8 rounded-xl border border-[color:var(--hairline)] bg-white/30 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white/50 md:p-8"
+                  className="mt-8 rounded-xl border border-hairline bg-white/30 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white/50 md:p-8"
                 >
                   <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                     <div>
                       <h4 className="font-display text-[20px] font-bold text-ink md:text-[24px]">
                         {e.project.title}
                       </h4>
-                      <div className="mt-1 font-mono text-[13px] text-[color:var(--accent-blue)]">
+                      <div className="mt-1 font-mono text-[13px] text-gold">
                         {e.project.domain}
                       </div>
                     </div>
@@ -143,7 +143,7 @@ export default function Experience() {
                     {e.project.badges.map((badge) => (
                       <span
                         key={badge}
-                        className="code-tag !text-[11.5px] border border-[color:var(--hairline)] !bg-white/60 !py-1 !px-3"
+                        className="code-tag text-[11.5px]! border border-hairline bg-white/60! py-1! px-3!"
                       >
                         {badge}
                       </span>
@@ -163,7 +163,7 @@ export default function Experience() {
                             key={idx}
                             className="grid grid-cols-[14px_1fr] gap-3 text-[14px] leading-[1.6] text-ink-secondary"
                           >
-                            <span className="mt-[8px] block h-[2px] w-[10px] bg-ink-muted" />
+                            <span className="mt-2 block h-0.5 w-2.5 bg-ink-muted" />
                             <span>
                               <strong className="text-ink">{boldPart}:</strong> {rest}
                             </span>

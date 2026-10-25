@@ -47,7 +47,7 @@ export default function Contact() {
       <SectionLabel>Get in Touch · Direct Communication</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="mb-14 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[34px] md:text-[56px]"
+        className="mb-14 max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[34px] md:text-[56px]"
       >
         Let's build something{" "}
         <span className="font-mono font-medium tracking-[-0.02em] text-[0.78em] align-baseline">
@@ -77,7 +77,7 @@ export default function Contact() {
               <a
                 key={c.email}
                 href={`mailto:${c.email}`}
-                className="group block border-t border-[color:var(--hairline)] pt-4 last:border-b last:pb-4"
+                className="group block border-t border-hairline pt-4 last:border-b last:pb-4"
               >
                 <div className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
                   {c.label}
@@ -98,7 +98,7 @@ export default function Contact() {
         <motion.form
           {...fadeUp}
           onSubmit={onSubmit}
-          className="space-y-5 rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6 md:p-8"
+          className="space-y-5 rounded-sm border border-hairline bg-surface p-6 md:p-8"
         >
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Field name="name" label="Full Name" required />
@@ -170,7 +170,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="w-full border-b border-[color:var(--hairline)] bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+        className="w-full border-b border-hairline bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
       />
     </label>
   );
@@ -183,7 +183,7 @@ function SelectField({ name, label, options }: { name: string; label: string; op
       <select
         name={name}
         defaultValue=""
-        className="w-full border-b border-[color:var(--hairline)] bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+        className="w-full border-b border-hairline bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-ink"
       >
         <option value="" disabled>
           Select a subject
@@ -214,7 +214,7 @@ function TextAreaField({
         name={name}
         required={required}
         rows={5}
-        className="w-full resize-none border border-[color:var(--hairline)] bg-transparent p-3 text-[15px] text-ink outline-none transition-colors focus:border-ink"
+        className="w-full resize-none border border-hairline bg-transparent p-3 text-[15px] text-ink outline-none transition-colors focus:border-ink"
       />
     </label>
   );

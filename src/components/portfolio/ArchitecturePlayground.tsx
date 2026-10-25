@@ -124,7 +124,7 @@ export function ArchitecturePlayground() {
               className={`rounded-full border px-3.5 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.14em] transition-colors ${
                 i === active
                   ? "border-ink bg-ink text-background"
-                  : "border-[color:var(--hairline)] bg-white/40 text-ink-secondary hover:bg-white/70"
+                  : "border-hairline bg-white/40 text-ink-secondary hover:bg-white/70"
               }`}
               style={{ fontFamily: "Roboto, sans-serif" }}
             >
@@ -135,7 +135,7 @@ export function ArchitecturePlayground() {
         {focusNode && (
           <button
             onClick={() => setFocusNode(null)}
-            className="rounded-full border border-[color:var(--hairline)] bg-white/60 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-ink-secondary hover:bg-white"
+            className="rounded-full border border-hairline bg-white/60 px-3 py-1.5 text-[11px] uppercase tracking-[0.14em] text-ink-secondary hover:bg-white"
             style={{ fontFamily: "Roboto, sans-serif" }}
           >
             Clear focus
@@ -144,8 +144,8 @@ export function ArchitecturePlayground() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <div className="relative overflow-x-auto rounded-xl border border-[color:var(--hairline)] bg-gradient-to-br from-white/60 to-white/20 p-3">
-          <svg viewBox="0 0 990 410" className="w-full min-w-[720px]">
+        <div className="relative overflow-x-auto rounded-xl border border-hairline bg-linear-to-br from-white/60 to-white/20 p-3">
+          <svg viewBox="0 0 990 410" className="w-full min-w-180">
             <defs>
               <marker
                 id="arrow-active"
@@ -256,7 +256,7 @@ export function ArchitecturePlayground() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-[color:var(--hairline)] bg-white/50 p-5">
+        <div className="rounded-xl border border-hairline bg-white/50 p-5">
           <div className="mono-label mb-2">Active Flow</div>
           <div className="font-display text-[20px] font-bold text-ink">{flow.name}</div>
           <div className="font-['Roboto',sans-serif] mt-6 text-sm leading-relaxed text-slate-300">
@@ -265,7 +265,7 @@ export function ArchitecturePlayground() {
           <p className="mt-3 text-[13.5px] leading-[1.65] text-ink-secondary">{flow.summary}</p>
 
           {focusNode && (
-            <div className="mt-4 rounded-lg border border-[color:var(--accent-blue)]/30 bg-[color:var(--accent-blue)]/10 px-3 py-2 text-[12px] text-ink">
+            <div className="mt-4 rounded-lg border border-(--accent-blue)/30 bg-(--accent-blue)/10 px-3 py-2 text-[12px] text-ink">
               Focused on <span className="font-semibold">{layout[focusNode].label}</span> — showing
               only the routes that touch this node.
             </div>

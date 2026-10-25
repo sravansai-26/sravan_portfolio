@@ -190,7 +190,7 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
     <motion.button
       {...fadeUp}
       onClick={onOpen}
-      className="group grid w-full grid-cols-[1fr_auto] items-start gap-4 md:gap-6 border-t border-[color:var(--hairline)] py-6 md:py-7 text-left last:border-b"
+      className="group grid w-full grid-cols-[1fr_auto] items-start gap-4 md:gap-6 border-t border-hairline py-6 md:py-7 text-left last:border-b"
     >
       <div className="min-w-0">
         <div className="font-display text-[17px] font-semibold tracking-[-0.01em] text-ink md:text-[20px]">
@@ -202,7 +202,7 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
             <div
               className={`flex shrink-0 items-center justify-start ${c.org.includes("Vathsalya")
                 ? "h-16 w-16 md:h-20 md:w-20"
-                : "h-10 md:h-12 max-w-[140px] md:max-w-[170px]"
+                : "h-10 md:h-12 max-w-35 md:max-w-42.5"
                 }`}
             >
               <img
@@ -227,7 +227,7 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
           {c.gpa && <span>{c.gpa}</span>}
           {c.meta && <span>{c.meta}</span>}
           {c.projectOrigin && (
-            <span className="rounded border border-[color:var(--hairline)] bg-white/50 px-2 py-0.5 text-[color:var(--accent-blue)]">
+            <span className="rounded border border-hairline bg-white/50 px-2 py-0.5 text-gold">
               {c.projectOrigin}
             </span>
           )}
@@ -259,7 +259,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex max-h-[92vh] w-full max-w-[1080px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/95 shadow-2xl md:flex-row"
+            className="relative flex max-h-[92vh] w-full max-w-270 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/95 shadow-2xl md:flex-row"
           >
             <button
               onClick={onClose}
@@ -270,7 +270,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
             </button>
 
             {/* Metadata panel */}
-            <div className="flex w-full flex-col gap-3 overflow-y-auto p-6 md:w-[380px] md:shrink-0 md:border-r md:border-white/40 md:p-7">
+            <div className="flex w-full flex-col gap-3 overflow-y-auto p-6 md:w-95 md:shrink-0 md:border-r md:border-white/40 md:p-7">
               <div className="mono-label">System Live · Verified Credential</div>
               <h3 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink md:text-[24px]">
                 {c.title}
@@ -281,8 +281,8 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                     src={c.logo}
                     alt={`${c.org} logo`}
                     className={`shrink-0 object-contain ${c.org.includes("Vathsalya")
-                      ? "h-12 max-w-[120px]"
-                      : "h-8 max-w-[110px]"
+                      ? "h-12 max-w-30"
+                      : "h-8 max-w-27.5"
                       }`}
                   />
                 )}
@@ -293,7 +293,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                 {c.meta && <span className="flex items-center">{c.meta}</span>}
                 {c.gpa && <span className="flex items-center">{c.gpa}</span>}
                 {c.projectOrigin && (
-                  <span className="rounded border border-[color:var(--hairline)] bg-white/50 px-2 py-0.5 text-[color:var(--accent-blue)]">
+                  <span className="rounded border border-hairline bg-white/50 px-2 py-0.5 text-gold">
                     {c.projectOrigin}
                   </span>
                 )}
@@ -320,7 +320,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                     href={c.file}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--hairline)] bg-white/70 px-3.5 py-1.5 text-[12px] text-ink hover:bg-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-white/70 px-3.5 py-1.5 text-[12px] text-ink hover:bg-white"
                   >
                     Open file <ExternalLink width={12} height={12} />
                   </a>
@@ -329,7 +329,7 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
             </div>
 
             {/* Document viewer */}
-            <div className="grid min-h-[320px] flex-1 place-items-center bg-gradient-to-br from-white/40 to-white/10 p-3 md:min-h-0">
+            <div className="grid min-h-80 flex-1 place-items-center bg-linear-to-br from-white/40 to-white/10 p-3 md:min-h-0">
               {c.file && c.fileType === "image" && (
                 <img
                   src={c.file}
@@ -343,14 +343,14 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                   type="application/pdf"
                   className="h-[78vh] w-full rounded-lg border border-white/40 bg-white"
                 >
-                  <div className="flex h-full min-h-[320px] flex-col items-center justify-center rounded-lg border border-white/40 bg-white/60 p-6 text-center">
+                  <div className="flex h-full min-h-80 flex-col items-center justify-center rounded-lg border border-white/40 bg-white/60 p-6 text-center">
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-ink/5 text-ink-secondary">
                       <DocIcon width={32} height={32} />
                     </div>
                     <h4 className="mb-2 font-display text-lg font-semibold tracking-tight text-ink">
                       Document Ready
                     </h4>
-                    <p className="mb-6 max-w-[280px] text-[13.5px] leading-relaxed text-ink-muted">
+                    <p className="mb-6 max-w-70 text-[13.5px] leading-relaxed text-ink-muted">
                       Your mobile browser doesn't support inline PDF viewing.
                     </p>
                     <a
@@ -387,7 +387,7 @@ function Credentials() {
       <SectionLabel>Credentials · System-Live Verification Dashboard</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="mb-12 max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Every credential is verifiable. Click any certification to inspect its live metadata and
         original document.
