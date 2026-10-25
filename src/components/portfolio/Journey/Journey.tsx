@@ -203,15 +203,15 @@ export default function LyfspotJourney() {
               {p.name === "The Story Lab" && (
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
               )}
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12 relative z-10">
-                <div className="flex flex-col gap-2.5">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-[320px_minmax(0,1fr)] md:gap-12 relative z-10">
+                <div className="flex items-center gap-3.5 md:gap-4 flex-nowrap">
                   {p.logo && (
-                    <div className={`flex items-center ${p.name === "Philistine" ? "h-14 md:h-20" : "h-11 md:h-14"}`}>
+                    <div className="flex shrink-0 items-center justify-center">
                       <img
                         src={p.logo}
                         alt={`${p.name} logo`}
-                        className={`w-auto max-w-[140px] md:max-w-[180px] object-contain transition-transform duration-300 hover:scale-105 ${
-                          p.name === "Philistine" ? "h-14 md:h-20" : "h-10 md:h-12"
+                        className={`w-auto object-contain transition-transform duration-300 hover:scale-105 ${
+                          p.name === "Philistine" ? "h-11 md:h-12 max-w-[50px] md:max-w-[56px]" : "h-8 md:h-9 max-w-[70px] md:max-w-[80px]"
                         }`}
                         loading="lazy"
                         decoding="async"

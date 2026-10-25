@@ -21,6 +21,7 @@ type Cred = {
   projectOrigin?: string;
   file?: string;
   fileType?: "pdf" | "image";
+  hideOrgInRow?: boolean;
 };
 
 const academic: Cred[] = [
@@ -42,8 +43,8 @@ const academic: Cred[] = [
     title: "Diploma in Computer Science and Engineering",
     org: "Vathsalya Institute of Science and Technology, Anantharam, Bhongir",
     logo: "/projects/diplomalogo.png",
-    width: 238,
-    height: 212,
+    width: 163,
+    height: 183,
     meta: "SBTET Telangana · C21 Scheme",
     date: "2021 – 2024",
     gpa: "Cumulative GPA · 8.78 / 10.0",
@@ -61,6 +62,7 @@ const certs: Cred[] = [
     logo: "/credentials/sap-lg.svg",
     width: 148,
     height: 74,
+    hideOrgInRow: true,
     meta: "Proctored Exam · C_P2WAB_2507",
     date: "Issued May 06, 2026 · Expires May 07, 2027",
     skills:
@@ -76,6 +78,7 @@ const certs: Cred[] = [
     logo: "/credentials/ibmskillsbuild-transparent.png",
     width: 368,
     height: 48,
+    hideOrgInRow: true,
     meta: "Professional Credential · Credly Verified",
     date: "Issued May 09, 2026",
     skills:
@@ -91,6 +94,7 @@ const certs: Cred[] = [
     logo: "/credentials/infosys-lg.svg",
     width: 290,
     height: 107,
+    hideOrgInRow: true,
     meta: "Cohort ID · B13",
     date: "Verified June 2026",
     skills: "Enterprise Java Solutions, Spring Boot Integration, React Client-Side Interfacing.",
@@ -104,6 +108,7 @@ const certs: Cred[] = [
     logo: "/credentials/servicenow-lg.svg",
     width: 685,
     height: 100,
+    hideOrgInRow: true,
     meta: "Credential ID · SNU2020716",
     date: "Verified May 2026",
     skills:
@@ -114,9 +119,9 @@ const certs: Cred[] = [
   {
     title: "SAP ABAP on S/4HANA Technical Track — Naxrita DevCon",
     org: "Naxrita India · Emax Technologies · MLRIT",
-    logo: "/credentials/naxrita-transparent-dark.png",
-    width: 193,
-    height: 174,
+    logo: "/credentials/naxrita-lg.png",
+    width: 376,
+    height: 62,
     date: "Awarded May 09, 2026",
     meta: "18-Day Industry Readiness Program",
     skills:
@@ -130,6 +135,7 @@ const certs: Cred[] = [
     logo: "/credentials/nptel-transparent.png",
     width: 268,
     height: 80,
+    hideOrgInRow: true,
     meta: "Elite Certification · SWAYAM",
     date: "2026",
     skills:
@@ -143,6 +149,7 @@ const certs: Cred[] = [
     logo: "/credentials/nptel-transparent.png",
     width: 268,
     height: 80,
+    hideOrgInRow: true,
     meta: "Elite Certification · 12-Week Course · 4 Credits",
     date: "Jan–Apr 2026 · Score: 72%",
     skills:
@@ -192,7 +199,13 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
 
         <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
           {c.logo && (
-            <div className="flex h-10 md:h-12 max-w-[120px] md:max-w-[150px] shrink-0 items-center justify-start">
+            <div
+              className={`flex shrink-0 items-center justify-start ${
+                c.org.includes("Vathsalya")
+                  ? "h-16 w-16 md:h-20 md:w-20"
+                  : "h-10 md:h-12 max-w-[140px] md:max-w-[170px]"
+              }`}
+            >
               <img
                 src={c.logo}
                 alt={`${c.org} logo`}
@@ -205,7 +218,9 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
             </div>
           )}
 
-          <div className="text-[13.5px] md:text-[14px] leading-relaxed text-ink-secondary">{c.org}</div>
+          {!c.hideOrgInRow && (
+            <div className="text-[13.5px] md:text-[14px] leading-relaxed text-ink-secondary">{c.org}</div>
+          )}
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-wider text-ink-muted">
@@ -266,7 +281,11 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                   <img
                     src={c.logo}
                     alt={`${c.org} logo`}
-                    className="h-8 max-w-[110px] shrink-0 object-contain"
+                    className={`shrink-0 object-contain ${
+                      c.org.includes("Vathsalya")
+                        ? "h-12 max-w-[120px]"
+                        : "h-8 max-w-[110px]"
+                    }`}
                   />
                 )}
                 <div className="text-[14px] text-ink-secondary">{c.org}</div>
