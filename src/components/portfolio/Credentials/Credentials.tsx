@@ -144,7 +144,7 @@ const certs: Cred[] = [
     fileType: "pdf",
   },
   {
-    title: "NPTEL Elite Certification — Cloud Computing Paradigms",
+    title: "NPTEL Elite Certification — Cloud Computing",
     org: "National Programme on Technology Enhanced Learning (NPTEL) · IIT Kharagpur",
     logo: "/credentials/nptel-transparent.png",
     width: 268,
@@ -200,11 +200,10 @@ function CredentialRow({ c, onOpen }: { c: Cred; onOpen: () => void }) {
         <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
           {c.logo && (
             <div
-              className={`flex shrink-0 items-center justify-start ${
-                c.org.includes("Vathsalya")
-                  ? "h-16 w-16 md:h-20 md:w-20"
-                  : "h-10 md:h-12 max-w-[140px] md:max-w-[170px]"
-              }`}
+              className={`flex shrink-0 items-center justify-start ${c.org.includes("Vathsalya")
+                ? "h-16 w-16 md:h-20 md:w-20"
+                : "h-10 md:h-12 max-w-[140px] md:max-w-[170px]"
+                }`}
             >
               <img
                 src={c.logo}
@@ -281,11 +280,10 @@ function CredentialModal({ c, onClose }: { c: Cred | null; onClose: () => void }
                   <img
                     src={c.logo}
                     alt={`${c.org} logo`}
-                    className={`shrink-0 object-contain ${
-                      c.org.includes("Vathsalya")
-                        ? "h-12 max-w-[120px]"
-                        : "h-8 max-w-[110px]"
-                    }`}
+                    className={`shrink-0 object-contain ${c.org.includes("Vathsalya")
+                      ? "h-12 max-w-[120px]"
+                      : "h-8 max-w-[110px]"
+                      }`}
                   />
                 )}
                 <div className="text-[14px] text-ink-secondary">{c.org}</div>
