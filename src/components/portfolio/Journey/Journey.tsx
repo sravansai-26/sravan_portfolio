@@ -203,55 +203,114 @@ export default function LyfspotJourney() {
               {p.name === "The Story Lab" && (
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
               )}
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-[320px_minmax(0,1fr)] md:gap-12 relative z-10">
-                <div className="flex items-center gap-3.5 md:gap-4 flex-nowrap">
-                  {p.logo && (
-                    <div className="flex shrink-0 items-center justify-center">
+              {p.logo ? (
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-[260px_minmax(0,1fr)] md:gap-12 relative z-10">
+                  {/* Mobile View: Logo on left, Name completely on right */}
+                  <div className="flex md:hidden items-center justify-between w-full gap-4">
+                    <div className="flex shrink-0 items-center justify-start">
                       <img
                         src={p.logo}
                         alt={`${p.name} logo`}
-                        className={`w-auto object-contain transition-transform duration-300 hover:scale-105 ${
-                          p.name === "Philistine" ? "h-11 md:h-12 max-w-[50px] md:max-w-[56px]" : "h-8 md:h-9 max-w-[70px] md:max-w-[80px]"
+                        className={`w-auto object-contain ${
+                          p.name === "Philistine"
+                            ? "h-14 sm:h-16 max-w-[65px]"
+                            : "h-11 sm:h-12 max-w-[140px]"
                         }`}
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
-                  )}
-                  <div
-                    className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
-                      p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
-                    } ${p.name === "The Story Lab" ? "font-serif italic text-ink !text-[32px] md:!text-[40px] tracking-normal" : ""}`}
-                  >
-                    {p.name}
-                    {p.name === "#ProjectYR" && (
-                      <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
-                        Flagship
-                      </span>
+                    <div className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink text-right">
+                      {p.name}
+                    </div>
+                  </div>
+
+                  {/* Desktop View: Left column with enlarged logo */}
+                  <div className="hidden md:flex items-center justify-start">
+                    <img
+                      src={p.logo}
+                      alt={`${p.name} logo`}
+                      className={`w-auto object-contain transition-transform duration-300 hover:scale-105 ${
+                        p.name === "Philistine"
+                          ? "h-20 lg:h-24 max-w-[85px] lg:max-w-[100px]"
+                          : "h-14 lg:h-16 max-w-[180px] lg:max-w-[210px]"
+                      }`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  {/* Right column: Name above description on desktop, description, and CTA */}
+                  <div>
+                    <div className="hidden md:block font-display text-[24px] lg:text-[28px] font-semibold tracking-[-0.02em] text-ink mb-2.5">
+                      {p.name}
+                    </div>
+                    <p className="max-w-[640px] text-[16px] leading-[1.7] text-ink-secondary">
+                      {p.body}
+                    </p>
+                    {p.cta && (
+                      <a
+                        href={p.cta.href}
+                        target={p.cta.href.startsWith("/") ? "_self" : "_blank"}
+                        rel={p.cta.href.startsWith("/") ? undefined : "noreferrer"}
+                        className="mt-6 inline-flex items-center gap-3 text-[15px] editorial-link"
+                      >
+                        <SparkIcon width={14} height={14} /> {p.cta.label}{" "}
+                        <ArrowRight width={14} height={14} />
+                      </a>
                     )}
                   </div>
                 </div>
-                <div>
-                  <p
-                    className={`max-w-[640px] text-[16px] leading-[1.7] ${
-                      p.name === "#ProjectYR" ? "text-ink font-medium" : p.name === "The Story Lab" ? "text-ink-secondary font-light text-[18px]" : "text-ink-secondary"
-                    }`}
-                  >
-                    {p.body}
-                  </p>
-                  {p.cta && (
-                    <a
-                      href={p.cta.href}
-                      target={p.cta.href.startsWith('/') ? "_self" : "_blank"}
-                      rel={p.cta.href.startsWith('/') ? undefined : "noreferrer"}
-                      className={`mt-6 inline-flex items-center gap-3 text-[15px] ${p.name === "The Story Lab" ? "bg-ink text-white px-6 py-3 rounded-full font-semibold transition-transform hover:scale-105" : "editorial-link"}`}
+              ) : (
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-[280px_minmax(0,1fr)] md:gap-12 relative z-10">
+                  <div>
+                    <div
+                      className={`font-display text-[22px] font-semibold tracking-[-0.02em] text-ink md:text-[26px] ${
+                        p.name === "#ProjectYR" ? "text-[color:var(--accent-purple)]" : ""
+                      } ${
+                        p.name === "The Story Lab"
+                          ? "font-serif italic text-ink !text-[32px] md:!text-[40px] tracking-normal"
+                          : ""
+                      }`}
                     >
-                      <SparkIcon width={14} height={14} /> {p.cta.label}{" "}
-                      {p.name !== "The Story Lab" && <ArrowRight width={14} height={14} />}
-                    </a>
-                  )}
+                      {p.name}
+                      {p.name === "#ProjectYR" && (
+                        <span className="ml-2 inline-block text-[11px] font-mono uppercase tracking-[0.1em] text-ink-muted bg-[color:var(--hairline)] px-2 py-0.5 rounded">
+                          Flagship
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <p
+                      className={`max-w-[640px] text-[16px] leading-[1.7] ${
+                        p.name === "#ProjectYR"
+                          ? "text-ink font-medium"
+                          : p.name === "The Story Lab"
+                          ? "text-ink-secondary font-light text-[18px]"
+                          : "text-ink-secondary"
+                      }`}
+                    >
+                      {p.body}
+                    </p>
+                    {p.cta && (
+                      <a
+                        href={p.cta.href}
+                        target={p.cta.href.startsWith("/") ? "_self" : "_blank"}
+                        rel={p.cta.href.startsWith("/") ? undefined : "noreferrer"}
+                        className={`mt-6 inline-flex items-center gap-3 text-[15px] ${
+                          p.name === "The Story Lab"
+                            ? "bg-ink text-white px-6 py-3 rounded-full font-semibold transition-transform hover:scale-105"
+                            : "editorial-link"
+                        }`}
+                      >
+                        <SparkIcon width={14} height={14} /> {p.cta.label}{" "}
+                        {p.name !== "The Story Lab" && <ArrowRight width={14} height={14} />}
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </motion.div>
           ))}
         </div>
