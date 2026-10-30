@@ -60,18 +60,17 @@
   }
   #glcanvas:active { cursor: grabbing; }
 
-  .hud-header {
+  /* Floating Telemetry & HUD Overlays */
+  .top-left-hud {
     position: absolute;
     top: 12px;
     left: 12px;
-    right: 12px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    flex-direction: column;
+    gap: 7px;
+    z-index: 15;
     pointer-events: none;
-    z-index: 10;
+    max-width: min(340px, calc(100% - 165px));
   }
   .brand-card {
     pointer-events: auto;
@@ -80,61 +79,141 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--panel-border);
     border-radius: 12px;
-    padding: 8px 12px;
+    padding: 6px 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
-  .brand-title { font-size: 0.88rem; font-weight: 700; letter-spacing: -0.01em; }
-  .brand-sub { font-size: 0.70rem; color: var(--text-muted); margin-top: 1px; }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .brand-title {
+    font-size: 0.80rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-sub {
+    font-size: 0.63rem;
+    color: var(--text-muted);
+    margin-top: 1.5px;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .spec-badge {
-    font-size: 0.70rem;
-    font-weight: 600;
-    padding: 3px 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2.5px 7px;
     border-radius: 999px;
     background: var(--badge-bg);
     color: var(--badge-text);
+    border: 1px solid rgba(52, 211, 153, 0.3);
     white-space: nowrap;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
   }
-  .top-actions {
+
+  /* Left Telemetry Specs Card */
+  .telemetry-panel {
     pointer-events: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
     background: var(--panel-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--panel-border);
     border-radius: 12px;
-    padding: 5px 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  }
-
-  .telemetry-panel {
-    position: absolute;
-    top: 68px;
-    left: 12px;
-    pointer-events: auto;
-    background: var(--panel-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--panel-border);
-    border-radius: 12px;
-    padding: 8px 12px;
-    font-size: 0.71rem;
+    padding: 8px 10px;
+    font-size: 0.67rem;
     line-height: 1.45;
     color: var(--text-muted);
-    z-index: 10;
-    max-width: 235px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    width: 210px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
   }
-  .telemetry-panel strong { color: var(--text-main); font-weight: 600; }
-  .telemetry-panel.force-hidden { display: none !important; }
-  .telemetry-panel.force-visible { display: block !important; }
+  .telemetry-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .telemetry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .telemetry-key {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .telemetry-val {
+    color: var(--text-main);
+    font-weight: 500;
+    text-align: right;
+  }
+  .telemetry-controls {
+    margin-top: 6px;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 5px;
+    font-size: 0.63rem;
+    line-height: 1.35;
+    color: var(--text-muted);
+  }
+  .telemetry-controls strong {
+    color: var(--text-main);
+  }
+  .telemetry-panel.force-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-6px) scale(0.97) !important;
+    visibility: hidden !important;
+    display: none !important;
+  }
+  .telemetry-panel.force-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+    visibility: visible !important;
+    display: block !important;
+  }
 
+  /* Top Right Controls */
+  .top-right-hud {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 15;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .top-actions {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 3.5px 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+  .top-actions button.ctrl-btn {
+    padding: 3.5px 7px;
+    font-size: 0.68rem;
+  }
   .toolbar-wrap {
     position: absolute;
     bottom: 12px;
@@ -147,9 +226,7 @@
   }
   .toolbar {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     gap: 4px;
     background: var(--panel-bg);
     backdrop-filter: blur(14px);
@@ -158,8 +235,15 @@
     border-radius: 14px;
     padding: 5px 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.30);
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .toolbar-divider { width: 1px; height: 18px; background: var(--panel-border); margin: 0 2px; }
+  .toolbar::-webkit-scrollbar {
+    display: none;
+  }
+  .toolbar-divider { width: 1px; height: 18px; background: var(--panel-border); margin: 0 2px; flex-shrink: 0; }
   button.ctrl-btn, label.ctrl-btn {
     appearance: none;
     border: 1px solid transparent;
@@ -242,12 +326,96 @@
     margin-bottom: 16px;
   }
 
+  @media (max-width: 680px) {
+    .top-left-hud {
+      top: 10px;
+      left: 10px;
+      max-width: calc(100% - 150px);
+    }
+    .top-right-hud {
+      top: 10px;
+      right: 10px;
+    }
+    .brand-card {
+      padding: 5px 8px;
+      gap: 6px;
+    }
+    .brand-title {
+      font-size: 0.75rem;
+    }
+    .brand-sub {
+      font-size: 0.59rem;
+    }
+    .spec-badge {
+      font-size: 0.62rem;
+      padding: 2px 6px;
+    }
+    .top-actions {
+      padding: 3px 5px;
+      gap: 3px;
+    }
+    .top-actions button.ctrl-btn {
+      padding: 3px 5px;
+      font-size: 0.64rem;
+    }
+    .telemetry-panel {
+      width: 175px;
+      font-size: 0.61rem;
+      padding: 6px 8px;
+    }
+    .telemetry-controls {
+      font-size: 0.58rem;
+    }
+    .toolbar-wrap {
+      bottom: 8px;
+      max-width: calc(100vw - 16px);
+    }
+    .toolbar button.ctrl-btn {
+      padding: 3.5px 6px;
+      font-size: 0.64rem;
+    }
+  }
+
   @media (max-width: 520px) {
-    .telemetry-panel { display: none; }
-    .brand-sub { display: none; }
-    .hud-header { top: 8px; left: 8px; right: 8px; }
-    .toolbar-wrap { bottom: 8px; }
-    button.ctrl-btn, label.ctrl-btn { padding: 4px 7px; font-size: 0.68rem; }
+    .top-left-hud {
+      top: 8px;
+      left: 8px;
+      max-width: calc(100% - 130px);
+    }
+    .top-right-hud {
+      top: 8px;
+      right: 8px;
+    }
+    .brand-card {
+      padding: 4px 7px;
+      gap: 6px;
+    }
+    .brand-title {
+      font-size: 0.70rem;
+    }
+    .brand-sub {
+      display: none;
+    }
+    .spec-badge {
+      font-size: 0.60rem;
+      padding: 1.5px 5px;
+    }
+    #btn-checker {
+      display: none !important;
+    }
+    .top-actions button.ctrl-btn {
+      padding: 2.5px 5px;
+      font-size: 0.62rem;
+    }
+    .telemetry-panel {
+      width: 165px;
+      font-size: 0.59rem;
+      padding: 6px 8px;
+    }
+    .toolbar button.ctrl-btn {
+      padding: 3px 5px;
+      font-size: 0.61rem;
+    }
   }
 </style>
 </head>
@@ -270,37 +438,40 @@
     </p>
   </div>
 
-  <header class="hud-header">
-    <div class="brand-card">
-      <div>
+  <!-- Top-Left Floating Frosted-Glass Overlay Boxes -->
+  <div class="top-left-hud">
+    <!-- 1. Top-Left Title & Status Box -->
+    <div class="brand-card" id="brand-card">
+      <div class="brand-text">
         <div class="brand-title">Interactive 3D Character Model</div>
-        <div class="brand-sub">glTF 2.0 PBR • 1.75 m Scale • 80,000 Verts • 160,000 Tris • 360° Multi-View</div>
+        <div class="brand-sub">glTF 2.0 PBR • 1.75 m Scale • 160k Tris • 360° Multi-View</div>
       </div>
       <span class="spec-badge" id="fps-badge" aria-label="Frame rate indicator">60 FPS</span>
     </div>
 
-    <div class="top-actions" role="toolbar" aria-label="Viewer settings and file controls">
-      <button type="button" class="ctrl-btn" id="btn-download-glb" style="background:#0284c7;color:#fff;" aria-label="Download colored character.glb file">Download Colored .GLB</button>
-      <button type="button" class="ctrl-btn" id="btn-telemetry" aria-label="Toggle specifications panel">Specs</button>
-      <button type="button" class="ctrl-btn" id="btn-checker" aria-label="Toggle UV checker texture" aria-pressed="false">UV Checker</button>
-      <button type="button" class="ctrl-btn" id="btn-theme" aria-label="Toggle outdoor meadow and dark studio theme">Dark Studio</button>
-      <label class="ctrl-btn" for="glb-file-input" aria-label="Load local GLB file">
-        Load .GLB
-        <input type="file" id="glb-file-input" accept=".glb,.gltf" style="display:none;">
-      </label>
-    </div>
-  </header>
+    <!-- 2. Left Telemetry Specs Card -->
+    <aside class="telemetry-panel" id="telemetry-panel" aria-label="Model specifications and keyboard shortcuts">
+      <div class="telemetry-grid">
+        <div class="telemetry-row"><span class="telemetry-key">Height:</span> <span class="telemetry-val">1.75 m</span></div>
+        <div class="telemetry-row"><span class="telemetry-key">Origin:</span> <span class="telemetry-val">(0, 0, 0) Ground Center</span></div>
+        <div class="telemetry-row"><span class="telemetry-key">Topology:</span> <span class="telemetry-val"><span id="stat-tris">160,000</span> Tris Smoothed</span></div>
+        <div class="telemetry-row"><span class="telemetry-key">Materials:</span> <span class="telemetry-val"><span id="stat-mats">8</span> PBR Regions</span></div>
+      </div>
+      <div class="telemetry-controls">
+        <strong>Controls:</strong> Drag to Orbit, Scroll/Pinch to Zoom, Arrow Keys Rotate, +/- Zoom, R Reset
+      </div>
+    </aside>
+  </div>
 
-  <aside class="telemetry-panel" aria-label="Model specifications and keyboard shortcuts">
-    <div><strong>Height:</strong> 1.75 m (+Y Up, +Z Front)</div>
-    <div><strong>Weight:</strong> 88 kg (Sturdy Stylized Build)</div>
-    <div><strong>Origin:</strong> (0, 0, 0) Ground Center</div>
-    <div><strong>Topology:</strong> <span id="stat-tris">160,000</span> Tris (Smoothed Manifold)</div>
-    <div><strong>Materials:</strong> <span id="stat-mats">8</span> PBR Regions</div>
-    <div style="margin-top:6px;border-top:1px solid var(--panel-border);padding-top:6px;">
-      <strong>Controls:</strong> Drag to Orbit • Scroll/Pinch to Zoom • Arrow Keys Rotate • <strong>+/-</strong> Zoom • <strong>R</strong> Reset
+  <!-- Top-Right Actions -->
+  <div class="top-right-hud">
+    <div class="top-actions" role="toolbar" aria-label="Viewer settings and controls">
+      <button type="button" class="ctrl-btn active" id="btn-telemetry" aria-label="Toggle telemetry panel">Specs</button>
+      <button type="button" class="ctrl-btn" id="btn-theme" aria-label="Toggle lighting theme">Dark Studio</button>
+      <button type="button" class="ctrl-btn" id="btn-checker" aria-label="Toggle UV checker texture" aria-pressed="false">UV</button>
+      <button type="button" class="ctrl-btn download-btn" id="btn-download-glb" style="background:#0284c7;color:#fff;" aria-label="Download character.glb">.GLB</button>
     </div>
-  </aside>
+  </div>
 
   <canvas id="glcanvas" tabindex="0" aria-label="Interactive 3D character canvas. Use mouse drag or arrow keys to orbit, scroll or plus and minus keys to zoom."></canvas>
 
@@ -976,12 +1147,12 @@
   }
 
   const PRESETS = {
-    front:         { yaw: 0.0,              pitch: 0.02,  dist: 3.35, target: [0.0, 0.84, 0.0], fov: 38 },
-    back:          { yaw: Math.PI,          pitch: 0.02,  dist: 3.35, target: [0.0, 0.84, 0.0], fov: 38 },
-    left:          { yaw: Math.PI * 0.5,    pitch: 0.02,  dist: 3.35, target: [0.0, 0.84, 0.0], fov: 38 },
-    right:         { yaw: -Math.PI * 0.5,   pitch: 0.02,  dist: 3.35, target: [0.0, 0.84, 0.0], fov: 38 },
-    top:           { yaw: 0.0,              pitch: 1.48,  dist: 3.40, target: [0.0, 0.88, 0.0], fov: 34 },
-    three_quarter: { yaw: -0.68,            pitch: 0.08,  dist: 3.35, target: [0.0, 0.84, 0.0], fov: 38 },
+    front:         { yaw: 0.0,              pitch: 0.02,  dist: 3.55, target: [0.0, 0.82, 0.0], fov: 36 },
+    back:          { yaw: Math.PI,          pitch: 0.02,  dist: 3.55, target: [0.0, 0.82, 0.0], fov: 36 },
+    left:          { yaw: Math.PI * 0.5,    pitch: 0.02,  dist: 3.55, target: [0.0, 0.82, 0.0], fov: 36 },
+    right:         { yaw: -Math.PI * 0.5,   pitch: 0.02,  dist: 3.55, target: [0.0, 0.82, 0.0], fov: 36 },
+    top:           { yaw: 0.0,              pitch: 1.48,  dist: 3.50, target: [0.0, 0.88, 0.0], fov: 34 },
+    three_quarter: { yaw: -0.68,            pitch: 0.08,  dist: 3.55, target: [0.0, 0.82, 0.0], fov: 36 },
     face:          { yaw: 0.00,             pitch: 0.02,  dist: 0.86, target: [0.0, 1.42, 0.08], fov: 35 },
     collar:        { yaw: 0.00,             pitch: 0.02,  dist: 0.82, target: [0.0, 1.04, 0.10], fov: 35 },
     tie:           { yaw: 0.00,             pitch: 0.02,  dist: 0.82, target: [0.0, 1.04, 0.10], fov: 35 },
@@ -1189,24 +1360,30 @@
     });
   }
 
-    const btnTelemetry = document.getElementById('btn-telemetry');
-  const telemetryPanel = document.querySelector('.telemetry-panel');
+  const btnTelemetry = document.getElementById('btn-telemetry');
+  const telemetryPanel = document.getElementById('telemetry-panel');
   if (btnTelemetry && telemetryPanel) {
+    if (window.innerWidth < 520) {
+      telemetryPanel.classList.add('force-hidden');
+      telemetryPanel.classList.remove('force-visible');
+      btnTelemetry.classList.remove('active');
+    }
+
     btnTelemetry.addEventListener('click', () => {
-      const isVisible = getComputedStyle(telemetryPanel).display !== 'none';
-      if (isVisible) {
+      const isHidden = telemetryPanel.classList.contains('force-hidden') || getComputedStyle(telemetryPanel).display === 'none';
+      if (isHidden) {
+        telemetryPanel.classList.remove('force-hidden');
+        telemetryPanel.classList.add('force-visible');
+        btnTelemetry.classList.add('active');
+      } else {
         telemetryPanel.classList.add('force-hidden');
         telemetryPanel.classList.remove('force-visible');
         btnTelemetry.classList.remove('active');
-      } else {
-        telemetryPanel.classList.add('force-visible');
-        telemetryPanel.classList.remove('force-hidden');
-        btnTelemetry.classList.add('active');
       }
     });
   }
 
-  const btnChecker = document.getElementById('btn-checker');
+    const btnChecker = document.getElementById('btn-checker');
   btnChecker.addEventListener('click', () => {
     useChecker = !useChecker;
     btnChecker.classList.toggle('active', useChecker);
@@ -1217,16 +1394,19 @@
   btnTheme.addEventListener('click', () => {
     darkTheme = !darkTheme;
     document.body.classList.toggle('light-theme', !darkTheme);
-    btnTheme.textContent = darkTheme ? 'Sunny Meadow' : 'Dark Studio';
+    btnTheme.textContent = darkTheme ? 'Meadow' : 'Dark Studio';
   });
 
-  document.getElementById('glb-file-input').addEventListener('change', async (e) => {
+  const glbFileInput = document.getElementById('glb-file-input');
+  if (glbFileInput) {
+    glbFileInput.addEventListener('change', async (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
     loadingOverlay.classList.remove('hidden');
     const buf = await file.arrayBuffer();
     await parseAndLoadGLB(buf);
-  });
+    });
+  }
 
   function mat4Perspective(fovY, aspect, near, far) {
     const f = 1.0 / Math.tan(fovY / 2.0);
@@ -1313,7 +1493,9 @@
     const eye = [ex, ey, ez];
 
     const nearClip = Math.max(0.02, Math.min(0.12, cam.dist * 0.06));
-    const proj = mat4Perspective(cam.fov * Math.PI / 180.0, w / h, nearClip, 25.0);
+    const aspect = w / h;
+    const fovYRad = (aspect < 0.88) ? Math.min(48, cam.fov * (0.88 / aspect)) * Math.PI / 180.0 : cam.fov * Math.PI / 180.0;
+    const proj = mat4Perspective(fovYRad, aspect, nearClip, 25.0);
     const view = mat4LookAt(eye, cam.target, [0, 1, 0]);
     const mvp = mat4Multiply(proj, view);
     const modelMat = new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
