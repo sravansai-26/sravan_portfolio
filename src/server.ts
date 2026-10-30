@@ -40,6 +40,32 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+
+      // 1. If static assets binding exists (Cloudflare Workers / Pages), check for static asset
+      if ((env as any)?.ASSETS) {
+        let assetResponse = await (env as any).ASSETS.fetch(request.clone());
+        if (assetResponse && assetResponse.status < 400) {
+          return assetResponse;
+        }
+
+        // Handle directories or extensionless paths (e.g. /models/character_project/viewer/)
+        if (url.pathname.endsWith("/")) {
+          const indexUrl = new URL(url.pathname + "index.html", request.url);
+          assetResponse = await (env as any).ASSETS.fetch(new Request(indexUrl, request));
+          if (assetResponse && assetResponse.status < 400) {
+            return assetResponse;
+          }
+        } else if (!url.pathname.includes(".") && !url.pathname.startsWith("/api/")) {
+          const indexUrl = new URL(url.pathname + "/index.html", request.url);
+          assetResponse = await (env as any).ASSETS.fetch(new Request(indexUrl, request));
+          if (assetResponse && assetResponse.status < 400) {
+            return assetResponse;
+          }
+        }
+      }
+
+      // 2. Otherwise pass to TanStack Start SSR handler
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);

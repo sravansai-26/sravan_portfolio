@@ -60,17 +60,12 @@
   }
   #glcanvas:active { cursor: grabbing; }
 
-  /* Floating Telemetry & HUD Overlays */
+  /* Floating Telemetry & HUD Overlays - Moved to separate portfolio details box */
   .top-left-hud {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    z-index: 15;
-    pointer-events: none;
-    max-width: min(340px, calc(100% - 165px));
+    display: none !important;
+  }
+  #btn-telemetry {
+    display: none !important;
   }
   .brand-card {
     pointer-events: auto;

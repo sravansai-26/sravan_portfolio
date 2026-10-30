@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Image as ImageIcon, X } from "lucide-react";
+import { Sparkles, Image as ImageIcon, X, Box, Layers, Maximize2, RotateCw, Move3d } from "lucide-react";
 
 import { Nav } from "@/components/portfolio/Nav";
 import Footer from "@/components/portfolio/Footer/Footer";
@@ -40,6 +40,7 @@ function StoryLab() {
   const [referenceId, setReferenceId] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [viewerMode, setViewerMode] = useState<"3d" | "2d">("3d");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -176,28 +177,210 @@ function StoryLab() {
         {/* SECTION B & C: MEET THE CHARACTER & 3D VIEWER */}
         <Container id="meet-the-character" className="mt-40">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-start">
-            <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
-              {/* Interactive 3D Character Model Viewer Box */}
-              <div className="group relative w-full h-[560px] sm:h-[620px] lg:h-[680px] overflow-hidden rounded-4xl border border-hairline bg-[#0c0f17] shadow-2xl transition-all duration-500 hover:border-accent-blue/40 hover:shadow-accent-blue/10">
-                <iframe
-                  src="/models/character_project/viewer/index.html"
-                  title="Interactive 3D Character Model Viewer"
-                  aria-label="Interactive 3D Character Model Viewer with 360-degree orbit, lighting themes, and camera presets"
-                  className="w-full h-full border-0 block"
-                  allow="fullscreen"
-                  loading="lazy"
-                />
+            <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-8">
+              {/* Studio Viewer Card (3D Model / 2D Character Blueprint Box) */}
+              <div className="relative w-full rounded-4xl border border-hairline bg-[#0c0f17] shadow-2xl overflow-hidden transition-all duration-500 hover:border-accent-blue/40 hover:shadow-accent-blue/10">
+                {/* Header Switcher Toolbar */}
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#121622]/90 backdrop-blur-md z-10 relative">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-2.5 w-2.5 rounded-full bg-accent-blue animate-pulse" />
+                    <span className="font-mono text-[12px] uppercase tracking-wider text-white/80">
+                      {viewerMode === "3d" ? "Interactive 3D Viewport" : "2D Blueprint Artwork"}
+                    </span>
+                  </div>
+
+                  {/* Mode Switcher Tabs */}
+                  <div className="flex items-center gap-1.5 p-1 rounded-full bg-white/10 border border-white/10 text-[12px]">
+                    <button
+                      type="button"
+                      onClick={() => setViewerMode("3d")}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        viewerMode === "3d"
+                          ? "bg-accent-blue text-white shadow-sm"
+                          : "text-white/70 hover:text-white"
+                      }`}
+                      aria-label="Switch to 3D interactive model"
+                    >
+                      <Move3d className="w-3.5 h-3.5" />
+                      <span>3D Model</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setViewerMode("2d")}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-full font-medium transition-all cursor-pointer ${
+                        viewerMode === "2d"
+                          ? "bg-accent-blue text-white shadow-sm"
+                          : "text-white/70 hover:text-white"
+                      }`}
+                      aria-label="Switch to 2D character blueprint"
+                    >
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      <span>2D Blueprint</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Main Viewport Container */}
+                <div className="relative w-full h-[540px] sm:h-[600px] lg:h-[660px]">
+                  {viewerMode === "3d" ? (
+                    <iframe
+                      src="/models/character_project/viewer/index.html"
+                      title="Interactive 3D Character Model Viewer"
+                      aria-label="Interactive 3D Character Model Viewer with 360-degree orbit, lighting themes, and camera presets"
+                      className="w-full h-full border-0 block"
+                      allow="fullscreen"
+                      loading="lazy"
+                    />
+                  ) : (
+                    /* 2D Character Image Container with Prominent 'X' to cancel/go back */
+                    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-b from-[#141a26] to-[#0c0f17]">
+                      {/* Prominent 'X' Cancel / Back Button */}
+                      <button
+                        type="button"
+                        onClick={() => setViewerMode("3d")}
+                        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/20 shadow-xl cursor-pointer transition-all hover:scale-105 active:scale-95 group"
+                        aria-label="Cancel 2D view and return to 3D model"
+                      >
+                        <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-300" />
+                        <span className="font-mono text-[12px] font-semibold tracking-wide">
+                          Back to 3D
+                        </span>
+                      </button>
+
+                      {/* Character Artwork Frame */}
+                      <div className="relative max-h-[78%] max-w-[88%] flex items-center justify-center">
+                        <img
+                          src={refImage}
+                          alt="2D Character Blueprint Artwork"
+                          className="max-h-[420px] sm:max-h-[480px] w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
+                        />
+                      </div>
+
+                      {/* Bottom Quick Return Badge */}
+                      <div className="mt-4 flex flex-wrap items-center justify-center gap-3 z-10">
+                        <button
+                          type="button"
+                          onClick={() => setViewerMode("3d")}
+                          className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white/90 text-[13px] border border-white/10 transition-colors cursor-pointer"
+                        >
+                          <RotateCw className="w-3.5 h-3.5" />
+                          <span>Return to 3D Interactive Model</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setIsImageModalOpen(true)}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent-blue/20 hover:bg-accent-blue/30 text-accent-blue text-[13px] border border-accent-blue/30 transition-colors cursor-pointer"
+                          aria-label="Expand image fullscreen"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5" />
+                          <span>Fullscreen</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Reference Image / Inspiration Board (Clickable) */}
+              {/* SEPARATE DETAILS & TECHNICAL TELEMETRY VIEWER BOX */}
+              <div className="rounded-4xl border border-hairline bg-surface/40 backdrop-blur-xl p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-accent-blue/30">
+                {/* Title and Live Status */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-hairline">
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2.5 rounded-2xl bg-accent-blue/10 border border-accent-blue/20 text-accent-blue shrink-0 mt-0.5">
+                      <Layers className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-[20px] sm:text-[24px] font-semibold text-ink leading-tight">
+                        Interactive 3D Character Model
+                      </h3>
+                      <p className="font-mono text-[12px] sm:text-[13px] text-ink-secondary mt-1">
+                        glTF 2.0 PBR • 1.75 m Scale • 160k Tris • 360° Multi-View
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 self-start sm:self-center px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-[12px] font-medium shrink-0">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>Studio PBR 2.0 • 60 FPS</span>
+                  </div>
+                </div>
+
+                {/* Technical Specifications Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 my-6">
+                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Height</span>
+                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">1.75 m</span>
+                    <span className="text-[11px] text-ink-secondary block">Humanoid Scale</span>
+                  </div>
+                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Origin</span>
+                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">(0, 0, 0)</span>
+                    <span className="text-[11px] text-ink-secondary block">Ground Center</span>
+                  </div>
+                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Topology</span>
+                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">160,000</span>
+                    <span className="text-[11px] text-ink-secondary block">Tris Smoothed</span>
+                  </div>
+                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
+                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Materials</span>
+                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">8 Regions</span>
+                    <span className="text-[11px] text-ink-secondary block">PBR Metal/Rough</span>
+                  </div>
+                </div>
+
+                {/* Viewport Navigation & Controls Guide */}
+                <div className="p-4 sm:p-5 rounded-2xl border border-hairline bg-surface/30">
+                  <h4 className="font-mono text-[11px] uppercase tracking-widest text-ink-muted mb-3 flex items-center gap-2">
+                    <Box className="w-3.5 h-3.5 text-accent-blue" />
+                    <span>Controls & Shortcuts</span>
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-[12px] text-ink-secondary">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Drag</span>
+                      <span>Orbit 360°</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Scroll / Pinch</span>
+                      <span>Zoom View</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Right-Drag</span>
+                      <span>Pan Canvas</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Arrow Keys</span>
+                      <span>Rotate Character</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Key [+] / [-]</span>
+                      <span>Zoom In / Out</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Key [R]</span>
+                      <span>Reset Camera</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2D Blueprint Origin Card (Clickable) */}
               <button 
-                onClick={() => setIsImageModalOpen(true)}
-                className="w-full text-left rounded-4xl border border-hairline bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group cursor-pointer hover:bg-surface/50 transition-colors"
+                type="button"
+                onClick={() => {
+                  setViewerMode("2d");
+                  const el = document.getElementById("meet-the-character");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="w-full text-left rounded-4xl border border-hairline bg-surface/30 p-6 flex items-center gap-6 overflow-hidden relative group cursor-pointer hover:bg-surface/50 hover:border-accent-blue/30 transition-all"
               >
                 <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl shadow-md">
                   <img
                     src={refImage}
-                    alt="Character Reference"
+                    alt="Character Reference Blueprint"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -205,9 +388,11 @@ function StoryLab() {
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-serif text-[18px] italic text-ink font-semibold group-hover:text-accent-blue transition-colors">The 2D Blueprint</h4>
+                  <h4 className="font-serif text-[18px] italic text-ink font-semibold group-hover:text-accent-blue transition-colors">
+                    The 2D Blueprint
+                  </h4>
                   <p className="text-[14px] text-ink-secondary mt-1">
-                    This original artwork sparked the initiative. Click to view and visualize the character in your mind as you build their story.
+                    This original artwork sparked the initiative. Click to display in the viewer container or inspect with fullscreen details.
                   </p>
                 </div>
               </button>
