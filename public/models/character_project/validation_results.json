@@ -1,0 +1,64 @@
+{
+  "glb_validation": {
+    "file_size_bytes": 3130844,
+    "file_size_mb": 2.9858055114746094,
+    "errors": [],
+    "warnings": [],
+    "num_materials": 13,
+    "num_primitives": 13,
+    "num_textures": 3,
+    "total_vertices": 47807,
+    "total_triangles": 89712,
+    "bbox_min": [
+      -0.5320000052452087,
+      0.0,
+      -0.2759999930858612
+    ],
+    "bbox_max": [
+      0.5320000052452087,
+      1.7500001192092896,
+      0.31660398840904236
+    ]
+  },
+  "mesh_audit": {
+    "topology": {
+      "non_manifold_edges": 0,
+      "boundary_edges": 0,
+      "degenerate_triangles": 0,
+      "loose_vertices": 0,
+      "inverted_normals_parts": 0,
+      "uv_overlap_boxes": 0,
+      "uv_out_of_bounds": 0
+    },
+    "measurements": {
+      "total_height_m": 1.75,
+      "ground_y_min_m": 0.0,
+      "head_hat_ratio_pct": 22.57,
+      "hat_brim_diameter_m": 0.564,
+      "hat_crown_height_m": 0.11,
+      "head_width_m": 0.3918,
+      "shoulder_width_m": 1.028,
+      "waist_belt_height_m": 0.539,
+      "waist_belt_pct": 30.8,
+      "inseam_m": 0.2721,
+      "shoe_length_m": 0.2993,
+      "arm_length_m": 0.9155
+    }
+  },
+  "viewer_smoke_test": {
+    "desktop_1920x1080": {
+      "loaded": true,
+      "load_time_ms": 6059.7,
+      "displayed_tris": "89,712",
+      "displayed_materials": "13",
+      "severe_console_errors": 0
+    },
+    "mobile_360x640": {
+      "loaded": true,
+      "load_time_ms": 6720.3,
+      "displayed_tris": "89,712",
+      "displayed_materials": "13",
+      "severe_console_errors": 0
+    }
+  }
+}

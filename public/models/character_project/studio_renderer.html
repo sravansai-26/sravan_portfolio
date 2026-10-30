@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #1e2430; }
+  canvas { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<canvas id="glcanvas"></canvas>
+<script>
+const canvas = document.getElementById('glcanvas');
+const gl = canvas.getContext('webgl2', { antialias: true, preserveDrawingBuffer: true, alpha: false });
+
+const VS_SRC = `#version 300 es
+precision highp float;
+layout(location = 0) in vec3 a_position;
+layout(location = 1) in vec3 a_normal;
+layout(location = 2) in vec2 a_uv;
+layout(location = 3) in vec4 a_tangent;
+
+uniform mat4 u_mvp;
+uniform mat4 u_model;
+
+out vec3 v_worldPos;
+out vec3 v_normal;
+out vec2 v_uv;
+out vec3 v_tangent;
+out vec3 v_bitangent;
+
+void main() {
+    vec4 wp = u_model * vec4(a_position, 1.0);
+    v_worldPos = wp.xyz;
+    mat3 nMat = mat3(u_model);
+    vec3 N = normalize(nMat * a_normal);
+    vec3 T = normalize(nMat * a_tangent.xyz);
+    T = normalize(T - dot(T, N) * N);
+    vec3 B = cross(N, T) * a_tangent.w;
+    v_normal = N;
+    v_tangent = T;
+    v_bitangent = B;
+    v_uv = a_uv;
+    gl_Position = u_mvp * wp;
+}
+`;
+
+const FS_SRC = `#version 300 es
+precision highp float;
+
+in vec3 v_worldPos;
+in vec3 v_normal;
+in vec2 v_uv;
+in vec3 v_tangent;
+in vec3 v_bitangent;
+
+uniform sampler2D u_baseColorTex;
+uniform sampler2D u_normalTex;
+uniform sampler2D u_ormTex;
+uniform sampler2D u_checkerTex;
+
+uniform vec4 u_baseColorFactor;
+uniform float u_metallicFactor;
+uniform float u_roughnessFactor;
+uniform float u_normalScale;
+uniform int u_useChecker;
+
+uniform vec3 u_camPos;
+uniform vec2 u_resolution;
+
+out vec4 outColor;
+
+const float PI = 3.14159265359;
+
+float DistributionGGX(vec3 N, vec3 H, float roughness) {
+    float a = roughness * roughness;
+    float a2 = a * a;
+    float NdotH = max(dot(N, H), 0.0);
+    float NdotH2 = NdotH * NdotH;
+    float denom = (NdotH2 * (a2 - 1.0) + 1.0);
+    denom = PI * denom * denom;
+    return a2 / max(denom, 1e-6);
+}
+
+float GeometrySchlickGGX(float NdotV, float roughness) {
+    float r = (roughness + 1.0);
+    float k = (r * r) / 8.0;
+    return NdotV / max(NdotV * (1.0 - k) + k, 1e-6);
+}
+
+float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness) {
+    float NdotV = max(dot(N, V), 0.0);
+    float NdotL = max(dot(N, L), 0.0);
+    return GeometrySchlickGGX(NdotV, roughness) * GeometrySchlickGGX(NdotL, roughness);
+}
+
+vec3 fresnelSchlick(float cosTheta, vec3 F0) {
+    return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+}
+
+vec3 sampleStudioEnv(vec3 R, float roughness) {
+    float y = clamp(R.y, -1.0, 1.0);
+    vec3 skyTop = vec3(0.75, 0.85, 0.98);
+    vec3 horizon = vec3(0.95, 0.92, 0.88);
+    vec3 ground = vec3(0.28, 0.25, 0.23);
+    vec3 env = (y >= 0.0) ? mix(horizon, skyTop, pow(y, 0.55)) : mix(horizon, ground, pow(-y, 0.65));
+
+    // Studio softbox highlights in environment map for realistic buckle/shoe reflections
+    vec3 sb1 = normalize(vec3(0.55, 0.68, 0.48));
+    vec3 sb2 = normalize(vec3(-0.65, 0.42, 0.62));
+    vec3 sb3 = normalize(vec3(0.0, 0.82, -0.57));
+    float specExp = mix(64.0, 3.0, roughness);
+    env += vec3(2.8, 2.65, 2.45) * pow(max(dot(R, sb1), 0.0), specExp) * (1.0 - 0.7 * roughness);
+    env += vec3(1.4, 1.55, 1.85) * pow(max(dot(R, sb2), 0.0), specExp * 0.7) * (1.0 - 0.7 * roughness);
+    env += vec3(1.8, 1.8, 2.0) * pow(max(dot(R, sb3), 0.0), specExp * 0.8) * (1.0 - 0.7 * roughness);
+    return env;
+}
+
+vec3 acesToneMap(vec3 x) {
+    float a = 2.51;
+    float b = 0.03;
+    float c = 2.43;
+    float d = 0.59;
+    float e = 0.14;
+    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);
+}
+
+void main() {
+    vec4 texCol = (u_useChecker == 1) ? texture(u_checkerTex, v_uv) : texture(u_baseColorTex, v_uv);
+    vec3 albedo = pow(texCol.rgb * u_baseColorFactor.rgb, vec3(2.2));
+
+    vec3 orm = texture(u_ormTex, v_uv).rgb;
+    float ao = (u_useChecker == 1) ? 1.0 : mix(1.0, orm.r, 0.85);
+    float roughness = (u_useChecker == 1) ? 0.55 : clamp(orm.g * (u_roughnessFactor / max(u_roughnessFactor, 0.001)), 0.06, 0.98);
+    // Use material metallicFactor combined with ORM blue channel
+    float metallic = (u_useChecker == 1) ? 0.0 : clamp(max(orm.b, u_metallicFactor), 0.0, 1.0);
+    if (u_metallicFactor > 0.5) {
+        roughness = clamp(orm.g, 0.10, 0.45);
+    }
+
+    vec3 nSample = texture(u_normalTex, v_uv).xyz * 2.0 - 1.0;
+    nSample.xy *= (u_useChecker == 1) ? 0.0 : u_normalScale * 0.65;
+    nSample = normalize(nSample);
+    mat3 TBN = mat3(normalize(v_tangent), normalize(v_bitangent), normalize(v_normal));
+    vec3 N = normalize(TBN * nSample);
+    vec3 V = normalize(u_camPos - v_worldPos);
+
+    vec3 F0 = mix(vec3(0.04), albedo, metallic);
+
+    // 3-Point Studio Lighting (Key, Fill, Rim) + Top Bounce
+    vec3 lightDirs[4];
+    vec3 lightCols[4];
+    lightDirs[0] = normalize(vec3(0.52, 0.64, 0.56));   // Warm Key Light
+    lightCols[0] = vec3(3.15, 2.98, 2.80);
+    lightDirs[1] = normalize(vec3(-0.68, 0.35, 0.64));  // Soft Sky Fill Light
+    lightCols[1] = vec3(1.35, 1.50, 1.75);
+    lightDirs[2] = normalize(vec3(-0.15, 0.58, -0.80)); // Crisp Back Rim Light
+    lightCols[2] = vec3(2.10, 2.20, 2.45);
+    lightDirs[3] = normalize(vec3(0.0, -0.85, 0.52));   // Warm Ground Bounce
+    lightCols[3] = vec3(0.55, 0.48, 0.42);
+
+    vec3 Lo = vec3(0.0);
+    for (int i = 0; i < 4; i++) {
+        vec3 L = lightDirs[i];
+        vec3 H = normalize(V + L);
+        float NdotL = max(dot(N, L), 0.0);
+        // Soft subsurface wrap for stylized skin & fabric warmth
+        float wrapNdotL = max((dot(N, L) + 0.18) / 1.18, 0.0);
+
+        float NDF = DistributionGGX(N, H, roughness);
+        float G = GeometrySmith(N, V, L, roughness);
+        vec3 F = fresnelSchlick(max(dot(H, V), 0.0), F0);
+
+        vec3 numerator = NDF * G * F;
+        float denominator = 4.0 * max(dot(N, V), 0.0) * max(NdotL, 0.0) + 0.0001;
+        vec3 specular = numerator / denominator;
+
+        vec3 kS = F;
+        vec3 kD = (vec3(1.0) - kS) * (1.0 - metallic);
+        Lo += (kD * albedo / PI * wrapNdotL + specular * NdotL) * lightCols[i];
+    }
+
+    // Hemisphere Ambient + Studio Environment Reflection (IBL)
+    vec3 R = reflect(-V, N);
+    vec3 F_env = fresnelSchlick(max(dot(N, V), 0.0), F0);
+    vec3 kS_env = F_env;
+    vec3 kD_env = (1.0 - kS_env) * (1.0 - metallic);
+    vec3 irr = mix(vec3(0.30, 0.28, 0.27), vec3(0.58, 0.65, 0.78), 0.5 * N.y + 0.5);
+    vec3 diffuseIBL = irr * albedo * kD_env;
+    vec3 specIBL = sampleStudioEnv(R, roughness) * F_env * (1.0 - 0.55 * roughness);
+
+    vec3 color = (Lo + (diffuseIBL + specIBL) * ao);
+    color = acesToneMap(color);
+    color = pow(color, vec3(1.0 / 2.2));
+    outColor = vec4(color, 1.0);
+}
+`;
+
+// Background + Ground Contact Shadow Shader
+const BG_VS = `#version 300 es
+precision highp float;
+layout(location = 0) in vec2 a_pos;
+out vec2 v_uv;
+void main() {
+    v_uv = a_pos * 0.5 + 0.5;
+    gl_Position = vec4(a_pos, 0.9999, 1.0);
+}
+`;
+
+const BG_FS = `#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform int u_darkTheme;
+out vec4 outColor;
+void main() {
+    vec2 center = v_uv - vec2(0.5, 0.52);
+    float dist = length(center);
+    vec3 topCol = (u_darkTheme == 1) ? vec3(0.14, 0.17, 0.23) : vec3(0.92, 0.95, 0.98);
+    vec3 botCol = (u_darkTheme == 1) ? vec3(0.08, 0.10, 0.14) : vec3(0.79, 0.84, 0.90);
+    vec3 bg = mix(botCol, topCol, v_uv.y);
+    bg *= (1.0 - 0.22 * dist * dist);
+    outColor = vec4(bg, 1.0);
+}
+`;
+
+const SHADOW_VS = `#version 300 es
+precision highp float;
+layout(location = 0) in vec3 a_position;
+uniform mat4 u_mvp;
+out vec2 v_xz;
+void main() {
+    v_xz = a_position.xz;
+    gl_Position = u_mvp * vec4(a_position, 1.0);
+}
+`;
+
+const SHADOW_FS = `#version 300 es
+precision highp float;
+in vec2 v_xz;
+out vec4 outColor;
+void main() {
+    // Dual foot contact shadow + overall body ground shadow at y=0
+    float dBody = length(v_xz * vec2(1.9, 2.3));
+    float dFootL = length((v_xz - vec2(0.16, 0.04)) * vec2(5.5, 3.8));
+    float dFootR = length((v_xz - vec2(-0.16, 0.04)) * vec2(5.5, 3.8));
+    float sBody = exp(-2.4 * dBody * dBody) * 0.36;
+    float sFeet = (exp(-3.2 * dFootL * dFootL) + exp(-3.2 * dFootR * dFootR)) * 0.42;
+    float alpha = clamp(sBody + sFeet, 0.0, 0.62);
+    outColor = vec4(0.04, 0.05, 0.08, alpha);
+}
+`;
+
+function compileShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        throw new Error(gl.getShaderInfoLog(s));
+    }
+    return s;
+}
+
+function createProgram(vs, fs) {
+    const p = gl.createProgram();
+    gl.attachShader(p, compileShader(gl.VERTEX_SHADER, vs));
+    gl.attachShader(p, compileShader(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) {
+        throw new Error(gl.getProgramInfoLog(p));
+    }
+    return p;
+}
+
+const pbrProg = createProgram(VS_SRC, FS_SRC);
+const bgProg = createProgram(BG_VS, BG_FS);
+const shProg = createProgram(SHADOW_VS, SHADOW_FS);
+
+// Setup fullscreen quad and shadow plane
+const bgVao = gl.createVertexArray();
+gl.bindVertexArray(bgVao);
+const bgBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, bgBuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+const shVao = gl.createVertexArray();
+gl.bindVertexArray(shVao);
+const shBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, shBuf);
+const S = 0.85;
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-S,0,-S, S,0,-S, -S,0,S, -S,0,S, S,0,-S, S,0,S]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+
+let gltfScene = null;
+let checkerTexture = null;
+
+function mat4Perspective(fovY, aspect, near, far) {
+    const f = 1.0 / Math.tan(fovY / 2.0);
+    const nf = 1.0 / (near - far);
+    return new Float32Array([
+        f / aspect, 0, 0, 0,
+        0, f, 0, 0,
+        0, 0, (far + near) * nf, -1,
+        0, 0, (2 * far * near) * nf, 0
+    ]);
+}
+
+function mat4LookAt(eye, target, up) {
+    let z0 = eye[0] - target[0], z1 = eye[1] - target[1], z2 = eye[2] - target[2];
+    let len = Math.hypot(z0, z1, z2);
+    z0 /= len; z1 /= len; z2 /= len;
+    let x0 = up[1] * z2 - up[2] * z1;
+    let x1 = up[2] * z0 - up[0] * z2;
+    let x2 = up[0] * z1 - up[1] * z0;
+    len = Math.hypot(x0, x1, x2);
+    if (len < 1e-5) { x0 = 1; x1 = 0; x2 = 0; } else { x0 /= len; x1 /= len; x2 /= len; }
+    let y0 = z1 * x2 - z2 * x1;
+    let y1 = z2 * x0 - z0 * x2;
+    let y2 = z0 * x1 - z1 * x0;
+    return new Float32Array([
+        x0, y0, z0, 0,
+        x1, y1, z1, 0,
+        x2, y2, z2, 0,
+        -(x0 * eye[0] + x1 * eye[1] + x2 * eye[2]),
+        -(y0 * eye[0] + y1 * eye[1] + y2 * eye[2]),
+        -(z0 * eye[0] + z1 * eye[1] + z2 * eye[2]),
+        1
+    ]);
+}
+
+function mat4Multiply(a, b) {
+    const out = new Float32Array(16);
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            out[j * 4 + i] =
+                a[0 * 4 + i] * b[j * 4 + 0] +
+                a[1 * 4 + i] * b[j * 4 + 1] +
+                a[2 * 4 + i] * b[j * 4 + 2] +
+                a[3 * 4 + i] * b[j * 4 + 3];
+        }
+    }
+    return out;
+}
+
+async function loadImageFromBytes(bytes, mimeType) {
+    const blob = new Blob([bytes], { type: mimeType || 'image/png' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = url;
+    });
+    URL.revokeObjectURL(url);
+    const tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+    return tex;
+}
+
+window.loadGLBFromBase64 = async function(b64Data, checkerB64) {
+    const binStr = atob(b64Data);
+    const len = binStr.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) bytes[i] = binStr.charCodeAt(i);
+    const dv = new DataView(bytes.buffer);
+
+    const magic = dv.getUint32(0, true);
+    if (magic !== 0x46546C67) throw new Error('Invalid GLB magic');
+    const jsonLen = dv.getUint32(12, true);
+    const jsonBytes = new Uint8Array(bytes.buffer, 20, jsonLen);
+    const gltf = JSON.parse(new TextDecoder().decode(jsonBytes));
+
+    const binChunkOffset = 20 + jsonLen + 8;
+    const binBuffer = bytes.buffer.slice(binChunkOffset);
+
+    const glTextures = [];
+    for (const imgDef of gltf.images) {
+        const bv = gltf.bufferViews[imgDef.bufferView];
+        const imgSlice = new Uint8Array(binBuffer, bv.byteOffset || 0, bv.byteLength);
+        const tex = await loadImageFromBytes(imgSlice, imgDef.mimeType);
+        glTextures.push(tex);
+    }
+
+    if (checkerB64) {
+        const cStr = atob(checkerB64);
+        const cBytes = new Uint8Array(cStr.length);
+        for (let i = 0; i < cStr.length; i++) cBytes[i] = cStr.charCodeAt(i);
+        checkerTexture = await loadImageFromBytes(cBytes, 'image/png');
+    } else {
+        checkerTexture = glTextures[0];
+    }
+
+    const drawPrimitives = [];
+    const mesh = gltf.meshes[0];
+    for (const prim of mesh.primitives) {
+        const vao = gl.createVertexArray();
+        gl.bindVertexArray(vao);
+
+        function bindAttr(attrName, loc, size) {
+            const accIdx = prim.attributes[attrName];
+            const acc = gltf.accessors[accIdx];
+            const bv = gltf.bufferViews[acc.bufferView];
+            const buf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+            gl.bufferData(gl.ARRAY_BUFFER, new Uint8Array(binBuffer, (bv.byteOffset || 0) + (acc.byteOffset || 0), bv.byteLength), gl.STATIC_DRAW);
+            gl.enableVertexAttribArray(loc);
+            gl.vertexAttribPointer(loc, size, acc.componentType, false, bv.byteStride || 0, 0);
+        }
+
+        bindAttr('POSITION', 0, 3);
+        bindAttr('NORMAL', 1, 3);
+        bindAttr('TEXCOORD_0', 2, 2);
+        bindAttr('TANGENT', 3, 4);
+
+        const idxAcc = gltf.accessors[prim.indices];
+        const idxBv = gltf.bufferViews[idxAcc.bufferView];
+        const ibo = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(binBuffer, (idxBv.byteOffset || 0) + (idxAcc.byteOffset || 0), idxBv.byteLength), gl.STATIC_DRAW);
+
+        const mat = gltf.materials[prim.material];
+        const pbr = mat.pbrMetallicRoughness || {};
+        drawPrimitives.push({
+            vao,
+            count: idxAcc.count,
+            indexType: idxAcc.componentType,
+            baseColorFactor: pbr.baseColorFactor || [1, 1, 1, 1],
+            metallicFactor: (pbr.metallicFactor !== undefined) ? pbr.metallicFactor : 0.0,
+            roughnessFactor: (pbr.roughnessFactor !== undefined) ? pbr.roughnessFactor : 0.5,
+            normalScale: (mat.normalTexture && mat.normalTexture.scale !== undefined) ? mat.normalTexture.scale : 1.0
+        });
+    }
+
+    gltfScene = { gltf, glTextures, drawPrimitives };
+    return {
+        numMaterials: gltf.materials.length,
+        numPrimitives: drawPrimitives.length,
+        numTextures: glTextures.length
+    };
+};
+
+window.renderView = function(opts) {
+    const w = opts.width || 1200;
+    const h = opts.height || 1200;
+    if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+    }
+    gl.viewport(0, 0, w, h);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    // 1. Background
+    gl.disable(gl.DEPTH_TEST);
+    gl.useProgram(bgProg);
+    gl.uniform1i(gl.getUniformLocation(bgProg, 'u_darkTheme'), opts.darkTheme ? 1 : 0);
+    gl.bindVertexArray(bgVao);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    const eye = opts.eye || [0, 0.95, 2.55];
+    const target = opts.target || [0, 0.90, 0];
+    const up = opts.up || [0, 1, 0];
+    const fov = (opts.fovDeg || 38.0) * Math.PI / 180.0;
+
+    const proj = mat4Perspective(fov, w / h, 0.05, 20.0);
+    const view = mat4LookAt(eye, target, up);
+    const mvp = mat4Multiply(proj, view);
+    const modelMat = new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1]);
+
+    // 2. Soft Ground Contact Shadow
+    gl.enable(gl.DEPTH_TEST);
+    gl.depthMask(false);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.useProgram(shProg);
+    gl.uniformMatrix4fv(gl.getUniformLocation(shProg, 'u_mvp'), false, mvp);
+    gl.bindVertexArray(shVao);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.disable(gl.BLEND);
+    gl.depthMask(true);
+
+    // 3. Character Mesh Primitives
+    gl.enable(gl.CULL_FACE);
+    gl.cullFace(gl.BACK);
+    gl.useProgram(pbrProg);
+    gl.uniformMatrix4fv(gl.getUniformLocation(pbrProg, 'u_mvp'), false, mvp);
+    gl.uniformMatrix4fv(gl.getUniformLocation(pbrProg, 'u_model'), false, modelMat);
+    gl.uniform3fv(gl.getUniformLocation(pbrProg, 'u_camPos'), new Float32Array(eye));
+    gl.uniform1i(gl.getUniformLocation(pbrProg, 'u_useChecker'), opts.useChecker ? 1 : 0);
+
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, gltfScene.glTextures[0]);
+    gl.uniform1i(gl.getUniformLocation(pbrProg, 'u_baseColorTex'), 0);
+
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, gltfScene.glTextures[1]);
+    gl.uniform1i(gl.getUniformLocation(pbrProg, 'u_normalTex'), 1);
+
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_2D, gltfScene.glTextures[2]);
+    gl.uniform1i(gl.getUniformLocation(pbrProg, 'u_ormTex'), 2);
+
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_2D, checkerTexture);
+    gl.uniform1i(gl.getUniformLocation(pbrProg, 'u_checkerTex'), 3);
+
+    for (const prim of gltfScene.drawPrimitives) {
+        gl.uniform4fv(gl.getUniformLocation(pbrProg, 'u_baseColorFactor'), new Float32Array(prim.baseColorFactor));
+        gl.uniform1f(gl.getUniformLocation(pbrProg, 'u_metallicFactor'), prim.metallicFactor);
+        gl.uniform1f(gl.getUniformLocation(pbrProg, 'u_roughnessFactor'), prim.roughnessFactor);
+        gl.uniform1f(gl.getUniformLocation(pbrProg, 'u_normalScale'), prim.normalScale);
+        gl.bindVertexArray(prim.vao);
+        gl.drawElements(gl.TRIANGLES, prim.count, prim.indexType, 0);
+    }
+
+    return canvas.toDataURL('image/png');
+};
+</script>
+</body>
+</html>

@@ -21,12 +21,6 @@ export const Route = createFileRoute("/story-lab")({
         content: "A character waiting to be discovered. A world waiting to be imagined. Stories that could begin with your idea.",
       },
     ],
-    scripts: [
-      {
-        type: "module",
-        src: "https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js",
-      }
-    ]
   }),
   component: StoryLab,
 });
@@ -183,27 +177,16 @@ function StoryLab() {
         <Container id="meet-the-character" className="mt-40">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20 items-start">
             <motion.div {...fadeUp} className="order-2 lg:order-1 flex flex-col gap-6">
-              {/* 3D Model Box - Light Black */}
-              <div className="group relative aspect-square w-full overflow-hidden rounded-4xl border border-hairline bg-[#111] shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-                <model-viewer
-                  src="/models/white_mesh.glb"
-                  alt="A 3D model of the character"
-                  auto-rotate
-                  camera-controls
-                  shadow-intensity="1.5"
-                  shadow-softness="1"
-                  environment-image="neutral"
-                  exposure="0.9"
-                  style={{ width: "100%", height: "100%", backgroundColor: "transparent" }}
-                  interaction-prompt="hover-2d"
-                >
-                  <div slot="poster" className="absolute inset-0 grid place-items-center bg-[#111]">
-                    <span className="font-mono text-[12px] tracking-widest text-white/40 animate-pulse">Initializing Canvas...</span>
-                  </div>
-                </model-viewer>
-                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-[#222]/80 px-4 py-2 backdrop-blur-md border border-white/10">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-white">Interactive</span>
-                </div>
+              {/* Interactive 3D Character Model Viewer Box */}
+              <div className="group relative w-full h-[560px] sm:h-[620px] lg:h-[680px] overflow-hidden rounded-4xl border border-hairline bg-[#0c0f17] shadow-2xl transition-all duration-500 hover:border-accent-blue/40 hover:shadow-accent-blue/10">
+                <iframe
+                  src="/models/character_project/viewer/index.html"
+                  title="Interactive 3D Character Model Viewer"
+                  aria-label="Interactive 3D Character Model Viewer with 360-degree orbit, lighting themes, and camera presets"
+                  className="w-full h-full border-0 block"
+                  allow="fullscreen"
+                  loading="lazy"
+                />
               </div>
 
               {/* Reference Image / Inspiration Board (Clickable) */}
