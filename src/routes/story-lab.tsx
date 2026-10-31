@@ -115,32 +115,32 @@ function StoryLab() {
     {
       q: "The Setting",
       a: "A dusty desert town? A floating city? A quiet forest?",
-      img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/1-the-setting.jpg"
     },
     {
       q: "The Companion",
       a: "A loyal robotic dog? A grumpy traveler? A magical creature?",
-      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/2-the-companion.jpg"
     },
     {
       q: "The Adventure",
       a: "Finding a lost map? Escaping a collapsing cave? Solving a mystery?",
-      img: "https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/3-the-adventure.jpg"
     },
     {
       q: "The Quirks",
       a: "Always loses their hat? Can't stop telling bad jokes? Terrified of spiders?",
-      img: "https://images.unsplash.com/photo-1514820402329-de527fdd2e6d?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/4-the-quirks.jpg"
     },
     {
       q: "The Rival",
       a: "A treasure hunter? A severe sandstorm? A broken time machine?",
-      img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/5-the-rival.jpg"
     },
     {
       q: "The Memory",
       a: "The great train chase. The festival of lanterns. The silent canyon.",
-      img: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&q=80&w=800"
+      img: "/models/story-lab/jpg/6-the-memory.jpg"
     },
   ];
 
@@ -380,28 +380,43 @@ function StoryLab() {
             </p>
           </motion.div>
 
-          <div className="mt-20 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {universePrompts.map((prompt, i) => (
               <motion.div
                 key={i}
                 {...fadeUp}
                 transition={{ delay: i * 0.1 }}
-                className="group relative h-80 overflow-hidden rounded-4xl shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl"
+                className="group relative h-88 sm:h-96 md:h-[420px] overflow-hidden rounded-4xl border border-hairline shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-accent-blue/40"
               >
-                {/* Stunning HD Unsplash Background */}
-                <div className="absolute inset-0">
+                {/* HD Local Artwork with Natural Contrast */}
+                <div className="absolute inset-0 bg-[#0c0f17]">
                   <img
                     src={prompt.img}
                     alt={prompt.q}
-                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-black/10 transition-opacity duration-500 group-hover:from-black/95 group-hover:via-black/60" />
+                  {/* Subtle lower-third vignette: keeps the artwork bright, vibrant, and clear while ensuring high contrast for text */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 via-35% to-transparent pointer-events-none" />
                 </div>
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-                  <h4 className="font-serif text-[28px] font-medium italic translate-y-4 transition-transform duration-500 group-hover:translate-y-0">{prompt.q}</h4>
-                  <p className="mt-3 text-[15px] leading-relaxed text-white/80 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">{prompt.a}</p>
+                {/* Index / Category Pill */}
+                <div className="absolute top-5 left-5 z-10 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1 backdrop-blur-md border border-white/15">
+                  <Sparkles className="w-3 h-3 text-accent-blue" />
+                  <span className="font-mono text-[11px] font-medium tracking-widest uppercase text-white/90">
+                    Prompt 0{i + 1}
+                  </span>
+                </div>
+
+                {/* Content - Fully Visible Across Mobile, Tablet, and Desktop */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 text-white z-10 pointer-events-none">
+                  <h4 className="font-serif text-[26px] sm:text-[30px] font-medium italic text-white drop-shadow-md leading-tight">
+                    {prompt.q}
+                  </h4>
+                  <p className="mt-2.5 text-[14px] sm:text-[15px] leading-relaxed text-white/90 drop-shadow-sm font-normal">
+                    {prompt.a}
+                  </p>
                 </div>
               </motion.div>
             ))}
