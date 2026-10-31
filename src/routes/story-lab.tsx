@@ -237,7 +237,7 @@ function StoryLab() {
                 </div>
 
                 {/* Main Viewport Container */}
-                <div className="relative w-full h-[540px] sm:h-[600px] lg:h-[660px]">
+                <div className="relative w-full h-135 sm:h-150 lg:h-165">
                   {viewerMode === "3d" ? (
                     <model-viewer
                       src="/models/character_project/character.glb"
@@ -259,7 +259,7 @@ function StoryLab() {
                     </model-viewer>
                   ) : (
                     /* 2D Character Image Container with Prominent 'X' to cancel/go back */
-                    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-b from-[#141a26] to-[#0c0f17]">
+                    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 bg-linear-to-b from-[#141a26] to-[#0c0f17]">
                       {/* Prominent 'X' Cancel / Back Button */}
                       <button
                         type="button"
@@ -278,7 +278,7 @@ function StoryLab() {
                         <img
                           src={refImage}
                           alt="2D Character Blueprint Artwork"
-                          className="max-h-[420px] sm:max-h-[480px] w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
+                          className="max-h-105 sm:max-h-120 w-auto object-contain rounded-2xl shadow-2xl border border-white/10"
                         />
                       </div>
 
@@ -400,7 +400,7 @@ function StoryLab() {
                   role="button"
                   aria-expanded={isActive}
                   aria-label={`${prompt.q} card`}
-                  className={`group relative h-88 sm:h-96 md:h-[420px] overflow-hidden rounded-4xl border shadow-sm transition-all duration-500 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-accent-blue ${
+                  className={`group relative h-88 sm:h-96 md:h-105 overflow-hidden rounded-4xl border shadow-sm transition-all duration-500 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-accent-blue ${
                     isActive
                       ? "border-accent-blue/60 shadow-2xl -translate-y-1.5"
                       : "border-hairline hover:-translate-y-2 hover:shadow-2xl hover:border-accent-blue/40"
@@ -419,7 +419,7 @@ function StoryLab() {
                     />
                     {/* Subtle lower-third vignette: preserves visible artwork while darkening smoothly for caption */}
                     <div
-                      className={`absolute inset-0 transition-all duration-500 pointer-events-none bg-gradient-to-t ${
+                      className={`absolute inset-0 transition-all duration-500 pointer-events-none bg-linear-to-t ${
                         isActive
                           ? "from-black/90 via-black/50 via-40% to-transparent opacity-100"
                           : "from-black/75 via-black/25 via-30% to-transparent group-hover:from-black/90 group-hover:via-black/50"

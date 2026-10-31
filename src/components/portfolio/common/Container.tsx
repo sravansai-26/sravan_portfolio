@@ -8,7 +8,7 @@ interface ContainerProps {
 
 export default function Container({ id, children, className = "" }: ContainerProps) {
   return (
-    <section id={id} className={`mx-auto w-full max-w-[1180px] px-6 md:px-12 ${className}`}>
+    <section id={id} className={`mx-auto w-full max-w-295 px-6 md:px-12 ${className}`}>
       {children}
     </section>
   );

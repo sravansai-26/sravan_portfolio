@@ -12,7 +12,7 @@ export default function GitHubPulse() {
       <SectionLabel>Live Engineering Pulse</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="mb-12 max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="mb-12 max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Real commits. Real cadence. Direct from{" "}
         <a
@@ -28,7 +28,7 @@ export default function GitHubPulse() {
 
       <motion.div
         {...fadeUp}
-        className="overflow-hidden rounded-sm border border-[color:var(--hairline)] bg-[color:var(--surface)] p-6 md:p-10"
+        className="overflow-hidden rounded-sm border border-hairline bg-surface p-6 md:p-10"
       >
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -53,7 +53,7 @@ export default function GitHubPulse() {
           <img
             src="https://ghchart.rshah.org/2A6F8E/sravansai-26"
             alt="GitHub contribution graph for sravansai-26"
-            className="w-full min-w-[640px]"
+            className="w-full min-w-160"
             loading="lazy"
           />
         </div>

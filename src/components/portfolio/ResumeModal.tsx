@@ -17,7 +17,7 @@ export function ResumeModal({ open, onClose }: { open: boolean; onClose: () => v
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[60] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md"
+          className="fixed inset-0 z-60 grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md"
           onClick={onClose}
         >
           <motion.div
@@ -26,12 +26,12 @@ export function ResumeModal({ open, onClose }: { open: boolean; onClose: () => v
             exit={{ opacity: 0, y: 20, scale: 0.98 }}
             transition={{ duration: 0.25 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex h-[90vh] w-full max-w-[1000px] flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/80 shadow-2xl backdrop-blur-2xl"
+            className="relative flex h-[90vh] w-full max-w-250 flex-col overflow-hidden rounded-2xl border border-white/30 bg-white/80 shadow-2xl backdrop-blur-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-[color:var(--hairline)] px-5 py-3">
+            <div className="flex items-center justify-between border-b border-hairline px-5 py-3">
               <div className="flex items-center gap-3">
-                <div className="grid h-9 w-9 place-items-center rounded-full bg-[color:var(--deep-ink)] text-white">
+                <div className="grid h-9 w-9 place-items-center rounded-full bg-deep-ink text-white">
                   <DocIcon width={16} height={16} />
                 </div>
 
@@ -50,7 +50,7 @@ export function ResumeModal({ open, onClose }: { open: boolean; onClose: () => v
                   href="/sravan-resume.pdf"
                   target="_blank"
                   rel="noreferrer"
-                  className="hidden items-center gap-1.5 rounded-full border border-[color:var(--hairline)] bg-white/70 px-3 py-1.5 text-[12px] text-ink transition hover:bg-white sm:inline-flex"
+                  className="hidden items-center gap-1.5 rounded-full border border-hairline bg-white/70 px-3 py-1.5 text-[12px] text-ink transition hover:bg-white sm:inline-flex"
                 >
                   Open in tab
                   <ExternalLink width={12} height={12} />

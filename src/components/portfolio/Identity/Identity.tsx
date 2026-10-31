@@ -10,13 +10,13 @@ export default function Identity() {
       <SectionLabel>The Founder's Identity</SectionLabel>
       <motion.h2
         {...fadeUp}
-        className="max-w-[900px] font-display font-bold tracking-[-0.025em] text-ink leading-[1.08] text-[30px] md:text-[44px]"
+        className="max-w-225 font-display font-bold tracking-tight text-ink leading-[1.08] text-[30px] md:text-[44px]"
       >
         Two disciplines, one practice — the professional engineer and the creative storyteller.
       </motion.h2>
 
       <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-16">
-        <motion.div {...fadeUp} className="border-t border-[color:var(--hairline)] pt-6">
+        <motion.div {...fadeUp} className="border-t border-hairline pt-6">
           <div className="mono-label mb-3">Philosophy</div>
           <p className="text-[17px] leading-[1.7] text-ink">
             Driven by the pursuit of turning complex, abstract engineering concepts into scalable,
@@ -27,7 +27,7 @@ export default function Identity() {
         <motion.div
           {...fadeUp}
           transition={{ ...fadeUp.transition, delay: 0.1 }}
-          className="border-t border-[color:var(--hairline)] pt-6"
+          className="border-t border-hairline pt-6"
         >
           <div className="mono-label mb-3">The Creative Edge</div>
           <p className="text-[17px] leading-[1.7] text-ink">
