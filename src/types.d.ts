@@ -13,6 +13,8 @@ declare module 'react' {
         "environment-image"?: string;
         exposure?: string | number;
         "interaction-prompt"?: string;
+        loading?: string;
+        reveal?: string;
         class?: string;
       };
     }

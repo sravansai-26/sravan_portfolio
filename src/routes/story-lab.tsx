@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Image as ImageIcon, X, Box, Layers, Maximize2, RotateCw, Move3d } from "lucide-react";
+import { Sparkles, Image as ImageIcon, X, Maximize2, RotateCw, Move3d } from "lucide-react";
 
 import { Nav } from "@/components/portfolio/Nav";
 import Footer from "@/components/portfolio/Footer/Footer";
@@ -19,6 +19,12 @@ export const Route = createFileRoute("/story-lab")({
       {
         name: "description",
         content: "A character waiting to be discovered. A world waiting to be imagined. Stories that could begin with your idea.",
+      },
+    ],
+    scripts: [
+      {
+        type: "module",
+        src: "https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js",
       },
     ],
   }),
@@ -41,6 +47,15 @@ function StoryLab() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [viewerMode, setViewerMode] = useState<"3d" | "2d">("3d");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !customElements.get("model-viewer")) {
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js";
+      document.head.appendChild(script);
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -223,14 +238,24 @@ function StoryLab() {
                 {/* Main Viewport Container */}
                 <div className="relative w-full h-[540px] sm:h-[600px] lg:h-[660px]">
                   {viewerMode === "3d" ? (
-                    <iframe
-                      src="/models/character_project/viewer/index.html"
-                      title="Interactive 3D Character Model Viewer"
-                      aria-label="Interactive 3D Character Model Viewer with 360-degree orbit, lighting themes, and camera presets"
-                      className="w-full h-full border-0 block"
-                      allow="fullscreen"
-                      loading="lazy"
-                    />
+                    <model-viewer
+                      src="/models/character_project/character.glb"
+                      alt="Interactive 3D Character Model"
+                      auto-rotate
+                      camera-controls
+                      shadow-intensity="1.5"
+                      shadow-softness="1"
+                      environment-image="neutral"
+                      exposure="1.0"
+                      style={{ width: "100%", height: "100%", backgroundColor: "transparent" }}
+                      interaction-prompt="auto"
+                      className="w-full h-full block"
+                    >
+                      <div slot="poster" className="absolute inset-0 flex flex-col items-center justify-center bg-[#0c0f17] text-white/50 gap-3">
+                        <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-blue border-t-transparent" />
+                        <span className="font-mono text-[12px] tracking-wider uppercase text-white/40">Loading 3D Model...</span>
+                      </div>
+                    </model-viewer>
                   ) : (
                     /* 2D Character Image Container with Prominent 'X' to cancel/go back */
                     <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 bg-gradient-to-b from-[#141a26] to-[#0c0f17]">
@@ -278,92 +303,6 @@ function StoryLab() {
                       </div>
                     </div>
                   )}
-                </div>
-              </div>
-
-              {/* SEPARATE DETAILS & TECHNICAL TELEMETRY VIEWER BOX */}
-              <div className="rounded-4xl border border-hairline bg-surface/40 backdrop-blur-xl p-6 sm:p-8 shadow-xl transition-all duration-300 hover:border-accent-blue/30">
-                {/* Title and Live Status */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-hairline">
-                  <div className="flex items-start gap-3.5">
-                    <div className="p-2.5 rounded-2xl bg-accent-blue/10 border border-accent-blue/20 text-accent-blue shrink-0 mt-0.5">
-                      <Layers className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-[20px] sm:text-[24px] font-semibold text-ink leading-tight">
-                        Interactive 3D Character Model
-                      </h3>
-                      <p className="font-mono text-[12px] sm:text-[13px] text-ink-secondary mt-1">
-                        glTF 2.0 PBR • 1.75 m Scale • 160k Tris • 360° Multi-View
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 self-start sm:self-center px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-mono text-[12px] font-medium shrink-0">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span>Studio PBR 2.0 • 60 FPS</span>
-                  </div>
-                </div>
-
-                {/* Technical Specifications Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 my-6">
-                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Height</span>
-                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">1.75 m</span>
-                    <span className="text-[11px] text-ink-secondary block">Humanoid Scale</span>
-                  </div>
-                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Origin</span>
-                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">(0, 0, 0)</span>
-                    <span className="text-[11px] text-ink-secondary block">Ground Center</span>
-                  </div>
-                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Topology</span>
-                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">160,000</span>
-                    <span className="text-[11px] text-ink-secondary block">Tris Smoothed</span>
-                  </div>
-                  <div className="p-3.5 rounded-2xl border border-hairline bg-surface/60">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-ink-muted block">Materials</span>
-                    <span className="font-serif text-[18px] sm:text-[20px] font-bold text-ink mt-0.5 block">8 Regions</span>
-                    <span className="text-[11px] text-ink-secondary block">PBR Metal/Rough</span>
-                  </div>
-                </div>
-
-                {/* Viewport Navigation & Controls Guide */}
-                <div className="p-4 sm:p-5 rounded-2xl border border-hairline bg-surface/30">
-                  <h4 className="font-mono text-[11px] uppercase tracking-widest text-ink-muted mb-3 flex items-center gap-2">
-                    <Box className="w-3.5 h-3.5 text-accent-blue" />
-                    <span>Controls & Shortcuts</span>
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-[12px] text-ink-secondary">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Drag</span>
-                      <span>Orbit 360°</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Scroll / Pinch</span>
-                      <span>Zoom View</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Right-Drag</span>
-                      <span>Pan Canvas</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Arrow Keys</span>
-                      <span>Rotate Character</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Key [+] / [-]</span>
-                      <span>Zoom In / Out</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-surface border border-hairline font-mono text-[11px] text-ink">Key [R]</span>
-                      <span>Reset Camera</span>
-                    </div>
-                  </div>
                 </div>
               </div>
 
