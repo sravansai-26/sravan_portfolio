@@ -47,6 +47,7 @@ function StoryLab() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [viewerMode, setViewerMode] = useState<"3d" | "2d">("3d");
+  const [activePromptIndex, setActivePromptIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && !customElements.get("model-viewer")) {
@@ -381,45 +382,73 @@ function StoryLab() {
           </motion.div>
 
           <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {universePrompts.map((prompt, i) => (
-              <motion.div
-                key={i}
-                {...fadeUp}
-                transition={{ delay: i * 0.1 }}
-                className="group relative h-88 sm:h-96 md:h-[420px] overflow-hidden rounded-4xl border border-hairline shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-accent-blue/40"
-              >
-                {/* HD Local Artwork with Natural Contrast */}
-                <div className="absolute inset-0 bg-[#0c0f17]">
-                  <img
-                    src={prompt.img}
-                    alt={prompt.q}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  {/* Subtle lower-third vignette: keeps the artwork bright, vibrant, and clear while ensuring high contrast for text */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 via-35% to-transparent pointer-events-none" />
-                </div>
+            {universePrompts.map((prompt, i) => {
+              const isActive = activePromptIndex === i;
+              return (
+                <motion.div
+                  key={i}
+                  {...fadeUp}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => setActivePromptIndex(prev => (prev === i ? null : i))}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActivePromptIndex(prev => (prev === i ? null : i));
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-expanded={isActive}
+                  aria-label={`${prompt.q} card`}
+                  className={`group relative h-88 sm:h-96 md:h-[420px] overflow-hidden rounded-4xl border shadow-sm transition-all duration-500 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-accent-blue ${
+                    isActive
+                      ? "border-accent-blue/60 shadow-2xl -translate-y-1.5"
+                      : "border-hairline hover:-translate-y-2 hover:shadow-2xl hover:border-accent-blue/40"
+                  }`}
+                >
+                  {/* HD Local Artwork with Natural Contrast */}
+                  <div className="absolute inset-0 bg-[#0c0f17]">
+                    <img
+                      src={prompt.img}
+                      alt={prompt.q}
+                      loading="lazy"
+                      decoding="async"
+                      className={`h-full w-full object-cover object-center transition-transform duration-700 ease-out ${
+                        isActive ? "scale-105" : "group-hover:scale-105"
+                      }`}
+                    />
+                    {/* Subtle lower-third vignette: preserves visible artwork while darkening smoothly for caption */}
+                    <div
+                      className={`absolute inset-0 transition-all duration-500 pointer-events-none bg-gradient-to-t ${
+                        isActive
+                          ? "from-black/90 via-black/50 via-40% to-transparent opacity-100"
+                          : "from-black/75 via-black/25 via-30% to-transparent group-hover:from-black/90 group-hover:via-black/50"
+                      }`}
+                    />
+                  </div>
 
-                {/* Index / Category Pill */}
-                <div className="absolute top-5 left-5 z-10 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1 backdrop-blur-md border border-white/15">
-                  <Sparkles className="w-3 h-3 text-accent-blue" />
-                  <span className="font-mono text-[11px] font-medium tracking-widest uppercase text-white/90">
-                    Prompt 0{i + 1}
-                  </span>
-                </div>
-
-                {/* Content - Fully Visible Across Mobile, Tablet, and Desktop */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 text-white z-10 pointer-events-none">
-                  <h4 className="font-serif text-[26px] sm:text-[30px] font-medium italic text-white drop-shadow-md leading-tight">
-                    {prompt.q}
-                  </h4>
-                  <p className="mt-2.5 text-[14px] sm:text-[15px] leading-relaxed text-white/90 drop-shadow-sm font-normal">
-                    {prompt.a}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                  {/* Content: Title displayed by default, caption animates on click/touch/hover */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 text-white z-10 pointer-events-none">
+                    <h4
+                      className={`font-serif text-[26px] sm:text-[30px] font-medium italic text-white drop-shadow-md transition-transform duration-500 ease-out ${
+                        isActive ? "translate-y-0" : "translate-y-3 sm:translate-y-4 group-hover:translate-y-0"
+                      }`}
+                    >
+                      {prompt.q}
+                    </h4>
+                    <p
+                      className={`mt-2.5 text-[14px] sm:text-[15px] leading-relaxed text-white/90 drop-shadow-sm transition-all duration-500 ease-out ${
+                        isActive
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0"
+                      }`}
+                    >
+                      {prompt.a}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </Container>
 
